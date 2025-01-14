@@ -2,39 +2,17 @@ library(tidyverse)
 library(eurostat)
 library(ofce)
 
-nace <- tribble( ~a20, ~a10, ~marchand,
-                     "A", "A", TRUE,
-                     "B", "B-E", TRUE,
-                     "C", "B-E", TRUE,
-                     "D", "B-E", TRUE,
-                     "E", "B-E", TRUE,
-                     "F", "F", TRUE,
-                     "G", "G-I", TRUE,
-                     "H", "G-I", TRUE,
-                     "I", "G-I", TRUE,
-                     "J", "J", TRUE,
-                     "K", "K", TRUE,
-                     "L", "L", TRUE,
-                     "M", "M_N", TRUE,
-                     "N", "M_N", TRUE,
-                     "O", "O-Q", FALSE,
-                     "P", "O-Q", FALSE,
-                     "Q", "O-Q", FALSE,
-                     "R", "R-U", TRUE,
-                     "S", "R-U", TRUE,
-                     "T", "R-U", TRUE,
-                     "U", "R-U", TRUE ) |>
-  mutate(l20 = label_eurostat(a20, dic="nace_r2"),
-         l10 = label_eurostat(a10, dic="nace_r2"))
+marchand <- source_data("marchand.r")$marchand
 
-marchand <- nace |> filter(marchand) |> pull(a20)
-marchand2 <- c(nace |> filter(marchand) |> pull(a10))
 pays <- c("DE", "FR", "IT", "ES", "NL", "BE", "IE", "AT", "FI", "PT", "EL", "SK", "LU", "LT", "HR", "SI", "LV", "EE", "CY", "MT", "EA20")
 pays2 <- c("DE", "FR", "IT", "ES", "NL", "BE")
 label_pays <- set_names(countrycode::countrycode(pays2, "eurostat", "country.name.fr"), pays2)
 
 naa_e <- get_eurostat("nama_10_a64_e",
-                          filters = list(nace_r2  = marchand, geo = pays, unit = c("THS_HW"), na_item = c("SAL_DC", "SELF_DC")) ) |>
+                      filters = list(nace_r2  = marchand,
+                                     geo = pays,
+                                     unit = c("THS_HW"),
+                                     na_item = c("SAL_DC", "SELF_DC")) ) |>
   drop_na(values) |>
   select(nace_r2, geo, time, values, na_item) |>
   pivot_wider(names_from = na_item, values_from = values)

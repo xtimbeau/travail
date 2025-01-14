@@ -41,9 +41,6 @@ ggplot(cho |> filter(time>="2010-01-01")) +
   geom_line(aes(y = Y1524), linetype = "dotted", show.legend = FALSE) +
   scale_color_pays(format = "eurostat") +
   facet_wrap(vars(geo), labeller = as_labeller(label_pays), ncol = 2) +
-  scale_y_continuous(limits = c(0,10), oob = scales::squish) +
+  scale_y_continuous(limits = c(0,12), oob = scales::squish) +
   scale_ofce_date() +
   theme_ofce()
-
-
-
