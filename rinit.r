@@ -1,0 +1,132 @@
+library(knitr)
+opts_chunk$set(
+  fig.pos="htb",
+  out.extra="",
+  dev="ragg_png",
+  dev.args = list(bg = "transparent"),
+  out.width="100%",
+  fig.showtext=TRUE,
+  message = FALSE,
+  warning = FALSE,
+  echo = FALSE)
+
+library(tidyverse, quietly = TRUE)
+library(ofce, quietly = TRUE)
+library(showtext, quietly = TRUE)
+library(gt, quietly = TRUE)
+library(readxl, quietly = TRUE)
+library(ggiraph, quietly = TRUE)
+library(scales, quietly = TRUE)
+library(glue, quietly = TRUE)
+library(patchwork, quietly = TRUE)
+library(downloadthis, quietly = TRUE)
+library(lubridate, quietly = TRUE)
+library(quarto, quietly = TRUE)
+library(qs, quietly = TRUE)
+library(conflicted, quietly = TRUE)
+library(countrycode, quietly = TRUE)
+
+options(
+  ofce.base_size = 12,
+  ofce.background_color = "transparent",
+  ofce.source_data.src_in = "file",
+  ofce.source_data.force_exec = FALSE)
+showtext_opts(dpi = 92)
+showtext_auto()
+options(cli.ignore_unknown_rstudio_theme = TRUE)
+tooltip_css  <-
+  "font-family:Open Sans;
+  background-color:snow;
+  border-radius:5px;
+  border-color:gray;
+  border-style:solid;
+  border-width:0.5px;
+  font-size:9pt;
+  padding:4px;
+  box-shadow: 2px 2px 2px gray;
+  r:20px;"
+
+gdtools::register_gfont("Open Sans")
+
+girafe_opts <- function(x, ...) girafe_options(
+  x,
+  opts_hover(css = "stroke-width:1px;", nearest_distance = 60),
+  opts_tooltip(css = tooltip_css, delay_mouseover = 10, delay_mouseout = 3000)) |>
+  girafe_options(...)
+
+girafy <- function(plot, r=2.5, o = 0.5,  ...) {
+  if(knitr::is_html_output()| interactive()) {
+    girafe(ggobj = plot) |>
+      girafe_options(
+        opts_hover_inv(css = glue("opacity:{o};")),
+        opts_hover(css = glue("r:{r}px;")),
+        opts_tooltip(css = tooltip_css)) |>
+      girafe_options(...)
+  } else {
+    plot
+  }
+}
+
+milliards <- function(x, n_signif = 3L) {
+  stringr::str_c(
+    format(
+      x,
+      digits = n_signif,
+      big.mark = " ",
+      decimal.mark = ","),
+    " milliards d'euros")
+}
+
+if(.Platform$OS.type=="windows")
+  Sys.setlocale(locale = "fr_FR.utf8") else
+    Sys.setlocale(locale = "fr_FR")
+
+margin_download <- function(data, output_name = "donnees", label = "données") {
+  if(knitr::is_html_output()) {
+    if(lobstr::obj_size(data)> 1e+5)
+      cli::cli_alert("la taille de l'objet est supérieure à 100kB")
+    fn <- str_c("ofce-prev2409-", tolower(output_name))
+    downloadthis::download_this(
+      data,
+      icon = "fa fa-download",
+      class = "dbtn",
+      button_label  = label,
+      output_name = fn)
+  } else
+    return(invisible(NULL))
+}
+
+inline_download <- function(data, label = "données", output_name = "donnees") {
+  downloadthis::download_this(
+    data,
+    icon = "fa fa-download",
+    class = "dbtn-inline",
+    button_label  = label,
+    output_name = output_name
+  )
+}
+
+ccsummer <- function(n=4) PrettyCols::prettycols("Summer", n=n)
+ccjoy <- function(n=4) PrettyCols::prettycols("Joyful", n=n)
+
+bluish <- ccjoy()[1]
+redish <- ccjoy()[2]
+yelish <- ccsummer()[2]
+greenish <- ccsummer()[4]
+darkgreenish <- ccsummer()[3]
+darkbluish <- ccjoy()[4]
+
+lbl <- function(x) {
+  x |>
+    mutate(across(1, ~countrycode(.x, "iso2c", "country.name.fr")))
+}
+
+conflicted::conflicts_prefer(dplyr::filter, .quiet = TRUE)
+conflicted::conflicts_prefer(dplyr::select, .quiet = TRUE)
+conflicted::conflicts_prefer(dplyr::lag, .quiet = TRUE)
+conflicted::conflicts_prefer(lubridate::year, .quiet = TRUE)
+conflicted::conflicts_prefer(lubridate::month, .quiet = TRUE)
+conflicted::conflicts_prefer(dplyr::first, .quiet = TRUE)
+conflicted::conflicts_prefer(dplyr::last, .quiet = TRUE)
+conflicted::conflicts_prefer(dplyr::between, .quiet = TRUE)
+conflicted::conflicts_prefer(lubridate::quarter, .quiet = TRUE)

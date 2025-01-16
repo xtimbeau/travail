@@ -1,0 +1,247 @@
+---
+title: "Quelles marges de manoeuvres macroéconomiques pour revaloriser le travail ?"
+author:
+  - name: "Xavier Timbeau" 
+    email: "xavier.timbeau@sciencespo.fr"
+    affiliation: OFCE, Sciences Po Paris
+    affiliation-url: "http://www.ofce.fr"
+    orcid: "0000-0002-6198-5953"
+format: 
+  ofce-html: default
+editor: visual
+
+abstract: "`r  wordcountaddin::word_count('travail.qmd')` mots."
+---
+
+```{r, include=FALSE}
+ofce::init_qmd()
+```
+
+
+## Revaloriser le travail
+
+Le constat: rémunération peu dynamique, épisode du covid, frustration, bascule de la mondialisation, perception des inégalités, inflation
+
+## Le nouveau monde
+
+```{r}
+#| label: fig-chomage
+#| fig-cap: Chômage et chômage des jeunes rapporté à la population
+
+cho.sum <- source_data("precarite.r")$cho |> 
+  pivot_longer(cols = c(Y1524, Y2064), names_to = "age", values_to = "cho") |> 
+  group_by(geo, age) |> 
+  summarize(
+    last_cho = cho[time==max(time, na.rm=TRUE)],
+    max_cho = max(cho, na.rm=TRUE),
+    max_cho_date = first(time[cho==max(cho, na.rm=TRUE)]))
+
+prec.sum <- source_data("precarite.r")$prec |> 
+  group_by(geo) |> 
+  summarize(
+    last_prec = values[time==max(time, na.rm=TRUE)],
+    max_prec = max(values, na.rm=TRUE),
+    max_prec_date = first(time[values==max(values, na.rm=TRUE)])) |> 
+  mutate()
+
+
+ggplot(cho |> filter(time>="2009-01-01")) +
+  aes(x = time, color = geo, group = geo) +
+  geom_line(aes(y = Y2064), show.legend = FALSE) +
+  geom_line(aes(y = Y1524), linetype = "dotted", show.legend = FALSE) +
+  scale_color_pays(format = "eurostat") +
+  facet_wrap(vars(geo), labeller = lbl, ncol = 2) +
+  scale_y_continuous(limits = c(0,12), breaks = seq(0, 12, 5), oob = squish, labels = scales::number_format(accuracy = 1, suffix="%")) +
+  scale_ofce_date() +
+  theme_ofce()
+```
+
+
+```{r}
+#| label: fig-prec
+#| fig-cap: Chômage et chômage des jeunes rapporté à la population
+
+prec <- source_data("precarite.r")$prec
+
+ggplot(prec) +
+  aes(x = time, y = values, color = geo, group = geo) +
+  geom_line(data = ~ rename(.x, geo2 = geo), aes(group = geo2),
+            color = "gray80", linewidth = 0.2) +
+  geom_line(show.legend = FALSE) +
+  scale_color_pays(format = "eurostat") +
+  facet_wrap(vars(geo), labeller = lbl, ncol = 2) +
+  scale_ofce_date() +
+  theme_ofce()
+
+earn |>
+  select(label, BE, DE,  IT, NL, FR,  ES) |>
+  gt() |>
+  fmt_percent(columns = c(BE, DE, ES, FR, NL, IT), rows = !(label |> str_detect("référence")),
+              decimals = 0, dec_mark = ",", sep_mark = " ") |>
+  fmt_number(columns = c(BE, DE, ES, FR, NL, IT), rows = label |> str_detect("référence"),
+             decimals = 0, dec_mark = ",", sep_mark = " ", pattern = "{x}€") |>
+  opt_table_lines("none") |>
+  tab_style(cell_borders(sides = "bottom", color = "grey", weight = px(1)),
+            locations = cells_body(rows = c(1, 3, 5, 7, 9) ) ) |>
+  tab_style(cell_borders(sides = "bottom", color = "black", weight = px(1)),
+            locations = cells_body(rows = c(11) ) ) |>
+  tab_style(cell_borders(sides = c("top", "bottom"), color = "black", weight = px(1)),
+            locations = cells_column_labels( ) ) |>
+  cols_label(label = "") |>
+  cols_label_with(columns = -label, ~countrycode::countrycode(.x, "eurostat", "country.name.fr")) |> 
+  sub_missing() |>
+  tab_footnote("Salaire annuel brut, temps partiel et complet, relatif au salaire annuel brut médian tous ages, toutes qualifications, femmes et hommes.",
+                cells_body(columns = label, rows = !str_detect(label, "référence"))) |>
+  tab_source_note(md("*Lecture* : Le salaire médian brut (i.e. y compris les cotisations sociales à la charge du salarié),
+  des salariés à temps partiel comme à temps plein, incluant le 13^e^ mois
+  et autres primes ou bonus est en France de 26 768 euros (soit un salarie mensuel moyen de 2 231 euros).
+  La rémunération moyenne d'un homme (à temps plein ou partiel) est de 119% le salaire médian contre 79% pour une femme (soit un ratio homme femme de 1,51)
+  en Allemagne, dont une partie s'explique par une prévalence du temps partiel plus forte chez les femmes allemandes (69%) que chez les hommes (24%). Le ratio de rémunération entre un travailleur non manuel (isco08 OC 1 à 5)
+  et un travailleur manuel peu qualifié (OC 9) est de 3,7 (110%/30%) aux Pays Bas.
+  La rémunération des moins de 30 ans est en moyenne inférieure de 28% au salariue médian en Italie.  
+  <br>
+  *Source* : Eurostat, Structure of earnings survey - annual earnings (doi.org/10.2908/EARN_SES_ANNUAL), version du 19 décembre 2024, téléchargé le 15 janvier 2025, année 2022, calculs de l'auteur"))
+
+```
+
+
+
+```{r}
+#| label: tbl-earn
+#| tbl-cap: Strucuture des rémunérations dans 6 pays européens
+
+earn <- source_data("earn.r")
+
+earn |>
+  select(label, BE, DE,  IT, NL, FR,  ES) |>
+  gt() |>
+  fmt_percent(columns = c(BE, DE, ES, FR, NL, IT), rows = !(label |> str_detect("référence")),
+              decimals = 0, dec_mark = ",", sep_mark = " ") |>
+  fmt_number(columns = c(BE, DE, ES, FR, NL, IT), rows = label |> str_detect("référence"),
+             decimals = 0, dec_mark = ",", sep_mark = " ", pattern = "{x}€") |>
+  opt_table_lines("none") |>
+  tab_style(cell_borders(sides = "bottom", color = "grey", weight = px(1)),
+            locations = cells_body(rows = c(1, 3, 5, 7, 9) ) ) |>
+  tab_style(cell_borders(sides = "bottom", color = "black", weight = px(1)),
+            locations = cells_body(rows = c(11) ) ) |>
+  tab_style(cell_borders(sides = c("top", "bottom"), color = "black", weight = px(1)),
+            locations = cells_column_labels( ) ) |>
+  cols_label(label = "") |>
+  cols_label_with(columns = -label, ~countrycode::countrycode(.x, "eurostat", "country.name.fr")) |> 
+  sub_missing() |>
+  tab_footnote("Salaire annuel brut, temps partiel et complet, relatif au salaire annuel brut médian tous ages, toutes qualifications, femmes et hommes.",
+                cells_body(columns = label, rows = !str_detect(label, "référence"))) |>
+  tab_source_note(md("*Lecture* : Le salaire médian brut (i.e. y compris les cotisations sociales à la charge du salarié),
+  des salariés à temps partiel comme à temps plein, incluant le 13^e^ mois
+  et autres primes ou bonus est en France de 26 768 euros (soit un salarie mensuel moyen de 2 231 euros).
+  La rémunération moyenne d'un homme (à temps plein ou partiel) est de 119% le salaire médian contre 79% pour une femme (soit un ratio homme femme de 1,51)
+  en Allemagne, dont une partie s'explique par une prévalence du temps partiel plus forte chez les femmes allemandes (69%) que chez les hommes (24%). Le ratio de rémunération entre un travailleur non manuel (isco08 OC 1 à 5)
+  et un travailleur manuel peu qualifié (OC 9) est de 3,7 (110%/30%) aux Pays Bas.
+  La rémunération des moins de 30 ans est en moyenne inférieure de 28% au salariue médian en Italie.  
+  <br>
+  *Source* : Eurostat, Structure of earnings survey - annual earnings (doi.org/10.2908/EARN_SES_ANNUAL), version du 19 décembre 2024, téléchargé le 15 janvier 2025, année 2022, calculs de l'auteur"))
+```
+
+
+## Rémunération du travail et du capital
+
+```{r}
+#| label: fig-sal
+#| fig-cap: Part des salaires dans la valeur ajoutée nette
+#| fig-asp: 1.4
+
+naa <- source_data("va.r")$naa
+
+ggplot(naa) +
+  aes(x=time, y=psal, col = geo) +
+  geom_line(data = ~.x |> rename(GEO = geo) , aes(group=GEO), col = "gray75", linewidth = 0.25) +
+  geom_ribbon(aes(ymin = psal2, ymax = psal, fill = geo, group = geo),
+              color = "transparent", show.legend = FALSE, alpha = 0.2) +
+  geom_line(show.legend=FALSE) +
+  facet_wrap(vars(geo), ncol = 2, labeller = lbl) +
+  scale_ofce_date() +
+  scale_y_continuous(labels = scales::label_percent(1), limits = c(NA, 1)) +
+  scale_color_pays(format = "eurostat") +
+  theme_ofce() +
+  ofce_caption(
+    wrap = 100,
+    source = "Eurostat, comptes nationaux annuels de branche (nama_10_a64 et nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10) pour l'année 2024 (jusqu'au T3),
+ comptes nationaux par secteurs institutionels (nasa_10_nf_tr) pour l'impôt sur les sociétés (D51), téléchargés le 15 janvier 2025,
+ calcul de l'auteur, le code est disponible à github.com/xtimbeau/travail",
+    champ = "Branches marchandes hors services immobiliers (L dans la NACE r2)",
+    lecture = "La part des salaires (corrigé de la non salarisation)
+ dans la valeur ajoutée nette atteint 90% en France en 2023 ((D1*(1+ns/s)/(B1G-P51C)).
+ La partie colorée correspond aux salaires différés correspondant aux cotisations sociales à la charge des employeurs (D11/(B1G-P51C)).
+ La rémunération inclue les cotisations sociales à la charge des employeurs.
+ La non salarisation est corrigée en affectant par branche (22 branches) un salaire aux non salariés égal au salaire moyen des salariés de la branche.
+ La valeur ajoutée nette (valeur ajoutée brute moins la consommation de capital fixe B1G-P51C) est préférée
+ à la valeur ajoutée brute pour pouvoir comparer des pays aux structures productives et aux ratios capital/travail différents.
+ La part des salaires dans la valeur ajoutée brute en France (D1/B1G) en 2023 est de 73,5%.",
+    note = "L'année 2024 est estimée à partir des comptes trimestriels en supposant que la croissance la masse salaire corrigée de la non salarisation
+ et de la valeur ajoutée nette sont égales à la celle de la masse salariale et de la valeur ajoutée brute.",
+    ofce = FALSE)
+```
+
+```{r}
+#| label: fig-profit
+#| fig-cap: Part des profits après impôt dans la valeur ajoutée nette
+#| fig-asp: 1.4
+
+ggplot(naa) +
+  aes(x=time, y=tp, col = geo) +
+  geom_line(data = ~.x |> rename(GEO = geo) , aes(group=GEO), col = "gray75", linewidth = 0.25) +
+  geom_ribbon(aes(ymin = tp, ymax = tpb, fill = geo, group = geo),
+              color = "transparent", show.legend = FALSE, alpha = 0.2) +
+  geom_line(show.legend=FALSE) +
+  facet_wrap(vars(geo), ncol = 2, labeller = lbl) +
+  scale_ofce_date() +
+  scale_y_continuous(labels = scales::label_percent(1)) +
+  scale_color_pays(format = "eurostat") +
+  theme_ofce() +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels de branche (nama_10_a64 et nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10) pour l'année 2024 (jusqu'au T3),
+ comptes nationaux par secteurs institutionels (nasa_10_nf_tr) pour l'impôt sur les sociétés (D51), version du 15 janvier 2025,  téléchargés le 15 janvier 2025,
+ calcul de l'auteur, le code est disponible à github.com/xtimbeau/travail.",
+    champ = "Branches marchandes hors services immobiliers (L dans la NACE r2)",
+    lecture = "La part des profits est la valeur ajoutée nette moins la rémunération des salariés corrigée
+ de la non salarisation moins les impôts de production nets des subventions à la production moins l'impôt sur les sociétés rapporté à la valeur ajoutée nette.
+ C'est donc la part de la production qui reste après la rémunération des facteurs de production (consommations intermédiaires,
+ salaires et dépréciation du capital) et après les impôts et taxes nets des subventions. Cette part sert la rémunération des actionnaires et des apporteurs de capitaux comme les banques.
+ En 2023, cette part est de 3% en France et de 12,9% en Allemagne. La partie colorée indique la part des impôts nets des subventions.",
+    ofce = FALSE)
+
+```
+
+```{r}
+#| label: fig-rendement
+#| fig-cap: Taux de rendement nominal du capital productif après impôts
+#| fig-asp: 1.4
+
+naaa <- source_data("va.r")$naaa
+
+ggplot(naaa) +
+  aes(x=time, y=r, col = geo) +
+  geom_line(data = ~.x |> rename(GEO = geo) , aes(group=GEO), col = "gray75", linewidth = 0.25) +
+  # geom_ribbon(aes(ymin = tp, ymax = tpb, fill = geo, group = geo),
+  #             color = "transparent", show.legend = FALSE, alpha = 0.2) +
+  geom_line(show.legend=FALSE) +
+  facet_wrap(vars(geo), ncol = 2, labeller = lbl) +
+  scale_ofce_date() +
+  scale_y_continuous(labels = scales::label_percent(1)) +
+  scale_color_pays(format = "eurostat") +
+  theme_ofce() +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels de branche (nama_10_a64 et nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10) pour l'année 2024 (jusqu'au T3),
+ comptes nationaux par secteurs institutionels (nasa_10_nf_tr) pour l'impôt sur les sociétés (D51), comptes d'actifs physiques par branche (
+nama_10_nfa_st), téléchargés le 15 janvier 2025,
+ calcul de l'auteur, le code est disponible à github.com/xtimbeau/travail.",
+    champ = "Branches marchandes hors services immobiliers (L dans la NACE r2)",
+    lecture = "Le taux de rendement du capital est le ratio entre les profits (après impôts, net des suventions) et la valeur au coût de remplacement du stock de capital productif. Le capital productif considéré est hors actifs non produits (terrains, terres agricoles, ressources naturelles). Il exclut le capital immobilier parce que la branche services immobiliers n'est pas dans le champ. Le taux de rendement du capital est de 1,5% en France et de 5,6% en Allemagne.",
+    ofce = FALSE)
+```
+
+
+## Une nouvelle poltiique de l'offre ?

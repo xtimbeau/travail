@@ -2,6 +2,7 @@ library(tidyverse)
 library(eurostat)
 library(ofce)
 
+marchand <- source_data('marchand.r')$marchand
 pays <- c("DE", "FR", "IT", "ES", "NL", "BE", "IE", "AT", "FI", "PT", "EL", "SK", "LU", "LT", "HR", "SI", "LV", "EE", "CY", "MT", "EA20")
 pays2 <- c("DE", "FR", "IT", "ES", "NL", "BE")
 label_pays <- set_names(countrycode::countrycode(pays2, "eurostat", "country.name.fr"), pays2)
