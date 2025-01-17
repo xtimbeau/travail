@@ -16,11 +16,14 @@ prec <- get_eurostat("lfsa_qoe_4ax1r2",
 prec_sum <- prec |>
   group_by(geo, age) |>
   summarize(
-    last = values[time==max(time, na.rm=TRUE)],
-    min = min(values, na.rm=TRUE),
+    last_v = values[time==max(time, na.rm=TRUE)],
+    last_date = max(time, na.rm=TRUE),
+    min_v = min(values, na.rm=TRUE),
     min_date = last(time[values==min(values, na.rm=TRUE)]),
-    max = max(values, na.rm=TRUE),
-    max_date = first(time[values==max(values, na.rm=TRUE)])) |>
+    max_v = max(values, na.rm=TRUE),
+    max_date = first(time[values==max(values, na.rm=TRUE)]),
+    dv_v = (values[time==max(time, na.rm=TRUE)] - values[time==min(time, na.rm=TRUE)])/ time_length(interval(min(time), max(time)), "years"),
+    dv_date = NA) |>
   mutate( what = "3mcontract", age = "Y2064")
 
 cho <- get_eurostat("une_rt_q",
@@ -37,11 +40,14 @@ cho <- get_eurostat("une_rt_q",
 cho_sum <- cho |>
   group_by(geo, age) |>
   summarize(
-    last = values[time==max(time, na.rm=TRUE)],
-    min = min(values, na.rm=TRUE),
+    last_v = values[time==max(time, na.rm=TRUE)],
+    last_date = max(time, na.rm=TRUE),
+    min_v = min(values, na.rm=TRUE),
     min_date = last(time[values==min(values, na.rm=TRUE)]),
-    max = max(values, na.rm=TRUE),
-    max_date = first(time[values==max(values, na.rm=TRUE)])) |>
+    max_v = max(values, na.rm=TRUE),
+    max_date = first(time[values==max(values, na.rm=TRUE)]),
+    dv_v = (values[time==max(time, na.rm=TRUE)] - values[time==min(time, na.rm=TRUE)])/ time_length(interval(min(time), max(time)), "years"),
+    dv_date = NA) |>
   mutate( what = "chômage")
 
 emp <- get_eurostat("lfsa_egan",
@@ -56,15 +62,18 @@ secondjob <- get_eurostat("lfsa_e2ged",
                                          age = "Y20-64")) |>
   select(geo, time, values) |>
   left_join(emp, by = c("geo", "time")) |>
-  mutate(values = values/emp) |>
+  mutate(values = values/emp * 100) |>
   drop_na(values) |>
   group_by(geo) |>
   summarize(
-    last = values[time==max(time, na.rm=TRUE)],
-    min = min(values, na.rm=TRUE),
+    last_v = values[time==max(time, na.rm=TRUE)],
+    last_date = max(time, na.rm=TRUE),
+    min_v = min(values, na.rm=TRUE),
     min_date = last(time[values==min(values, na.rm=TRUE)]),
-    max = max(values, na.rm=TRUE),
-    max_date = first(time[values==max(values, na.rm=TRUE)])) |>
+    max_v = max(values, na.rm=TRUE),
+    max_date = first(time[values==max(values, na.rm=TRUE)]),
+    dv_v = (values[time==max(time, na.rm=TRUE)] - values[time==min(time, na.rm=TRUE)])/ time_length(interval(min(time), max(time)), "years"),
+    dv_date = NA) |>
   mutate(what = "second job", age = "Y2064")
 
 newjob <- get_eurostat("lfsa_enewasn",
@@ -74,13 +83,18 @@ newjob <- get_eurostat("lfsa_enewasn",
                                       age = "Y20-64")) |>
   group_by(geo) |>
   summarize(
-    last = values[time==max(time, na.rm=TRUE)],
-    min = min(values, na.rm=TRUE),
+    last_v = values[time==max(time, na.rm=TRUE)],
+    last_date = max(time, na.rm=TRUE),
+    min_v = min(values, na.rm=TRUE),
     min_date = last(time[values==min(values, na.rm=TRUE)]),
-    max = max(values, na.rm=TRUE),
-    max_date = first(time[values==max(values, na.rm=TRUE)])) |>
+    max_v = max(values, na.rm=TRUE),
+    max_date = first(time[values==max(values, na.rm=TRUE)]),
+    dv_v = (values[time==max(time, na.rm=TRUE)] - values[time==min(time, na.rm=TRUE)])/ time_length(interval(min(time), max(time)), "years"),
+    dv_date = NA) |>
   mutate(what = "newjob", age = "Y2064")
 
-summary <- bind_rows(prec_sum, cho_sum, secondjob, newjob)
+summary <- bind_rows(prec_sum, cho_sum, secondjob, newjob) |>
+  ungroup() |>
+  pivot_longer(cols = -c(geo, age, what), names_pattern = "(.+)_(.+)", names_to = c("op", ".value"))
 
 return(list(cho = cho, prec = prec, sum = summary))

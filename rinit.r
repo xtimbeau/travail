@@ -117,6 +117,8 @@ darkgreenish <- ccsummer()[3]
 darkbluish <- ccjoy()[4]
 
 lbl <- function(x) {
+  if(is.character(x))
+    return(countrycode(x, "iso2c", "country.name.fr"))
   x |>
     mutate(across(1, ~countrycode(.x, "iso2c", "country.name.fr")))
 }
