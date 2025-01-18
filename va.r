@@ -25,7 +25,7 @@ naa_a20 <- get_eurostat("nama_10_a64", filters = list(unit = "CP_MEUR",
     van = B1G-P51C,
     vab = B1G,
     msa = D1 * tsal,
-    msa2 = D11 * tsal,
+    msa2 = D1,
     ip = D29X39)
 
 naa_a10 <- naa_a20 |>
