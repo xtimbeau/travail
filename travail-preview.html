@@ -1,0 +1,2131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+    <meta charset="utf-8">
+    <meta name="generator" content="quarto-1.6.40">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+    <meta name="author" content="Xavier Timbeau">
+
+    <title>Quelles marges de manoeuvres macroéconomiques pour revaloriser le </title>
+    <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      div.columns{display: flex; gap: min(4vw, 1.5em);}
+      div.column{flex: auto; overflow-x: auto;}
+      div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+      ul.task-list{list-style: none;}
+      ul.task-list li input[type="checkbox"] {
+        width: 0.8em;
+        margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+        vertical-align: middle;
+      }
+      /* CSS for syntax highlighting */
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      .sourceCode { overflow: visible; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+        }
+      pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+      div.sourceCode
+        {   }
+      @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+    </style>
+
+    <style>
+      body.hypothesis-enabled #quarto-embed-header {
+        padding-right: 36px;
+      }
+
+      #quarto-embed-header {
+        height: 3em;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: solid 1px;
+      }
+
+      #quarto-embed-header h6 {
+        font-size: 1.1em;
+        padding-top: 0.6em;
+        margin-left: 1em;
+        margin-right: 1em;
+        font-weight: 400;
+      }
+
+      #quarto-embed-header a.quarto-back-link,
+      #quarto-embed-header a.quarto-download-embed {
+        font-size: 0.8em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: 1em;
+        margin-right: 1em;
+      }
+
+      .quarto-back-container {
+        padding-left: 0.5em;
+        display: flex;
+      }
+
+      .headroom {
+          will-change: transform;
+          transition: transform 200ms linear;
+      }
+
+      .headroom--pinned {
+          transform: translateY(0%);
+      }
+
+      .headroom--unpinned {
+          transform: translateY(-100%);
+      }      
+    </style>
+
+    <script>
+    window.document.addEventListener("DOMContentLoaded", function () {
+
+      var header = window.document.querySelector("#quarto-embed-header");
+      const titleBannerEl = window.document.querySelector("body > #title-block-header");
+      if (titleBannerEl) {
+        titleBannerEl.style.paddingTop = header.clientHeight + "px";
+      }
+      const contentEl = window.document.getElementById('quarto-content');
+      for (const child of contentEl.children) {
+        child.style.paddingTop = header.clientHeight + "px";
+        child.style.marginTop = "1em";
+      }
+
+      // Use the article root if the `back` call doesn't work. This isn't perfect
+      // but should typically work
+      window.quartoBackToArticle = () => {
+        var currentUrl = window.location.href;
+        window.history.back();
+        setTimeout(() => {
+            // if location was not changed in 100 ms, then there is no history back
+            if(currentUrl === window.location.href){              
+                // redirect to site root
+                window.location.href = "index.html";
+            }
+        }, 100);
+      }
+
+      const headroom = new window.Headroom(header, {
+        tolerance: 5,
+        onPin: function () {
+        },
+        onUnpin: function () {
+        },
+      });
+      headroom.init();
+    });
+    </script>
+
+    
+<script src="site_libs/manuscript-notebook/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-70d37b45c5086134dc26dbb10e888fc0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-854916f460e8172f1814fabb6a03986a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+     
+      <meta name="citation_title" content="Quelles marges de manoeuvres macroéconomiques pour revaloriser le travail ?">
+<meta name="citation_abstract" content="887 mots.">
+<meta name="citation_author" content="Xavier Timbeau">
+<meta name="citation_language" content="fr">
+</head>
+
+  <body class="quarto-notebook">
+    <div id="quarto-embed-header" class="headroom fixed-top bg-primary">
+      
+      <a onclick="window.quartoBackToArticle(); return false;" class="btn btn-primary quarto-back-link" href=""><i class="bi bi-caret-left"></i> Retour à l’article</a>
+      <h6><i class="bi bi-journal-code"></i> Article Notebook</h6>
+
+            <a href="./travail.qmd" class="btn btn-primary quarto-download-embed" download="travail.qmd">Télécharger le code source</a>
+          </div>
+
+     <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Quelles marges de manoeuvres macroéconomiques pour revaloriser le <span style="white-space:nowrap">travail ?</span></h1>
+          </div>
+
+    
+    <div class="quarto-title-meta-container">
+      <div class="quarto-title-meta-column-start">
+            <div class="quarto-title-meta-author">
+          <div class="quarto-title-meta-heading">Par</div>
+          <div class="quarto-title-meta-heading">Affiliation</div>
+          
+                <div class="quarto-title-meta-contents">
+            <p class="author">Xavier Timbeau <a href="mailto:xavier.timbeau@sciencespo.fr" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0002-6198-5953" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+                <div class="quarto-title-meta-contents">
+                    <p class="affiliation">
+                        <a href="http://www.ofce.fr">
+                        OFCE, Sciences Po Paris
+                        </a>
+                      </p>
+                  </div>
+                    </div>
+        
+        <div class="quarto-title-meta">
+
+                      
+          
+                
+              </div>
+      </div>
+      <div class="quarto-title-meta-column-end quarto-other-formats-target">
+      </div>
+    </div>
+
+    <div>
+      <div class="abstract">
+        <div class="block-title">Résumé</div>
+        887 mots.
+      </div>
+    </div>
+
+
+    <div class="quarto-other-links-text-target">
+    </div>  </div>
+</header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sur cette page</h2>
+   
+  <ul>
+  <li><a href="#revaloriser-le-travail" id="toc-revaloriser-le-travail" class="nav-link active" data-scroll-target="#revaloriser-le-travail"><span class="header-section-number">1</span> Revaloriser le travail</a></li>
+  <li><a href="#le-nouveau-monde" id="toc-le-nouveau-monde" class="nav-link" data-scroll-target="#le-nouveau-monde"><span class="header-section-number">2</span> Le nouveau monde</a></li>
+  <li><a href="#rémunération-du-travail-et-du-capital" id="toc-rémunération-du-travail-et-du-capital" class="nav-link" data-scroll-target="#rémunération-du-travail-et-du-capital"><span class="header-section-number">3</span> Rémunération du travail et du capital</a></li>
+  <li><a href="#une-nouvelle-poltiique-de-loffre" id="toc-une-nouvelle-poltiique-de-loffre" class="nav-link" data-scroll-target="#une-nouvelle-poltiique-de-loffre"><span class="header-section-number">4</span> Une nouvelle poltiique de <span style="white-space:nowrap">l’offre ?</span></a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">      
+
+       <div class="cell-container"><div class="cell-decorator"><pre>In [1]:</pre></div><div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ofce<span class="sc">::</span><span class="fu">init_qmd</span>()</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter()   masks stats::filter()
+✖ dplyr::lag()      masks stats::lag()
+✖ readr::tokenize() masks koRpus::tokenize()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
+
+Attaching package: 'scales'
+
+
+The following object is masked from 'package:purrr':
+
+    discard
+
+
+The following object is masked from 'package:readr':
+
+    col_factor
+
+
+qs 0.27.2. Announcement: https://github.com/qsbase/qs/issues/103</code></pre>
+</div>
+</div></div>
+<section id="revaloriser-le-travail" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="revaloriser-le-travail"><span class="header-section-number">1</span> Revaloriser le travail</h2>
+<p>L’ensemble du numéro d’économie politique consacré au travail pointe dans une direction sans équivoque. Le travail est au cœur du pacte <span style="white-space:nowrap">social ;</span> il est une nécessité économique pour une immense <span style="white-space:nowrap">majorité ;</span> il est la condition pour l’émancipation des individus. Le travail réalise également les promesses floues du mérite et cristallise en conséquence les perceptions des inégalités. Il condense également les attentes et les perceptions de la situation économique, tant le travail et la position que chacun occupe dans la société est le le modèle dominant de la rémunération. A part quelques rares privilégiés, dont les ultra riches sont peut être la manifestation la plus visible, chacun vite de son travail, présent ou passé et est donc renvoyé à une condition commune et partagée. Personne ou presque ne vit des revenus de son épargne, personne ou presque ne peut imaginer une vie sans travail.</p>
+<p>La stagnation des revenus des salariés depuis la crise de 2008 est donc un moment essentiel dans notre histoire économique. Nul besoin de faire appel à la période des 30 glorieuses, avec une nostalgie souvent exagérée, pour évoquer des périodes de croissance du pouvoir d’achat des salariés (graphique). La crise de 2008, la crise des dettes souveraines, les restrictions budgétaires pour absorber les déficits publics mais aussi le décrochage de la croissance dans l’Union Européenne par rapport aux Etats-Unis expliquent en partie cette stagnation. Après une accalmie entre 2017 et 2020, la crise sanitaire puis la seconde invasion de l’Ukraine par la Russie, la crise énergétique qui s’en est suivie ont à la fois pesé sur l’activité (la perte d’activité en Europe liée à la guerre en Ukraine est de l’ordre de 3&nbsp;points de PIB) et sur les prix (les prix à la consommation ont augmenté de plus 15% entre 2020 et 2024). La combinaison à la fois d’une activité économique plutôt stagnante, en tout cas en décrochage avec d’autres économies développées, et d’épisodes conjoncturels brutaux se réduit très concrètement dans les revenus tirés du travail.</p>
+<p>La question que nous allons essayer de traiter dans cette contribution est celle des marges de manœuvre que la macroéconomie, en France comme en Europe, laisse pour répondre à cette crise du travail et de sa rémunération. Pour approcher cette question sous l’angle macroéconomique, la méthode est de chercher dans les évolutions récentes des marchés du travail, expression consacrée pour désigner la marchandisation du travail, ce qui pourrait constituer une anomalie qu’une politique volontariste pourrait vouloir corriger. Il s’agit d’un écho lointain aux analyses presentées dans ce numéro qui se fondent sur des observations plus directes des réalités du monde du travail. Mais les statistiques peuvent ici servir à relativiser et fournir un point de vue riche, d’autant que nous essayons de comparer la France à ses principaux voisins, qu’ils soient d’Europe du Sud ou plutôt d’Europe du Nord.</p>
+<p>Pour répondre à la questions des marges macroéconomiques, nous analyserons, à partir des données de comptabilité nationale, le partage de la valeur ajoutée. Un rapport de force moins favorable aux salariés est sans doute à attendre des efforts de libéralisation et de flexibilisation des marchés du travail et aurait pu se traduire dans la mesure du partage. Nous verrons que la mise à jour des indicateurs de partage de la valeur ajoutée n’offrent pas beaucoup d’espoir quant à un rééquilibrage en faveur du travail. La discussion des notions de la comptabilité nationale et des systèmes fiscaux nationaux peuvent laisser entrevoir cependant ce qui pourrait être une nouvelle politique de l’offre.</p>
+</section>
+<section id="le-nouveau-monde" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="le-nouveau-monde"><span class="header-section-number">2</span> Le nouveau monde</h2>
+<p>La flexibilisation des marchés du travail est à l’ordre du jour depuis les années 1980. Elle a été brutale dans certains pays, plus progressive dans d’autres, en particulier en France. Néanmoins, et combinée à la perte d’influence des syndicats et la diminution du rôle des partenaires sociaux, lorsqu’on se retourne sur les 50 dernières années, on ne peut manquer d’être frappé par l’ampleur des changements. Le <a href="#tbl-chomage" class="quarto-xref">tableau&nbsp;1</a> donne quelques indicateurs choisis pour 6 pays européens pour la période 1995-2023. Quelques faits résument les <span style="white-space:nowrap">évolutions :</span></p>
+<ul>
+<li><p>le chômage a baissé dans les 6 pays, en moyenne sur presque 30&nbsp;ans, bien qu’en France la baisse soit plutôt faible. Dans la plupart des pays européens, y compris la France, le chômage de masse des années 1980 a été partiellement ou complètement résorbé. Le chômage des jeunes, mesuré ici par rapport à la population de même âge et non la population active, a baissé dans 5 pays, l’exception étant la France. En France et aux Pays-Bas, la part des jeunes au chômage est supérieure à la part du reste de la population en âge de travailler.</p></li>
+<li><p>La rotation sur le marché du travail, ici quantifiée approximativement par la part des salariés en emploi depuis moins d’un an dans le poste qu’ils occupent, s’est plutôt accrue. Elle est élevée en France, bien que moins qu’au Pays-Bas ou en Espagne.</p></li>
+<li><p>Sans doute en conséquence d’une pression à la baisse sur les salaires et d’une moindre protection des salariés, la part des individus occupant un deuxième emploi a augmenté</p></li>
+</ul>
+<div class="cell-container"><div class="cell-decorator"><pre>In [2]:</pre></div><div class="cell">
+
+<div class="cell-container"><div class="cell-decorator"><pre>In [3]:</pre></div><div><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> <span class="fu">source_data</span>(<span class="st">"precarite.r"</span>)<span class="sc">$</span>sum  <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">c =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>     op <span class="sc">==</span> <span class="st">"last"</span> <span class="sc">~</span> <span class="fu">str_c</span>(<span class="fu">round</span>(v,<span class="dv">1</span>), <span class="st">"%"</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>     op <span class="sc">==</span> <span class="st">"min"</span> <span class="sc">~</span> <span class="fu">str_c</span>(<span class="fu">round</span>(v,<span class="dv">1</span>), <span class="st">"%&lt;br&gt;("</span>, <span class="fu">year</span>(date), <span class="st">")"</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>     op <span class="sc">==</span> <span class="st">"max"</span> <span class="sc">~</span> <span class="fu">str_c</span>(<span class="fu">round</span>(v,<span class="dv">1</span>), <span class="st">"%&lt;br&gt; ("</span>, <span class="fu">year</span>(date), <span class="st">")"</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>     op <span class="sc">==</span> <span class="st">"dv"</span> <span class="sc">~</span> <span class="fu">str_c</span>(<span class="fu">round</span>(v,<span class="dv">2</span>), <span class="st">"%"</span>) ) ) <span class="sc">|&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(age, what, op), <span class="at">names_from =</span> geo, <span class="at">values_from =</span> c) <span class="sc">|&gt;</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      what <span class="sc">==</span> <span class="st">"3mcontract"</span> <span class="sc">~</span> <span class="st">"Part de la population en âge de travailler en contrat de moins de 3 mois"</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>      what <span class="sc">==</span> <span class="st">"chômage"</span> <span class="sc">&amp;</span> age <span class="sc">==</span> <span class="st">"Y1524"</span> <span class="sc">~</span> <span class="st">"Chômeurs de 15 à 24 ans en % de la population des jeunes"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>      what <span class="sc">==</span> <span class="st">"chômage"</span> <span class="sc">&amp;</span> age <span class="sc">==</span> <span class="st">"Y2064"</span> <span class="sc">~</span> <span class="st">"Chômeurs en % de la population en âge de travailler"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>      what <span class="sc">==</span> <span class="st">"second job"</span> <span class="sc">~</span> <span class="st">"Part de la population en âge de travailler occupant deux emplois"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>      what <span class="sc">==</span> <span class="st">"newjob"</span> <span class="sc">~</span> <span class="st">"Part de la population en âge de travailler en poste depuis moins d'un an (rotation)"</span>),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">op =</span> <span class="fu">case_match</span>(op,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"last"</span> <span class="sc">~</span> <span class="st">"En 2023"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"min"</span> <span class="sc">~</span> <span class="st">"Le plus bas entre 1995 et 2023"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"max"</span> <span class="sc">~</span> <span class="st">"Le plus haut entre 1995 et 2023"</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"dv"</span> <span class="sc">~</span> <span class="st">"Evolution moyenne annuelle entre 1995 et 2023"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>age, <span class="sc">-</span>what)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>sum <span class="sc">|&gt;</span> </span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(label) <span class="sc">|&gt;</span> </span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label_with</span>(<span class="at">fn =</span> lbl) <span class="sc">|&gt;</span> </span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_align</span>(<span class="st">"center"</span>, <span class="sc">-</span><span class="fu">c</span>(label, op)) <span class="sc">|&gt;</span> </span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_markdown</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>            <span class="at">locations =</span> <span class="fu">cells_body</span>(<span class="at">columns =</span> FR)) <span class="sc">|&gt;</span> </span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(<span class="at">op =</span> <span class="st">""</span>, <span class="at">label =</span> <span class="st">""</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div><div id="tbl-chomage" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-chomage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<strong>Tableau</strong>&nbsp;1<strong>.</strong> Indicateurs du « marché du travail », 1995-2023
+</figcaption>
+<div aria-describedby="tbl-chomage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="ztbzpsielv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ztbzpsielv table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ztbzpsielv thead, #ztbzpsielv tbody, #ztbzpsielv tfoot, #ztbzpsielv tr, #ztbzpsielv td, #ztbzpsielv th {
+  border-style: none;
+}
+
+#ztbzpsielv p {
+  margin: 0;
+  padding: 0;
+}
+
+#ztbzpsielv .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ztbzpsielv .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ztbzpsielv .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ztbzpsielv .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ztbzpsielv .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ztbzpsielv .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ztbzpsielv .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ztbzpsielv .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ztbzpsielv .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ztbzpsielv .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ztbzpsielv .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ztbzpsielv .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ztbzpsielv .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ztbzpsielv .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ztbzpsielv .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ztbzpsielv .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ztbzpsielv .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ztbzpsielv .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ztbzpsielv .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ztbzpsielv .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ztbzpsielv .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ztbzpsielv .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ztbzpsielv .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ztbzpsielv .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ztbzpsielv .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ztbzpsielv .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ztbzpsielv .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ztbzpsielv .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ztbzpsielv .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ztbzpsielv .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ztbzpsielv .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ztbzpsielv .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ztbzpsielv .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ztbzpsielv .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ztbzpsielv .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ztbzpsielv .gt_left {
+  text-align: left;
+}
+
+#ztbzpsielv .gt_center {
+  text-align: center;
+}
+
+#ztbzpsielv .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ztbzpsielv .gt_font_normal {
+  font-weight: normal;
+}
+
+#ztbzpsielv .gt_font_bold {
+  font-weight: bold;
+}
+
+#ztbzpsielv .gt_font_italic {
+  font-style: italic;
+}
+
+#ztbzpsielv .gt_super {
+  font-size: 65%;
+}
+
+#ztbzpsielv .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ztbzpsielv .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ztbzpsielv .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ztbzpsielv .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ztbzpsielv .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ztbzpsielv .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ztbzpsielv .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ztbzpsielv .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ztbzpsielv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="op"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="DE">Allemagne</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="FR">France</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="IT">Italie</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="ES">Espagne</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="NL">Pays-Bas</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="BE">Belgique</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr class="gt_group_heading_row">
+      <th colspan="7" class="gt_group_heading" scope="colgroup" id="Part de la population en âge de travailler en contrat de moins de 3 mois">Part de la population en âge de travailler en contrat de moins de 3 mois</th>
+    </tr>
+    <tr class="gt_row_group_first"><td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  op" class="gt_row gt_left"><span data-qmd-base64="RW4gMjAyMw=="><span class="gt_from_md">En 2023</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  DE" class="gt_row gt_center"><span data-qmd-base64="MC4zJQ=="><span class="gt_from_md">0.3%</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="My42JQ=="><span class="gt_from_md">3.6%</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  IT" class="gt_row gt_center"><span data-qmd-base64="MS4xJQ=="><span class="gt_from_md">1.1%</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  ES" class="gt_row gt_center"><span data-qmd-base64="MS43JQ=="><span class="gt_from_md">1.7%</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  NL" class="gt_row gt_center"><span data-qmd-base64="MC43JQ=="><span class="gt_from_md">0.7%</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  BE" class="gt_row gt_center"><span data-qmd-base64="Mi4yJQ=="><span class="gt_from_md">2.2%</span></span></td></tr>
+    <tr><td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  op" class="gt_row gt_left"><span data-qmd-base64="TGUgcGx1cyBiYXMgZW50cmUgMTk5NSBldCAyMDIz"><span class="gt_from_md">Le plus bas entre 1995 et 2023</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  DE" class="gt_row gt_center"><span data-qmd-base64="MC4yJTxicj4oMjAyMSk="><span class="gt_from_md">0.2%<br>(2021)</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="My42JTxicj4oMjAyMyk="><span class="gt_from_md">3.6%<br>(2023)</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  IT" class="gt_row gt_center"><span data-qmd-base64="MS4xJTxicj4oMjAyMyk="><span class="gt_from_md">1.1%<br>(2023)</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  ES" class="gt_row gt_center"><span data-qmd-base64="MS43JTxicj4oMjAyMyk="><span class="gt_from_md">1.7%<br>(2023)</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  NL" class="gt_row gt_center"><span data-qmd-base64="MC42JTxicj4oMjAyMCk="><span class="gt_from_md">0.6%<br>(2020)</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  BE" class="gt_row gt_center"><span data-qmd-base64="MiU8YnI+KDIwMjIp"><span class="gt_from_md">2%<br>(2022)</span></span></td></tr>
+    <tr><td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  op" class="gt_row gt_left"><span data-qmd-base64="TGUgcGx1cyBoYXV0IGVudHJlIDE5OTUgZXQgMjAyMw=="><span class="gt_from_md">Le plus haut entre 1995 et 2023</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  DE" class="gt_row gt_center"><span data-qmd-base64="MC43JTxicj4gKDIwMDgp"><span class="gt_from_md">0.7%<br> (2008)</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="NSU8YnI+ICgyMDE5KQ=="><span class="gt_from_md">5%<br> (2019)</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  IT" class="gt_row gt_center"><span data-qmd-base64="My43JTxicj4gKDIwMTgp"><span class="gt_from_md">3.7%<br> (2018)</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  ES" class="gt_row gt_center"><span data-qmd-base64="NC43JTxicj4gKDIwMTQp"><span class="gt_from_md">4.7%<br> (2014)</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  NL" class="gt_row gt_center"><span data-qmd-base64="MSU8YnI+ICgyMDE1KQ=="><span class="gt_from_md">1%<br> (2015)</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  BE" class="gt_row gt_center"><span data-qmd-base64="My42JTxicj4gKDIwMTkp"><span class="gt_from_md">3.6%<br> (2019)</span></span></td></tr>
+    <tr><td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  op" class="gt_row gt_left"><span data-qmd-base64="RXZvbHV0aW9uIG1veWVubmUgYW5udWVsbGUgZW50cmUgMTk5NSBldCAyMDIz"><span class="gt_from_md">Evolution moyenne annuelle entre 1995 et 2023</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  DE" class="gt_row gt_center"><span data-qmd-base64="LTAuMDMl"><span class="gt_from_md">-0.03%</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="LTAuMDYl"><span class="gt_from_md">-0.06%</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  IT" class="gt_row gt_center"><span data-qmd-base64="LTAuMDcl"><span class="gt_from_md">-0.07%</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  ES" class="gt_row gt_center"><span data-qmd-base64="LTAuMTcl"><span class="gt_from_md">-0.17%</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  NL" class="gt_row gt_center"><span data-qmd-base64="LTAuMDEl"><span class="gt_from_md">-0.01%</span></span></td>
+<td headers="Part de la population en âge de travailler en contrat de moins de 3 mois  BE" class="gt_row gt_center"><span data-qmd-base64="LTAuMDMl"><span class="gt_from_md">-0.03%</span></span></td></tr>
+    <tr class="gt_group_heading_row">
+      <th colspan="7" class="gt_group_heading" scope="colgroup" id="Chômeurs de 15 à 24 ans en % de la population des jeunes">Chômeurs de 15 à 24 ans en % de la population des jeunes</th>
+    </tr>
+    <tr class="gt_row_group_first"><td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  op" class="gt_row gt_left"><span data-qmd-base64="RW4gMjAyMw=="><span class="gt_from_md">En 2023</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  DE" class="gt_row gt_center"><span data-qmd-base64="My42JQ=="><span class="gt_from_md">3.6%</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="OC42JQ=="><span class="gt_from_md">8.6%</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  IT" class="gt_row gt_center"><span data-qmd-base64="NC44JQ=="><span class="gt_from_md">4.8%</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  ES" class="gt_row gt_center"><span data-qmd-base64="OS4yJQ=="><span class="gt_from_md">9.2%</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  NL" class="gt_row gt_center"><span data-qmd-base64="Ny4zJQ=="><span class="gt_from_md">7.3%</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  BE" class="gt_row gt_center"><span data-qmd-base64="NS44JQ=="><span class="gt_from_md">5.8%</span></span></td></tr>
+    <tr><td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  op" class="gt_row gt_left"><span data-qmd-base64="TGUgcGx1cyBiYXMgZW50cmUgMTk5NSBldCAyMDIz"><span class="gt_from_md">Le plus bas entre 1995 et 2023</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  DE" class="gt_row gt_center"><span data-qmd-base64="MyU8YnI+KDIwMjIp"><span class="gt_from_md">3%<br>(2022)</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="Ni44JTxicj4oMjAyMSk="><span class="gt_from_md">6.8%<br>(2021)</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  IT" class="gt_row gt_center"><span data-qmd-base64="NC44JTxicj4oMjAyNCk="><span class="gt_from_md">4.8%<br>(2024)</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  ES" class="gt_row gt_center"><span data-qmd-base64="OSU8YnI+KDIwMjQp"><span class="gt_from_md">9%<br>(2024)</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  NL" class="gt_row gt_center"><span data-qmd-base64="Ni4xJTxicj4oMjAyMik="><span class="gt_from_md">6.1%<br>(2022)</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  BE" class="gt_row gt_center"><span data-qmd-base64="My44JTxicj4oMjAxOSk="><span class="gt_from_md">3.8%<br>(2019)</span></span></td></tr>
+    <tr><td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  op" class="gt_row gt_left"><span data-qmd-base64="TGUgcGx1cyBoYXV0IGVudHJlIDE5OTUgZXQgMjAyMw=="><span class="gt_from_md">Le plus haut entre 1995 et 2023</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  DE" class="gt_row gt_center"><span data-qmd-base64="Ni4zJTxicj4gKDIwMDkp"><span class="gt_from_md">6.3%<br> (2009)</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="MTElPGJyPiAoMjAxMik="><span class="gt_from_md">11%<br> (2012)</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  IT" class="gt_row gt_center"><span data-qmd-base64="MTEuOCU8YnI+ICgyMDE0KQ=="><span class="gt_from_md">11.8%<br> (2014)</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  ES" class="gt_row gt_center"><span data-qmd-base64="MjEuNiU8YnI+ICgyMDEzKQ=="><span class="gt_from_md">21.6%<br> (2013)</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  NL" class="gt_row gt_center"><span data-qmd-base64="MTEuNSU8YnI+ICgyMDEzKQ=="><span class="gt_from_md">11.5%<br> (2013)</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  BE" class="gt_row gt_center"><span data-qmd-base64="Ny45JTxicj4gKDIwMTAp"><span class="gt_from_md">7.9%<br> (2010)</span></span></td></tr>
+    <tr><td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  op" class="gt_row gt_left"><span data-qmd-base64="RXZvbHV0aW9uIG1veWVubmUgYW5udWVsbGUgZW50cmUgMTk5NSBldCAyMDIz"><span class="gt_from_md">Evolution moyenne annuelle entre 1995 et 2023</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  DE" class="gt_row gt_center"><span data-qmd-base64="LTAuMTYl"><span class="gt_from_md">-0.16%</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="MC4wNSU="><span class="gt_from_md">0.05%</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  IT" class="gt_row gt_center"><span data-qmd-base64="LTAuMTQl"><span class="gt_from_md">-0.14%</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  ES" class="gt_row gt_center"><span data-qmd-base64="LTAuNDYl"><span class="gt_from_md">-0.46%</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  NL" class="gt_row gt_center"><span data-qmd-base64="LTAuMDkl"><span class="gt_from_md">-0.09%</span></span></td>
+<td headers="Chômeurs de 15 à 24 ans en % de la population des jeunes  BE" class="gt_row gt_center"><span data-qmd-base64="LTAuMDUl"><span class="gt_from_md">-0.05%</span></span></td></tr>
+    <tr class="gt_group_heading_row">
+      <th colspan="7" class="gt_group_heading" scope="colgroup" id="Chômeurs en % de la population en âge de travailler">Chômeurs en % de la population en âge de travailler</th>
+    </tr>
+    <tr class="gt_row_group_first"><td headers="Chômeurs en % de la population en âge de travailler  op" class="gt_row gt_left"><span data-qmd-base64="RW4gMjAyMw=="><span class="gt_from_md">En 2023</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  DE" class="gt_row gt_center"><span data-qmd-base64="Mi45JQ=="><span class="gt_from_md">2.9%</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="NS43JQ=="><span class="gt_from_md">5.7%</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  IT" class="gt_row gt_center"><span data-qmd-base64="NC40JQ=="><span class="gt_from_md">4.4%</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  ES" class="gt_row gt_center"><span data-qmd-base64="OC44JQ=="><span class="gt_from_md">8.8%</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  NL" class="gt_row gt_center"><span data-qmd-base64="Mi42JQ=="><span class="gt_from_md">2.6%</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  BE" class="gt_row gt_center"><span data-qmd-base64="NC4xJQ=="><span class="gt_from_md">4.1%</span></span></td></tr>
+    <tr><td headers="Chômeurs en % de la population en âge de travailler  op" class="gt_row gt_left"><span data-qmd-base64="TGUgcGx1cyBiYXMgZW50cmUgMTk5NSBldCAyMDIz"><span class="gt_from_md">Le plus bas entre 1995 et 2023</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  DE" class="gt_row gt_center"><span data-qmd-base64="Mi40JTxicj4oMjAyMyk="><span class="gt_from_md">2.4%<br>(2023)</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="NS4xJTxicj4oMjAwOCk="><span class="gt_from_md">5.1%<br>(2008)</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  IT" class="gt_row gt_center"><span data-qmd-base64="NC40JTxicj4oMjAyNCk="><span class="gt_from_md">4.4%<br>(2024)</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  ES" class="gt_row gt_center"><span data-qmd-base64="OC44JTxicj4oMjAyNCk="><span class="gt_from_md">8.8%<br>(2024)</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  NL" class="gt_row gt_center"><span data-qmd-base64="Mi40JTxicj4oMjAyMik="><span class="gt_from_md">2.4%<br>(2022)</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  BE" class="gt_row gt_center"><span data-qmd-base64="My44JTxicj4oMjAyMyk="><span class="gt_from_md">3.8%<br>(2023)</span></span></td></tr>
+    <tr><td headers="Chômeurs en % de la population en âge de travailler  op" class="gt_row gt_left"><span data-qmd-base64="TGUgcGx1cyBoYXV0IGVudHJlIDE5OTUgZXQgMjAyMw=="><span class="gt_from_md">Le plus haut entre 1995 et 2023</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  DE" class="gt_row gt_center"><span data-qmd-base64="NS45JTxicj4gKDIwMDkp"><span class="gt_from_md">5.9%<br> (2009)</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="Ny44JTxicj4gKDIwMTUp"><span class="gt_from_md">7.8%<br> (2015)</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  IT" class="gt_row gt_center"><span data-qmd-base64="OC44JTxicj4gKDIwMTQp"><span class="gt_from_md">8.8%<br> (2014)</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  ES" class="gt_row gt_center"><span data-qmd-base64="MjAuMyU8YnI+ICgyMDEzKQ=="><span class="gt_from_md">20.3%<br> (2013)</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  NL" class="gt_row gt_center"><span data-qmd-base64="Ni42JTxicj4gKDIwMTQp"><span class="gt_from_md">6.6%<br> (2014)</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  BE" class="gt_row gt_center"><span data-qmd-base64="Ni41JTxicj4gKDIwMTUp"><span class="gt_from_md">6.5%<br> (2015)</span></span></td></tr>
+    <tr><td headers="Chômeurs en % de la population en âge de travailler  op" class="gt_row gt_left"><span data-qmd-base64="RXZvbHV0aW9uIG1veWVubmUgYW5udWVsbGUgZW50cmUgMTk5NSBldCAyMDIz"><span class="gt_from_md">Evolution moyenne annuelle entre 1995 et 2023</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  DE" class="gt_row gt_center"><span data-qmd-base64="LTAuMTgl"><span class="gt_from_md">-0.18%</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="LTAuMDEl"><span class="gt_from_md">-0.01%</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  IT" class="gt_row gt_center"><span data-qmd-base64="LTAuMDIl"><span class="gt_from_md">-0.02%</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  ES" class="gt_row gt_center"><span data-qmd-base64="LTAuMjUl"><span class="gt_from_md">-0.25%</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  NL" class="gt_row gt_center"><span data-qmd-base64="LTAuMDUl"><span class="gt_from_md">-0.05%</span></span></td>
+<td headers="Chômeurs en % de la population en âge de travailler  BE" class="gt_row gt_center"><span data-qmd-base64="LTAuMSU="><span class="gt_from_md">-0.1%</span></span></td></tr>
+    <tr class="gt_group_heading_row">
+      <th colspan="7" class="gt_group_heading" scope="colgroup" id="Part de la population en âge de travailler occupant deux emplois">Part de la population en âge de travailler occupant deux emplois</th>
+    </tr>
+    <tr class="gt_row_group_first"><td headers="Part de la population en âge de travailler occupant deux emplois  op" class="gt_row gt_left"><span data-qmd-base64="RW4gMjAyMw=="><span class="gt_from_md">En 2023</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  DE" class="gt_row gt_center"><span data-qmd-base64="NC43JQ=="><span class="gt_from_md">4.7%</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="NC41JQ=="><span class="gt_from_md">4.5%</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  IT" class="gt_row gt_center"><span data-qmd-base64="MS4yJQ=="><span class="gt_from_md">1.2%</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  ES" class="gt_row gt_center"><span data-qmd-base64="Mi43JQ=="><span class="gt_from_md">2.7%</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  NL" class="gt_row gt_center"><span data-qmd-base64="OS44JQ=="><span class="gt_from_md">9.8%</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  BE" class="gt_row gt_center"><span data-qmd-base64="NS4yJQ=="><span class="gt_from_md">5.2%</span></span></td></tr>
+    <tr><td headers="Part de la population en âge de travailler occupant deux emplois  op" class="gt_row gt_left"><span data-qmd-base64="TGUgcGx1cyBiYXMgZW50cmUgMTk5NSBldCAyMDIz"><span class="gt_from_md">Le plus bas entre 1995 et 2023</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  DE" class="gt_row gt_center"><span data-qmd-base64="Mi4zJTxicj4oMjAwMik="><span class="gt_from_md">2.3%<br>(2002)</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="Mi43JTxicj4oMjAwMyk="><span class="gt_from_md">2.7%<br>(2003)</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  IT" class="gt_row gt_center"><span data-qmd-base64="MS4yJTxicj4oMjAwMyk="><span class="gt_from_md">1.2%<br>(2003)</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  ES" class="gt_row gt_center"><span data-qmd-base64="MS42JTxicj4oMTk5Nik="><span class="gt_from_md">1.6%<br>(1996)</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  NL" class="gt_row gt_center"><span data-qmd-base64="NC45JTxicj4oMTk5NSk="><span class="gt_from_md">4.9%<br>(1995)</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  BE" class="gt_row gt_center"><span data-qmd-base64="Mi42JTxicj4oMTk5NSk="><span class="gt_from_md">2.6%<br>(1995)</span></span></td></tr>
+    <tr><td headers="Part de la population en âge de travailler occupant deux emplois  op" class="gt_row gt_left"><span data-qmd-base64="TGUgcGx1cyBoYXV0IGVudHJlIDE5OTUgZXQgMjAyMw=="><span class="gt_from_md">Le plus haut entre 1995 et 2023</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  DE" class="gt_row gt_center"><span data-qmd-base64="NS42JTxicj4gKDIwMTkp"><span class="gt_from_md">5.6%<br> (2019)</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="NS41JTxicj4gKDIwMTMp"><span class="gt_from_md">5.5%<br> (2013)</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  IT" class="gt_row gt_center"><span data-qmd-base64="Mi4xJTxicj4gKDIwMDQp"><span class="gt_from_md">2.1%<br> (2004)</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  ES" class="gt_row gt_center"><span data-qmd-base64="Mi43JTxicj4gKDIwMjMp"><span class="gt_from_md">2.7%<br> (2023)</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  NL" class="gt_row gt_center"><span data-qmd-base64="OS44JTxicj4gKDIwMjMp"><span class="gt_from_md">9.8%<br> (2023)</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  BE" class="gt_row gt_center"><span data-qmd-base64="NS4zJTxicj4gKDIwMjIp"><span class="gt_from_md">5.3%<br> (2022)</span></span></td></tr>
+    <tr><td headers="Part de la population en âge de travailler occupant deux emplois  op" class="gt_row gt_left"><span data-qmd-base64="RXZvbHV0aW9uIG1veWVubmUgYW5udWVsbGUgZW50cmUgMTk5NSBldCAyMDIz"><span class="gt_from_md">Evolution moyenne annuelle entre 1995 et 2023</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  DE" class="gt_row gt_center"><span data-qmd-base64="MC4wNyU="><span class="gt_from_md">0.07%</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="MC4wNCU="><span class="gt_from_md">0.04%</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  IT" class="gt_row gt_center"><span data-qmd-base64="LTAuMDEl"><span class="gt_from_md">-0.01%</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  ES" class="gt_row gt_center"><span data-qmd-base64="MC4wNCU="><span class="gt_from_md">0.04%</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  NL" class="gt_row gt_center"><span data-qmd-base64="MC4xNyU="><span class="gt_from_md">0.17%</span></span></td>
+<td headers="Part de la population en âge de travailler occupant deux emplois  BE" class="gt_row gt_center"><span data-qmd-base64="MC4wOSU="><span class="gt_from_md">0.09%</span></span></td></tr>
+    <tr class="gt_group_heading_row">
+      <th colspan="7" class="gt_group_heading" scope="colgroup" id="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)">Part de la population en âge de travailler en poste depuis moins d'un an (rotation)</th>
+    </tr>
+    <tr class="gt_row_group_first"><td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  op" class="gt_row gt_left"><span data-qmd-base64="RW4gMjAyMw=="><span class="gt_from_md">En 2023</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  DE" class="gt_row gt_center"><span data-qmd-base64="MTUuMyU="><span class="gt_from_md">15.3%</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="MTYuMiU="><span class="gt_from_md">16.2%</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  IT" class="gt_row gt_center"><span data-qmd-base64="MTIl"><span class="gt_from_md">12%</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  ES" class="gt_row gt_center"><span data-qmd-base64="MTguNSU="><span class="gt_from_md">18.5%</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  NL" class="gt_row gt_center"><span data-qmd-base64="MTguOCU="><span class="gt_from_md">18.8%</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  BE" class="gt_row gt_center"><span data-qmd-base64="MTIuMiU="><span class="gt_from_md">12.2%</span></span></td></tr>
+    <tr><td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  op" class="gt_row gt_left"><span data-qmd-base64="TGUgcGx1cyBiYXMgZW50cmUgMTk5NSBldCAyMDIz"><span class="gt_from_md">Le plus bas entre 1995 et 2023</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  DE" class="gt_row gt_center"><span data-qmd-base64="MTEuMyU8YnI+KDE5OTUp"><span class="gt_from_md">11.3%<br>(1995)</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="MTIuMiU8YnI+KDIwMTMp"><span class="gt_from_md">12.2%<br>(2013)</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  IT" class="gt_row gt_center"><span data-qmd-base64="OC44JTxicj4oMTk5NSk="><span class="gt_from_md">8.8%<br>(1995)</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  ES" class="gt_row gt_center"><span data-qmd-base64="MTQuOCU8YnI+KDIwMTIp"><span class="gt_from_md">14.8%<br>(2012)</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  NL" class="gt_row gt_center"><span data-qmd-base64="Ni4yJTxicj4oMjAwNCk="><span class="gt_from_md">6.2%<br>(2004)</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  BE" class="gt_row gt_center"><span data-qmd-base64="MTAuMyU8YnI+KDE5OTYp"><span class="gt_from_md">10.3%<br>(1996)</span></span></td></tr>
+    <tr><td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  op" class="gt_row gt_left"><span data-qmd-base64="TGUgcGx1cyBoYXV0IGVudHJlIDE5OTUgZXQgMjAyMw=="><span class="gt_from_md">Le plus haut entre 1995 et 2023</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  DE" class="gt_row gt_center"><span data-qmd-base64="MTUuNSU8YnI+ICgyMDIyKQ=="><span class="gt_from_md">15.5%<br> (2022)</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="MTYuNiU8YnI+ICgyMDAxKQ=="><span class="gt_from_md">16.6%<br> (2001)</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  IT" class="gt_row gt_center"><span data-qmd-base64="MTIuNiU8YnI+ICgyMDIyKQ=="><span class="gt_from_md">12.6%<br> (2022)</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  ES" class="gt_row gt_center"><span data-qmd-base64="MjguMSU8YnI+ICgxOTk4KQ=="><span class="gt_from_md">28.1%<br> (1998)</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  NL" class="gt_row gt_center"><span data-qmd-base64="MTkuMyU8YnI+ICgyMDIyKQ=="><span class="gt_from_md">19.3%<br> (2022)</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  BE" class="gt_row gt_center"><span data-qmd-base64="MTMuOCU8YnI+ICgyMDAwKQ=="><span class="gt_from_md">13.8%<br> (2000)</span></span></td></tr>
+    <tr><td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  op" class="gt_row gt_left"><span data-qmd-base64="RXZvbHV0aW9uIG1veWVubmUgYW5udWVsbGUgZW50cmUgMTk5NSBldCAyMDIz"><span class="gt_from_md">Evolution moyenne annuelle entre 1995 et 2023</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  DE" class="gt_row gt_center"><span data-qmd-base64="MC4xNCU="><span class="gt_from_md">0.14%</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  FR" class="gt_row gt_center" style="font-weight: bold;"><span data-qmd-base64="MC4wOSU="><span class="gt_from_md">0.09%</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  IT" class="gt_row gt_center"><span data-qmd-base64="MC4xMSU="><span class="gt_from_md">0.11%</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  ES" class="gt_row gt_center"><span data-qmd-base64="LTAuMzQl"><span class="gt_from_md">-0.34%</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  NL" class="gt_row gt_center"><span data-qmd-base64="MC4yMiU="><span class="gt_from_md">0.22%</span></span></td>
+<td headers="Part de la population en âge de travailler en poste depuis moins d'un an (rotation)  BE" class="gt_row gt_center"><span data-qmd-base64="MC4wNyU="><span class="gt_from_md">0.07%</span></span></td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+</figure>
+</div></div></div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [4]:</pre></div><div class="cell">
+
+<div class="cell-container"><div class="cell-decorator"><pre>In [5]:</pre></div><div><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>earn <span class="ot">&lt;-</span> <span class="fu">source_data</span>(<span class="st">"earn.r"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>earn <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(label, BE, DE,  IT, NL, FR,  ES) <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_percent</span>(<span class="at">columns =</span> <span class="fu">c</span>(BE, DE, ES, FR, NL, IT), <span class="at">rows =</span> <span class="sc">!</span>(label <span class="sc">|&gt;</span> <span class="fu">str_detect</span>(<span class="st">"référence"</span>)),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">decimals =</span> <span class="dv">0</span>, <span class="at">dec_mark =</span> <span class="st">","</span>, <span class="at">sep_mark =</span> <span class="st">" "</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="fu">c</span>(BE, DE, ES, FR, NL, IT), <span class="at">rows =</span> label <span class="sc">|&gt;</span> <span class="fu">str_detect</span>(<span class="st">"référence"</span>),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">decimals =</span> <span class="dv">0</span>, <span class="at">dec_mark =</span> <span class="st">","</span>, <span class="at">sep_mark =</span> <span class="st">" "</span>, <span class="at">pattern =</span> <span class="st">"{x}€"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_table_lines</span>(<span class="st">"none"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">"bottom"</span>, <span class="at">color =</span> <span class="st">"grey"</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">1</span>)),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">locations =</span> <span class="fu">cells_body</span>(<span class="at">rows =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>) ) ) <span class="sc">|&gt;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">"bottom"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">1</span>)),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">locations =</span> <span class="fu">cells_body</span>(<span class="at">rows =</span> <span class="fu">c</span>(<span class="dv">11</span>) ) ) <span class="sc">|&gt;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="fu">c</span>(<span class="st">"top"</span>, <span class="st">"bottom"</span>), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">1</span>)),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">locations =</span> <span class="fu">cells_column_labels</span>( ) ) <span class="sc">|&gt;</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(<span class="at">label =</span> <span class="st">""</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label_with</span>(<span class="at">columns =</span> <span class="sc">-</span>label, <span class="sc">~</span>countrycode<span class="sc">::</span><span class="fu">countrycode</span>(.x, <span class="st">"eurostat"</span>, <span class="st">"country.name.fr"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sub_missing</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_footnote</span>(<span class="st">"Salaire annuel brut, temps partiel et complet, relatif au salaire annuel brut médian tous ages, toutes qualifications, femmes et hommes."</span>,</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>                <span class="fu">cells_body</span>(<span class="at">columns =</span> label, <span class="at">rows =</span> <span class="sc">!</span><span class="fu">str_detect</span>(label, <span class="st">"référence"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(<span class="fu">md</span>(<span class="st">"*Lecture* : Le salaire médian brut (i.e. y compris les cotisations sociales à la charge du salarié),</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="st">  des salariés à temps partiel comme à temps plein, incluant le 13^e^ mois</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="st">  et autres primes ou bonus est en France de 26 768 euros (soit un salarie mensuel moyen de 2 231 euros).</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="st">  La rémunération moyenne d'un homme (à temps plein ou partiel) est de 119% le salaire médian contre 79% pour une femme (soit un ratio homme femme de 1,51)</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="st">  en Allemagne, dont une partie s'explique par une prévalence du temps partiel plus forte chez les femmes allemandes (69%) que chez les hommes (24%). Le ratio de rémunération entre un travailleur non manuel (isco08 OC 1 à 5)</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="st">  et un travailleur manuel peu qualifié (OC 9) est de 3,7 (110%/30%) aux Pays Bas.</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="st">  La rémunération des moins de 30 ans est en moyenne inférieure de 28% au salariue médian en Italie.  </span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="st">  &lt;br&gt;</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="st">  *Source* : Eurostat, Structure of earnings survey - annual earnings (doi.org/10.2908/EARN_SES_ANNUAL), version du 19 décembre 2024, téléchargé le 15 janvier 2025, année 2022, calculs de l'auteur"</span>))</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div><div id="tbl-earn" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-earn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<strong>Tableau</strong>&nbsp;2<strong>.</strong> Strucuture des rémunérations dans 6 pays européens, année 2022
+</figcaption>
+<div aria-describedby="tbl-earn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="rntqbdefgj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rntqbdefgj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#rntqbdefgj thead, #rntqbdefgj tbody, #rntqbdefgj tfoot, #rntqbdefgj tr, #rntqbdefgj td, #rntqbdefgj th {
+  border-style: none;
+}
+
+#rntqbdefgj p {
+  margin: 0;
+  padding: 0;
+}
+
+#rntqbdefgj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rntqbdefgj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#rntqbdefgj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rntqbdefgj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rntqbdefgj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rntqbdefgj .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rntqbdefgj .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rntqbdefgj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rntqbdefgj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rntqbdefgj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rntqbdefgj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rntqbdefgj .gt_column_spanner {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rntqbdefgj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#rntqbdefgj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#rntqbdefgj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rntqbdefgj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rntqbdefgj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rntqbdefgj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: none;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rntqbdefgj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rntqbdefgj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#rntqbdefgj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#rntqbdefgj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#rntqbdefgj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rntqbdefgj .gt_first_summary_row {
+  border-top-style: none;
+  border-top-color: #D3D3D3;
+}
+
+#rntqbdefgj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#rntqbdefgj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rntqbdefgj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rntqbdefgj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: none;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rntqbdefgj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: none;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rntqbdefgj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rntqbdefgj .gt_table_body {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rntqbdefgj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rntqbdefgj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rntqbdefgj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rntqbdefgj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rntqbdefgj .gt_left {
+  text-align: left;
+}
+
+#rntqbdefgj .gt_center {
+  text-align: center;
+}
+
+#rntqbdefgj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rntqbdefgj .gt_font_normal {
+  font-weight: normal;
+}
+
+#rntqbdefgj .gt_font_bold {
+  font-weight: bold;
+}
+
+#rntqbdefgj .gt_font_italic {
+  font-style: italic;
+}
+
+#rntqbdefgj .gt_super {
+  font-size: 65%;
+}
+
+#rntqbdefgj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#rntqbdefgj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#rntqbdefgj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#rntqbdefgj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#rntqbdefgj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#rntqbdefgj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#rntqbdefgj .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#rntqbdefgj .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#rntqbdefgj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 1px; border-top-style: solid; border-top-color: black; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black;" scope="col" id="label"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 1px; border-top-style: solid; border-top-color: black; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black;" scope="col" id="BE">Belgique</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 1px; border-top-style: solid; border-top-color: black; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black;" scope="col" id="DE">Allemagne</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 1px; border-top-style: solid; border-top-color: black; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black;" scope="col" id="IT">Italie</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 1px; border-top-style: solid; border-top-color: black; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black;" scope="col" id="NL">Pays-Bas</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 1px; border-top-style: solid; border-top-color: black; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black;" scope="col" id="FR">France</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 1px; border-top-style: solid; border-top-color: black; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black;" scope="col" id="ES">Espagne</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">Salaire médian brut annuel (référence)</td>
+<td headers="BE" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">38 969€</td>
+<td headers="DE" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">28 784€</td>
+<td headers="IT" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">28 345€</td>
+<td headers="NL" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">26 793€</td>
+<td headers="FR" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">26 768€</td>
+<td headers="ES" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">23 997€</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Part des hommes à temps partiel<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></td>
+<td headers="BE" class="gt_row gt_right">19%</td>
+<td headers="DE" class="gt_row gt_right">24%</td>
+<td headers="IT" class="gt_row gt_right">19%</td>
+<td headers="NL" class="gt_row gt_right">32%</td>
+<td headers="FR" class="gt_row gt_right">17%</td>
+<td headers="ES" class="gt_row gt_right">22%</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">Part des femmes à temps partiel<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></td>
+<td headers="BE" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">44%</td>
+<td headers="DE" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">69%</td>
+<td headers="IT" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">34%</td>
+<td headers="NL" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">84%</td>
+<td headers="FR" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">30%</td>
+<td headers="ES" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">43%</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Salaire du premier décile<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></td>
+<td headers="BE" class="gt_row gt_right">34%</td>
+<td headers="DE" class="gt_row gt_right">15%</td>
+<td headers="IT" class="gt_row gt_right">38%</td>
+<td headers="NL" class="gt_row gt_right">14%</td>
+<td headers="FR" class="gt_row gt_right">34%</td>
+<td headers="ES" class="gt_row gt_right">37%</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">Salaire du dernier décile<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></td>
+<td headers="BE" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">174%</td>
+<td headers="DE" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">229%</td>
+<td headers="IT" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">193%</td>
+<td headers="NL" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">225%</td>
+<td headers="FR" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">204%</td>
+<td headers="ES" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">222%</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Salaire des hommes<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></td>
+<td headers="BE" class="gt_row gt_right">106%</td>
+<td headers="DE" class="gt_row gt_right">119%</td>
+<td headers="IT" class="gt_row gt_right">105%</td>
+<td headers="NL" class="gt_row gt_right">127%</td>
+<td headers="FR" class="gt_row gt_right">108%</td>
+<td headers="ES" class="gt_row gt_right">109%</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">Salaire des femmes<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></td>
+<td headers="BE" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">93%</td>
+<td headers="DE" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">79%</td>
+<td headers="IT" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">93%</td>
+<td headers="NL" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">80%</td>
+<td headers="FR" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">92%</td>
+<td headers="ES" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">89%</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Salaire des moins de 30 ans<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></td>
+<td headers="BE" class="gt_row gt_right">—</td>
+<td headers="DE" class="gt_row gt_right">—</td>
+<td headers="IT" class="gt_row gt_right">72%</td>
+<td headers="NL" class="gt_row gt_right">37%</td>
+<td headers="FR" class="gt_row gt_right">65%</td>
+<td headers="ES" class="gt_row gt_right">64%</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">Salaire des plus de 50 ans<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></td>
+<td headers="BE" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">—</td>
+<td headers="DE" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">—</td>
+<td headers="IT" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">115%</td>
+<td headers="NL" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">122%</td>
+<td headers="FR" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">113%</td>
+<td headers="ES" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: grey;">112%</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">Salaire des travailleurs non manuels<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></td>
+<td headers="BE" class="gt_row gt_right">110%</td>
+<td headers="DE" class="gt_row gt_right">109%</td>
+<td headers="IT" class="gt_row gt_right">109%</td>
+<td headers="NL" class="gt_row gt_right">110%</td>
+<td headers="FR" class="gt_row gt_right">113%</td>
+<td headers="ES" class="gt_row gt_right">111%</td></tr>
+    <tr><td headers="label" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black;">Salaire des travailleurs manuels peu qualifiés<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></td>
+<td headers="BE" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black;">—</td>
+<td headers="DE" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black;">—</td>
+<td headers="IT" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black;">68%</td>
+<td headers="NL" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black;">31%</td>
+<td headers="FR" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black;">52%</td>
+<td headers="ES" class="gt_row gt_right" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: black;">67%</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="7"><span data-qmd-base64="PGVtPkxlY3R1cmU8L2VtPiA6IExlIHNhbGFpcmUgbcOpZGlhbiBicnV0IChpLmUuIHkgY29tcHJpcyBsZXMgY290aXNhdGlvbnMgc29jaWFsZXMgw6AgbGEgY2hhcmdlIGR1IHNhbGFyacOpKSwKZGVzIHNhbGFyacOpcyDDoCB0ZW1wcyBwYXJ0aWVsIGNvbW1lIMOgIHRlbXBzIHBsZWluLCBpbmNsdWFudCBsZSAxMzxzdXA+ZTwvc3VwPiBtb2lzCmV0IGF1dHJlcyBwcmltZXMgb3UgYm9udXMgZXN0IGVuIEZyYW5jZSBkZSAyNiA3NjggZXVyb3MgKHNvaXQgdW4gc2FsYXJpZSBtZW5zdWVsIG1veWVuIGRlIDIgMjMxIGV1cm9zKS4KTGEgcsOpbXVuw6lyYXRpb24gbW95ZW5uZSBk4oCZdW4gaG9tbWUgKMOgIHRlbXBzIHBsZWluIG91IHBhcnRpZWwpIGVzdCBkZSAxMTklIGxlIHNhbGFpcmUgbcOpZGlhbiBjb250cmUgNzklIHBvdXIgdW5lIGZlbW1lIChzb2l0IHVuIHJhdGlvIGhvbW1lIGZlbW1lIGRlIDEsNTEpCmVuIEFsbGVtYWduZSwgZG9udCB1bmUgcGFydGllIHPigJlleHBsaXF1ZSBwYXIgdW5lIHByw6l2YWxlbmNlIGR1IHRlbXBzIHBhcnRpZWwgcGx1cyBmb3J0ZSBjaGV6IGxlcyBmZW1tZXMgYWxsZW1hbmRlcyAoNjklKSBxdWUgY2hleiBsZXMgaG9tbWVzICgyNCUpLiBMZSByYXRpbyBkZSByw6ltdW7DqXJhdGlvbiBlbnRyZSB1biB0cmF2YWlsbGV1ciBub24gbWFudWVsIChpc2NvMDggT0MgMSDDoCA1KQpldCB1biB0cmF2YWlsbGV1ciBtYW51ZWwgcGV1IHF1YWxpZmnDqSAoT0MgOSkgZXN0IGRlIDMsNyAoMTEwJS8zMCUpIGF1eCBQYXlzIEJhcy4KTGEgcsOpbXVuw6lyYXRpb24gZGVzIG1vaW5zIGRlIDMwIGFucyBlc3QgZW4gbW95ZW5uZSBpbmbDqXJpZXVyZSBkZSAyOCUgYXUgc2FsYXJpdWUgbcOpZGlhbiBlbiBJdGFsaWUuPGJyIC8+Cjxicj4KPGVtPlNvdXJjZTwvZW0+IDogRXVyb3N0YXQsIFN0cnVjdHVyZSBvZiBlYXJuaW5ncyBzdXJ2ZXkgLSBhbm51YWwgZWFybmluZ3MgKGRvaS5vcmcvMTAuMjkwOC9FQVJOX1NFU19BTk5VQUwpLCB2ZXJzaW9uIGR1IDE5IGTDqWNlbWJyZSAyMDI0LCB0w6lsw6ljaGFyZ8OpIGxlIDE1IGphbnZpZXIgMjAyNSwgYW5uw6llIDIwMjIsIGNhbGN1bHMgZGUgbOKAmWF1dGV1cg=="><span class="gt_from_md"><em>Lecture</em> : Le salaire médian brut (i.e. y compris les cotisations sociales à la charge du salarié),
+des salariés à temps partiel comme à temps plein, incluant le 13<sup>e</sup> mois
+et autres primes ou bonus est en France de 26 768 euros (soit un salarie mensuel moyen de 2 231 euros).
+La rémunération moyenne d’un homme (à temps plein ou partiel) est de 119% le salaire médian contre 79% pour une femme (soit un ratio homme femme de 1,51)
+en Allemagne, dont une partie s’explique par une prévalence du temps partiel plus forte chez les femmes allemandes (69%) que chez les hommes (24%). Le ratio de rémunération entre un travailleur non manuel (isco08 OC 1 à 5)
+et un travailleur manuel peu qualifié (OC 9) est de 3,7 (110%/30%) aux Pays Bas.
+La rémunération des moins de 30 ans est en moyenne inférieure de 28% au salariue médian en Italie.<br>
+<br>
+<em>Source</em> : Eurostat, Structure of earnings survey - annual earnings (doi.org/10.2908/EARN_SES_ANNUAL), version du 19 décembre 2024, téléchargé le 15 janvier 2025, année 2022, calculs de l’auteur</span></span></td>
+    </tr>
+  </tfoot>
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="7"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> Salaire annuel brut, temps partiel et complet, relatif au salaire annuel brut médian tous ages, toutes qualifications, femmes et hommes.</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+</figure>
+</div></div></div>
+</div></div>
+</section>
+<section id="rémunération-du-travail-et-du-capital" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="rémunération-du-travail-et-du-capital"><span class="header-section-number">3</span> Rémunération du travail et du capital</h2>
+<div class="cell-container"><div class="cell-decorator"><pre>In [6]:</pre></div><div id="cell-fig-sal" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>naa <span class="ot">&lt;-</span> <span class="fu">source_data</span>(<span class="st">"va.r"</span>)<span class="sc">$</span>naa</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(naa) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>time, <span class="at">y=</span>psal, <span class="at">col =</span> geo) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> <span class="sc">~</span>.x <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">GEO =</span> geo) , <span class="fu">aes</span>(<span class="at">group=</span>GEO), <span class="at">col =</span> <span class="st">"gray75"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> psal2, <span class="at">ymax =</span> psal, <span class="at">fill =</span> geo, <span class="at">group =</span> geo),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">"transparent"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(geo), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">labeller =</span> lbl) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_ofce_date</span>() <span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="dv">1</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_pays</span>(<span class="at">format =</span> <span class="st">"eurostat"</span>) <span class="sc">+</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_ofce</span>() <span class="sc">+</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ofce_caption</span>(</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">wrap =</span> <span class="dv">100</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">source =</span> <span class="st">"Eurostat, comptes nationaux annuels de branche (nama_10_a64 et nama_10_a64_e),</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="st"> comptes nationaux trimestriels (namq_10_a10) pour l'année 2024 (jusqu'au T3),</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="st"> comptes nationaux par secteurs institutionels (nasa_10_nf_tr) pour l'impôt sur les sociétés (D51), téléchargés le 15 janvier 2025,</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="st"> calcul de l'auteur, le code est disponible à github.com/xtimbeau/travail"</span>,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">champ =</span> <span class="st">"Branches marchandes hors services immobiliers (L dans la NACE r2)"</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">lecture =</span> <span class="st">"La part des salaires (corrigé de la non salarisation)</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="st"> dans la valeur ajoutée nette atteint 90% en France en 2023 ((D1*(1+ns/s)/(B1G-P51C)).</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="st"> La partie colorée correspond aux salaires différés correspondant aux cotisations sociales à la charge des employeurs (D11/(B1G-P51C)).</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="st"> La rémunération inclue les cotisations sociales à la charge des employeurs.</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="st"> La non salarisation est corrigée en affectant par branche (22 branches) un salaire aux non salariés égal au salaire moyen des salariés de la branche.</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="st"> La valeur ajoutée nette (valeur ajoutée brute moins la consommation de capital fixe B1G-P51C) est préférée</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="st"> à la valeur ajoutée brute pour pouvoir comparer des pays aux structures productives et aux ratios capital/travail différents.</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="st"> La part des salaires dans la valeur ajoutée brute en France (D1/B1G) en 2023 est de 73,5%."</span>,</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">note =</span> <span class="st">"L'année 2024 est estimée à partir des comptes trimestriels en supposant que la croissance la masse salaire corrigée de la non salarisation</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="st"> et de la valeur ajoutée nette sont égales à la celle de la masse salariale et de la valeur ajoutée brute."</span>,</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">ofce =</span> <span class="cn">FALSE</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-sal" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-pos="htb">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-sal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<strong>Graphique</strong>&nbsp;1<strong>.</strong> Part des salaires dans la valeur ajoutée nette
+</figcaption>
+<div aria-describedby="fig-sal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="travail_files/figure-html/fig-sal-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Graphique&nbsp;1. Part des salaires dans la valeur ajoutée nette"><img src="travail_files/figure-html/fig-sal-1.png" class="img-fluid figure-img" style="width:100.0%" data-fig-pos="htb"></a>
+</div>
+</figure>
+</div>
+</div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [7]:</pre></div><div id="cell-fig-profit" class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(naa) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>time, <span class="at">y=</span>tp, <span class="at">col =</span> geo) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> <span class="sc">~</span>.x <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">GEO =</span> geo) , <span class="fu">aes</span>(<span class="at">group=</span>GEO), <span class="at">col =</span> <span class="st">"gray75"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> tp, <span class="at">ymax =</span> tpb, <span class="at">fill =</span> geo, <span class="at">group =</span> geo),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">"transparent"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(geo), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">labeller =</span> lbl) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_ofce_date</span>() <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_pays</span>(<span class="at">format =</span> <span class="st">"eurostat"</span>) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_ofce</span>() <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ofce_caption</span>(</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">source =</span> <span class="st">"Eurostat, comptes nationaux annuels de branche (nama_10_a64 et nama_10_a64_e),</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="st"> comptes nationaux trimestriels (namq_10_a10) pour l'année 2024 (jusqu'au T3),</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="st"> comptes nationaux par secteurs institutionels (nasa_10_nf_tr) pour l'impôt sur les sociétés (D51), version du 15 janvier 2025,  téléchargés le 15 janvier 2025,</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="st"> calcul de l'auteur, le code est disponible à github.com/xtimbeau/travail."</span>,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">champ =</span> <span class="st">"Branches marchandes hors services immobiliers (L dans la NACE r2)"</span>,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">lecture =</span> <span class="st">"La part des profits est la valeur ajoutée nette moins la rémunération des salariés corrigée</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="st"> de la non salarisation moins les impôts de production nets des subventions à la production moins l'impôt sur les sociétés rapporté à la valeur ajoutée nette.</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="st"> C'est donc la part de la production qui reste après la rémunération des facteurs de production (consommations intermédiaires,</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="st"> salaires et dépréciation du capital) et après les impôts et taxes nets des subventions. Cette part sert la rémunération des actionnaires et des apporteurs de capitaux comme les banques.</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="st"> En 2023, cette part est de 3% en France et de 12,9% en Allemagne. La partie colorée indique la part des impôts nets des subventions."</span>,</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">ofce =</span> <span class="cn">FALSE</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-profit" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-pos="htb">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-profit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<strong>Graphique</strong>&nbsp;2<strong>.</strong> Part des profits après impôt dans la valeur ajoutée nette
+</figcaption>
+<div aria-describedby="fig-profit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="travail_files/figure-html/fig-profit-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Graphique&nbsp;2. Part des profits après impôt dans la valeur ajoutée nette"><img src="travail_files/figure-html/fig-profit-1.png" class="img-fluid figure-img" style="width:100.0%" data-fig-pos="htb"></a>
+</div>
+</figure>
+</div>
+</div>
+</div></div>
+<div class="cell-container"><div class="cell-decorator"><pre>In [8]:</pre></div><div id="cell-fig-rendement" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>naaa <span class="ot">&lt;-</span> <span class="fu">source_data</span>(<span class="st">"va.r"</span>)<span class="sc">$</span>naaa</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(naaa) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>time, <span class="at">y=</span>r, <span class="at">col =</span> geo) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> <span class="sc">~</span>.x <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">GEO =</span> geo) , <span class="fu">aes</span>(<span class="at">group=</span>GEO), <span class="at">col =</span> <span class="st">"gray75"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_ribbon(aes(ymin = tp, ymax = tpb, fill = geo, group = geo),</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#             color = "transparent", show.legend = FALSE, alpha = 0.2) +</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(geo), <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">labeller =</span> lbl) <span class="sc">+</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_ofce_date</span>() <span class="sc">+</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_pays</span>(<span class="at">format =</span> <span class="st">"eurostat"</span>) <span class="sc">+</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_ofce</span>() <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ofce_caption</span>(</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">source =</span> <span class="st">"Eurostat, comptes nationaux annuels de branche (nama_10_a64 et nama_10_a64_e),</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="st"> comptes nationaux trimestriels (namq_10_a10) pour l'année 2024 (jusqu'au T3),</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="st"> comptes nationaux par secteurs institutionels (nasa_10_nf_tr) pour l'impôt sur les sociétés (D51), comptes d'actifs physiques par branche (</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="st">nama_10_nfa_st), téléchargés le 15 janvier 2025,</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="st"> calcul de l'auteur, le code est disponible à github.com/xtimbeau/travail."</span>,</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">champ =</span> <span class="st">"Branches marchandes hors services immobiliers (L dans la NACE r2)"</span>,</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">lecture =</span> <span class="st">"Le taux de rendement du capital est le ratio entre les profits (après impôts, net des suventions) et la valeur au coût de remplacement du stock de capital productif. Le capital productif considéré est hors actifs non produits (terrains, terres agricoles, ressources naturelles). Il exclut le capital immobilier parce que la branche services immobiliers n'est pas dans le champ. Le taux de rendement du capital est de 1,5% en France et de 5,6% en Allemagne."</span>,</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">ofce =</span> <span class="cn">FALSE</span>)</span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-rendement" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-pos="htb">
+<figure class="quarto-float quarto-float-fig figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-fig" id="fig-rendement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<strong>Graphique</strong>&nbsp;3<strong>.</strong> Taux de rendement nominal du capital productif après impôts
+</figcaption>
+<div aria-describedby="fig-rendement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="">
+<a href="travail_files/figure-html/fig-rendement-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Graphique&nbsp;3. Taux de rendement nominal du capital productif après impôts"><img src="travail_files/figure-html/fig-rendement-1.png" class="img-fluid figure-img" style="width:100.0%" data-fig-pos="htb"></a>
+</div>
+</figure>
+</div>
+</div>
+</div></div>
+</section>
+<section id="une-nouvelle-poltiique-de-loffre" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="une-nouvelle-poltiique-de-loffre"><span class="header-section-number">4</span> Une nouvelle poltiique de <span style="white-space:nowrap">l’offre ?</span></h2>
+</section>
+     </main>
+<!-- /main column -->  <script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copié");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copié");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>  </div> <!-- /content -->  <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script> 
+  
+</body></html>

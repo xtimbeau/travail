@@ -1,0 +1,214 @@
+---
+title: "Quelles marges de manoeuvres macroéconomiques pour revaloriser le travail ?"
+author:
+  - name: "Xavier Timbeau" 
+    email: "xavier.timbeau@sciencespo.fr"
+    affiliation: OFCE, Sciences Po Paris
+    affiliation-url: "http://www.ofce.fr"
+    orcid: "0000-0002-6198-5953"
+format: 
+  ofce-html: default
+editor: visual
+
+abstract: "`r  wordcountaddin::word_count('travail.qmd')` mots."
+---
+
+```{r, include=FALSE}
+ofce::init_qmd()
+```
+
+## Revaloriser le travail
+
+L'ensemble du numéro d'économie politique consacré au travail pointe dans une direction sans équivoque. Le travail est au cœur du pacte social ; il est une nécessité économique pour une immense majorité ; il est la condition pour l'émancipation des individus. Le travail réalise également les promesses floues du mérite et cristallise en conséquence les perceptions des inégalités. Il condense également les attentes et les perceptions de la situation économique, tant le travail et la position que chacun occupe dans la société est le le modèle dominant de la rémunération. A part quelques rares privilégiés, dont les ultra riches sont peut être la manifestation la plus visible, chacun vite de son travail, présent ou passé et est donc renvoyé à une condition commune et partagée. Personne ou presque ne vit des revenus de son épargne, personne ou presque ne peut imaginer une vie sans travail.
+
+La stagnation des revenus des salariés depuis la crise de 2008 est donc un moment essentiel dans notre histoire économique. Nul besoin de faire appel à la période des 30 glorieuses, avec une nostalgie souvent exagérée, pour évoquer des périodes de croissance du pouvoir d'achat des salariés (graphique). La crise de 2008, la crise des dettes souveraines, les restrictions budgétaires pour absorber les déficits publics mais aussi le décrochage de la croissance dans l'Union Européenne par rapport aux Etats-Unis expliquent en partie cette stagnation. Après une accalmie entre 2017 et 2020, la crise sanitaire puis la seconde invasion de l'Ukraine par la Russie, la crise énergétique qui s'en est suivie ont à la fois pesé sur l'activité (la perte d'activité en Europe liée à la guerre en Ukraine est de l'ordre de 3 points de PIB) et sur les prix (les prix à la consommation ont augmenté de plus 15% entre 2020 et 2024). La combinaison à la fois d'une activité économique plutôt stagnante, en tout cas en décrochage avec d'autres économies développées, et d'épisodes conjoncturels brutaux se réduit très concrètement dans les revenus tirés du travail.
+
+La question que nous allons essayer de traiter dans cette contribution est celle des marges de manœuvre que la macroéconomie, en France comme en Europe, laisse pour répondre à cette crise du travail et de sa rémunération. Pour approcher cette question sous l'angle macroéconomique, la méthode est de chercher dans les évolutions récentes des marchés du travail, expression consacrée pour désigner la marchandisation du travail, ce qui pourrait constituer une anomalie qu'une politique volontariste pourrait vouloir corriger. Il s'agit d'un écho lointain aux analyses presentées dans ce numéro qui se fondent sur des observations plus directes des réalités du monde du travail. Mais les statistiques peuvent ici servir à relativiser et fournir un point de vue riche, d'autant que nous essayons de comparer la France à ses principaux voisins, qu'ils soient d'Europe du Sud ou plutôt d'Europe du Nord.
+
+Pour répondre à la questions des marges macroéconomiques, nous analyserons, à partir des données de comptabilité nationale, le partage de la valeur ajoutée. Un rapport de force moins favorable aux salariés est sans doute à attendre des efforts de libéralisation et de flexibilisation des marchés du travail et aurait pu se traduire dans la mesure du partage. Nous verrons que la mise à jour des indicateurs de partage de la valeur ajoutée n'offrent pas beaucoup d'espoir quant à un rééquilibrage en faveur du travail. La discussion des notions de la comptabilité nationale et des systèmes fiscaux nationaux peuvent laisser entrevoir cependant ce qui pourrait être une nouvelle politique de l'offre.
+
+## Le nouveau monde
+
+La flexibilisation des marchés du travail est à l'ordre du jour depuis les années 1980. Elle a été brutale dans certains pays, plus progressive dans d'autres, en particulier en France. Néanmoins, et combinée à la perte d'influence des syndicats et la diminution du rôle des partenaires sociaux, lorsqu'on se retourne sur les 50 dernières années, on ne peut manquer d'être frappé par l'ampleur des changements. Le @tbl-chomage donne quelques indicateurs choisis pour 6 pays européens pour la période 1995-2023. Quelques faits résument les évolutions :
+
+-   le chômage a baissé dans les 6 pays, en moyenne sur presque 30 ans, bien qu'en France la baisse soit plutôt faible. Dans la plupart des pays européens, y compris la France, le chômage de masse des années 1980 a été partiellement ou complètement résorbé. Le chômage des jeunes, mesuré ici par rapport à la population de même âge et non la population active, a baissé dans 5 pays, l'exception étant la France. En France et aux Pays-Bas, la part des jeunes au chômage est supérieure à la part du reste de la population en âge de travailler.
+
+-   La rotation sur le marché du travail, ici quantifiée approximativement par la part des salariés en emploi depuis moins d'un an dans le poste qu'ils occupent, s'est plutôt accrue. Elle est élevée en France, bien que moins qu'au Pays-Bas ou en Espagne.
+
+-   Sans doute en conséquence d'une pression à la baisse sur les salaires et d'une moindre protection des salariés, la part des individus occupant un deuxième emploi a augmenté
+
+```{r}
+#| label: tbl-chomage
+#| tbl-cap: Indicateurs du "marché du travail", 1995-2023
+#| html-table-processing: none
+
+sum <- source_data("precarite.r")$sum  |> 
+  mutate(c = case_when(
+     op == "last" ~ str_c(round(v,1), "%"),
+     op == "min" ~ str_c(round(v,1), "%<br>(", year(date), ")"),
+     op == "max" ~ str_c(round(v,1), "%<br> (", year(date), ")"),
+     op == "dv" ~ str_c(round(v,2), "%") ) ) |>
+  pivot_wider(id_cols = c(age, what, op), names_from = geo, values_from = c) |> 
+  mutate(
+    label = case_when(
+      what == "3mcontract" ~ "Part de la population en âge de travailler en contrat de moins de 3 mois",
+      what == "chômage" & age == "Y1524" ~ "Chômeurs de 15 à 24 ans en % de la population des jeunes",
+      what == "chômage" & age == "Y2064" ~ "Chômeurs en % de la population en âge de travailler",
+      what == "second job" ~ "Part de la population en âge de travailler occupant deux emplois",
+      what == "newjob" ~ "Part de la population en âge de travailler en poste depuis moins d'un an (rotation)"),
+    op = case_match(op,
+                    "last" ~ "En 2023",
+                    "min" ~ "Le plus bas entre 1995 et 2023",
+                    "max" ~ "Le plus haut entre 1995 et 2023",
+                    "dv" ~ "Evolution moyenne annuelle entre 1995 et 2023")) |> 
+  select(-age, -what)
+
+sum |> 
+  group_by(label) |> 
+  gt() |> 
+  cols_label_with(fn = lbl) |> 
+  cols_align("center", -c(label, op)) |> 
+  fmt_markdown() |> 
+  tab_style(style = cell_text(weight = "bold"),
+            locations = cells_body(columns = FR)) |> 
+  cols_label(op = "", label = "")
+```
+
+```{r}
+#| label: tbl-earn
+#| tbl-cap: Strucuture des rémunérations dans 6 pays européens, année 2022
+#| html-table-processing: none
+
+earn <- source_data("earn.r")
+
+earn |>
+  select(label, BE, DE,  IT, NL, FR,  ES) |>
+  gt() |>
+  fmt_percent(columns = c(BE, DE, ES, FR, NL, IT), rows = !(label |> str_detect("référence")),
+              decimals = 0, dec_mark = ",", sep_mark = " ") |>
+  fmt_number(columns = c(BE, DE, ES, FR, NL, IT), rows = label |> str_detect("référence"),
+             decimals = 0, dec_mark = ",", sep_mark = " ", pattern = "{x}€") |>
+  opt_table_lines("none") |>
+  tab_style(cell_borders(sides = "bottom", color = "grey", weight = px(1)),
+            locations = cells_body(rows = c(1, 3, 5, 7, 9) ) ) |>
+  tab_style(cell_borders(sides = "bottom", color = "black", weight = px(1)),
+            locations = cells_body(rows = c(11) ) ) |>
+  tab_style(cell_borders(sides = c("top", "bottom"), color = "black", weight = px(1)),
+            locations = cells_column_labels( ) ) |>
+  cols_label(label = "") |>
+  cols_label_with(columns = -label, ~countrycode::countrycode(.x, "eurostat", "country.name.fr")) |> 
+  sub_missing() |>
+  tab_footnote("Salaire annuel brut, temps partiel et complet, relatif au salaire annuel brut médian tous ages, toutes qualifications, femmes et hommes.",
+                cells_body(columns = label, rows = !str_detect(label, "référence"))) |>
+  tab_source_note(md("*Lecture* : Le salaire médian brut (i.e. y compris les cotisations sociales à la charge du salarié),
+  des salariés à temps partiel comme à temps plein, incluant le 13^e^ mois
+  et autres primes ou bonus est en France de 26 768 euros (soit un salarie mensuel moyen de 2 231 euros).
+  La rémunération moyenne d'un homme (à temps plein ou partiel) est de 119% le salaire médian contre 79% pour une femme (soit un ratio homme femme de 1,51)
+  en Allemagne, dont une partie s'explique par une prévalence du temps partiel plus forte chez les femmes allemandes (69%) que chez les hommes (24%). Le ratio de rémunération entre un travailleur non manuel (isco08 OC 1 à 5)
+  et un travailleur manuel peu qualifié (OC 9) est de 3,7 (110%/30%) aux Pays Bas.
+  La rémunération des moins de 30 ans est en moyenne inférieure de 28% au salariue médian en Italie.  
+  <br>
+  *Source* : Eurostat, Structure of earnings survey - annual earnings (doi.org/10.2908/EARN_SES_ANNUAL), version du 19 décembre 2024, téléchargé le 15 janvier 2025, année 2022, calculs de l'auteur"))
+```
+
+## Rémunération du travail et du capital
+
+```{r}
+#| label: fig-sal
+#| fig-cap: Part des salaires dans la valeur ajoutée nette
+#| fig-asp: 1.4
+
+naa <- source_data("va.r")$naa
+
+ggplot(naa) +
+  aes(x=time, y=psal, col = geo) +
+  geom_line(data = ~.x |> rename(GEO = geo) , aes(group=GEO), col = "gray75", linewidth = 0.25) +
+  geom_ribbon(aes(ymin = psal2, ymax = psal, fill = geo, group = geo),
+              color = "transparent", show.legend = FALSE, alpha = 0.2) +
+  geom_line(show.legend=FALSE) +
+  facet_wrap(vars(geo), ncol = 2, labeller = lbl) +
+  scale_ofce_date() +
+  scale_y_continuous(labels = scales::label_percent(1), limits = c(NA, 1)) +
+  scale_color_pays(format = "eurostat") +
+  theme_ofce() +
+  ofce_caption(
+    wrap = 100,
+    source = "Eurostat, comptes nationaux annuels de branche (nama_10_a64 et nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10) pour l'année 2024 (jusqu'au T3),
+ comptes nationaux par secteurs institutionels (nasa_10_nf_tr) pour l'impôt sur les sociétés (D51), téléchargés le 15 janvier 2025,
+ calcul de l'auteur, le code est disponible à github.com/xtimbeau/travail",
+    champ = "Branches marchandes hors services immobiliers (L dans la NACE r2)",
+    lecture = "La part des salaires (corrigé de la non salarisation)
+ dans la valeur ajoutée nette atteint 90% en France en 2023 ((D1*(1+ns/s)/(B1G-P51C)).
+ La partie colorée correspond aux salaires différés correspondant aux cotisations sociales à la charge des employeurs (D11/(B1G-P51C)).
+ La rémunération inclue les cotisations sociales à la charge des employeurs.
+ La non salarisation est corrigée en affectant par branche (22 branches) un salaire aux non salariés égal au salaire moyen des salariés de la branche.
+ La valeur ajoutée nette (valeur ajoutée brute moins la consommation de capital fixe B1G-P51C) est préférée
+ à la valeur ajoutée brute pour pouvoir comparer des pays aux structures productives et aux ratios capital/travail différents.
+ La part des salaires dans la valeur ajoutée brute en France (D1/B1G) en 2023 est de 73,5%.",
+    note = "L'année 2024 est estimée à partir des comptes trimestriels en supposant que la croissance la masse salaire corrigée de la non salarisation
+ et de la valeur ajoutée nette sont égales à la celle de la masse salariale et de la valeur ajoutée brute.",
+    ofce = FALSE)
+```
+
+```{r}
+#| label: fig-profit
+#| fig-cap: Part des profits après impôt dans la valeur ajoutée nette
+#| fig-asp: 1.4
+
+ggplot(naa) +
+  aes(x=time, y=tp, col = geo) +
+  geom_line(data = ~.x |> rename(GEO = geo) , aes(group=GEO), col = "gray75", linewidth = 0.25) +
+  geom_ribbon(aes(ymin = tp, ymax = tpb, fill = geo, group = geo),
+              color = "transparent", show.legend = FALSE, alpha = 0.2) +
+  geom_line(show.legend=FALSE) +
+  facet_wrap(vars(geo), ncol = 2, labeller = lbl) +
+  scale_ofce_date() +
+  scale_y_continuous(labels = scales::label_percent(1)) +
+  scale_color_pays(format = "eurostat") +
+  theme_ofce() +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels de branche (nama_10_a64 et nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10) pour l'année 2024 (jusqu'au T3),
+ comptes nationaux par secteurs institutionels (nasa_10_nf_tr) pour l'impôt sur les sociétés (D51), version du 15 janvier 2025,  téléchargés le 15 janvier 2025,
+ calcul de l'auteur, le code est disponible à github.com/xtimbeau/travail.",
+    champ = "Branches marchandes hors services immobiliers (L dans la NACE r2)",
+    lecture = "La part des profits est la valeur ajoutée nette moins la rémunération des salariés corrigée
+ de la non salarisation moins les impôts de production nets des subventions à la production moins l'impôt sur les sociétés rapporté à la valeur ajoutée nette.
+ C'est donc la part de la production qui reste après la rémunération des facteurs de production (consommations intermédiaires,
+ salaires et dépréciation du capital) et après les impôts et taxes nets des subventions. Cette part sert la rémunération des actionnaires et des apporteurs de capitaux comme les banques.
+ En 2023, cette part est de 3% en France et de 12,9% en Allemagne. La partie colorée indique la part des impôts nets des subventions.",
+    ofce = FALSE)
+
+```
+
+```{r}
+#| label: fig-rendement
+#| fig-cap: Taux de rendement nominal du capital productif après impôts
+#| fig-asp: 1.4
+
+naaa <- source_data("va.r")$naaa
+
+ggplot(naaa) +
+  aes(x=time, y=r, col = geo) +
+  geom_line(data = ~.x |> rename(GEO = geo) , aes(group=GEO), col = "gray75", linewidth = 0.25) +
+  # geom_ribbon(aes(ymin = tp, ymax = tpb, fill = geo, group = geo),
+  #             color = "transparent", show.legend = FALSE, alpha = 0.2) +
+  geom_line(show.legend=FALSE) +
+  facet_wrap(vars(geo), ncol = 2, labeller = lbl) +
+  scale_ofce_date() +
+  scale_y_continuous(labels = scales::label_percent(1)) +
+  scale_color_pays(format = "eurostat") +
+  theme_ofce() +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels de branche (nama_10_a64 et nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10) pour l'année 2024 (jusqu'au T3),
+ comptes nationaux par secteurs institutionels (nasa_10_nf_tr) pour l'impôt sur les sociétés (D51), comptes d'actifs physiques par branche (
+nama_10_nfa_st), téléchargés le 15 janvier 2025,
+ calcul de l'auteur, le code est disponible à github.com/xtimbeau/travail.",
+    champ = "Branches marchandes hors services immobiliers (L dans la NACE r2)",
+    lecture = "Le taux de rendement du capital est le ratio entre les profits (après impôts, net des suventions) et la valeur au coût de remplacement du stock de capital productif. Le capital productif considéré est hors actifs non produits (terrains, terres agricoles, ressources naturelles). Il exclut le capital immobilier parce que la branche services immobiliers n'est pas dans le champ. Le taux de rendement du capital est de 1,5% en France et de 5,6% en Allemagne.",
+    ofce = FALSE)
+```
+
+## Une nouvelle poltiique de l'offre ?
