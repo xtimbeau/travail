@@ -19,7 +19,8 @@ manuscript:
     - text: NACE rev2
       icon: file-code
       href: nace.r
-
+comments:
+  hypothesis: true
 format:
   ofce-html: default
   docx: default
