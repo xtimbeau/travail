@@ -5,7 +5,7 @@ library(gt)
 pays2 <- c("DE", "FR", "IT", "ES", "NL", "BE")
 label_pays <- set_names(countrycode::countrycode(pays2, "eurostat", "country.name.fr"), pays2)
 
-earn.raw <- get_eurostat("earn_ses_annual", filters = list(isco08 = c("OC1-5", "OC9", "TOTAL"),
+earn.raw <- get_eurostat("earn_ses_annual", filters = list(isco08 = c("OC1", "OC9", "TOTAL"),
                                                            geo = pays2,
                                                            worktime = c("TOTAL", "PT", "FT"),
                                                            nace_r2 = "B-S_X_O",
@@ -13,7 +13,6 @@ earn.raw <- get_eurostat("earn_ses_annual", filters = list(isco08 = c("OC1-5", "
                                                            sex = c("M", "F", "T"),
                                                            indic_se = c("MED_E_PPS", "D9_E_PPS", "D1_E_PPS"))) |>
   select(-freq, -nace_r2) |>
-  drop_na() |>
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE"))) |>
   group_by(geo) |>
   filter(time==max(time)) |>
@@ -55,7 +54,7 @@ earn <- earn.raw |>
       tt== "rel" & isco08 == "TOTAL" & age == "TOTAL" & sex == "F" & indic_se == "MED_E_PPS" ~ "Salaire des femmes",
       tt== "rel" & isco08 == "TOTAL" & age == "Y_LT30" & sex == "T" & indic_se == "MED_E_PPS" ~ "Salaire des moins de 30 ans",
       tt== "rel" & isco08 == "TOTAL" & age == "Y_GE50" & sex == "T" & indic_se == "MED_E_PPS" ~ "Salaire des plus de 50 ans",
-      tt== "rel" & isco08 == "OC1-5" & age == "TOTAL" & sex == "T" & indic_se == "MED_E_PPS" ~ "Salaire des travailleurs non manuels",
+      tt== "rel" & isco08 == "OC1" & age == "TOTAL" & sex == "T" & indic_se == "MED_E_PPS" ~ "Salaire des *managers*",
       tt== "rel" & isco08 == "OC9" & age == "TOTAL" & sex == "T" & indic_se == "MED_E_PPS" ~ "Salaire des travailleurs manuels peu qualifiés") )
 
 return(earn)
