@@ -29,6 +29,7 @@ library(countrycode, quietly = TRUE)
 options(
   ofce.base_size = 12,
   ofce.background_color = "transparent",
+  ofce.marquee = TRUE,
   ofce.source_data.src_in = "file",
   ofce.source_data.force_exec = FALSE)
 showtext_opts(dpi = 92)
