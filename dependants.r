@@ -114,33 +114,36 @@ dep <- full |>
     depse = (sum(pop) - sum(pop[age=="Y_LT14"]) - sum(emp))/sum(emp*eqpt),
     dep = (sum(pop)-sum(emp))/sum(emp*eqpt),
     depse.alt = (sum(pop)- sum(pop[age=="Y_LT14"])-sum(emp.alt))/sum(emp.alt*eqpt),
-    .groups = "drop")
+    .groups = "drop") |>
+  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
 
-ggplot(full |> filter(time<="2030-01-01", age != "Y_GE65")) +
-  aes(x=time, y=tact, color = age, linetype = sex) +
-  geom_line() +
-  scale_color_brewer(palette = "Blues") +
-  facet_wrap(vars(geo), ncol = 2) +
-  theme_ofce()
+return(dep)
 
-ggplot(worktime |> filter(age == "Y25-54")) +
-  aes(x=time, y = hpw, color = worktime, linetype = sex) +
-  geom_line(show.legend = FALSE) +
-  theme_ofce(marquee = TRUE) +
-  facet_wrap(vars(geo), ncol = 2, labeller = lbl) +
-  ofce_caption(
-    source = "Eurostat demo_pjan pour la population, proj_23np pour les projections de population (baseline), lfsi_emp_a pour l'emploi par age et sexe",
-    note = "Le ratio de dépendance est le ratio entre les inactifs ou chômmeurs, de 0 à 100 ans rapporté aux actifs de 15 à 64 ans.
-  Le trait pointillé indique le ratio de dépendance si le taux d'emploi des femmes est égal à celui des hommes.")
-
-ggplot(dep |> filter(time<='2050-01-01')) +
-  geom_line(aes(x=time, y=depse, color = geo), show.legend = FALSE) +
-  geom_ribbon(aes(x=time, ymin=depse.alt, ymax = depse, fill = geo), color="transparent", alpha = 0.2, show.legend = FALSE) +
-  geom_line(aes(x=time, y=dep, color = geo), linetype="dashed", show.legend = FALSE) +
-  theme_ofce(marquee = TRUE) +
-  facet_wrap(vars(geo), ncol = 2, labeller = lbl) +
-  scale_color_pays(format = "eurostat") +
-  ofce_caption(
-    source = "Eurostat demo_pjan pour la population, proj_23np pour les projections de population (baseline), lfsi_emp_a pour l'emploi par age et sexe",
-    note = "Le ratio de dépendance est le ratio entre les inactifs ou chômmeurs, de 0 à 100 ans rapporté aux actifs de 15 à 64 ans.
-  Le trait pointillé indique le ratio de dépendance si le taux d'emploi des femmes est égal à celui des hommes.")
+# ggplot(full |> filter(time<="2030-01-01", age != "Y_GE65")) +
+#   aes(x=time, y=tact, color = age, linetype = sex) +
+#   geom_line() +
+#   scale_color_brewer(palette = "Blues") +
+#   facet_wrap(vars(geo), ncol = 2) +
+#   theme_ofce()
+#
+# ggplot(worktime |> filter(age == "Y25-54")) +
+#   aes(x=time, y = hpw, color = worktime, linetype = sex) +
+#   geom_line(show.legend = FALSE) +
+#   theme_ofce(marquee = TRUE) +
+#   facet_wrap(vars(geo), ncol = 2, labeller = lbl) +
+#   ofce_caption(
+#     source = "Eurostat demo_pjan pour la population, proj_23np pour les projections de population (baseline), lfsi_emp_a pour l'emploi par age et sexe",
+#     note = "Le ratio de dépendance est le ratio entre les inactifs ou chômmeurs, de 0 à 100 ans rapporté aux actifs de 15 à 64 ans.
+#   Le trait pointillé indique le ratio de dépendance si le taux d'emploi des femmes est égal à celui des hommes.")
+#
+# ggplot(dep |> filter(time<='2050-01-01')) +
+#   geom_line(aes(x=time, y=depse, color = geo), show.legend = FALSE) +
+#   geom_ribbon(aes(x=time, ymin=depse.alt, ymax = depse, fill = geo), color="transparent", alpha = 0.2, show.legend = FALSE) +
+#   geom_line(aes(x=time, y=dep, color = geo), linetype="dashed", show.legend = FALSE) +
+#   theme_ofce(marquee = TRUE) +
+#   facet_wrap(vars(geo), ncol = 2, labeller = lbl) +
+#   scale_color_pays(format = "eurostat") +
+#   ofce_caption(
+#     source = "Eurostat demo_pjan pour la population, proj_23np pour les projections de population (baseline), lfsi_emp_a pour l'emploi par age et sexe",
+#     note = "Le ratio de dépendance est le ratio entre les inactifs ou chômmeurs, de 0 à 100 ans rapporté aux actifs de 15 à 64 ans.
+#   Le trait pointillé indique le ratio de dépendance si le taux d'emploi des femmes est égal à celui des hommes.")

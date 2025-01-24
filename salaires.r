@@ -1,61 +1,66 @@
-library(eurostat)
 library(tidyverse)
-library(ggbump)
+library(eurostat)
 library(ofce)
 
-ze <- c("DE", "FR", "IT", "ES", "NL", "BE", "IE", "AT", "FI", "PT", "EL", "SK", "LU", "LT", "HR", "SI", "LV", "EE", "CY", "MT", "EA20")
-pays <- c("DE", "FR", "IT", "ES", "NL", "BE", "UK", "US")
+pays2 <- c("DE", "FR", "IT", "ES", "NL", "BE")
+label_pays <- set_names(countrycode::countrycode(pays2, "eurostat", "country.name.fr"), pays2)
 
-sal <-  get_eurostat("earn_nt_net", filters = list(estruct = "NET", geo = pays, currency = "PPS", ecase = c("CPL_CH2_AW100_67", "CPL_CH2_AW100", "P1_NCH_AW100", "P1_CH2_AW67"))) |>
-  mutate(
-    adultes = case_when(
-      str_detect(ecase, "CPL") ~ 2,
-      str_detect(ecase, "P1") ~ 1 ),
-    enfants = case_when(
-      str_detect(ecase, "CH2") ~ 2,
-      str_detect(ecase, "NCH") ~ 0),
-    uc = case_match(adultes,
-                    2 ~ 1.5,
-                    1 ~ 1) +  enfants*0.3,
-    netperuc = values/uc) |>
-  group_by(time, ecase) |>
-  mutate(rank  = rank(-netperuc)) |>
-  group_by(time, geo) |>
-  mutate(relperuc = netperuc/netperuc[ecase == "P1_NCH_AW100"]) |>
-  ungroup()
+eq <- get_eurostat("namq_10_a10_e",
+                   filters = list(na_item = "SAL_DC",
+                                  geo = pays2,
+                                  unit = "THS_PER")) |>
+  drop_na(values) |>
+  mutate(s_adj = factor(s_adj, c("SCA", "SA", "CA", "NSA"))) |>
+  group_by(across(-c(s_adj, values))) |>
+  arrange(s_adj) |>
+  summarize(values = first(values),
+            s_adj = first(s_adj),
+            .groups = "drop") |>
+  select(geo, time, nace_r2, emp_sal = values)
 
-ggplot(sal) +
-  aes(x=time, y=rank, color = geo)+
-  scale_y_reverse() +
-  geom_bump() +
-  geom_point(size = 4) +
-  # scale_y_log10() +
-  facet_wrap(vars(ecase)) +
-  geom_text(aes(label = geo), size = 2, col = "white") +
-  theme_ofce()
+d1 <- get_eurostat("namq_10_a10",
+                   filters = list(na_item = c("D1", "D11", "D12"),
+                                  geo = pays2,
+                                  unit = "CP_MEUR")) |>
+  mutate(s_adj = factor(s_adj, c("SCA", "SA", "CA", "NSA"))) |>
+  drop_na() |>
+  group_by(across(-c(s_adj, values))) |>
+  arrange(s_adj) |>
+  summarize(values = first(values),
+            s_adj = first(s_adj),
+            .groups = "drop") |>
+  select(geo, time, values, nace_r2, na_item) |>
+  pivot_wider(names_from = na_item, values_from = values)
 
-ggplot(sal) +
-  aes(x=time, y=netperuc, color = ecase)+
-  geom_bump() +
-  geom_point(size = 1) +
-  scale_y_log10() +
-  facet_wrap(vars(geo)) +
-  theme_ofce()
+pc <- get_eurostat("namq_10_fcs", filters = list(na_item = "P31_S14", unit = c("CP_MEUR", "CLV20_MEUR"), geo = pays2)) |>
+  drop_na(values) |>
+  mutate(s_adj = factor(s_adj, c("SCA", "SA", "CA", "NSA"))) |>
+  group_by(across(-c(s_adj, values))) |>
+  arrange(s_adj) |>
+  summarize(values = first(values),
+            s_adj = first(s_adj),
+            .groups = "drop") |>
+  select(geo, time, values, unit) |>
+  pivot_wider(names_from = unit, values_from = values) |>
+  mutate(pc = CP_MEUR/CLV20_MEUR) |>
+  select(geo, time, pc)
 
-ggplot(sal) +
-  aes(x=time, y=relperuc, color = ecase)+
-  geom_bump() +
-  geom_point(size = 1) +
-  scale_y_log10() +
-  facet_wrap(vars(geo)) +
-  theme_ofce()
+salaires <- eq |>
+  left_join(d1, by = c("time", "geo", "nace_r2")) |>
+  group_by(geo, time) |>
+  filter(nace_r2 != "TOTAL") |>
+  summarize(w = sum(D1)/sum(emp_sal),
+            wbrut = sum(D11)/sum(emp_sal),
+            w_md = (sum(D1)- D1[nace_r2 == "O-Q"])/(sum(emp_sal)- emp_sal[nace_r2 == "O-Q"]),
+            w_nmd = (D1[nace_r2 == "O-Q"])/(emp_sal[nace_r2 == "O-Q"]) ,
+            .groups = "drop") |>
+  left_join(pc, by = c("time", "geo")) |>
+  group_by(geo) |>
+  mutate(wr = 4*slider::slide_dbl(w, .before = 3, .f = mean)/pc,
+         wbr = 4*slider::slide_dbl(wbrut, .before = 3, .f = mean)/pc,
+         wr_md = 4*slider::slide_dbl(w_md, .before = 3, .f = mean)/pc,
+         wr_nmd = 4*slider::slide_dbl(w_nmd, .before = 3, .f = mean)/pc) |>
+  ungroup() |>
+  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
 
-minwage <- OECD::get_dataset("OECD.ELS.SAE,DSD_EARNINGS@RMW,", "...A...") |>
-  filter(UNIT_MEASURE == "USD_PPP") |>
-  select(time = TIME_PERIOD, geo = REF_AREA, v = ObsValue) |>
-  mutate(time = ym(str_c(time, "-01")), v = as.numeric(v)) |>
-  drop_na()
-
-ggplot(minwage |> filter(time >= "2000-01-01", geo %in% c("FRA", "USA", "DEU", "ITA", "GBR", "ESP"))) +
-  aes(x = time, y = v, color = geo, group = geo) +
-  geom_line()
+return(salaires)

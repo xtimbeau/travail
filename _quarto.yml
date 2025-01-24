@@ -4,13 +4,16 @@ project:
 manuscript:
   article: travail.qmd
   code-links:
-    - text: Part des salaires dans la VA, branches
+    - text: Salaires dans la VA
       icon: file-code
       href: va.r
+    - text: Salaires trimestriels
+      icon: file-code
+      href: salaires.r
     - text: Structure des rémunérations
       icon: file-code
       href: earn.r
-    - text: Inidicateurs du marché du travail
+    - text: Indicateurs du marché du travail
       icon: file-code
       href: precarite.r
     - text: Non salariés

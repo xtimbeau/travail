@@ -152,6 +152,7 @@ naa_ext2 <- naa_ext |>
   filter(year(time)<= max_y) |>
   left_join( assets, by =c("geo", "time") ) |>
   mutate(r = tp*van/asset) |>
-  arrange( desc(time), geo)
+  arrange( desc(time), geo) |>
+  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
 
 return(list(naa = naa_ext, naaa = naa_ext2))

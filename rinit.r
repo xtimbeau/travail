@@ -30,6 +30,8 @@ options(
   ofce.base_size = 12,
   ofce.background_color = "transparent",
   ofce.marquee = TRUE,
+  ofce.caption.ofce = FALSE,
+  ofce.caption.wrap = 0,
   ofce.source_data.src_in = "file",
   ofce.source_data.force_exec = FALSE)
 showtext_opts(dpi = 92)
@@ -117,11 +119,18 @@ greenish <- ccsummer()[4]
 darkgreenish <- ccsummer()[3]
 darkbluish <- ccjoy()[4]
 
-lbl <- function(x) {
+lbl <- function(x, format=NULL) {
+  if(is.null(format))
+    if(is.character(x))
+      fmt <- ifelse(stringr::str_length(x)==2, "eurostat", "iso3c")
+    else
+      fmt <- ifelse(stringr::str_length(x[1,1])==2, "eurostat", "iso3c")
+  else
+    fmt <- format
   if(is.character(x))
-    return(countrycode(x, "iso2c", "country.name.fr"))
+    return(countrycode(x, fmt, "country.name.fr"))
   x |>
-    mutate(across(1, ~countrycode(.x, "iso2c", "country.name.fr")))
+    mutate(across(1, ~countrycode(.x, fmt, "country.name.fr")))
 }
 
 conflicted::conflicts_prefer(dplyr::filter, .quiet = TRUE)
