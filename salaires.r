@@ -56,10 +56,13 @@ salaires <- eq |>
             .groups = "drop") |>
   left_join(pc, by = c("time", "geo")) |>
   group_by(geo) |>
-  mutate(wr = 4*slider::slide_dbl(w, .before = 3, .f = mean)/pc,
-         wbr = 4*slider::slide_dbl(wbrut, .before = 3, .f = mean)/pc,
-         wr_md = 4*slider::slide_dbl(w_md, .before = 3, .f = mean)/pc,
-         wr_nmd = 4*slider::slide_dbl(w_nmd, .before = 3, .f = mean)/pc) |>
+  mutate(
+    pc = pc/pc[time == "2023-01-01"],
+    w = 4*slider::slide_dbl(w, .before = 3, .f = mean),
+    wr = w/pc,
+    wbr = 4*slider::slide_dbl(wbrut, .before = 3, .f = mean)/pc,
+    wr_md = 4*slider::slide_dbl(w_md, .before = 3, .f = mean)/pc,
+    wr_nmd = 4*slider::slide_dbl(w_nmd, .before = 3, .f = mean)/pc) |>
   ungroup() |>
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
 
