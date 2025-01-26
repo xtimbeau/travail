@@ -1,0 +1,46 @@
+---
+title: "tableau indicateurs"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: tbl-chomage
+#| tbl-cap: Indicateurs du "marché du travail", 1995-2023
+#| html-table-processing: none
+
+sum <- source_data("precarite.r")$sum  |> 
+  mutate(c = case_when(
+     op == "last" ~ str_c(round(v,1), "%"),
+     op == "min" ~ str_c(round(v,1), "%<br>(", year(date), ")"),
+     op == "max" ~ str_c(round(v,1), "%<br> (", year(date), ")"),
+     op == "dv" ~ str_c(round(v,2), "%") ) ) |>
+  pivot_wider(id_cols = c(age, what, op), names_from = geo, values_from = c) |> 
+  filter(op %in% c("dv","last")) |> 
+  mutate(
+    label = case_when(
+      what == "3mcontract" ~ "Part de la population en âge de travailler en contrat de moins de 3 mois",
+      what == "chômage" & age == "Y1524" ~ "Chômeurs de 15 à 24 ans en % de la population des jeunes",
+      what == "chômage" & age == "Y2064" ~ "Chômeurs en % de la population en âge de travailler",
+      what == "second job" ~ "Part de la population en âge de travailler occupant deux emplois",
+      what == "newjob" ~ "Part de la population en âge de travailler en poste depuis moins d'un an (rotation)"),
+    op = case_match(op,
+                    "last" ~ "En 2023",
+                    "min" ~ "Le plus bas entre 1995 et 2023",
+                    "max" ~ "Le plus haut entre 1995 et 2023",
+                    "dv" ~ "Evolution moyenne annuelle entre 1995 et 2023")) |> 
+  select(-age, -what) 
+
+sum |> 
+  group_by(label) |> 
+  gt() |> 
+  cols_label_with(fn = lbl) |> 
+  cols_align("center", -c(label, op)) |> 
+  fmt_markdown() |> 
+  tab_style(style = cell_text(weight = "bold"),
+            locations = cells_body(columns = FR)) |> 
+  cols_label(op = "", label = "") |>
+  tab_style(style = cell_text(weight = "bold"),
+            locations = cells_row_groups()) |> 
+  tab_options(table.font.size = 11)
+```

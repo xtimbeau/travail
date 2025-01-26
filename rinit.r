@@ -88,7 +88,7 @@ margin_download <- function(data, output_name = "donnees", label = "données") {
   if(knitr::is_html_output()) {
     if(lobstr::obj_size(data)> 1e+5)
       cli::cli_alert("la taille de l'objet est supérieure à 100kB")
-    fn <- str_c("ofce-prev2409-", tolower(output_name))
+    fn <- str_c("travail-2025-", tolower(output_name))
     downloadthis::download_this(
       data,
       icon = "fa fa-download",
@@ -120,17 +120,30 @@ darkgreenish <- ccsummer()[3]
 darkbluish <- ccjoy()[4]
 
 lbl <- function(x, format=NULL) {
+
   if(is.null(format))
-    if(is.character(x))
-      fmt <- ifelse(stringr::str_length(x)==2, "eurostat", "iso3c")
+    if(is.null(dim(x)))
+      fmt <- ifelse(max(stringr::str_length(x))==2, "eurostat", "iso3c")
     else
-      fmt <- ifelse(stringr::str_length(x[1,1])==2, "eurostat", "iso3c")
+      fmt <- ifelse(max(stringr::str_length(x[,1]))==2, "eurostat", "iso3c")
   else
     fmt <- format
-  if(is.character(x))
+  if(is.null(dim(x)))
     return(countrycode(x, fmt, "country.name.fr"))
   x |>
     mutate(across(1, ~countrycode(.x, fmt, "country.name.fr")))
+}
+
+date_trim <- function(date) {
+  str_c("T", lubridate::quarter(date), " ", lubridate::year(date))
+}
+
+date_mois <- function(date) {
+  str_c(lubridate::month(date,label = TRUE, abbr = FALSE), " ", lubridate::year(date))
+}
+
+date_jour <- function(date) {
+  str_c(lubridate::day(date), " ", lubridate::month(date,label = TRUE, abbr = FALSE), " ", lubridate::year(date))
 }
 
 conflicted::conflicts_prefer(dplyr::filter, .quiet = TRUE)
