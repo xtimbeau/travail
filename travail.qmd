@@ -24,7 +24,7 @@ L'ensemble de ce numéro d’Économie Politique consacré au travail pointe dan
 
 Dans l’approche macroéconomique que nous suivons ici les salaires sont traités en agrégé, et nous laissons de côté les questions relatives à une répartition différente entre les groupes de salariés, par exemple celle des critères qui doivent guider la valorisation des différents métiers au sein d’une entreprise ou d’une branche (voir par exemple l’article de Bénédicte Grésy). Ici, la question est de savoir les conditions dans quelles l’évolution des salaires pourrait être plus dynamique que celle observée en France et en Europe, et qui contraste avec les tendances aux Etats-Unis notamment. N’oublions pas cependant que les deux questions sont étroitement liées : une évolution plus dynamique dans l’agrégat élargit des marges de manœuvre pour mener d’autres politiques salariales à l’échelle des entreprises ou des branches, dans le secteur privé comme dans le public.
 
-En France, depuis 2018, les salaires réels déclinent en effet depuis plusieurs trimestres (@fig-salaires) ∂; c'est également le cas aux Pays Bas ou en Allemagne ; ils stagnent depuis longtemps en Espagne et continuent de se dégrader encore en Italie. Partout en Europe la valeur du travail est à la peine, avec les conséquences sociales et politiques que l'on peut imaginer sur les sociétés. La hausse récente de l'inflation (2022-2024), consécutive au choc de prix de l'énergie provoqué par l'invasion de l'Ukraine par la Russie impose ici sa loi. En Europe, la hausse des prix du gaz et de l'électricité a coûté presque 3 points de PIB, en partie absorbés par les déficits publics.
+En France, depuis 2018, les salaires réels déclinent en effet depuis plusieurs trimestres (@fig-salaires) ; c'est également le cas aux Pays Bas ou en Allemagne ; ils stagnent depuis longtemps en Espagne et continuent de se dégrader encore en Italie. Partout en Europe la valeur du travail est à la peine, avec les conséquences sociales et politiques que l'on peut imaginer sur les sociétés. La hausse récente de l'inflation (2022-2024), consécutive au choc de prix de l'énergie provoqué par l'invasion de l'Ukraine par la Russie impose ici sa loi. En Europe, la hausse des prix du gaz et de l'électricité a coûté presque 3 points de PIB, en partie absorbés par les déficits publics.
 
 ```{r}
 #| label: fig-salaires
@@ -71,9 +71,11 @@ margin_download(salaires)
 ```
 :::
 
-Mais la hausse des prix de l'énergie s'ajoute à une situation plus ancienne et dont le diagnostic macroéconomique est fait depuis longtemps, la crise des dettes souveraines en 2012 ayant amorcé le décrochage européen par rapport aux Etats-Unis du fait de la combinaison de politiques budgétaires et monétaires trop restrictives, limitant la demande interne européenne dans un monde de plus en plus protectionniste (voir notamment les rapport iAGS de 2013 à 2019[^1] ou les analyses du FMI et de la commission Européenne sur les multiplicateurs budgétaires en temps de crise). Le très récent rapport Draghi [@draghi2024] en fait une synthèse consensuelle : d'une part l'accumulation d'une position nette européenne très positive expose les détenteurs de patrimoine européens à des effets de change adverse et les oblige à accepter des rendements faibles, de l'autre la faible demande européenne pèse à la fois sur le court-terme (un multiplicateur keynésien traditionnel) et sur le long terme. D'un côté, les Etats-Unis d'Amérique combinent déficit public, déficit extérieur et un différentiel entre le taux d'intérêt sur leur dette publique et le rendement du capital productif investit sur leur territoire ou sous leur contrôle. L’Europe, de l'autre côté, se noie dans une dynamique délétère, au prétexte d'une soutenabilité mal pensée. L'abandon par Trump de l'atténuation du changement climatique qui prolonge des stratégies opposées accroît encore le fossé entre Europe et Etats-Unis en termes de prix de l'énergie (@epaulard2024).
+Mais la hausse des prix de l'énergie s'ajoute à une situation plus ancienne et dont le diagnostic macroéconomique est fait depuis longtemps. La crise des dettes souveraines en 2012 a amorcé le décrochage européen par rapport aux Etats-Unis du fait de la combinaison de politiques budgétaires et monétaires trop restrictives, limitant la demande interne européenne dans un monde de plus en plus protectionniste (voir notamment les rapport iAGS de 2013 à 2019[^1] ou les analyses du FMI et de la commission Européenne sur les multiplicateurs budgétaires en temps de crise).
 
 [^1]: <https://www.ofce.sciences-po.fr/recherche/iags.php>
+
+Le très récent rapport Draghi [@draghi2024] en fait une synthèse consensuelle : d'une part l'accumulation d'une position nette européenne très positive expose les détenteurs de patrimoine européens à des effets de change adverse et les oblige à accepter des rendements faibles, de l'autre la faible demande européenne pèse à la fois sur le court-terme (un multiplicateur keynésien traditionnel) et sur le long terme. D'un côté, les Etats-Unis d'Amérique combinent déficit public, déficit extérieur et un différentiel entre le taux d'intérêt sur leur dette publique et le rendement du capital productif investit sur leur territoire ou sous leur contrôle. L’Europe, de l'autre côté, se noie dans une dynamique délétère, au prétexte d'une soutenabilité mal pensée. L'abandon par Trump de l'atténuation du changement climatique qui prolonge des stratégies opposées accroît encore le fossé entre Europe et Etats-Unis en termes de prix de l'énergie (@epaulard2024).
 
 Les marges de manœuvre en Europe dépendent d'abord de la stratégie macroéconomique de l'Europe : sortir d'un carcan idéologique et se positionner pragmatiquement dans la nouvelle donne mondiale. L'Europe a la taille critique pour traiter avec ses marchés financiers. Son épargne abondante lui autorise de grandes libertés et rien ne l'oblige à financer l'expansion américaine, qui s'affranchit de toutes limites à commencer par celles de la Planète. L'Europe doit combiner une relance qui soutient la demande interne mais également qui stimule son tissu productif. La fin de la globalisation plus ou moins régulée demande une autre approche que la recherche de la compétitivité à tout prix. Et tant que ce cadre de pensée n'aura pas basculé, l'Europe restera contrainte à jouer le jeu de la concurrence entre les Etats membres produisant stagnation et appauvrissement.
 
@@ -103,11 +105,12 @@ Au sein de l'Union Européenne, La France se situe dans une position basse en te
 earn <- source_data("earn.r")
 
 earn |>
-  select(label, BE, DE,  IT, NL, FR,  ES) |>
+  select(label, tt, BE, DE,  IT, NL, FR,  ES) |>
   gt() |>
-  fmt_percent(columns = c(BE, DE, ES, FR, NL, IT), rows = !(label |> str_detect("référence")),
+  cols_hide(tt) |> 
+  fmt_percent(columns = c(BE, DE, ES, FR, NL, IT), rows = tt != "ref",
               decimals = 0, dec_mark = ",", sep_mark = " ") |>
-  fmt_number(columns = c(BE, DE, ES, FR, NL, IT), rows = label |> str_detect("référence"),
+  fmt_number(columns = c(BE, DE, ES, FR, NL, IT), rows = tt=="ref",
              decimals = 0, dec_mark = ",", sep_mark = " ", pattern = "{x}€") |>
   opt_table_lines("none") |>
   tab_style(cell_borders(sides = "bottom", color = "grey", weight = px(1)),
@@ -119,19 +122,22 @@ earn |>
   cols_label(label = "") |>
   cols_label_with(
     columns = -label, ~countrycode::countrycode(.x, "eurostat", "country.name.fr")) |> 
-  tab_options(table.font.size = 11) |> 
+  tab_options(table.font.size = 13) |> 
   sub_missing() |>
+  fmt_markdown(label) |> 
+  cols_width(
+    label ~ pct(20) ) |> 
   tab_footnote("Salaire annuel brut, temps partiel et complet, relatif au salaire annuel brut médian tous âges, toutes qualifications, femmes et hommes.",
-                cells_body(columns = label, rows = !str_detect(label, "référence"))) |>
-  tab_source_note(md("*Lecture* : Le salaire médian brut (i.e. y compris les cotisations sociales à la charge du salarié),
+                cells_body(columns = label, rows = tt=="rel")) |>
+  tab_source_note(md(
+  "*Lecture* : Le salaire médian brut (i.e. y compris les cotisations sociales à la charge du salarié),
   des salariés à temps partiel comme à temps plein, incluant le 13^e^ mois
   et autres primes ou bonus est en France de 26 768 euros (soit un salaire mensuel moyen de 2 231 euros).
   La rémunération moyenne d'un homme (à temps plein ou partiel) est de 119% le salaire médian contre 79% pour une femme (soit un ratio homme femme de 1,51)
   en Allemagne, dont une partie s'explique par une prévalence du temps partiel plus forte chez les femmes allemandes (69%) que chez les hommes (24%). Le ratio de rémunération entre un *manager*  (isco08 OC 1)
   et un travailleur manuel peu qualifié (OC 9) est de 7,4 (229/31) aux Pays Bas contre 3,7 en France.
-  La rémunération des moins de 30 ans est en moyenne inférieure de 28% au salaire médian en Italie.  
-  <br>
-  *Source* : Eurostat, Structure of earnings survey - annual earnings (doi.org/10.2908/EARN_SES_ANNUAL), version du 19 décembre 2024, téléchargé le 15 janvier 2025, année 2022, calculs de l'auteur."))
+  La rémunération des moins de 30 ans est en moyenne inférieure de 28% au salaire médian en Italie.")) |> tab_source_note(md("*Code* : github.com/xtimbeau/travail/earn.r")) |> 
+  tab_source_note(md("*Source* : Eurostat, Structure of earnings survey - annual earnings (doi.org/10.2908/EARN_SES_ANNUAL), version du 19 décembre 2024, téléchargé le 15 janvier 2025, année 2022, calculs de l'auteur."))
 ```
 
 Ainsi, le temps partiel des femmes est largement plus développé aux Pays-Bas qu'en France (en France, femmes et hommes ont le taux de temps partiel le plus bas des 6 pays). La réduction du temps de travail au Pays-Bas passe donc par le temps partiel alors qu'elle est plus collective en France (il n'empêche que les femmes qui participent au marché du travail sont presque 2 fois plus à temps partiel que les hommes). Le très fort développement du temps partiel au Pays-Bas induit des inégalités de rémunération importantes, entre les femmes et les hommes (37% de moins pour les femmes aux Pays-Bas contre 15% en France) mais l'écart de rémunération est plus faible en Italie ou en Belgique, ce qui indique que le temps partiel n'est pas le seul facteur. Le temps partiel, massivement choisi et non subit, aux Pays-Bas ne se traduit pas uniquement par une inégalité majeure entre femmes et hommes mais également entre salariés peu qualifiés et *managers*. L'effet de l'âge est plutôt atténué en France par rapport aux autres pays (du moins ceux pour lesquels les données sont disponibles).
@@ -160,10 +166,10 @@ dep <- ggplot(dependants) +
   geom_ribbon(aes(ymin=depse.alt, ymax = depse), color="transparent", alpha = 0.2, show.legend = FALSE) +
   geom_line(aes(y=dep), linetype="dotted", show.legend = FALSE) +
   geom_point_interactive(aes(tooltip = tooltip, data_id = time, y = depse),
-                         shape = 21, stroke = 0.1, color = "white", size = 0.5,
+                         shape = 21, stroke = 0.2, color = "white", size = 1,
                          hover_nearest = TRUE, show.legend = FALSE) +
   geom_point_interactive(aes(tooltip = tooltip, data_id = time, y = dep),
-                         shape = 21, stroke = 0.1, color = "white", size = 0.5,
+                         shape = 21, stroke = 0.1, color = "white", size = .25,
                          hover_nearest = TRUE, show.legend = FALSE) +
   theme_ofce(marquee = TRUE) +
   ylab("Dépendants/actifs en équivalent temps plein") + xlab(NULL) +
@@ -176,7 +182,7 @@ dep <- ggplot(dependants) +
     note = "Le ratio de dépendance est le ratio entre les inactifs ou chômmeurs, de 0 à 100 ans rapporté aux actifs de 15 à 64 ans en équivalent temps plein. Le ruban coloré indique le ratio de dépendance si le taux d'emploi des femmes est égal à celui des hommes.",
     ofce = FALSE)
 
-girafy(dep, 1)
+girafy(dep, 1.5)
 ```
 
 ::: column-margin
@@ -198,9 +204,17 @@ Enfin, la branche services immobiliers (branche L dans la NACE rev. 2) a été e
 #| fig-cap: Part des salaires dans la valeur ajoutée nette
 #| fig-asp: 1
 
-naa <- source_data("va.r")$naa
+naa <- source_data("va.r")$naa |> 
+  mutate(tooltip = glue(
+    "<b>{lbl(geo)}</b>
+    {year(time)}
+    Part des impôts net de subvention dans la VAN : {round(100*(ip+is)/van,1)}%
+    Part des rémunérations (y.c. ns) dans la VAN : {round(psal*100,1)}%
+    Part des salaires dans la VAN : {round(100*psal2,1)}%
+    Part des rémunérations (y.c. ns) dans la VAB : {round(msa/vab*100,1)}%
+    Part des salaires dans la VAB : {round(msa2/vab*100,1)}%"))
 
-ggplot(naa) +
+psal <- ggplot(naa) +
   aes(x=time, y=psal, col = geo) +
   geom_line(data = ~.x |> rename(GEO = geo) , aes(group=GEO), col = "gray75", linewidth = 0.25) +
   geom_ribbon(aes(ymin = psal2, ymax = psal, fill = geo, group = geo),
@@ -208,6 +222,9 @@ ggplot(naa) +
   geom_line(aes(y = psal + (ip+is)/van, color = geo, group = geo),
               show.legend = FALSE, linetype = "dotted") +
   geom_line(show.legend=FALSE) +
+  geom_point_interactive(aes(tooltip = tooltip, data_id = time, fill = geo),
+                         size = 1, stroke = 0.2, shape = 21, color = "white",
+                         hover_nearest = TRUE, show.legend=FALSE) +
   ylab("Rémunération sur valeur ajoutée nette") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date() +
@@ -224,7 +241,15 @@ ggplot(naa) +
     champ = "Branches marchandes hors services immobiliers (L dans la NACE r2)",
     note = "La part des salaires (corrigé de la non-salarisation) dans la valeur ajoutée nette atteint 90% en France en 2023 ((D1*(1+ns/s)/(B1G-P51C)). La partie colorée correspond à la correction pour la non-salarisation. L'année 2024 est estimée à partir des comptes trimestriels. La ligne pointillée indique la somme de l'impôt des sociétés et des impôts de production nets des subventions.",
     ofce = FALSE)
+
+girafy(psal, 1.5)
 ```
+
+::: column-margin
+```{r}
+margin_download(naa)
+```
+:::
 
 Le @fig-sal indique des parts des salaires dans la valeur ajoutée nette à des niveaux comparables – dans un intervalle entre les 6 pays européens qui va de 91% à 77,5%. Elle est la plus élevée en 2024 en France et en Belgique, avec une croissance pour 3 des pays considérés sur la période, en France, en Espagne, en Italie. La correction de la non-salarisation est indiquée par le ruban coloré sur chaque graphique. Elle est très importante en Italie et en Belgique et croissante en France.
 
@@ -243,14 +268,21 @@ Les taux de rendement du capital productif sont assez disparates. En 2023, le ta
 #| fig-cap: Taux de rendement nominal du capital productif après impôts
 #| fig-asp: 1
 
-naaa <- source_data("va.r")$naaa
+naaa <- source_data("va.r")$naaa |> 
+  mutate(tooltip = glue(
+    "<b>{lbl(geo)}</b>
+    {year(time)}
+    Rendement du capital productif physique : {round(100*r,1)}%"))
 
-ggplot(naaa) +
+return <- ggplot(naaa) +
   aes(x=time, y=r, col = geo) +
   geom_line(data = ~.x |> rename(GEO = geo) , aes(group=GEO), col = "gray80", linewidth = 0.25) +
   # geom_ribbon(aes(ymin = tp, ymax = tpb, fill = geo, group = geo),
   #             color = "transparent", show.legend = FALSE, alpha = 0.2) +
   geom_line(show.legend=FALSE) +
+  geom_point_interactive(aes(tooltip = tooltip, data_id = time, fill = geo),
+                         shape = 21, stroke = 0.2, size = 1, color = "white",
+                         hover_nearest = TRUE, show.legend = FALSE) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date() +
   scale_y_continuous(labels = scales::label_percent(1)) +
@@ -265,7 +297,15 @@ ggplot(naaa) +
     champ = "Branches marchandes hors services immobiliers (L dans la NACE r2)",
     lecture = "Le taux de rendement du capital est le ratio entre les profits (après impôts, net des suventions) et la valeur au coût de remplacement du stock de capital productif. Le capital productif considéré est hors actifs non produits (terrains, terres agricoles, ressources naturelles).",
     ofce = FALSE)
+
+girafy(return, 1.5)
 ```
+
+::: column-margin
+```{r}
+margin_download(naaa)
+```
+:::
 
 ## Réformes fiscales et une nouvelle politique de l'offre (verte et pragmatique)
 
