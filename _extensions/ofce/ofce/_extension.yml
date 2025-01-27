@@ -10,14 +10,14 @@ contributes:
       french: true
       language:
         fr:
-          section-title-references: "Bibliograhie"
+          section-title-references: "Références"
           title-block-author-single: "Par"
           title-block-author-plural: "Par"
           title-block-published: "Publié le"
           title-block-modified: "Modifié le"
           toc-title: "Sur cette page"
         en:
-          section-title-references: "Bibilography"
+          section-title-references: "References"
           title-block-author-single: "Author"
           title-block-author-plural: "Authors"
           title-block-published: "Published on"
@@ -90,6 +90,12 @@ contributes:
       template-partials:
         - pdf_template/title.tex
         - pdf_template/before-body.tex
+    docx:
+      number-sections: true
+      number-depth: 3
+      fig-dpi: 1200
+      fig-width: 5
+      fig-format: png
     dashboard:
       theme:
         - cosmo

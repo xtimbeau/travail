@@ -22,7 +22,7 @@ ofce::init_qmd()
 
 L'ensemble de ce numéro d’Économie Politique consacré au travail pointe dans une direction sans équivoque. Le travail est au cœur du pacte social ; il est une nécessité économique pour une immense majorité ; il est la condition pour l'émancipation des individus. Le travail réalise également les promesses floues du mérite et cristallise en conséquence les perceptions des inégalités. Il condense également les attentes et les perceptions de la situation économique, tant le travail et la position que chacun occupe dans la société est le le modèle dominant de la rémunération. A part quelques rares privilégiés, dont les ultra-riches sont peut-être la manifestation la plus visible, chacun vit de son travail, présent ou passé et est donc renvoyé à une condition commune et partagée.
 
-Dans l’approche macroéconomique que nous suivons ici les salaires sont traités en agrégé, et nous laissons de côté les questions relatives à une répartition différente entre les groupes de salariés, par exemple celle des critères qui doivent guider la valorisation des différents métiers au sein d’une entreprise ou d’une branche (voir par exemple l’article de Bénédicte Grésy). Ici, la question est de savoir les conditions dans lesquelles l’évolution de la rémunération du travail pourrait être plus dynamique que celle observée en France et en Europe, et qui contraste avec les tendances aux Etats-Unis notamment. N’oublions pas cependant que les deux questions sont étroitement liées : une évolution plus dynamique dans l’agrégat élargit des marges de manœuvre pour mener d’autres politiques salariales à l’échelle des entreprises ou des branches, dans le secteur privé comme dans le public.
+Dans l’approche macroéconomique que nous suivons ici les salaires – c'est-à-dire l'ensemble des rémunérations divisé par l'emploi salarié – sont traités en agrégé, et nous laissons de côté les questions relatives à une répartition différente entre les groupes de salariés, par exemple celle des critères qui doivent guider la valorisation des différents métiers au sein d’une entreprise ou d’une branche (voir par exemple l’article de Bénédicte Grésy). Ici, la question est de savoir les conditions dans lesquelles l’évolution de la rémunération du travail pourrait être plus dynamique que celle observée en France et en Europe, et qui contraste avec les tendances aux Etats-Unis notamment. N’oublions pas cependant que les deux questions sont étroitement liées : une évolution plus dynamique dans l’agrégat élargit des marges de manœuvre pour mener d’autres politiques salariales à l’échelle des entreprises ou des branches, dans le secteur privé comme dans le public.
 
 En France, les salaires réels déclinent en effet depuis plusieurs trimestres (@fig-salaires) ; c'est également le cas aux Pays Bas ou en Allemagne ; ils stagnent depuis longtemps en Espagne et continuent de se dégrader encore en Italie. Partout en Europe la valeur du travail est à la peine, avec les conséquences sociales et politiques que l'on peut imaginer sur les sociétés. La hausse récente de l'inflation (2022-2024), consécutive au choc de prix de l'énergie provoqué par l'invasion de l'Ukraine par la Russie impose ici sa loi. En Europe, la hausse des prix du gaz et de l'électricité a coûté presque 3 points de PIB, en partie absorbés par les déficits publics.
 
@@ -57,8 +57,8 @@ sal <- ggplot(salaires |> filter(time >= "1995-01-01")) +
     source = "Eurostat, comptes nationaux trimestriels (namq_10_a10),
     calcul de l'auteur.",
     code =  "github.com/xtimbeau/travail/salaires.r",
-    champ = "Toute l'économie",
-    note = "Le salaire est défini comme la masse salariale divisée par l'emploi salarié, sur les 4 derniers trimestres. Le ruban coloré indique les cotisations sociales à la charge de l'employeur (selon la définition du SNA).",
+    champ = "Toute l'économie, salaires y compris cotisations sociales à la charge de l'employeur.",
+    note = "Le salaire est défini comme la masse salariale divisée par l'emploi salarié, sur les 4 derniers trimestres, déflaté par le déflateur de la consommation chaîné. Le ruban coloré indique les cotisations sociales à la charge de l'employeur.",
     ofce = FALSE)
 
 girafy(sal, 1)
@@ -101,7 +101,7 @@ Au sein de l'Union Européenne, La France se situe dans une position basse en te
 
 ```{r}
 #| label: tbl-earn
-#| tbl-cap: Structure des rémunérations dans 6 pays européens, année 2022
+#| tbl-cap: Rémunérations des salariés dans 6 pays européens, année 2022
 #| html-table-processing: none
 
 earn <- source_data("earn.r")
@@ -135,16 +135,14 @@ earn |>
   "*Lecture* : Le salaire médian brut (i.e. y compris les cotisations sociales à la charge du salarié),
   des salariés à temps partiel comme à temps plein, incluant le 13^e^ mois
   et autres primes ou bonus est en France de 26 768 euros (soit un salaire mensuel moyen de 2 231 euros).
-  La rémunération moyenne d'un homme (à temps plein ou partiel) est de 119% le salaire médian contre 79% pour une femme (soit un ratio homme femme de 1,51)
-  en Allemagne, dont une partie s'explique par une prévalence du temps partiel plus forte chez les femmes allemandes (69%) que chez les hommes (24%). Le ratio de rémunération entre un *manager*  (isco08 OC 1)
-  et un travailleur manuel peu qualifié (OC 9) est de 7,4 (229/31) aux Pays Bas contre 3,7 en France.
-  La rémunération des moins de 30 ans est en moyenne inférieure de 28% au salaire médian en Italie.")) |> tab_source_note(md("*Code* : github.com/xtimbeau/travail/earn.r")) |> 
+  La rémunération moyenne d'un homme (à temps plein ou partiel) est de 114% le salaire médian contre 90% pour une femme (soit un ratio homme femme de 1,27)")) |>
+  tab_source_note(md("*Code* : github.com/xtimbeau/travail/earn.r")) |> 
   tab_source_note(md("*Source* : Eurostat, Structure of earnings survey - annual earnings (doi.org/10.2908/EARN_SES_ANNUAL), version du 19 décembre 2024, téléchargé le 15 janvier 2025, année 2022, calculs de l'auteur."))
 ```
 
-Ainsi, le temps partiel des femmes est largement plus développé aux Pays-Bas qu'en France (en France, femmes et hommes ont le taux de temps partiel le plus bas des 6 pays). La réduction du temps de travail au Pays-Bas passe donc par le temps partiel alors qu'elle est plus collective en France (il n'empêche que les femmes qui participent au marché du travail sont presque 2 fois plus à temps partiel que les hommes). Le très fort développement du temps partiel au Pays-Bas induit des inégalités de rémunération importantes, entre les femmes et les hommes (37% de moins pour les femmes – en incluant le temps partiel – aux Pays-Bas contre 15% en France) mais l'écart de rémunération est plus faible en Italie ou en Belgique, ce qui indique que le temps partiel n'est pas le seul facteur. Le temps partiel, massivement choisi et non subit, aux Pays-Bas ne se traduit pas uniquement par une inégalité majeure entre femmes et hommes mais également entre salariés peu qualifiés et *managers*. L'effet de l'âge est plutôt atténué en France par rapport aux autres pays (du moins ceux pour lesquels les données sont disponibles).
+Ainsi, le temps partiel des femmes est largement plus développé aux Pays-Bas qu'en France (en France, femmes et hommes ont le taux de temps partiel le plus bas des 6 pays). La réduction du temps de travail au Pays-Bas passe donc par le temps partiel alors qu'elle est plus collective en France (il n'empêche que les femmes qui participent au marché du travail sont presque 2 fois plus à temps partiel que les hommes). Le très fort développement du temps partiel au Pays-Bas induit des inégalités de rémunération importantes, entre les femmes et les hommes (47% de moins pour les femmes – en incluant le temps partiel – aux Pays-Bas contre 25% en France) mais l'écart de rémunération est plus faible en Italie ou en Belgique, ce qui indique que le temps partiel n'est pas le seul facteur. Le temps partiel, massivement choisi et non subit, aux Pays-Bas ne se traduit pas uniquement par une inégalité majeure entre femmes et hommes mais également entre salariés peu qualifiés et *managers*. L'effet de l'âge est plutôt atténué en France par rapport aux autres pays (du moins ceux pour lesquels les données sont disponibles).
 
-La France apparaît comme un pays où les inégalités salariales sont plus contenues qu'ailleurs[^2]. Les Pays-Bas affichent une forte inégalité (le ratio interdécile est de 15 contre 6 en France). Ces éléments suggèrent que les marges en France sont plus faibles que dans les autres pays. Aligner la rémunération et le temps de travail des femmes sur ceux des hommes n'est pas un politique simple, mais ne résoudrait pas pour autant la crise des rémunérations comme le montre l'analyse du partage de la valeur ajoutée plus loin.
+La France apparaît comme un pays où les inégalités salariales sont plus contenues qu'ailleurs[^2]. Les Pays-Bas affichent une forte inégalité (le ratio interdécile est de 11 contre 5,3 en France). Ces éléments suggèrent que les marges en France sont plus faibles que dans les autres pays. Aligner la rémunération et le temps de travail des femmes sur ceux des hommes n'est pas un politique simple, mais ne résoudrait pas pour autant la crise des rémunérations comme le montre l'analyse du partage de la valeur ajoutée plus loin.
 
 [^2]: Voir aussi @timbeau2023 (trois décennies de réformes fiscales, Economie Politique n°96)
 
@@ -152,14 +150,14 @@ Le vieillissement de la population rend difficile également le partage de la ch
 
 ```{r}
 #| label: fig-depend
-#| fig-cap: Ratio de dépendance inactifs/en-emplois en équivalent temps plein
+#| fig-cap: Inactifs rapportés aux effectifs en emploi, en équivalent temps plein
 #| fig-asp: 1
 
 dependants <- source_data("dependants.r") |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
-    Dependants (plus de 15 ans)/actifs (en eqtp) : {round(depse,1)}
-    Dependants (tous âges)/actifs (en eqtp) : {round(dep,1)}"  ) ) |> 
+    Dependants (plus de 15 ans)/actifs (en eqtp) : {round(depse,2)}
+    Dependants (tous âges)/actifs (en eqtp) : {round(dep,2)}"  ) ) |> 
    filter(time<='2050-01-01')
 
 dep <- ggplot(dependants) +
@@ -203,18 +201,18 @@ Enfin, la branche services immobiliers (branche L dans la NACE rev. 2) a été e
 
 ```{r}
 #| label: fig-sal
-#| fig-cap: Part des salaires dans la valeur ajoutée nette
+#| fig-cap: Rémunération du travail dans la valeur ajoutée nette
 #| fig-asp: 1
 
 naa <- source_data("va.r")$naa |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
     {year(time)}
-    Part des impôts net de subvention dans la VAN : {round(100*(ip+is)/van,1)}%
-    Part des rémunérations (y.c. ns) dans la VAN : {round(psal*100,1)}%
-    Part des salaires dans la VAN : {round(100*psal2,1)}%
-    Part des rémunérations (y.c. ns) dans la VAB : {round(msa/vab*100,1)}%
-    Part des salaires dans la VAB : {round(msa2/vab*100,1)}%"))
+    Impôts net de subvention dans la VAN : {round(100*(ip+is)/van,1)}%
+    Rémunérations (y.c. ns) dans la VAN : {round(psal*100,1)}%
+    Salaires dans la VAN : {round(100*psal2,1)}%
+    Rémunérations (y.c. ns) dans la VAB : {round(msa/vab*100,1)}%
+    Salaires dans la VAB : {round(msa2/vab*100,1)}%"))
 
 psal <- ggplot(naa) +
   aes(x=time, y=psal, col = geo) +
@@ -265,7 +263,7 @@ L'imposition des entreprises (somme de l’impôt sur les sociétés et des imp�
 
 Le @fig-rendement représente les profits, nets des impôts (nets des subventions), rapportés à la valeur des actifs productifs. C'est ce qui s'approche le plus d'un taux de rendement du capital productif en comptabilité nationale. Pour des raisons de comparabilité entre pays et de disponibilité des données, les actifs non produits – c'est-à-dire les terrains, les terres agricoles ou les ressources naturelles – ne sont pas prise en compte dans l'analyse.
 
-Les taux de rendement du capital productif sont assez disparates. En 2023, le taux de rendement est le plus élevé aux Pays-Bas et le plus faible en France. Il a presque continument baissé sur la période de 1995 à 2023 en France et augmenté aux Pays-Bas. Il est plutôt stable, et à un niveau supérieur à 5% par an, en Allemagne. La période de 2000 à la crise financière de 2008 est caractérisée en Allemagne par une baisse de la part des salaires dans la valeur ajoutée, à la suite des réformes Hartz, conduisant à améliorer nettement le rendement du capital productif.
+Les taux de rendement du capital productif sont assez disparates. En 2023, le taux de rendement est le plus élevé aux Pays-Bas et le plus faible en France. Il a presque continûment baissé sur la période de 1995 à 2023 en France et augmenté aux Pays-Bas. Il est plutôt stable, et à un niveau supérieur à 5% par an, en Allemagne. La période de 2000 à la crise financière de 2008 est caractérisée en Allemagne par une baisse de la part des salaires dans la valeur ajoutée, à la suite des réformes Hartz, conduisant à améliorer nettement le rendement du capital productif.
 
 ```{r}
 #| label: fig-rendement
@@ -311,7 +309,7 @@ margin_download(naaa)
 ```
 :::
 
-## Réformes fiscales et une nouvelle politique de l'offre (verte et pragmatique)
+## Réformes fiscales et une nouvelle politique de l'offre, verte et pragmatique 
 
 Ce tableau paraît désespérant, d'autant que depuis la présidence de François Hollande et plus encore celle d'Emmanuel Macron, la France s'est engagée dans une politique de l'offre ambitieuse et coûteuse, accroissant les subventions et les allègements de cotisations sociales (dont le CICE, sa transformation en allègements de cotisations et le CIR), prolongée par la baisse de l'impôt sur les sociétés et une réduction progressive des impôts de production. Or le @fig-rendement plus haut suggère que cette politique de l'offre n'a pas inversé l'effondrement du rendement du capital, alors que c’est la condition nécessaire, c’est la thèse de cet article, pour créer des conditions macroéconomiques permettant de revaloriser les salaires.
 
