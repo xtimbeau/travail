@@ -156,8 +156,8 @@ Le vieillissement de la population rend difficile également le partage de la ch
 dependants <- source_data("dependants.r") |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
-    Dependants (plus de 15 ans)/actifs (en eqtp) : {round(depse,1)}
-    Dependants (tous âges)/actifs (en eqtp) : {round(dep,1)}"  ) ) |> 
+    Dependants (plus de 15 ans)/actifs (en eqtp) : {round(depse,2)}
+    Dependants (tous âges)/actifs (en eqtp) : {round(dep,2)}"  ) ) |> 
    filter(time<='2050-01-01')
 
 dep <- ggplot(dependants) +
