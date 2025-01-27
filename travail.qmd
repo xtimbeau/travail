@@ -129,7 +129,7 @@ earn |>
   fmt_markdown(label) |> 
   cols_width(
     label ~ pct(20) ) |> 
-  tab_footnote("Salaire annuel brut, temps partiel et complet, relatif au salaire annuel brut médian tous âges, toutes qualifications, femmes et hommes.",
+  tab_footnote("Salaire annuel médian brut de la catégorie, temps partiel et complet, relatif au salaire annuel brut médian de l'ensemble des salariés (tous âge, femmes et hommes, toutes qualifications, tous secteurs).",
                 cells_body(columns = label, rows = tt=="rel")) |>
   tab_source_note(md(
   "*Lecture* : Le salaire médian brut (i.e. y compris les cotisations sociales à la charge du salarié),
@@ -309,7 +309,7 @@ margin_download(naaa)
 ```
 :::
 
-## Réformes fiscales et une nouvelle politique de l'offre, verte et pragmatique 
+## Réformes fiscales et une nouvelle politique de l'offre, verte et pragmatique
 
 Ce tableau paraît désespérant, d'autant que depuis la présidence de François Hollande et plus encore celle d'Emmanuel Macron, la France s'est engagée dans une politique de l'offre ambitieuse et coûteuse, accroissant les subventions et les allègements de cotisations sociales (dont le CICE, sa transformation en allègements de cotisations et le CIR), prolongée par la baisse de l'impôt sur les sociétés et une réduction progressive des impôts de production. Or le @fig-rendement plus haut suggère que cette politique de l'offre n'a pas inversé l'effondrement du rendement du capital, alors que c’est la condition nécessaire, c’est la thèse de cet article, pour créer des conditions macroéconomiques permettant de revaloriser les salaires.
 
