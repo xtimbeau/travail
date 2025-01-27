@@ -129,7 +129,7 @@ earn |>
   fmt_markdown(label) |> 
   cols_width(
     label ~ pct(20) ) |> 
-  tab_footnote("Salaire annuel brut, temps partiel et complet, relatif au salaire annuel brut médian tous âges, toutes qualifications, femmes et hommes.",
+  tab_footnote("Salaire annuel médian brut de la catégorie, temps partiel et complet, relatif au salaire annuel brut médian de l'ensemble des salariés (tous âge, femmes et hommes, toutes qualifications, tous secteurs).",
                 cells_body(columns = label, rows = tt=="rel")) |>
   tab_source_note(md(
   "*Lecture* : Le salaire médian brut (i.e. y compris les cotisations sociales à la charge du salarié),
