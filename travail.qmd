@@ -58,7 +58,7 @@ sal <- ggplot(salaires |> filter(time >= "1995-01-01")) +
     calcul de l'auteur.",
     code =  "github.com/xtimbeau/travail/salaires.r",
     champ = "Toute l'économie, salaires y compris cotisations sociales à la charge de l'employeur.",
-    note = "Le salaire est défini comme la masse salariale divisée par l'emploi salarié, sur les 4 derniers trimestres. Le ruban coloré indique les cotisations sociales à la charge de l'employeur.",
+    note = "Le salaire est défini comme la masse salariale divisée par l'emploi salarié, sur les 4 derniers trimestres, déflaté par le déflateur de la consommation chaîné. Le ruban coloré indique les cotisations sociales à la charge de l'employeur.",
     ofce = FALSE)
 
 girafy(sal, 1)
@@ -135,7 +135,7 @@ earn |>
   "*Lecture* : Le salaire médian brut (i.e. y compris les cotisations sociales à la charge du salarié),
   des salariés à temps partiel comme à temps plein, incluant le 13^e^ mois
   et autres primes ou bonus est en France de 26 768 euros (soit un salaire mensuel moyen de 2 231 euros).
-  La rémunération moyenne d'un homme (à temps plein ou partiel) est de 119% le salaire médian contre 79% pour une femme (soit un ratio homme femme de 1,51)")) |>
+  La rémunération moyenne d'un homme (à temps plein ou partiel) est de 114% le salaire médian contre 90% pour une femme (soit un ratio homme femme de 1,27)")) |>
   tab_source_note(md("*Code* : github.com/xtimbeau/travail/earn.r")) |> 
   tab_source_note(md("*Source* : Eurostat, Structure of earnings survey - annual earnings (doi.org/10.2908/EARN_SES_ANNUAL), version du 19 décembre 2024, téléchargé le 15 janvier 2025, année 2022, calculs de l'auteur."))
 ```
