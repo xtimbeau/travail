@@ -57,8 +57,8 @@ sal <- ggplot(salaires |> filter(time >= "1995-01-01")) +
     source = "Eurostat, comptes nationaux trimestriels (namq_10_a10),
     calcul de l'auteur.",
     code =  "github.com/xtimbeau/travail/salaires.r",
-    champ = "Toute l'économie",
-    note = "Le salaire est défini comme la masse salariale divisée par l'emploi salarié, sur les 4 derniers trimestres. Le ruban coloré indique les cotisations sociales à la charge de l'employeur (selon la définition du SNA).",
+    champ = "Toute l'économie, salaires y compris cotisations sociales à la charge de l'employeur.",
+    note = "Le salaire est défini comme la masse salariale divisée par l'emploi salarié, sur les 4 derniers trimestres. Le ruban coloré indique les cotisations sociales à la charge de l'employeur.",
     ofce = FALSE)
 
 girafy(sal, 1)
@@ -101,7 +101,7 @@ Au sein de l'Union Européenne, La France se situe dans une position basse en te
 
 ```{r}
 #| label: tbl-earn
-#| tbl-cap: Structure des rémunérations dans 6 pays européens, année 2022
+#| tbl-cap: Rémunérations des salariés dans 6 pays européens, année 2022
 #| html-table-processing: none
 
 earn <- source_data("earn.r")
@@ -135,10 +135,8 @@ earn |>
   "*Lecture* : Le salaire médian brut (i.e. y compris les cotisations sociales à la charge du salarié),
   des salariés à temps partiel comme à temps plein, incluant le 13^e^ mois
   et autres primes ou bonus est en France de 26 768 euros (soit un salaire mensuel moyen de 2 231 euros).
-  La rémunération moyenne d'un homme (à temps plein ou partiel) est de 119% le salaire médian contre 79% pour une femme (soit un ratio homme femme de 1,51)
-  en Allemagne, dont une partie s'explique par une prévalence du temps partiel plus forte chez les femmes allemandes (69%) que chez les hommes (24%). Le ratio de rémunération entre un *manager*  (isco08 OC 1)
-  et un travailleur manuel peu qualifié (OC 9) est de 7,4 (229/31) aux Pays Bas contre 3,7 en France.
-  La rémunération des moins de 30 ans est en moyenne inférieure de 28% au salaire médian en Italie.")) |> tab_source_note(md("*Code* : github.com/xtimbeau/travail/earn.r")) |> 
+  La rémunération moyenne d'un homme (à temps plein ou partiel) est de 119% le salaire médian contre 79% pour une femme (soit un ratio homme femme de 1,51)")) |>
+  tab_source_note(md("*Code* : github.com/xtimbeau/travail/earn.r")) |> 
   tab_source_note(md("*Source* : Eurostat, Structure of earnings survey - annual earnings (doi.org/10.2908/EARN_SES_ANNUAL), version du 19 décembre 2024, téléchargé le 15 janvier 2025, année 2022, calculs de l'auteur."))
 ```
 
@@ -152,7 +150,7 @@ Le vieillissement de la population rend difficile également le partage de la ch
 
 ```{r}
 #| label: fig-depend
-#| fig-cap: Ratio de dépendance inactifs/en-emplois en équivalent temps plein
+#| fig-cap: Inactifs rapportés aux effectifs en emploi, en équivalent temps plein
 #| fig-asp: 1
 
 dependants <- source_data("dependants.r") |> 
@@ -203,18 +201,18 @@ Enfin, la branche services immobiliers (branche L dans la NACE rev. 2) a été e
 
 ```{r}
 #| label: fig-sal
-#| fig-cap: Part des salaires dans la valeur ajoutée nette
+#| fig-cap: Rémunération du travail dans la valeur ajoutée nette
 #| fig-asp: 1
 
 naa <- source_data("va.r")$naa |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
     {year(time)}
-    Part des impôts net de subvention dans la VAN : {round(100*(ip+is)/van,1)}%
-    Part des rémunérations (y.c. ns) dans la VAN : {round(psal*100,1)}%
-    Part des salaires dans la VAN : {round(100*psal2,1)}%
-    Part des rémunérations (y.c. ns) dans la VAB : {round(msa/vab*100,1)}%
-    Part des salaires dans la VAB : {round(msa2/vab*100,1)}%"))
+    Impôts net de subvention dans la VAN : {round(100*(ip+is)/van,1)}%
+    Rémunérations (y.c. ns) dans la VAN : {round(psal*100,1)}%
+    Salaires dans la VAN : {round(100*psal2,1)}%
+    Rémunérations (y.c. ns) dans la VAB : {round(msa/vab*100,1)}%
+    Salaires dans la VAB : {round(msa2/vab*100,1)}%"))
 
 psal <- ggplot(naa) +
   aes(x=time, y=psal, col = geo) +
@@ -265,7 +263,7 @@ L'imposition des entreprises (somme de l’impôt sur les sociétés et des imp�
 
 Le @fig-rendement représente les profits, nets des impôts (nets des subventions), rapportés à la valeur des actifs productifs. C'est ce qui s'approche le plus d'un taux de rendement du capital productif en comptabilité nationale. Pour des raisons de comparabilité entre pays et de disponibilité des données, les actifs non produits – c'est-à-dire les terrains, les terres agricoles ou les ressources naturelles – ne sont pas prise en compte dans l'analyse.
 
-Les taux de rendement du capital productif sont assez disparates. En 2023, le taux de rendement est le plus élevé aux Pays-Bas et le plus faible en France. Il a presque continument baissé sur la période de 1995 à 2023 en France et augmenté aux Pays-Bas. Il est plutôt stable, et à un niveau supérieur à 5% par an, en Allemagne. La période de 2000 à la crise financière de 2008 est caractérisée en Allemagne par une baisse de la part des salaires dans la valeur ajoutée, à la suite des réformes Hartz, conduisant à améliorer nettement le rendement du capital productif.
+Les taux de rendement du capital productif sont assez disparates. En 2023, le taux de rendement est le plus élevé aux Pays-Bas et le plus faible en France. Il a presque continûment baissé sur la période de 1995 à 2023 en France et augmenté aux Pays-Bas. Il est plutôt stable, et à un niveau supérieur à 5% par an, en Allemagne. La période de 2000 à la crise financière de 2008 est caractérisée en Allemagne par une baisse de la part des salaires dans la valeur ajoutée, à la suite des réformes Hartz, conduisant à améliorer nettement le rendement du capital productif.
 
 ```{r}
 #| label: fig-rendement
@@ -311,7 +309,7 @@ margin_download(naaa)
 ```
 :::
 
-## Réformes fiscales et une nouvelle politique de l'offre (verte et pragmatique)
+## Réformes fiscales et une nouvelle politique de l'offre, verte et pragmatique 
 
 Ce tableau paraît désespérant, d'autant que depuis la présidence de François Hollande et plus encore celle d'Emmanuel Macron, la France s'est engagée dans une politique de l'offre ambitieuse et coûteuse, accroissant les subventions et les allègements de cotisations sociales (dont le CICE, sa transformation en allègements de cotisations et le CIR), prolongée par la baisse de l'impôt sur les sociétés et une réduction progressive des impôts de production. Or le @fig-rendement plus haut suggère que cette politique de l'offre n'a pas inversé l'effondrement du rendement du capital, alors que c’est la condition nécessaire, c’est la thèse de cet article, pour créer des conditions macroéconomiques permettant de revaloriser les salaires.
 
