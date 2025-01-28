@@ -7,7 +7,8 @@ author:
     affiliation-url: "http://www.ofce.fr"
     orcid: "0000-0002-6198-5953"
 editor: visual
-
+date: "2025-01-27"
+date-modified: "2025-01-27"
 abstract: "La globalisation et les mutations économiques engagées depuis les années 1990 ont fait porter la charge de l’ajustement macroéconomique d’abord sur le coût du travail. L’exemple américain montre toutefois qu’un autre mix macroéconomique est possible, fonde à la fois sur des politiques fiscales et une politique de l’offre différentes de celles que nous avons vu sous la présidence d’Emmanuel Macron.  
 `r  wordcountaddin::word_count('travail.qmd')` mots."
 
