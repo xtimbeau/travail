@@ -17,6 +17,10 @@ bibliography: references.bib
 
 ```{r, include=FALSE}
 ofce::init_qmd()
+thm <- theme_ofce(
+  marquee=TRUE,
+  panel.spacing = unit(9, "point")
+)
 ```
 
 ## Revaloriser le travail
@@ -172,7 +176,7 @@ dep <- ggplot(dependants) +
   geom_point_interactive(aes(tooltip = tooltip, data_id = time, y = dep),
                          shape = 21, stroke = 0.1, color = "white", size = .25,
                          hover_nearest = TRUE, show.legend = FALSE) +
-  theme_ofce(marquee = TRUE) +
+  thm +
   ylab("Dépendants/actifs en équivalent temps plein") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_color_pays(format = "eurostat") +
@@ -180,8 +184,7 @@ dep <- ggplot(dependants) +
     source = "Eurostat demo_pjan pour la population, proj_23np pour les projections de population (scénario baseline), lfsi_emp_a pour l'emploi par age et sexe.",
     code =  "github.com/xtimbeau/travail/dependants.r",
     lecture = "Les réformes récentes de recul de l'âge de départ à la retraite ont réduit dans certains pays le ratio de dépendance, et le scénario fait l'hypothèse de taux d'activité par âge figés à leur niveau de 2023. Les graphiques indiquent donc son évolution sous l'influence de la démographie seule.",
-    note = "Le ratio de dépendance est le ratio entre les inactifs ou chômmeurs, de 0 à 100 ans rapporté aux actifs de 15 à 64 ans en équivalent temps plein. Le ruban coloré indique le ratio de dépendance si le taux d'emploi des femmes est égal à celui des hommes.",
-    ofce = FALSE)
+    note = "Le ratio de dépendance est le ratio entre les inactifs ou chômmeurs, de 0 à 100 ans rapporté aux actifs de 15 à 64 ans en équivalent temps plein. Le ruban coloré indique le ratio de dépendance si le taux d'emploi des femmes est égal à celui des hommes.")
 
 girafy(dep, 1.5)
 ```
@@ -231,7 +234,7 @@ psal <- ggplot(naa) +
   scale_ofce_date() +
   scale_y_continuous(labels = scales::label_percent(1), limits = c(NA, 1)) +
   scale_color_pays(format = "eurostat") +
-  theme_ofce(marquee = TRUE) +
+  thm +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64 et nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10) pour l'année 2024,
@@ -289,7 +292,7 @@ return <- ggplot(naaa) +
   scale_y_continuous(labels = scales::label_percent(1)) +
   scale_color_pays(format = "eurostat") +
   ylab("Profit sur actifs physiques") + xlab(NULL) +
-  theme_ofce() +
+  thm +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels de branche (nama_10_a64 et nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10) pour l'année 2024 (jusqu'au T3),
