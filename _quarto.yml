@@ -26,5 +26,5 @@ comments:
   hypothesis: true
 format:
   ofce-html: default
-  docx: default
+  ofce-docx: default
 
