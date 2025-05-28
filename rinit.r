@@ -34,7 +34,7 @@ options(
   ofce.caption.wrap = 0,
   ofce.source_data.src_in = "file",
   ofce.source_data.force_exec = FALSE)
-showtext_opts(dpi = 92)
+showtext_opts(dpi = 120)
 showtext_auto()
 options(cli.ignore_unknown_rstudio_theme = TRUE)
 tooltip_css  <-

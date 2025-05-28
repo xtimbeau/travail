@@ -106,6 +106,11 @@ nav.quarto-secondary-nav,
   text-align: $aligment !important;
 }
 
+p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem
+}
+
 .align-left {
   text-align: left;
 }
@@ -189,6 +194,8 @@ caption {
 
 .csl-entry {
   text-align: start;
+  text-indent: -2em;
+  padding-left: 2em;
 }
 
 .table {
