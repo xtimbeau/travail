@@ -2,6 +2,8 @@ library(tidyverse)
 library(eurostat)
 library(ofce)
 
+pays2 <- c("DE", "FR", "IT", "ES", "NL", "BE")
+
 marchand <- source_data("nace.r")
 
 assets_a10 <- get_eurostat("nama_10_nfa_st",

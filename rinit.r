@@ -120,7 +120,6 @@ darkgreenish <- ccsummer()[3]
 darkbluish <- ccjoy()[4]
 
 lbl <- function(x, format=NULL) {
-
   if(is.null(format))
     if(is.null(dim(x)))
       fmt <- ifelse(max(stringr::str_length(x))==2, "eurostat", "iso3c")
