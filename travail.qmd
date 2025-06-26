@@ -7,15 +7,20 @@ author:
     affiliation-url: "http://www.ofce.fr"
     orcid: "0000-0002-6198-5953"
 editor: visual
-
-abstract: "La globalisation et les mutations économiques engagées depuis les années 1990 ont fait porter la charge de l’ajustement macroéconomique d’abord sur le coût du travail. L’exemple américain montre toutefois qu’un autre mix macroéconomique est possible, fonde à la fois sur des politiques fiscales et une politique de l’offre différentes de celles que nous avons vu sous la présidence d’Emmanuel Macron.  
-`r  wordcountaddin::word_count('travail.qmd')` mots."
+date: "2025-01-27"
+date-modified: "2025-01-27"
+abstract: "Les profondes mutations du marché du travail ont pesé sur la conditions de travail et les rémunérations. Cependantn comparée à 5 grandes économies européennes, le marché du travail français ne semble pas offrir de grandes marges de manoeuvre pour la revalorisation du travail. Le partage de la valeur ajoutée, ici nette, fait même apparaître une singularité française : la part des salaires dans la valeur ajoutée nette est supérieure à 90% ce qui laisse là aussi peu d'espoir pour une revalorisation globale. Cependfant, ce partge peut ête le résultat d'une 'fuite' de valeur ajoutée soit vers d'autres pays, soit par du transfert vers les services immobiliers. Une harmonisation fiscale européenne et une chasse aux incohérences dans la taxation des entreprises pourrait alors fournir des amrges de manoeuvre invisibles sinon.  
+    `r  wordcountaddin::word_count('travail.qmd')` mots."
 
 bibliography: references.bib
 ---
 
 ```{r, include=FALSE}
 ofce::init_qmd()
+thm <- theme_ofce(
+  marquee=TRUE,
+  panel.spacing = unit(9, "point")
+)
 ```
 
 ## Revaloriser le travail
@@ -171,7 +176,7 @@ dep <- ggplot(dependants) +
   geom_point_interactive(aes(tooltip = tooltip, data_id = time, y = dep),
                          shape = 21, stroke = 0.1, color = "white", size = .25,
                          hover_nearest = TRUE, show.legend = FALSE) +
-  theme_ofce(marquee = TRUE) +
+  thm +
   ylab("Dépendants/actifs en équivalent temps plein") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_color_pays(format = "eurostat") +
@@ -179,8 +184,7 @@ dep <- ggplot(dependants) +
     source = "Eurostat demo_pjan pour la population, proj_23np pour les projections de population (scénario baseline), lfsi_emp_a pour l'emploi par age et sexe.",
     code =  "github.com/xtimbeau/travail/dependants.r",
     lecture = "Les réformes récentes de recul de l'âge de départ à la retraite ont réduit dans certains pays le ratio de dépendance, et le scénario fait l'hypothèse de taux d'activité par âge figés à leur niveau de 2023. Les graphiques indiquent donc son évolution sous l'influence de la démographie seule.",
-    note = "Le ratio de dépendance est le ratio entre les inactifs ou chômmeurs, de 0 à 100 ans rapporté aux actifs de 15 à 64 ans en équivalent temps plein. Le ruban coloré indique le ratio de dépendance si le taux d'emploi des femmes est égal à celui des hommes.",
-    ofce = FALSE)
+    note = "Le ratio de dépendance est le ratio entre les inactifs ou chômmeurs, de 0 à 100 ans rapporté aux actifs de 15 à 64 ans en équivalent temps plein. Le ruban coloré indique le ratio de dépendance si le taux d'emploi des femmes est égal à celui des hommes.")
 
 girafy(dep, 1.5)
 ```
@@ -230,17 +234,15 @@ psal <- ggplot(naa) +
   scale_ofce_date() +
   scale_y_continuous(labels = scales::label_percent(1), limits = c(NA, 1)) +
   scale_color_pays(format = "eurostat") +
-  theme_ofce(marquee = TRUE) +
+  thm +
   ofce_caption(
-    wrap = 0,
     source = "Eurostat, comptes nationaux annuels (nama_10_a64 et nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10) pour l'année 2024,
  comptes nationaux de secteur (nasa_10_nf_tr) pour l'IS (D51), téléchargés le 15 janvier 2025,
  calcul de l'auteur.",
     code =  "github.com/xtimbeau/travail/va.r",
     champ = "Branches marchandes hors services immobiliers (L dans la NACE r2)",
-    note = "La part des salaires (corrigé de la non-salarisation) dans la valeur ajoutée nette atteint 90% en France en 2023 ((D1*(1+ns/s)/(B1G-P51C)). La partie colorée correspond à la correction pour la non-salarisation. L'année 2024 est estimée à partir des comptes trimestriels. La ligne pointillée indique la somme de l'impôt des sociétés et des impôts de production nets des subventions.",
-    ofce = FALSE)
+    note = "La part des salaires (corrigé de la non-salarisation) dans la valeur ajoutée nette atteint 90% en France en 2023 ((D1*(1+ns/s)/(B1G-P51C)). La partie colorée correspond à la correction pour la non-salarisation. L'année 2024 est estimée à partir des comptes trimestriels. La ligne pointillée indique la somme de l'impôt des sociétés et des impôts de production nets des subventions.")
 
 girafy(psal, 1.5)
 ```
@@ -253,11 +255,11 @@ margin_download(naa)
 
 Le @fig-sal indique des parts des salaires dans la valeur ajoutée nette à des niveaux comparables – dans un intervalle entre les 6 pays européens qui va de 91% à 77,5%. Elle est la plus élevée en 2024 en France et en Belgique, avec une croissance pour 3 des pays considérés sur la période, en France, en Espagne, en Italie. La correction de la non-salarisation est indiquée par le ruban coloré sur chaque graphique. Elle est très importante en Italie et en Belgique et croissante en France.
 
-Dans les 6 pays, la part des salaires dans la valeur ajoutée a atteint un pic en 2020, au moment de l'épidémie de COVID et des mesures de soutien au pouvoir d'achat communes à beaucoup de pays européens. Dans 5 des 6 pays, l'épisode d'inflation à partir de 2022 a induit un fort recul de la part des salaires dans la valeur ajoutée. Ce n'est pas le cas en France, celle-ci ayant été particulièrement stable entre 2020 et 2024. Ainsi, malgré une indexation partielle, la part des salaires (y.c les non salariés) s'est maintenue, mais le coût des consommations intermédiaires a réduit la valeur ajoutée nette proportionellement[^3].
+Dans les 6 pays, la part des salaires dans la valeur ajoutée a atteint un pic en 2020, au moment de l'épidémie de COVID et des mesures de soutien au pouvoir d'achat communes à beaucoup de pays européens. Dans 5 des 6 pays, l'épisode d'inflation à partir de 2022 a induit un fort recul de la part des salaires dans la valeur ajoutée. Ce n'est pas le cas en France, celle-ci ayant été particulièrement stable entre 2020 et 2024. Ainsi, malgré une indexation partielle, la part des salaires (y.c les non salariés) s'est maintenue, mais le coût des consommations intermédiaires a réduit la valeur ajoutée nette proportionnellement[^3].
 
 [^3]: La France est le seul pays pour le moment à avoir publié ses comptes nationaux dans la méthodologie version 2020, avec des révisions importantes par rapport à la version 2014. Le diagnostic en France en a été significativement changé, avec plus de gains de productivité et moins de réduction des marges brutes des entreprises.
 
-On peut tirer deux conclusions importantes de ces éléments. Premièrement, la part des salaires dans la valeur ajoutée nette fluctue peu – au délà de la tendance à la hausse en France au cours des 20 dernières années – et ce malgré des chocs économiques majeurs. C'est la conséquence d'un ajustement plus flexible des marchés du travail et de la désindexation d'une grande part des rémunérations. Deuxièmement, il n'existe pas en France de marge de redressement des salaires sans hausse de la valeur ajoutée, qu'elle vienne de gains de productivité ou d'une hausse du nombre d'heure travaillées. 90% de la valeur ajoutée nette est sans doute proche d'un maximum et demande probablement des montages particuliers pour être soutenable du côté de la rémunération du capital. Les Pays-Bas, l'Espagne et l'Italie échappent à cette contrainte : en Espagne comme en Italie, cela correspond à une masse salariale globale très contenue et indique sans doute des marges de manœuvre du côté des salaires, après des années particulièrement austères. Les Pays-Bas sont un cas à part. Les inégalités salariales y découlent avant tout du temps partiel, et le fort rendement du capital provient de la localisation des holding de tête de nombreux groupes dans ce pays. De cette façon, la valeur ajoutée y est gonflée par des prix de transfert, et donc la réduisant d'autant dans les pays voisins.
+On peut tirer deux conclusions importantes de ces éléments. Premièrement, la part des salaires dans la valeur ajoutée nette fluctue peu – au delà de la tendance à la hausse en France au cours des 20 dernières années – et ce malgré des chocs économiques majeurs. C'est la conséquence d'un ajustement plus flexible des marchés du travail et de la désindexation d'une grande part des rémunérations. Deuxièmement, il n'existe pas en France de marge de redressement des salaires sans hausse de la valeur ajoutée, qu'elle vienne de gains de productivité ou d'une hausse du nombre d'heure travaillées. 90% de la valeur ajoutée nette est sans doute proche d'un maximum et demande probablement des montages particuliers pour être soutenable du côté de la rémunération du capital. Les Pays-Bas, l'Espagne et l'Italie échappent à cette contrainte : en Espagne comme en Italie, cela correspond à une masse salariale globale très contenue et indique sans doute des marges de manœuvre du côté des salaires, après des années particulièrement austères. Les Pays-Bas sont un cas à part. Les inégalités salariales y découlent avant tout du temps partiel, et le fort rendement du capital provient de la localisation des holding de tête de nombreux groupes dans ce pays. De cette façon, la valeur ajoutée y est gonflée par des prix de transfert, et donc la réduisant d'autant dans les pays voisins.
 
 L'imposition des entreprises (somme de l’impôt sur les sociétés et des impôts de production net des subventions) réduit encore la marge de manœuvre en France (quelques % de la valeur ajoutée nette restent). Dans quelques pays, les impôts nets des subventions sont fluctuants (en Allemagne, aux Pays-Bas ou en Belgique) ce qui traduit un changement de conditions fiscales accentuant la concurrence à l'intérieur du marché unique.
 
@@ -290,7 +292,7 @@ return <- ggplot(naaa) +
   scale_y_continuous(labels = scales::label_percent(1)) +
   scale_color_pays(format = "eurostat") +
   ylab("Profit sur actifs physiques") + xlab(NULL) +
-  theme_ofce() +
+  thm +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels de branche (nama_10_a64 et nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10) pour l'année 2024 (jusqu'au T3),
