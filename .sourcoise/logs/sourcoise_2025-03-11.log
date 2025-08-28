@@ -1,9 +1,0 @@
-INFO [2025-03-11 11:41:38] source file : /Users/xt/github/travail/dependants.r
-SUCCESS [2025-03-11 11:41:44] Successful forced execution in 6.75 sec. (22 kB)
-INFO [2025-03-11 11:41:44] source file : /Users/xt/github/travail/earn.r
-SUCCESS [2025-03-11 11:41:45] Successful forced execution in 0.69 sec. (7 kB)
-INFO [2025-03-11 11:41:45] source file : /Users/xt/github/travail/naa_e.r
-INFO [2025-03-11 11:41:46] source file : /Users/xt/github/travail/nace.r
-SUCCESS [2025-03-11 11:41:47] Successful forced execution in 0.62 sec. (8 kB)
-INFO [2025-03-11 11:41:47] source file : /Users/xt/github/travail/salaires.r
-SUCCESS [2025-03-11 11:41:52] Successful forced execution in 5.09 sec. (70 kB)

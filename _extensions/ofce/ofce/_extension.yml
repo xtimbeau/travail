@@ -10,14 +10,14 @@ contributes:
       french: true
       language:
         fr:
-          section-title-references: "Références"
+          section-title-references: "Bibliograhie"
           title-block-author-single: "Par"
           title-block-author-plural: "Par"
           title-block-published: "Publié le"
           title-block-modified: "Modifié le"
           toc-title: "Sur cette page"
         en:
-          section-title-references: "References"
+          section-title-references: "Bibilography"
           title-block-author-single: "Author"
           title-block-author-plural: "Authors"
           title-block-published: "Published on"
@@ -53,6 +53,9 @@ contributes:
       shortcodes:
         - fontawesome
         - downloadthis
+      search-replace:
+        oe : "\u0153"
+        ae : "\u00e6"
       csl: csl/revue-francaise-de-gestion.csl
     html:
       theme:
@@ -90,12 +93,6 @@ contributes:
       template-partials:
         - pdf_template/title.tex
         - pdf_template/before-body.tex
-    docx:
-      number-sections: true
-      number-depth: 3
-      fig-dpi: 1200
-      fig-width: 5
-      fig-format: png
     dashboard:
       theme:
         - cosmo
