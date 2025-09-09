@@ -35,6 +35,13 @@
     "text": "Profits nets et dividendes\nLes comptes des sociétés non financières permettent d’éxaminer d’autres éléments du compte. On affiche ici le profit net sur la valeur ajoutée nette, et le taux de dividendes nets sur la valeur ajoutée nette.\nLes profits nets sont définis comme la valeur ajoutée nette de la consommation de cpaital fixe moins la rémunération dedes salariés, moins les taxes nettes des subventions moins l’impôt sur les sociétés :\n\\[\n\\Pi = B1G - P51C - D1 - (D2-D3) - D5\n\\]\nLes dividendes sont la ligne \\(D4\\) nette de ce qui est payé et reçu par le secteur S11 et des intérêts (\\(D41\\)).\n\n\n\n\nFigure 4: Profits nets dans la VA, comptes de secteur\n\n\n\n\n\n\n\n\nOn peut rapporter ces notions aux éléments qui viennent du compte de capital. Le premier concept est le profit rapporté au stock de capital physique (tel que valorisé dans la comptabilité nationale, c’est-à-dire à la valeur de remplacement et au prix de marché). Mlaheureusement, à part la France, aucun pays dans notre échantillon ne diffuse ces données sur Eurostat.\nOn rapporte également à une notion financière, à savoir la valeur nette des actions au passif des comptes d’entreprises. Les conventions de valorisation des actions non côtées sont délicates et difficiles à suivre d’un pays à l’autres. On choisit ici d’augmenter ces actions de la valeur nette résiduelle des entreprises non financières (\\(BF90\\)). On a donc :\n\\[\n\\begin{align}\nr_{productif} & = \\frac{B2N-D5}{N1N+N2N} \\\\\nr_{financier} & = \\frac{B2N-D5}{F51+F52+BF90}\n\\end{align}\n\\]\nOn obtient le graphe suivant :\n\n\n\n\nFigure 5: Rendements du capital, compte de secteur"
   },
   {
+    "objectID": "psal_comp.html#au-delà-de-leurope",
+    "href": "psal_comp.html#au-delà-de-leurope",
+    "title": "Part des salaires dans la valeur ajoutée",
+    "section": "Au delà de l’Europe",
+    "text": "Au delà de l’Europe\nL’accès aux données de l’OCDE est devenu particulièrement opaque. En revanche, Eurostat a un programme de coopération (avec l’OCDE) pour intégrer les données dans un même cadre.\nOn utilise ces données (naidsa_10_nf_tr) pour construire des indicateurs comparables en comparant des pays autres que ceux de la zone euro.\n\n\n\n\nFigure 6: Part des salaires dans la valeur ajoutée, comptes de secteur, comparaisons internationales"
+  },
+  {
     "objectID": "travail.html",
     "href": "travail.html",
     "title": "Quelles marges de manœuvres macroéconomiques pour revaloriser le travail ?",
