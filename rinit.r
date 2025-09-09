@@ -145,6 +145,19 @@ date_jour <- function(date) {
   str_c(lubridate::day(date), " ", lubridate::month(date,label = TRUE, abbr = FALSE), " ", lubridate::year(date))
 }
 
+date1 <- function(x) {
+  fnan <- which(!is.na(x)) |> min()
+  r <- stringr::str_sub(x, 3)
+  r[[fnan]] <- stringr::str_c(x[fnan])
+  return(r)
+}
+
+date1d <- function(x) date1(year(x))
+
+dates_breaks <- function(by=4) {
+  function(x) {
+    seq(ceiling(x[[1]]),x[[2]], by = by ) }
+}
 conflicted::conflicts_prefer(dplyr::filter, .quiet = TRUE)
 conflicted::conflicts_prefer(dplyr::select, .quiet = TRUE)
 conflicted::conflicts_prefer(dplyr::lag, .quiet = TRUE)

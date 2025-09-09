@@ -32,7 +32,9 @@ d1 <- get_eurostat("namq_10_a10",
   select(geo, time, values, nace_r2, na_item) |>
   pivot_wider(names_from = na_item, values_from = values)
 
-pc <- get_eurostat("namq_10_fcs", filters = list(na_item = "P31_S14", unit = c("CP_MEUR", "CLV20_MEUR"), geo = pays2)) |>
+pc <- "namq_10_fcs" |>
+  get_eurostat(
+    filters = list(na_item = "P31_S14", unit = c("CP_MEUR", "CLV20_MEUR"), geo = pays2)) |>
   drop_na(values) |>
   mutate(s_adj = factor(s_adj, c("SCA", "SA", "CA", "NSA"))) |>
   group_by(across(-c(s_adj, values))) |>

@@ -1,8 +1,41 @@
 project:
-  type: manuscript
+  type: website
 
-manuscript:
-  article: travail.qmd
+website:
+  title: "Partage de la valeur ajoutée, comparaisons internationales"
+  page-navigation: true
+  site-url: "https://xtimbeau.github.io/travail/"
+  repo-url: "https://github.com/xtimbeau/travail/"
+  reader-mode: false
+  bread-crumbs: true
+  favicon: www/fofce.png
+  page-footer:
+      border: true
+      left: "![](/www/ccby4.png){height='16'}"
+      right: "propulsé par ![](/www/quarto.png){height='16'}"
+  navbar:
+    title: false
+    search: true
+    code-tools: false
+    bakground: "#FEFEFE"
+    logo: www/ofce_m.png
+    logo-alt: "OFCE"
+    logo-href: "https://www.ofce.fr/"
+    right:
+      - text: " "
+        icon: person-circle
+        href: about.html
+
+  sidebar:
+      - id: fr
+        collapse-level: 1
+        title: "Quelles marges de manoeuvres pour revaloriser le travail"
+        file: travail.qmd
+      - id: inter
+        collapse-level: 1
+        title: "Stat: comparaisons part des salaires et profits"
+        file: psal_comp.qmd
+
   code-links:
     - text: Salaires dans la VA
       icon: file-code
@@ -26,5 +59,4 @@ comments:
   hypothesis: true
 format:
   ofce-html: default
-  ofce-docx: default
 

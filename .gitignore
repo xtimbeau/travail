@@ -6,3 +6,5 @@
 /.quarto/
 _manuscript/
 travail_files/
+
+**/*.quarto_ipynb
