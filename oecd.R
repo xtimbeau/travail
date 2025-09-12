@@ -2,10 +2,12 @@ library(OECD)
 library(tidyverse)
 library(glue)
 sna <- "OECD.SDD.NAD,DSD_NAMAIN1@DF_QNA,1.1"
+sectors <- "OECD.SDD.NAD,DSD_NASEC10@DF_TABLE14,1.1"
+
 eo <- "OECD.ECO.MAD,DSD_EO@DF_EO,1.3"
-query <- "Q..FRA.........."
+query <- "A..GBR.........."
 pays <- "USA+FRA+DEU+GBR+ITA+ESP+NLD+BEL+JPN"
-fr <-  OECD::get_dataset(sna, query)
+jpn <-  OECD::get_dataset(sna, query)
 
 b1g <-  OECD::get_dataset(sna, "Q..{pays}...B1G.._T...V..T0101" |> glue())
 b1gq <-  OECD::get_dataset(sna, "Q..{pays}...B1GQ.....V.." |> glue())
