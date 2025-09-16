@@ -26,6 +26,7 @@ library(qs, quietly = TRUE)
 library(conflicted, quietly = TRUE)
 library(countrycode, quietly = TRUE)
 library(gfonts)
+library(marquee)
 
 options(
   ofce.base_size = 12,

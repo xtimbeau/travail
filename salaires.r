@@ -4,7 +4,7 @@ library(ofce)
 
 pays2 <- c("DE", "FR", "IT", "ES", "NL", "BE")
 label_pays <- set_names(countrycode::countrycode(pays2, "eurostat", "country.name.fr"), pays2)
-
+nace <- source_data("nace.r")$nace
 eq <- get_eurostat("namq_10_a10_e",
                    filters = list(na_item = "SAL_DC",
                                   geo = pays2,
@@ -49,12 +49,15 @@ pc <- "namq_10_fcs" |>
 
 salaires <- eq |>
   left_join(d1, by = c("time", "geo", "nace_r2")) |>
+  left_join(nace |> distinct(a10, .keep_all = TRUE) |> select(nace_r2 = a10, marchand, hifi),
+            by = "nace_r2") |>
+  drop_na(marchand) |>
   group_by(geo, time) |>
-  filter(nace_r2 != "TOTAL") |>
   summarize(w = sum(D1)/sum(emp_sal),
             wbrut = sum(D11)/sum(emp_sal),
-            w_md = (sum(D1)- D1[nace_r2 == "O-Q"])/(sum(emp_sal)- emp_sal[nace_r2 == "O-Q"]),
-            w_nmd = (D1[nace_r2 == "O-Q"])/(emp_sal[nace_r2 == "O-Q"]) ,
+            w_md = sum(D1[marchand])/sum(emp_sal[marchand]),
+            w_nmd = sum(D1[!marchand])/sum(emp_sal[!marchand]) ,
+            w_hifi = sum(D1[marchand&hifi])/sum(emp_sal[marchand&hifi]),
             .groups = "drop") |>
   left_join(pc, by = c("time", "geo")) |>
   group_by(geo) |>
@@ -64,7 +67,8 @@ salaires <- eq |>
     wr = w/pc,
     wbr = 4*slider::slide_dbl(wbrut, .before = 3, .f = mean)/pc,
     wr_md = 4*slider::slide_dbl(w_md, .before = 3, .f = mean)/pc,
-    wr_nmd = 4*slider::slide_dbl(w_nmd, .before = 3, .f = mean)/pc) |>
+    wr_nmd = 4*slider::slide_dbl(w_nmd, .before = 3, .f = mean)/pc,
+    wr_hifi = 4*slider::slide_dbl(w_hifi, .before = 3, .f = mean)/pc) |>
   ungroup() |>
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
 

@@ -48,13 +48,14 @@ date <- meta$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 data <- salaires |> 
   filter(time >= "1995-01-01") |> 
-  select(geo, time, wr, wr_md, wr_nmd) |> 
-  pivot_longer(c(wr, wr_md, wr_nmd)) |> 
+  select(geo, time, wr, wr_md, wr_nmd, wr_hifi) |> 
+  pivot_longer(c(wr, wr_md, wr_nmd, wr_hifi)) |> 
   mutate(
     nlabel = case_match(
       name, 
       "wr" ~ "Salaire réel, toute l'économie",
       "wr_md" ~ "Salaire réel, branches marchandes",
+      "wr_hifi" ~ "Salaire réel, branches marchandes hors immobilier et services financiers",
       "wr_nmd" ~ "Salaire réel, branches non-marchandes"), 
     tooltip = glue("<b>{lbl(geo)}</b><br>{date_trim(time)}<br>{nlabel} : {round(value,1)} k€/an")) |> 
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
@@ -64,9 +65,11 @@ sal <- ggplot(data) +
       alpha = name, linewidth = name, linetype = name,
       color = geo) +
   scale_alpha_manual(values = c(wr=1, wr_md = 0.2, wr_nmd = 0.5)) +
-  scale_linetype_manual(values = c(wr="solid", wr_md ="solid", wr_nmd ="dotted")) +
-  scale_linewidth_manual(values = c(wr=.5, wr_md = 0.1, wr_nmd = 0.1)) +
-  geom_point_interactive(aes(tooltip = tooltip, data_id = time),
+  scale_linetype_manual(values = c(wr="solid", wr_md ="solid", wr_nmd ="dotted", wr_hifi = "dashed")) +
+  scale_linewidth_manual(values = c(wr=.5, wr_md = 0.1, wr_nmd = 0.1, wr_hifi = 0.2)) +
+  geom_point_interactive(
+    data = ~.x |> group_by(geo) |> filter(quarter(time) == last(quarter(time))) |> ungroup(),
+    aes(tooltip = tooltip, data_id = time),
                          size = 0.05, hover_nearest = TRUE, show.legend = FALSE) +
   geom_line(show.legend=FALSE) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
@@ -74,16 +77,17 @@ sal <- ggplot(data) +
   ylab("Salaire annuel réel en k€") + xlab(NULL) +
   scale_y_log10(breaks = c(10, 20, 30, 40, 50, 50, 60)) +
   scale_color_pays(format = "eurostat") +
-  theme_ofce() +
+  theme_ofce(
+    strip.text = element_marquee(size = rel(0.8))  ) +
   ofce_caption(
     wrap = 0,
-    source = "Eurostat, comptes nationaux trimestriels (namq_10_a10), téléchargé le {date},
+    source = "Eurostat, comptes nationaux trimestriels de branche (namq_10_a10), téléchargé le {date},
     calcul de l'auteur.",
     dpt = salaires$time,
     dptf = "quarter",
     code =  "github.com/xtimbeau/travail/salaires.r",
     champ = "Toute l'économie, salaires y compris cotisations sociales à la charge de l'employeur.",
-    note = "Le salaire est défini comme la masse salariale divisée par l'emploi salarié, sur les 4 derniers trimestres, déflaté par le déflateur de la consommation chaîné. Le ruban coloré indique les cotisations sociales à la charge de l'employeur.",
+    note = "Le salaire est défini comme la masse salariale divisée par l'emploi salarié, sur les 4 derniers trimestres, déflaté par le déflateur de la consommation chaîné.",
     ofce = FALSE)
 
 girafy(sal, 1)
@@ -106,17 +110,6 @@ Les données trimestrielles sont annualisées pour la lisibilité et pour simpli
 #| label: fig-sal
 #| fig-cap: Part des salaries dans la VA, comptes de branche
 #| fig-asp: 1
-
-naa <- source_data("va.r")$naa |> 
-  mutate(tooltip = glue(
-    "<b>{lbl(geo)}</b>
-    {year(time)}
-    Impôts net de subvention dans la VAN : {round(100*(ip+is)/van,1)}%
-    Rémunérations (y.c. ns) dans la VAN : {round(psal*100,1)}%
-    Salaires dans la VAN : {round(100*psal2,1)}%
-    Rémunérations (y.c. ns) dans la VAB : {round(msa/vab*100,1)}%
-    Salaires dans la VAB : {round(msa2/vab*100,1)}%")) |> 
-  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
 
 naq <- source_data("vaq.r")$naa |> 
   mutate(tooltip = glue(

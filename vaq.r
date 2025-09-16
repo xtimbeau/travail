@@ -2,9 +2,12 @@ library(tidyverse)
 library(eurostat)
 library(ofce)
 
-marchand <- source_data("nace.r")$marchand
-marchand2 <- source_data("nace.r")$marchand2
 nace <- source_data("nace.r")$nace
+m_a20 <- nace |> filter(hifi&marchand) |> pull(a20)
+m_a10 <- nace |> filter(hifi&marchand) |> pull(a10)
+
+marchand2 <- source_data("nace.r")$marchand2
+
 
 pays2 <- c("DE", "FR", "IT", "ES", "NL", "BE")
 
@@ -15,7 +18,7 @@ label_pays <- set_names(countrycode::countrycode(pays2, "eurostat", "country.nam
 naq10_e <- source_data("naq10_e")$naq_e
 
 naa_a64 <- get_eurostat("nama_10_a64", filters = list(unit = "CP_MEUR",
-                                                      nace_r2  = marchand,
+                                                      nace_r2  = m_a20,
                                                       na_item = c("B1G", "D1", "D11", "P51C", "D29X39"),
                                                       geo = pays2) ) |>
   drop_na(values) |>
@@ -34,7 +37,7 @@ naa_a64 <- get_eurostat("nama_10_a64", filters = list(unit = "CP_MEUR",
   select(-month)
 
 naq_a10 <- get_eurostat("namq_10_a10", filters = list(unit = "CP_MEUR",
-                                                      nace_r2  = marchand2,
+                                                      nace_r2  = m_a10,
                                                       na_item = c("B1G", "D1", "D11"),
                                                       geo = pays2) ) |>
   select(na_item, geo, time, values, nace_r2, s_adj) |>
