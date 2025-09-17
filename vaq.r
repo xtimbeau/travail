@@ -21,10 +21,10 @@ naa_a64 <- get_eurostat("nama_10_a64", filters = list(unit = "CP_MEUR",
   drop_na(values) |>
   pivot_wider(id_cols = c(nace_r2, geo, time),
               names_from =  na_item, values_from = values) |>
-  left_join(nace |> select(a10, a20, md = marchand, hi = hors_imm, hifi), by = c("nace_r2"= "a20")) |>
+  left_join(nace |> select(a10, a20, md = marchand, hi = hors_imm, hifi, hfi), by = c("nace_r2"= "a20")) |>
   group_by(a10, geo, time) |>
   summarise(across(c(B1G, D1, D11, P51C, D29X39), sum),
-            across(c(md, hifi, hi), first),
+            across(c(md, hifi, hi, hfi), first),
             .groups = "drop") |>
   rename(nace_r2 = a10) |>
   mutate(across(c(D1, D11, P51C, D29X39), ~ .x / B1G)) |>
@@ -68,6 +68,7 @@ naq <- naq_a10 |>
     across(c(van, vab, msa, msanc, ip), ~sum(.x[md], na.rm=TRUE), .names = "{.col}_md"),
     across(c(van, vab, msa, msanc, ip), ~sum(.x[hi&md], na.rm=TRUE), .names = "{.col}_mdhi"),
     across(c(van, vab, msa, msanc, ip), ~sum(.x[hifi&md], na.rm=TRUE), .names = "{.col}_mdhifi"),
+    across(c(van, vab, msa, msanc, ip), ~sum(.x[hfi&md], na.rm=TRUE), .names = "{.col}_mdhfi"),
     across(c(van, vab, msa, msanc, ip), ~sum(.x, na.rm=TRUE), .names = "{.col}_tb"),
     .groups = "drop") |>
   pivot_longer(starts_with(c("van", "vab", "msa", "ip"))) |>
@@ -98,13 +99,15 @@ naa <- naq |>
   filter(geo %in% c("DE", "FR", "IT", "ES", "NL", "BE"), time >= "1995-01-01") |>
   mutate(geo = factor(geo,  c("DE", "FR", "IT", "ES", "NL", "BE")))
 
-na_tot <- get_eurostat("nama_10_gdp",
-                       filters = list(geo = pays2,
-                                      na_item = c("D21", "D31"),
-                                      unit = "CP_MEUR")) |>
+na_tot <-  "nama_10_gdp" |>
+  get_eurostat(
+    filters = list(geo = pays2,
+                   na_item = c("D21", "D31"),
+                   unit = "CP_MEUR")) |>
   drop_na() |>
   pivot_wider(names_from = na_item, values_from = values) |>
   transmute(geo, time, d2131 = D21 - D31)
+
 max_y <- max(year(na_tot$time))
 
 nq_tot <- get_eurostat("namq_10_gdp",
@@ -127,14 +130,15 @@ nq_tot <- get_eurostat("namq_10_gdp",
   bind_rows(na_tot) |>
   arrange(geo, time)
 
-d51 <- get_eurostat("nasa_10_nf_tr",
-                    filters = list(na_item = c("B1G", "D51"), direct = "PAID",
-                                   geo = pays2, unit = "CP_MEUR",
-                                   sector = c("S11", "S12"))) |>
+d51 <- "nasa_10_nf_tr" |>
+  get_eurostat(
+    filters = list(na_item = c("B1G", "D51"), direct = "PAID",
+                   geo = pays2, unit = "CP_MEUR",
+                   sector = c("S11", "S12"))) |>
   drop_na() |>
   pivot_wider(names_from = sector, values_from = values) |>
-  mutate(tt = S11 + S12, md = S11 + S12, hi = NA, hifi = S11) |>
-  pivot_longer(c(tt, md, hi, hifi), names_to = "champ", values_to = "value") |>
+  mutate(tb = S11 + S12, md = S11 + S12, mdhi = S11+S12, mdhifi = S11, mdhfi = S11) |>
+  pivot_longer(c(tb, md, mdhi, mdhifi, mdhfi), names_to = "champ", values_to = "value") |>
   select(-S11, -S12) |>
   pivot_wider(names_from = na_item, values_from = value) |>
   select(geo, time, is=D51, B1Ga = B1G, champ) |>
@@ -143,6 +147,7 @@ d51 <- get_eurostat("nasa_10_nf_tr",
          tis = is/(van-msa-ip)) |>
   group_by(geo, champ) |>
   fill(tis, t2is) |>
+  ungroup() |>
   transmute(
     geo, time, tis, t2is, champ,
     is = tis*(van-msa-ip),
@@ -151,7 +156,7 @@ d51 <- get_eurostat("nasa_10_nf_tr",
 naa_ext <- naa |>
   select(geo, time, van, vab, msa, msanc, ip, champ) |>
   arrange(time, geo, champ) |>
-  left_join(d51, by  = c("time", "geo")) |>
+  left_join(d51, by  = c("time", "geo", "champ")) |>
   mutate(psal = msa/van,
          psalnc = msanc/van,
          psalb = msa/vab,
@@ -162,14 +167,13 @@ naa_ext <- naa |>
     tp = (van - msa - ip - is)/van,
     tpb = (van - msa)/van )
 
-assets <- source_data("assets.r")$assets |>
-  pivot_longer(cols = c(BE, DE, ES, FR, IT, NL), values_to = "asset", names_to = "geo") |>
-  filter(asset>0)
+assets <- source_data("assets.r")$assets  |>
+  filter(assets>0)
 
 naa_ext2 <- naa_ext |>
   filter(year(time)<= max_y) |>
-  left_join( assets, by =c("geo", "time") ) |>
-  mutate(r = tp*van/asset) |>
+  left_join( assets, by =c("geo", "time", "champ") ) |>
+  mutate(r = tp*van/assets) |>
   arrange( desc(time), geo) |>
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
 

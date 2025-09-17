@@ -22,13 +22,16 @@ warning: false
 ofce::init_qmd()
 thm <- theme_ofce(
   marquee=TRUE,
-  panel.spacing = unit(9, "point")
+  panel.spacing = unit(9, "point"),
+  strip.text = element_marquee(size = rel(0.7))
 )
 ```
 
 ## Evolution des salaires réels
 
 On déflate la masse salariale (comptabilité nationale, comptes trimestriels) par les prix à la consommation. On utilise les masses salariales ($D1$, dans [`namq_10_a10`](https://ec.europa.eu/eurostat/databrowser/view/NAMQ_10_A10/default/table?lang=en)) par branches pour comparer branches (principalement) marchandes et (principalement) non marchandes divisées par l'emploi salarié ([`namq_10_a10_e`](https://ec.europa.eu/eurostat/databrowser/view/NAMQ_10_A10_E__custom_7475124/default/table?lang=en)). Les prix sont les déflateurs de la consommation ($P31\_S14$ dans [`namq_10_fcs`](https://ec.europa.eu/eurostat/databrowser/product/page/NAMQ_10_FCS)) chaînés (voir le code pour les détails).
+
+On distingue 4 agrégations : l'ensemble des branches (ou l'ensemble de l'économie), les branches non marchandes, les branches marchandes et les branches marchandes hors immobilier.
 
 ```{r}
 #| label: fig-salaires
@@ -64,14 +67,16 @@ sal <- ggplot(data) +
   aes(x=time, y=value, 
       alpha = name, linewidth = name, linetype = name,
       color = geo) +
-  scale_alpha_manual(values = c(wr=1, wr_md = 0.2, wr_nmd = 0.5)) +
-  scale_linetype_manual(values = c(wr="solid", wr_md ="solid", wr_nmd ="dotted", wr_hifi = "dashed")) +
-  scale_linewidth_manual(values = c(wr=.5, wr_md = 0.1, wr_nmd = 0.1, wr_hifi = 0.2)) +
+  scale_alpha_manual(values = c(wr=1, wr_md = 0.75, wr_nmd = 0.5, wr_hifi = 0.75)) +
+  scale_linetype_manual(values = c(wr="solid", wr_md ="solid", wr_nmd ="solid", wr_hifi = "dotted")) +
+  scale_linewidth_manual(values = c(wr=.5, wr_md = 0.1, wr_nmd = 0.25, wr_hifi = 0.5)) +
   geom_point_interactive(
-    data = ~.x |> group_by(geo) |> filter(quarter(time) == last(quarter(time))) |> ungroup(),
+    data = ~.x |> filter(name == "wr") |> group_by(geo) |> filter(quarter(time) == last(quarter(time))) |> ungroup(),
     aes(tooltip = tooltip, data_id = time),
                          size = 0.05, hover_nearest = TRUE, show.legend = FALSE) +
-  geom_line(show.legend=FALSE) +
+  geom_line_interactive(
+    aes(tooltip  = nlabel),
+    show.legend=FALSE) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(labels = date1d) +
   ylab("Salaire annuel réel en k€") + xlab(NULL) +
@@ -109,38 +114,36 @@ Les données trimestrielles sont annualisées pour la lisibilité et pour simpli
 ```{r}
 #| label: fig-sal
 #| fig-asp: 1
-#| fig-cap: Part des salaires dans la VA, comptes de branche
+#| fig-cap: Part des salaires dans la VA, comptes de branche, prise en compte de la non salarisation
 
+champs  <- c("md" = "marchand", "mdhifi" = "marchand hors immobilier et services financiers",
+            "mdhfi"= "marchand hors services financiers", "tb" = "Toutes branches (marchandes et non marchandes)")
 naq <- source_data("vaq.r")$naa |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
-    {year(time)}
-    Impôts net de subvention dans la VAN : {round(100*(ip+is)/van,1)}%
-    Rémunérations (y.c. ns) dans la VAN : {round(psal*100,1)}%
-    Salaires dans la VAN : {round(100*psal2,1)}%
-    Rémunérations (y.c. ns) dans la VAB : {round(msa/vab*100,1)}%
-    Salaires dans la VAB : {round(msa2/vab*100,1)}%")) |>
+    {year(time)} {champs[champ]}
+    Rémunérations (y.c. les non salariés) dans la VAN : {round(psal*100,1)}%
+    Rémunérations (sans les non salariés) dans la VAN : {round(100*psalnc,1)}%")) |>
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
   
-psal <- ggplot() +
-  aes(x=time, y=psal, col = geo) +
-  geom_line_interactive(
-    data=naq, 
-    aes(y=psalb, tooltip = "Part des salaires dans la VAB, corrigée de la non salarisation"),
-    show.legend=FALSE, alpha = 0.5) +
-  geom_line_interactive(
-    data=naq, 
-    aes(y=psal2, tooltip = "Part des salaires dans la VAN, non corrigée de la non salarisation"),
-    show.legend=FALSE, alpha = 0.75, linewidth = 0.1) +
+psal <- ggplot(naq |> filter(champ %in% c("md"))) +
+  aes(x=time, y=psal, col = geo, linetype = champ, alpha = champ) +
+  scale_alpha_manual(values = c(md=.75, mdhifi = 0.5)) +
+  scale_linetype_manual(values = c(md="solid", mdhifi ="dotted")) +
+  geom_ribbon(aes(ymin = psalnc, ymax = psal, fill = geo), 
+              color = NA, alpha=0.1, show.legend = FALSE) +
+  geom_line_interactive( 
+    aes(y=psalnc, tooltip = "Part des salaires dans la VAN, non corrigée de la non salarisation"),
+    show.legend=FALSE) +
   geom_line_interactive(
     aes(tooltip = "Part des salaires dans la VAN, corrigée de la non salarisation"),
-    data=naq, show.legend=FALSE) +
+    show.legend=FALSE) +
   geom_point_interactive(
-    data=naq, 
+    data = ~.x |> filter(champ == "md"),
     aes(tooltip = tooltip, data_id = time, fill = geo),
     size = 1, stroke = 0.2, shape = 21, color = "white",
     hover_nearest = TRUE, show.legend=FALSE) +
-  ylab("Rémunération sur valeur ajoutée nette") + xlab(NULL) +
+  ylab("% de la valeur ajoutée") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
     labels = date1d
