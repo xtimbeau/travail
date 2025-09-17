@@ -108,8 +108,8 @@ Les données trimestrielles sont annualisées pour la lisibilité et pour simpli
 
 ```{r}
 #| label: fig-sal
-#| fig-cap: Part des salaries dans la VA, comptes de branche
 #| fig-asp: 1
+#| fig-cap: Part des salaires dans la VA, comptes de branche
 
 naq <- source_data("vaq.r")$naa |> 
   mutate(tooltip = glue(
@@ -154,7 +154,7 @@ psal <- ggplot() +
  comptes nationaux de secteur (nasa_10_nf_tr) pour l'IS (D51), jusqu'en 2023, téléchargés le 15 janvier 2025,
  calcul de l'auteur.",
     code =  "github.com/xtimbeau/travail/vaq.r",
-    champ = "Branches marchandes hors services immobiliers (L dans la NACE r2)",
+    champ = "Branches marchandes hors services immobiliers et financiers (L dans la NACE r2)",
     note = "La part des salaires (corrigé de la non-salarisation) dans la valeur ajoutée nette atteint 90% en France en 2023 ((D1*(1+ns/s)/(B1G-P51C)). L'année 2025 est estimée à partir des comptes trimestriels. La consommation de capital fixe est extrapolée pour l'année 2024 et 2025.")
 
 girafy(psal, 1.5)

@@ -2,6 +2,9 @@ library(tidyverse)
 library(eurostat)
 
 pays2 <- c("DE", "FR", "IT", "ES", "NL", "BE")
+nace <- source_data("nace.r")$nace
+m_a20 <- nace  |> pull(a20) |> unique()
+m_a10 <- nace |> pull(a10) |> unique()
 marchand <- source_data("nace.r")$marchand
 
 naa <- get_eurostat("nama_10_a64",
