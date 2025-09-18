@@ -375,7 +375,7 @@ data <- ofce::source_data("oecd.r") |>
     "<b>{lbl(geo)}</b>
     {date_trim(time)}
     Salaires dans le Produit Intérieur Net de la CCF : {round(100*psalaire,1)}%")) |> 
-  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE", "US", "UK")),
+  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE", "US", "UK", "JP")),
          q = quarter(time))
 
 date <- sourcoise::sourcoise_meta("oecd.r")$data_date |> ymd_hms() 
@@ -392,18 +392,18 @@ psaloecd <- ggplot(data |> filter(year(time)>=1995)) +
     size = .2, stroke = 0.1, shape = 21, color = "white",
     hover_nearest = TRUE, show.legend=FALSE) +
   ylab("En % du PIN") + xlab(NULL) +
-  facet_wrap(vars(geo), ncol = 3) +
+  facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
     labels = date1d
   ) +
-  scale_y_continuous(labels = scales::label_percent(1), limits = c(NA, 1)) +
+  scale_y_continuous(labels = scales::label_percent(1)) +
   scale_color_pays(format = "eurostat") +
   thm +
   ofce_caption(
     source = "OECD, comptes nationaux, téléchargés le {date},
  calcul de l'auteur.",
     code =  "github.com/xtimbeau/travail/oecd.r",
-    champ = "Toute l'économie.")
+    champ = "Toutes branches, y compris services immobiliers")
 
 girafy(psaloecd, 1.5)
 ```

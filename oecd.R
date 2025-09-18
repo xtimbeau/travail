@@ -24,7 +24,7 @@ self_eo <- OECD::get_dataset(eo, "{pays}.EG+ET+ES.Q" |> glue()) |>
   mutate(time = yq(time),
          value = as.numeric(value)) |>
   pivot_wider(names_from = var, values_from = value) |>
-  mutate(pnsal = ES/ET) |>
+  mutate(pnsal = ES/(ET-ES)) |>
   filter(year(time)>=1995) |>
   select(geo, time, pnsal)
 
@@ -33,7 +33,8 @@ map(list(b1g, b1gq, p51c, sal, self, d1),
       mutate(ADJUSTMENT = factor(ADJUSTMENT, c("Y", "N"))) |>
       arrange(ADJUSTMENT) |>
       group_by(across(-c(ADJUSTMENT, ObsValue))) |>
-      summarize(across(c(ADJUSTMENT, ObsValue), first)) |>
+      summarize(across(c(ADJUSTMENT, ObsValue), first),
+                .groups = "drop") |>
       group_by(REF_AREA) |>
       summarize(n=n(), nt = n_distinct(TIME_PERIOD), mint = min(TIME_PERIOD), maxt = max(TIME_PERIOD), adj = n_distinct(ADJUSTMENT)))
 
@@ -50,12 +51,10 @@ data <- map_dfr(list(b1g, b1gq, p51c, sal, self, d1),
              var = tolower(var)) ) |>
       pivot_wider(names_from = var, values_from = value) |>
   left_join(self_eo, by = c("time", "geo")) |>
-  mutate(pnsal_sna = self/(sal+self)) |>
+  mutate(pnsal_sna = self/sal) |>
   group_by(geo) |>
   mutate(across(c(b1g, b1gq, p51c, d1), ~slider::slide_dbl(.x, .before=3L, .f = ~mean(.x, na.rm = TRUE) ))) |>
   mutate(psalaire = d1*(1+pnsal)/(b1gq-p51c)) |>
-  mutate(p51c_r = p51c/b1gq) |>
-  fill(p51c_r, .direction = "down") |>
   ungroup() |>
   mutate(
     geo = countrycode::countrycode(geo, "iso3c", "eurostat"))
