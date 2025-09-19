@@ -52,38 +52,53 @@ date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 data <- salaires |> 
   filter(time >= "1995-01-01") |> 
   select(geo, time, wr, wr_md, wr_nmd, wr_hifi) |> 
-  pivot_longer(c(wr, wr_md, wr_nmd, wr_hifi)) |> 
   mutate(
-    nlabel = case_match(
-      name, 
-      "wr" ~ "Salaire réel, toute l'économie",
-      "wr_md" ~ "Salaire réel, branches marchandes",
-      "wr_hifi" ~ "Salaire réel, branches marchandes hors immobilier et services financiers",
-      "wr_nmd" ~ "Salaire réel, branches non-marchandes"), 
-    tooltip = glue("<b>{lbl(geo)}</b><br>{date_trim(time)}<br>{nlabel} : {round(value,1)} k€/an")) |> 
+    tooltip = glue(
+    "<b>{lbl(geo)}</b>
+    {date_trim(time)}</b>
+    Salaire réel, toute l'économie {round(wr,1)} k€/an
+    Salaire réel, branches marchandes {round(wr_md,1)} k€/an
+    Salaire réel, branches marchandes hors imm.&fin. {round(wr_hifi,1)} k€/an
+    Salaire réel, branches non marchandes {round(wr_nmd,1)} k€/an")) |> 
+  pivot_longer(c(wr, wr_md, wr_nmd, wr_hifi)) |> 
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
 
+labels_branches <- c(wr = "Ttes branches", wr_md = "Marchand", 
+                     wr_nmd = "Non marchand", wr_hifi = "Marchand hors imm.&fin.")
 sal <- ggplot(data) +
   aes(x=time, y=value, 
       alpha = name, linewidth = name, linetype = name,
       color = geo) +
-  scale_alpha_manual(values = c(wr=1, wr_md = 0.75, wr_nmd = 0.5, wr_hifi = 0.75)) +
-  scale_linetype_manual(values = c(wr="solid", wr_md ="solid", wr_nmd ="solid", wr_hifi = "dotted")) +
-  scale_linewidth_manual(values = c(wr=.5, wr_md = 0.1, wr_nmd = 0.25, wr_hifi = 0.5)) +
+  scale_alpha_manual(
+    values = c(wr=1, wr_md = 1, wr_nmd = 0.75, wr_hifi = 0.75),
+    labels = labels_branches, name = NULL) +
+  scale_linetype_manual(
+    values = c(wr="solid", wr_md ="solid", wr_nmd ="solid", wr_hifi = "11"),
+    labels = labels_branches,
+    name = NULL) +
+  scale_linewidth_manual(
+    values = c(wr=.5, wr_md = 0.1, wr_nmd = 0.25, wr_hifi = 0.5),
+    labels = labels_branches, name = NULL) +
   geom_point_interactive(
-    data = ~.x |> filter(name == "wr") |> group_by(geo) |> filter(quarter(time) == last(quarter(time))) |> ungroup(),
+    data = ~.x |> 
+      filter( name == "wr") |>  
+      group_by(geo) |>
+      filter(quarter(time) == last(quarter(time))) |>
+      ungroup(),
     aes(tooltip = tooltip, data_id = time),
-                         size = 0.05, hover_nearest = TRUE, show.legend = FALSE) +
+    size = 0.2, stroke = 0, hover_nearest = TRUE) +
   geom_line_interactive(
-    aes(tooltip  = nlabel),
-    show.legend=FALSE) +
+    aes(tooltip  = labels_branches[name])) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(labels = date1d) +
   ylab("Salaire annuel réel en k€") + xlab(NULL) +
   scale_y_log10(breaks = c(10, 20, 30, 40, 50, 50, 60)) +
   scale_color_pays(format = "eurostat") +
   theme_ofce(
+    legend.position = c(1, 0.025),
+    legend.justification = c(1,0),
     strip.text = element_marquee(size = rel(0.8))  ) +
+  guides(linetype = "legend", linewidth = "legend", color = "none", fill="none") +
   ofce_caption(
     wrap = 0,
     source = "Eurostat, comptes nationaux trimestriels de branche (namq_10_a10), téléchargé le {date},
@@ -99,75 +114,219 @@ girafy(sal, 1)
 
 ```
 
+En Italie et en Espagne, la masse salariale dans les branches non marchandes est supérieures à celle des branches non marchandes. Aux Pays-Bas et en Allemagne il n'y a pas de différence notable. En France, elle est significativement plus basse. Notons que les branches non marchandes ne sont pas nécessairement de l'emploi public et ce dans des proportions variables suivant les pays. Dans tous les pays, la masse salariale des branches immobilier et (surtout) services financiers est plus élevée que la masse salariale dans les autres branches marchandes.
+
 ## Part des salaires dans la valeur ajoutée, comptes de branche
 
 On utilise les données de comptabilité nationale, en trimestriel, par branche ([`nasq_10_nf_tr`](https://ec.europa.eu/eurostat/databrowser/view/nasq_10_nf_tr/default/table?lang=en)`)`. La part des salaires est corrigée de la part des non salariés (données annuelles [`nama_10_a64_e`](https://ec.europa.eu/eurostat/databrowser/view/nama_10_a64_e/default/table?lang=en), extrapolées en maintenant le ratio salariés/non salariés à sa dernière valeur observée et en considérant que le salaire des non salariés est identique par branche (en 9 branches, hors immobilier) à celui des salariés – cette hypothèse sous estime probablement le salaire des non salariés mais elle est difficile à lever, sauf à utiliser les enquêtes force de travail et faire confiance au revenu qui y est déclaré).
 
 La masse salariale est rapportée soit à la valeur ajoutée brute ($B1G$), soit à la valeur ajoutée nette ($B1N=B1G-P51C$). Comme la consommation de capital fixe ($P51C$) n'est pas connue en trimestriel, elle est dérivée des comptes annuels en 21 branches (niveau 1 de la nace rev2 [`nama_10_a64`](https://ec.europa.eu/eurostat/databrowser/view/nama_10_a64/default/table?lang=en)), agrégée en 9 branches, puis extrapolée pour les années non connues (ici 2024 et 2025) en conservant un ratio constant dans la valeur ajouté brute. Le détail se trouve dans le code.
 
-On affiche sur le graphique pour chaque pays la part des salaires corrigés de la non salarisation dans la VAN (trait principal, concept privilégié), non corrigés (trait fin), et dans la valeur ajouté brute.
+Les trois graphiques suivants illustrent les conséquences sur la mesure de la part des salaires suivant les différents concepts. Le @fig-psalcnc compare avec et sans correction pour les non salariés. Deux rubans sont affichés, l'un pour les branches marchandes hors services immobiliers et financiers et l'autre pour toutes les branches.
 
 L'avantage des comptes de branches est une définition homogène pour chacun des pays. La branche immobilier est exclue parce qu'il est impossible de distinguer les entreprises des ménages propriétaires (les loyers imputés sont une valeur ajoutée des ménages).
 
 Les données trimestrielles sont annualisées pour la lisibilité et pour simplifier le mélange de données annuelles et trimestrielles. Le point 2025 (la dernière année) est donc un *acquis* sur les trimestres observés de l'année (ici 2 trimestres sur 4) suceptible de changer au fur et à mesure du temps. Il est possible en modifiant le code de produire un graphique trimestriel ou trimestriel lissé, à votre convenance.
 
 ```{r}
-#| label: fig-sal
+#| label: fig-psalcnc
 #| fig-asp: 1
-#| fig-cap: Part des salaires dans la VA, comptes de branche, prise en compte de la non salarisation
+#| fig-cap: Non salarisation, part des salaires dans la VA nette, comptes de branches
 
 champs  <- c("md" = "marchand", "mdhifi" = "marchand hors immobilier et services financiers",
             "mdhfi"= "marchand hors services financiers", "tb" = "Toutes branches (marchandes et non marchandes)")
 naq <- source_data("vaq.r")$naa |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
-    {year(time)} {champs[champ]}
+    {year(time)} 
+    {champs[champ]}
     Rémunérations (y.c. les non salariés) dans la VAN : {round(psal*100,1)}%
     Rémunérations (sans les non salariés) dans la VAN : {round(100*psalnc,1)}%")) |>
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
-  
-psal <- ggplot(naq |> filter(champ %in% c("md"))) +
+
+date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
+date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
+
+annot <-  tribble(
+    ~time, ~psal, ~label, ~geo, ~champ,
+    "1996-01-01", .89, "Branches marchandes hors immobilier et finance", "DE", "mdhifi",
+    "1996-01-01", .61, "Branches marchandes et non marchandes", "DE", "tb") |> 
+  mutate(time = as.Date(time),
+         geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+
+labels_champ = c(tb = "Ttes branches", md="Marchand", mdhifi = "Marchand hors imm.&fin.")
+
+psal <- ggplot(naq |> filter(champ %in% c("tb", "mdhifi"))) +
   aes(x=time, y=psal, col = geo, linetype = champ, alpha = champ) +
-  scale_alpha_manual(values = c(md=.75, mdhifi = 0.5)) +
-  scale_linetype_manual(values = c(md="solid", mdhifi ="dotted")) +
+  scale_alpha_manual(values = c(tb=.25, md=.25, mdhifi = 1),
+                     labels = labels_champ,
+                     name = NULL) +
+  scale_linetype_manual(values = c(tb="11", md="solid", mdhifi ="solid"),
+                        labels = labels_champ,
+                        name = NULL) +
   geom_ribbon(aes(ymin = psalnc, ymax = psal, fill = geo), 
               color = NA, alpha=0.1, show.legend = FALSE) +
   geom_line_interactive( 
     aes(y=psalnc, tooltip = "Part des salaires dans la VAN, non corrigée de la non salarisation"),
-    show.legend=FALSE) +
+    linewidth = 0.2) +
   geom_line_interactive(
     aes(tooltip = "Part des salaires dans la VAN, corrigée de la non salarisation"),
-    show.legend=FALSE) +
+    linewidth = 0.5) +
   geom_point_interactive(
-    data = ~.x |> filter(champ == "md"),
+    data = ~.x |> filter(champ == "mdhifi"),
     aes(tooltip = tooltip, data_id = time, fill = geo),
     size = 1, stroke = 0.2, shape = 21, color = "white",
     hover_nearest = TRUE, show.legend=FALSE) +
+#  geom_marquee(
+#    data = annot, hjust = 0, 
+#    aes(label = label),  size = 6, size.unit = "pt", show.legend=FALSE) +
   ylab("% de la valeur ajoutée") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
-    labels = date1d
-  ) +
+    labels = date1d ) +
+  guides( fill = "none", color = "none") + 
   scale_y_continuous(labels = scales::label_percent(1), limits = c(NA, 1)) +
   scale_color_pays(format = "eurostat") +
   thm +
+  theme(
+    legend.position = c(1, 0.025),
+    legend.justification = c(1, 0) ) +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10),
- comptes nationaux de secteur (nasa_10_nf_tr) pour l'IS (D51), jusqu'en 2023, téléchargés le 15 janvier 2025,
- calcul de l'auteur.",
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}.",
     code =  "github.com/xtimbeau/travail/vaq.r",
-    champ = "Branches marchandes hors services immobiliers et financiers (L dans la NACE r2)",
-    note = "La part des salaires (corrigé de la non-salarisation) dans la valeur ajoutée nette atteint 90% en France en 2023 ((D1*(1+ns/s)/(B1G-P51C)). L'année 2025 est estimée à partir des comptes trimestriels. La consommation de capital fixe est extrapolée pour l'année 2024 et 2025.")
+    champ = "Branches marchandes et non marchandes (en léger et pointillé) et branches marchandes hors services immobiliers et financiers (L et K dans la NACE r2) (en plein).",
+    note = "La CCF provient des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà.")
 
 girafy(psal, 1.5)
 ```
 
+La correction de la non salarisation, en imputant une masse salariale pour les entrepreneurs individuels, augmente la part des salaires. La correction n'est pas constante dans le temps (c'est particulièrement fort pour la France) ni dans l'espace (la correction est très forte en Italie). La correction est plus importante lorsqu'on se limite aux branches marchandes hors services immobiliers et services financiers, sauf aux Pays-Bas.
+
+```{r}
+#| label: fig-psalnetbrut
+#| fig-asp: 1
+#| fig-cap: Part des salaires dans la VA nette et brute, comptes de branches
+
+champs  <- c("md" = "marchand",
+            "mdhifi" = "marchand hors immobilier et services financiers",
+            "mdhfi"= "marchand hors services financiers", 
+            "tb" = "Toutes branches (marchandes et non marchandes)")
+naq <- source_data("vaq.r")$naa |> 
+  mutate(tooltip = glue(
+    "<b>{lbl(geo)}</b>
+    {year(time)} 
+    {champs[champ]}
+    Rémunérations (y.c. les non salariés) dans la VAN : {round(psal*100,1)}%
+    Rémunérations (sans les non salariés) dans la VAB : {round(100*psalb,1)}%")) |>
+  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+
+date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
+date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
+
+annot <-  tribble(
+    ~time, ~psal, ~label, ~geo, ~champ,
+    "1996-01-01", .89, "Branches marchandes hors immobilier et finance", "DE", "mdhifi",
+    "1996-01-01", .61, "Branches marchandes et non marchandes", "DE", "tb") |> 
+  mutate(time = as.Date(time),
+         geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+
+psal <- ggplot(naq |> filter(champ %in% c("tb", "mdhifi"))) +
+  aes(x=time, y=psal, col = geo, linetype = champ, alpha = champ) +
+  scale_alpha_manual(values = c(tb=.25, md=.25, mdhifi = 1),
+                        labels = labels_champ,
+                        name = NULL) +
+  scale_linetype_manual(values = c(tb="11", md="solid", mdhifi ="solid"),
+                        labels = labels_champ,
+                        name = NULL) +
+  geom_ribbon(aes(ymin = psalb, ymax = psal, fill = geo), 
+              color = NA, alpha=0.1, show.legend = FALSE) +
+  geom_line_interactive( 
+    aes(y=psalb, 
+        tooltip = "Part des salaires dans la VAB, corrigée de la non salarisation",
+        data_id = champ),
+    linewidth = 0.2) +
+  geom_line_interactive(
+    aes(tooltip = "Part des salaires dans la VAN, corrigée de la non salarisation",
+        data_id = champ),
+    linewidth = 0.5) +
+  geom_point_interactive(
+    data = ~.x |> filter(champ == "mdhifi"),
+    aes(tooltip = tooltip, data_id = time, fill = geo),
+    size = 1, stroke = 0.2, shape = 21, color = "white",
+    hover_nearest = TRUE) +
+  ylab("% de la valeur ajoutée") + xlab(NULL) +
+  facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
+  scale_ofce_date(
+    labels = date1d ) +
+  scale_y_continuous(labels = scales::label_percent(1)) +
+  scale_color_pays(format = "eurostat") +
+  thm +
+  guides(fill = "none", color = "none") +
+  theme(
+    legend.position = c(1, 0.025),
+    legend.justification = c(1, 0) ) +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}.",
+    code =  "github.com/xtimbeau/travail/vaq.r",
+    champ = "Branches marchandes et non marchandes (en léger et pointillé) et branches marchandes hors services immobiliers et financiers (L et K dans la NACE r2) (en plein)")
+
+girafy(psal, 1.5)
+```
+
+La notion de part des salaires dans la valeur ajoutée nette consiste à réduire le démominateur (la valeur ajoutée) de la consommation de capital fixe. Cela augmente donc le ratio. Cependant, cette correction n'est pas constante dans le temps (comme en France, en Espagne ou en Belgique). Comme on peut le voir sur le @fig-psalcompote, la variance entre les pays est plus basse pour la notion brute (non corrigé de la CCF) que nette. Pour les branches marchandes hors services immobiliers et services immobiliers, le classement entre pays est marginalement modifié, la Belgique ayant une part des salaires nette pus élevée que l'Allemagne, alors que sa part brute est plus faible qu'en Allemagne. Pour les autres pays, le classement est indentique (La France a la part la plus haute et les Pays-Bas plus faible).
+
+```{r}
+#| label: fig-psalcompote
+#| fig-asp: 1
+#| fig-cap: Tous concepts, comparaison entre pays
+
+data <- naq |> 
+  filter(time>="1995-01-01") |>
+  select(geo, time, champ, psal, psalnc, psalb, psalncb) |> 
+  pivot_longer(c(psal, psalnc, psalb, psalncb)) |> 
+  mutate(name = factor(name, c("psal", "psalb", "psalnc", "psalncb")),
+         champ = factor(champ, c("tb", "md", "mdhi", "mdhfi", "mdhifi")))
+
+strips_name <- c(psal = "Nette, avec n.s.",
+                psalnc = "Nette, sans n.s.",
+                psalb = "Brute, avec n.s.",
+                psalncb = "Brute, sans n.s.")
+strips_champ <- c(tb = "Ttes branches",
+                md = "Marchand",
+                mdhi = "hors imm.",
+                mdhfi = "hors fin.",
+                mdhifi = "hors imm.&fin.")
+
+gg <- ggplot(data) +
+  aes(x=time, y = value, color = geo) + 
+  geom_line_interactive(
+    aes(tooltip = lbl(geo), data_id = geo),
+    linewidth = 0.25,
+    show.legend = FALSE, hover_nearest = TRUE) +
+  theme_ofce(
+    strip.text = element_marquee(size=rel(0.6)),
+    axis.text = element_marquee(size=rel(0.6))
+  ) +
+  facet_grid(rows=vars(champ), cols = vars(name),
+             labeller = labeller(name= strips_name, champ = strips_champ)) + 
+  scale_y_continuous(labels = scales::label_percent(1),
+                     breaks = scales::breaks_pretty(n=3)) +
+  scale_ofce_date(
+    labels = date1d
+    ) +
+  ylab("%% de la VA") +
+  scale_color_pays("eurostat")
+
+girafy(gg)
+```
+
 ## Part des salaires dans la valeur ajoutée, comptes de secteur
 
-Les comptes de secteurs permettent une analyse plus simple sur les entreprises non financières. Cela évite normalement de prendre en compte la cas des non salariés, et bien que ce ne soit pas un champ exhaustif, cela doit permettre une analyse sur un champ économique plus strict (au sens de la forme légale des entités considérées). La notion d'impôt sur les sociétés ets mieux définie et le stock de capital productif est mieux connu du fait de l'obligation légale de déclaration des comptes.
+Les comptes de secteurs permettent une analyse plus simple pour les seules entreprises non financières. Cela évite normalement d'avoir à prendre en compte la cas des non salariés, et bien que ce ne soit pas un champ exhaustif, cela doit permettre une analyse sur un champ économique plus strict (au sens de la forme légale des entités considérées). La notion d'impôt sur les sociétés ets mieux définie et le stock de capital productif est mieux connu du fait de l'obligation légale de déclaration des comptes.
 
-Malheureusemet, comme identifié par l'INSEE, la pratique des organismes européens n'est pas celle de l'INSEE. Par exemple, en Allemagne, le secteur S11 inclu les quasi sociétés et les entrepreuneurs individuels. La normalisation des concepts est par ailleurs peu probable, puisqu'elle est liée aux pratiques administratives. Les comptes de branches opèrent un reclassement des entités économiques qui améliore la comparabilité. En pratique cette précaution ne paraît pas essentielle.
+Malheureusemet, comme identifié par l'INSEE, la pratique des instituts nationaux européens n'est pas celle de l'INSEE. Par exemple, en Allemagne, le secteur S11 inclu les quasi-sociétés et les entrepreneurs individuels. La normalisation des concepts est par ailleurs peu probable, puisqu'elle est liée aux pratiques administratives. Les comptes de branches opèrent un reclassement des entités économiques qui améliore la comparabilité. En pratique cette précaution ne paraît pas essentielle.
 
 Comme pour les graphiques précédents, les données trimestrielles sont annualisées (pour éliminer la variablibilité trimestrielle qui nuit à la lisibilité et qui n'a pas beaucoup de sens).
 
@@ -210,20 +369,22 @@ date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 psnf <- ggplot(snfq |> filter(time >= "1995-01-01")) +
   aes(x=time, y=psal, col = geo) +
   geom_line_interactive(
-    data=naq, 
+    data=naq |> filter(champ == "mdhifi"), 
     aes(y=psal, 
-        tooltip = "Part des salaires dans la VAN, corrigée de la non salarisation"),
-    show.legend=FALSE, alpha = 0.75, linewidth = 0.1, linetype = "solid") +
+        tooltip = "mesurée par les comptes de branches (marchand hors finance)"),
+    alpha = 0.75, linewidth = 0.25, linetype = "11") +
+  geom_ribbon(
+    aes(ymin = psalb, ymax =psal, fill = geo), alpha =0.1, color = NA) +
   geom_line_interactive(
      aes(y=psalb, tooltip = "Part des salaires dans la VAB, SNF"),
-     show.legend=FALSE, alpha = 0.5) +
+     alpha = 0.5, linewidth = 0.33) +
    geom_line_interactive(
-     aes(y = psal, tooltip = "Part des salaires dans la VAN, SNF"),
-     show.legend=FALSE) +
+     aes(y = psal, tooltip = "Part des salaires dans la VAN, SNF"), 
+     linewidth = 0.5) +
   geom_point_interactive(
      aes( y = psal, fill = geo,
         tooltip = tooltip, data_id = time),
-        size = 1, stroke = 0.2, shape = 21, color = "white",
+        size = 1, stroke = 0.1, shape = 21, color = "white",
         hover_nearest = TRUE, show.legend=FALSE) +
   ylab("Rémunération sur valeur ajoutée") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
@@ -232,6 +393,7 @@ psnf <- ggplot(snfq |> filter(time >= "1995-01-01")) +
   scale_y_continuous(labels = scales::label_percent(1), limits = c(NA, 1)) +
   scale_color_pays(format = "eurostat") +
   thm +
+  guides(color = "none", fill = "none") +
   ofce_caption(
     source = "Eurostat, comptes nationaux trimestriels de secteur (nasq_10_nf_tr), téléchargés le {date}, calcul de l'auteur.",
     code =  "github.com/xtimbeau/travail/snf_ratio.r",

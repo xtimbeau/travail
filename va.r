@@ -169,13 +169,12 @@ naa_ext <- naa_a10 |>
     tpb = (van - msa)/van )
 
 assets <- source_data("assets.r")$assets |>
-  pivot_longer(cols = c(BE, DE, ES, FR, IT, NL), values_to = "asset", names_to = "geo") |>
-  filter(asset>0)
+  filter(assets>0, champ == "mdhifi")
 
 naa_ext2 <- naa_ext |>
   left_join( assets, by =c("geo", "time") ) |>
-  drop_na(asset) |>
-  mutate(r = tp*van/asset) |>
+  drop_na(assets) |>
+  mutate(r = tp*van/assets) |>
   arrange( desc(time), geo) |>
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
 
