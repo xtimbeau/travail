@@ -36,25 +36,6 @@ website:
         title: "Stat: comparaisons part des salaires et profits"
         file: psal_comp.qmd
 
-  code-links:
-    - text: Salaires dans la VA
-      icon: file-code
-      href: va.r
-    - text: Salaires trimestriels
-      icon: file-code
-      href: salaires.r
-    - text: Structure des rémunérations
-      icon: file-code
-      href: earn.r
-    - text: Indicateurs du marché du travail
-      icon: file-code
-      href: precarite.r
-    - text: Non salariés
-      icon: file-code
-      href: naa_e.r
-    - text: NACE rev2
-      icon: file-code
-      href: nace.r
 comments:
   hypothesis: true
 format:

@@ -53,7 +53,9 @@ data <- map_dfr(list(b1g, b1gq, p51c, sal, self, d1),
   left_join(self_eo, by = c("time", "geo")) |>
   mutate(pnsal_sna = self/sal) |>
   group_by(geo) |>
-  mutate(across(c(b1g, b1gq, p51c, d1), ~slider::slide_dbl(.x, .before=3L, .f = ~mean(.x, na.rm = TRUE) ))) |>
+  mutate(
+    across(c(b1g, b1gq, p51c, d1),
+           ~slider::slide_dbl(.x, .before=3L, .f = ~mean(.x, na.rm = TRUE) ))) |>
   mutate(psalaire = d1*(1+pnsal)/(b1gq-p51c)) |>
   ungroup() |>
   mutate(

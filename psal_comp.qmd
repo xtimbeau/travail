@@ -9,13 +9,35 @@ author:
 editor: visual
 date: "2025-09-08"
 date-modified: now
-format:
-  html: 
-    fig-cap-location: top
 bibliography: references.bib
 echo: false
 message: false
 warning: false
+
+format:
+  ofce-html:
+    code-links:
+      - text: Salaires dans la VA
+        icon: file-code
+        href: vaq.r
+      - text: Salaires trimestriels
+        icon: file-code
+        href: salaires.r
+      - text: Comptes des SNF (s11)
+        icon: file-code
+        href: snf_ratio.r
+      - text: SNF (coop. inter. Eurostat)
+        icon: file-code
+        href: snf_international.r
+      - text: SNA (OCDE)
+        icon: file-code
+        href: oecd.r
+      - text: Emploi salarié et non salarié
+        icon: file-code
+        href: naq10_e.r
+      - text: NACE rev2
+        icon: file-code
+        href: nace.r
 ---
 
 ```{r, include=FALSE}
@@ -180,12 +202,14 @@ psal <- ggplot(naq |> filter(champ %in% c("tb", "mdhifi"))) +
 #  geom_marquee(
 #    data = annot, hjust = 0, 
 #    aes(label = label),  size = 6, size.unit = "pt", show.legend=FALSE) +
-  ylab("% de la valeur ajoutée") + xlab(NULL) +
+  ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
     labels = date1d ) +
   guides( fill = "none", color = "none") + 
-  scale_y_continuous(labels = scales::label_percent(1), limits = c(NA, 1)) +
+  scale_y_continuous(labels = scales::label_percent(1), 
+                     breaks = scales::pretty_breaks(3),
+                     limits = c(.5, 1)) +
   scale_color_pays(format = "eurostat") +
   thm +
   theme(
@@ -205,7 +229,7 @@ La correction de la non salarisation, en imputant une masse salariale pour les e
 
 ```{r}
 #| label: fig-psalnetbrut
-#| fig-asp: 1
+#| fig-asp: 1.25
 #| fig-cap: Part des salaires dans la VA nette et brute, comptes de branches
 
 champs  <- c("md" = "marchand",
@@ -255,11 +279,13 @@ psal <- ggplot(naq |> filter(champ %in% c("tb", "mdhifi"))) +
     aes(tooltip = tooltip, data_id = time, fill = geo),
     size = 1, stroke = 0.2, shape = 21, color = "white",
     hover_nearest = TRUE) +
-  ylab("% de la valeur ajoutée") + xlab(NULL) +
+  ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
     labels = date1d ) +
-  scale_y_continuous(labels = scales::label_percent(1)) +
+  scale_y_continuous(labels = scales::label_percent(1),
+                     breaks = scales::pretty_breaks(3),
+                     limits = c(.5, 1)) +
   scale_color_pays(format = "eurostat") +
   thm +
   guides(fill = "none", color = "none") +
@@ -316,8 +342,12 @@ gg <- ggplot(data) +
   scale_ofce_date(
     labels = date1d
     ) +
-  ylab("%% de la VA") +
-  scale_color_pays("eurostat")
+  ylab("% de la VA") +
+  scale_color_pays("eurostat") +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}.",
+    code =  "github.com/xtimbeau/travail/vaq.r")
 
 girafy(gg)
 ```
@@ -386,7 +416,7 @@ psnf <- ggplot(snfq |> filter(time >= "1995-01-01")) +
         tooltip = tooltip, data_id = time),
         size = 1, stroke = 0.1, shape = 21, color = "white",
         hover_nearest = TRUE, show.legend=FALSE) +
-  ylab("Rémunération sur valeur ajoutée") + xlab(NULL) +
+  ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
    labels = date1d ) +
@@ -432,7 +462,7 @@ pprofit <- ggplot(snfq |> filter(time >= "1995-01-01")) +
         tooltip = tooltip, data_id = time),
         size = 1, stroke = 0.2, shape = 21, color = "white",
         hover_nearest = TRUE, show.legend=FALSE) +
-  ylab("% de la valeur ajoutée") + xlab(NULL) +
+  ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
    labels = date1d ) +
@@ -502,7 +532,7 @@ ptprofit <- ggplot(snfq_a) +
         tooltip = tooltip, data_id = time),
         size = 1, stroke = 0.2, shape = 21, color = "white",
         hover_nearest = TRUE, show.legend=FALSE) +
-  ylab("% du capital") + xlab(NULL) +
+  ylab("% du stock de capital") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
    labels = date1d ) +
@@ -608,7 +638,7 @@ psali <- ggplot(snfia) +
     aes(tooltip = tooltip, data_id = time, fill = geo),
     size = 1, stroke = 0.2, shape = 21, color = "white",
     hover_nearest = TRUE, show.legend=FALSE) +
-  ylab("% de la valeur ajoutée") + xlab(NULL) +
+  ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl_eurostat) +
   scale_ofce_date(
     labels = date1d
