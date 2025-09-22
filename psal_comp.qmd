@@ -49,6 +49,8 @@ thm <- theme_ofce(
 )
 ```
 
+## Du partage de la VA au partage des richesses
+
 L'analyse du partage de la valeur ajoutée est au cœur des débats sur la redistribution des richesses. Un indicateur souvent retenu est celui de la part des salaires dans la valeur ajoutée. Nous discutons ici de la construction de cet indicateur et de sa comparabilité entre pays (européens ou non). Trois points sont importants pour disposer du bon concept :
 
 -   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, mais qu'il est difficile de dépasser. Elle a des conséquences pour les comparaisons entre périodes pour un même pays parce que la part des non salariés varie dans le temps, de façon différente suivant les branches et entre pays.
@@ -125,11 +127,15 @@ psal <- ggplot(naq |> filter(champ %in% c("mdhi"))) +
 girafy(psal, 1.5)
 ```
 
-La part des salaires dans la valeur ajoutée nette est croissante en France [@fig-psal] (de 10 points de 1998 à 2025), comme en Espagne (de 9 points). Elle atteint en France le niveau le plus élevé des pays sélectionnés, pour autant que l'on puisse comparer entre pays. La part des salaires dans la valeur ajoutée est la plus basse aux Pays-Bas et est sur une pente décroisante depuis plus de 20 ans, alors qu'elle semble stable en Belgique et en Allemagne. L'italie affiche une importante variabilité temporelle.
+La part des salaires dans la valeur ajoutée nette est croissante en France (@fig-psal) (de 10 points de 1998 à 2025), comme en Espagne (de 9 points). Elle atteint en France le niveau le plus élevé des pays sélectionnés, pour autant que l'on puisse comparer entre pays. La part des salaires dans la valeur ajoutée est la plus basse aux Pays-Bas et est sur une pente décroissante depuis plus de 20 ans, alors qu'elle semble stable en Belgique et en Allemagne. L'Italie affiche une importante variabilité temporelle.
 
-Elle est cependant stable en France depuis 2020 (voire légèrement décroissante). Ce même mouvement s'observe dans les autres pays, plus nettement. La phase d'inflation à partir de 2022 a induit une moindre indexation des salaires [voir @fig-salaires] puis un rattrapage.
+Elle est cependant stable en France depuis 2020 (voire légèrement décroissante). Ce même mouvement s'observe dans les autres pays, plus nettement. La phase d'inflation à partir de 2022 a induit une moindre indexation des salaires (voir @fig-salaires) puis un rattrapage. Ce profil général a pris néanmoins des tournures assez différentes d'un pays à l'autre. La déflation salariale a plutôt été plus limité en France, conduisant à une hausse de la part des salaires, alors qu'elle a été très marquée aux Pays-Bas – sans doute aussi par des effets de la crise énergétique différents entre pays, sans compter des questions de mesure des indices de prix qui peuvent rendre difficile les comparaisons. Mais au-delà des problèmes de mesures, la part des salaires est plus volatile aux Pays-Bas qu'en France, ce qui tend à montrer que la dépréciation réelle des salaires c'est fait aux Pays-Bas à l'avantage des firmes.
 
-On détaille dans la suite de ce document les effets des corrections appliquées, ainsi que la différence entre les mesures dérivées des comptes de branche ou des comptes d'agents. On explore également les conséquences en matière de taux de profit (part des profits nets dans la valeur ajoutée) ou rendement du capital (profits nets divisés par les actifs).
+Au début des années 2000, deux pays se distinguaient des autres (l'Espagne et l'Italie) par une part des salaires plus faibles. L'écart avec l'Allemagne atteignait alors plus de 15 points. Moins développés, une part peut être plus importante de l'investissement expliquait cette situation. La généralisation de l'approche à d'autres pays de l'Union Européenne permettrait de confirmer cette hypothèse. Aujourd'hui la situation est différente, l'écart entre l'Allemagne et ces pays s'étant drastiquement réduit (moins de 8 points entre l'Italie et l'Allemagne) et les Pays-Bas prenant la place du pays où la part des salaires est la plus basse et la France où elle est nettement plus haute.
+
+On détaille dans la suite de ce document les effets des corrections appliquées, ainsi que la différence entre les mesures dérivées des comptes de branche ou des comptes d'agents. Ces éléments sont un peu fastidieux, mais ils s'avèrent assez importants et pas toujours très intuitifs.
+
+On explore également les conséquences en matière de taux de profit (part des profits nets dans la valeur ajoutée) ou rendement du capital (profits nets divisés par les actifs).
 
 ## Evolution des salaires réels
 
