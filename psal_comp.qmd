@@ -27,6 +27,14 @@ thm <- theme_ofce(
 )
 ```
 
+L'analyse du partage de la valeur ajoutée est au cœur des débats sur la redistribution des richesses. Un indicateur souvent retenu est celui de la part des salaires dans la valeur ajoutée. Nous discutons ici de la construction de cet indicateur et de sa comparabilité entre pays (européens ou non). Trois points sont importants pour disposer du bon concept :
+
+-   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, mais qu'il est difficile de dépasser.
+
+-   Etre soigneux sur le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour par auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée.
+
+-   Utiliser la notion de valeur ajoutée nette plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute
+
 ## Evolution des salaires réels
 
 On déflate la masse salariale (comptabilité nationale, comptes trimestriels) par les prix à la consommation. On utilise les masses salariales ($D1$, dans [`namq_10_a10`](https://ec.europa.eu/eurostat/databrowser/view/NAMQ_10_A10/default/table?lang=en)) par branches pour comparer branches (principalement) marchandes et (principalement) non marchandes divisées par l'emploi salarié ([`namq_10_a10_e`](https://ec.europa.eu/eurostat/databrowser/view/NAMQ_10_A10_E__custom_7475124/default/table?lang=en)). Les prix sont les déflateurs de la consommation ($P31\_S14$ dans [`namq_10_fcs`](https://ec.europa.eu/eurostat/databrowser/product/page/NAMQ_10_FCS)) chaînés (voir le code pour les détails).
