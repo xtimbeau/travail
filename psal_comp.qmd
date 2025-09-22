@@ -51,11 +51,85 @@ thm <- theme_ofce(
 
 L'analyse du partage de la valeur ajoutée est au cœur des débats sur la redistribution des richesses. Un indicateur souvent retenu est celui de la part des salaires dans la valeur ajoutée. Nous discutons ici de la construction de cet indicateur et de sa comparabilité entre pays (européens ou non). Trois points sont importants pour disposer du bon concept :
 
--   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, mais qu'il est difficile de dépasser.
+-   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, mais qu'il est difficile de dépasser. Elle a des conséquences pour les comparaisons entre périodes pour un même pays parce que la part des non salariés varie dans le temps, de façon différente suivant les branches et entre pays.
 
 -   Etre soigneux sur le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour par auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée.
 
--   Utiliser la notion de valeur ajoutée nette plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute
+-   Utiliser la notion de valeur ajoutée nette plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. Cette dernière notion découle de l'application de tables de mortalité à un inventaire permanent des investissements non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée.
+
+```{r}
+#| label: fig-psal
+#| fig-asp: 1
+#| fig-cap: Part des salaires dans la VA nette
+
+champs  <- c("md" = "Marchand", "mdhifi" = "Marchand hors immobilier et services financiers",
+            "mdhi"= "Marchand hors services immobiliers", 
+            "mdhfi"= "Marchand hors services financiers", 
+            "tb" = "Toutes branches (marchandes et non marchandes)")
+naq <- source_data("vaq.r")$naa |> 
+  mutate(tooltip = glue(
+    "<b>{lbl(geo)}</b>
+    {year(time)} 
+    {champs[champ]}
+    Rémunérations (y.c. les non salariés) dans la VAN : {round(psal*100,1)}%")) |>
+  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+
+date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
+date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
+
+annot <-  tribble(
+    ~time, ~psal, ~label, ~geo, ~champ,
+    "1996-01-01", .89, "Branches marchandes hors immobilier et finance", "DE", "mdhifi",
+    "1996-01-01", .61, "Branches marchandes et non marchandes", "DE", "tb") |> 
+  mutate(time = as.Date(time),
+         geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+
+labels_champ = c(tb = "Ttes branches", md="Marchand", mdhifi = "Marchand hors imm.&fin.",
+                 mdhi = "Marchand hors imm.")
+
+psal <- ggplot(naq |> filter(champ %in% c("mdhi"))) +
+  aes(x=time, y=psal, col = geo, group = geo) +
+  geom_line(color = "grey85", layout = "fixed", linewidth = 0.2) +
+  geom_line_interactive(
+    aes(tooltip = "Part des salaires dans la VAN,<br>corrigée de la non salarisation,<br>branches marchandes hors immobilier"),
+    linewidth = 0.5) +
+  geom_point_interactive(
+    aes(tooltip = tooltip, data_id = time, fill = geo),
+    size = 1, stroke = 0.2, shape = 21, color = "white",
+    hover_nearest = TRUE, show.legend=FALSE) +
+#  geom_marquee(
+#    data = annot, hjust = 0, 
+#    aes(label = label),  size = 6, size.unit = "pt", show.legend=FALSE) +
+  ylab("% de la VA") + xlab(NULL) +
+  facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
+  scale_ofce_date(
+    labels = date1d ) +
+  guides( fill = "none", color = "none") + 
+  scale_y_continuous(
+    labels = scales::label_percent(1), 
+                     breaks = scales::pretty_breaks(5),
+                     limits = c(NA, NA)) +
+  scale_color_pays(format = "eurostat") +
+  thm +
+  theme(
+    axis.text.y = element_text(size = rel(0.7)),
+    legend.position = c(1, 0.025),
+    legend.justification = c(1, 0) ) +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}.",
+    code =  "github.com/xtimbeau/travail/vaq.r",
+    champ = "Branches marchandes hors services immobiliers (L dans la NACE r2).",
+    note = "La CCF provient des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà.")
+
+girafy(psal, 1.5)
+```
+
+La part des salaires dans la valeur ajoutée nette est croissante en France [@fig-psal] (de 10 points de 1998 à 2025), comme en Espagne (de 9 points). Elle atteint en France le niveau le plus élevé des pays sélectionnés, pour autant que l'on puisse comparer entre pays. La part des salaires dans la valeur ajoutée est la plus basse aux Pays-Bas et est sur une pente décroisante depuis plus de 20 ans, alors qu'elle semble stable en Belgique et en Allemagne. L'italie affiche une importante variabilité temporelle.
+
+Elle est cependant stable en France depuis 2020 (voire légèrement décroissante). Ce même mouvement s'observe dans les autres pays, plus nettement. La phase d'inflation à partir de 2022 a induit une moindre indexation des salaires [voir @fig-salaires] puis un rattrapage.
+
+On détaille dans la suite de ce document les effets des corrections appliquées, ainsi que la différence entre les mesures dérivées des comptes de branche ou des comptes d'agents. On explore également les conséquences en matière de taux de profit (part des profits nets dans la valeur ajoutée) ou rendement du capital (profits nets divisés par les actifs).
 
 ## Evolution des salaires réels
 
@@ -156,7 +230,7 @@ Les trois graphiques suivants illustrent les conséquences sur la mesure de la p
 
 L'avantage des comptes de branches est une définition homogène pour chacun des pays. La branche immobilier est exclue parce qu'il est impossible de distinguer les entreprises des ménages propriétaires (les loyers imputés sont une valeur ajoutée des ménages).
 
-Les données trimestrielles sont annualisées pour la lisibilité et pour simplifier le mélange de données annuelles et trimestrielles. Le point 2025 (la dernière année) est donc un *acquis* sur les trimestres observés de l'année (ici 2 trimestres sur 4) suceptible de changer au fur et à mesure du temps. Il est possible en modifiant le code de produire un graphique trimestriel ou trimestriel lissé, à votre convenance.
+Les données trimestrielles sont annualisées pour la lisibilité et pour simplifier le mélange de données annuelles et trimestrielles. Le point 2025 (la dernière année) est donc un acquis sur les trimestres observés de l'année (ici 2 trimestres sur 4) suceptible de changer au fur et à mesure du temps. Il est possible en modifiant le code de produire un graphique trimestriel ou trimestriel lissé, à votre convenance.
 
 ```{r}
 #| label: fig-psalcnc
@@ -440,7 +514,7 @@ psnf <- ggplot(snfq |> filter(time >= "1995-01-01")) +
 girafy(psnf, 1.5)
 ```
 
-## Profits nets et dividendes
+## Profits nets et dividendes dans les comptes d'agent
 
 Les comptes des sociétés non financières permettent d'éxaminer d'autres éléments du compte. On affiche ici le profit net sur la valeur ajoutée nette, et le taux de dividendes nets sur la valeur ajoutée nette.
 
@@ -555,9 +629,11 @@ ptprofit <- ggplot(snfq_a) +
 girafy(ptprofit, 1.5)
 ```
 
+## Profits nets dans les comptes de branche
+
 ## Au delà de l'Europe
 
-L'accès aux données de l'OCDE est devenu particulièrement opaque, mais je m'en suis sorti. Il est possible d'utiliser des données de comptabilité nationale, au niveau de l'ensemble de l'économie (y compris donc les branches non marchandes et l'immobilier). La correction pour la non-salarisation est assurée par les données de l'*Economic Outlook* (avec une trimestrialisation *ad hoc*). Au lieu de la valeur ajoutée, on utilise le PIB, auquel on enlève la conosmmation de capital fixe (dans les données OCDE, il n'y a pas de données de CCF pour le Japon). Le concept de part des salaires n'est donc pas tout à fait le même que dans les autres analyses.
+L'accès aux données de l'OCDE est devenu particulièrement opaque, mais je m'en suis sorti. Il est possible d'utiliser des données de comptabilité nationale, au niveau de l'ensemble de l'économie (y compris donc les branches non marchandes et l'immobilier). La correction pour la non-salarisation est assurée par les données de l'Economic Outlook (avec une trimestrialisation ad hoc). Au lieu de la valeur ajoutée, on utilise le PIB, auquel on enlève la conosmmation de capital fixe (dans les données OCDE, il n'y a pas de données de CCF pour le Japon). Le concept de part des salaires n'est donc pas tout à fait le même que dans les autres analyses.
 
 On obtient ce graphique :
 

@@ -14,10 +14,11 @@ label_pays <- set_names(countrycode::countrycode(pays2, "eurostat", "country.nam
 
 naq10_e <- source_data("naq10_e")$naq_e
 
-naa_a64 <- get_eurostat("nama_10_a64", filters = list(unit = "CP_MEUR",
-                                                      nace_r2  = m_a20,
-                                                      na_item = c("B1G", "D1", "D11", "P51C", "D29X39"),
-                                                      geo = pays2) ) |>
+naa_a64 <- "nama_10_a64" |>
+  get_eurostat(filters = list(unit = "CP_MEUR",
+                              nace_r2  = m_a20,
+                              na_item = c("B1G", "D1", "D11", "P51C", "D29X39"),
+                              geo = pays2) ) |>
   drop_na(values) |>
   pivot_wider(id_cols = c(nace_r2, geo, time),
               names_from =  na_item, values_from = values) |>
@@ -37,9 +38,9 @@ naa_a64 <- get_eurostat("nama_10_a64", filters = list(unit = "CP_MEUR",
 
 naq_a10 <- "namq_10_a10" |>
   get_eurostat(filters = list(unit = "CP_MEUR",
-                                nace_r2  = m_a10,
-                                na_item = c("B1G", "D1", "D11"),
-                                geo = pays2) ) |>
+                              nace_r2  = m_a10,
+                              na_item = c("B1G", "D1", "D11"),
+                              geo = pays2) ) |>
   select(na_item, geo, time, values, nace_r2, s_adj) |>
   mutate(s_adj = factor(s_adj, adj)) |>
   arrange(s_adj) |>
