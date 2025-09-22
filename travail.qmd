@@ -13,6 +13,28 @@ abstract: "Les profondes mutations du marché du travail ont pesé sur la condit
     `r  wordcountaddin::word_count('travail.qmd')` mots."
 
 bibliography: references.bib
+
+format:
+  ofce-html:
+    code-links:
+      - text: Salaires dans la VA
+        icon: file-code
+        href: va.r
+      - text: Salaires trimestriels
+        icon: file-code
+        href: salaires.r
+      - text: Structure des rémunérations
+        icon: file-code
+        href: earn.r
+      - text: Indicateurs du marché du travail
+        icon: file-code
+        href: precarite.r
+      - text: Non salariés
+        icon: file-code
+        href: naa_e.r
+      - text: NACE rev2
+        icon: file-code
+        href: nace.r
 ---
 
 ```{r, include=FALSE}

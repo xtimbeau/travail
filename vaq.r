@@ -21,10 +21,11 @@ naa_a64 <- get_eurostat("nama_10_a64", filters = list(unit = "CP_MEUR",
   drop_na(values) |>
   pivot_wider(id_cols = c(nace_r2, geo, time),
               names_from =  na_item, values_from = values) |>
-  left_join(nace |> select(a10, a20, md = marchand, hi = hors_imm, hifi, hfi), by = c("nace_r2"= "a20")) |>
+  left_join(nace |>
+              select(a10, a20,),
+            by = c("nace_r2"= "a20")) |>
   group_by(a10, geo, time) |>
   summarise(across(c(B1G, D1, D11, P51C, D29X39), sum),
-            across(c(md, hifi, hi, hfi), first),
             .groups = "drop") |>
   rename(nace_r2 = a10) |>
   mutate(across(c(D1, D11, P51C, D29X39), ~ .x / B1G)) |>
@@ -34,10 +35,11 @@ naa_a64 <- get_eurostat("nama_10_a64", filters = list(unit = "CP_MEUR",
   rename(B1Ga = B1G) |>
   select(-month)
 
-naq_a10 <- get_eurostat("namq_10_a10", filters = list(unit = "CP_MEUR",
-                                                      nace_r2  = m_a10,
-                                                      na_item = c("B1G", "D1", "D11"),
-                                                      geo = pays2) ) |>
+naq_a10 <- "namq_10_a10" |>
+  get_eurostat(filters = list(unit = "CP_MEUR",
+                                nace_r2  = m_a10,
+                                na_item = c("B1G", "D1", "D11"),
+                                geo = pays2) ) |>
   select(na_item, geo, time, values, nace_r2, s_adj) |>
   mutate(s_adj = factor(s_adj, adj)) |>
   arrange(s_adj) |>
@@ -60,7 +62,11 @@ naq_a10 <- get_eurostat("namq_10_a10", filters = list(unit = "CP_MEUR",
     vab = B1G,
     msa = d1 * B1G * tsal,
     msanc = d1 * B1G,
-    ip = B1G * d29x39)
+    ip = B1G * d29x39) |>
+  left_join(nace |>
+              distinct(a10, .keep_all = TRUE ) |>
+              select(nace_r2 = a10, md=marchand, hi = hors_imm, hifi, hfi),
+            by = "nace_r2")
 
 naq <- naq_a10 |>
   group_by(geo, time) |>
