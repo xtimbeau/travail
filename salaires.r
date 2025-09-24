@@ -49,15 +49,16 @@ pc <- "namq_10_fcs" |>
 
 salaires <- eq |>
   left_join(d1, by = c("time", "geo", "nace_r2")) |>
-  left_join(nace |> distinct(a10, .keep_all = TRUE) |> select(nace_r2 = a10, marchand, hifi),
+  left_join(nace |> distinct(a10, .keep_all = TRUE) |> select(nace_r2 = a10, md=marchand, hifi, hi, hfi),
             by = "nace_r2") |>
-  drop_na(marchand) |>
+  drop_na(md) |>
   group_by(geo, time) |>
   summarize(w = sum(D1)/sum(emp_sal),
             wbrut = sum(D11)/sum(emp_sal),
-            w_md = sum(D1[marchand])/sum(emp_sal[marchand]),
-            w_nmd = sum(D1[!marchand])/sum(emp_sal[!marchand]) ,
-            w_hifi = sum(D1[marchand&hifi])/sum(emp_sal[marchand&hifi]),
+            w_md = sum(D1[md])/sum(emp_sal[md]),
+            w_nmd = sum(D1[!md])/sum(emp_sal[!md]),
+            w_hifi = sum(D1[md&hifi])/sum(emp_sal[md&hifi]),
+            w_hi = sum(D1[md&hi])/sum(emp_sal[md&hi]),
             .groups = "drop") |>
   left_join(pc, by = c("time", "geo")) |>
   group_by(geo) |>
@@ -68,7 +69,8 @@ salaires <- eq |>
     wbr = 4*slider::slide_dbl(wbrut, .before = 3, .f = mean)/pc,
     wr_md = 4*slider::slide_dbl(w_md, .before = 3, .f = mean)/pc,
     wr_nmd = 4*slider::slide_dbl(w_nmd, .before = 3, .f = mean)/pc,
-    wr_hifi = 4*slider::slide_dbl(w_hifi, .before = 3, .f = mean)/pc) |>
+    wr_hifi = 4*slider::slide_dbl(w_hifi, .before = 3, .f = mean)/pc,
+    wr_hi = 4*slider::slide_dbl(w_hi, .before = 3, .f = mean)/pc) |>
   ungroup() |>
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
 
