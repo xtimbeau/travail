@@ -45,7 +45,8 @@ ofce::init_qmd()
 thm <- theme_ofce(
   marquee=TRUE,
   panel.spacing = unit(9, "point"),
-  strip.text = element_marquee(size = rel(0.7))
+  axis.text = element_text(size=rel(0.7)),
+  strip.text = element_marquee(size = rel(0.75))
 )
 ```
 
@@ -114,7 +115,6 @@ psal <- ggplot(naq |> filter(champ %in% c("mdhi"))) +
   scale_color_pays(format = "eurostat") +
   thm +
   theme(
-    axis.text.y = element_text(size = rel(0.7)),
     legend.position = c(1, 0.025),
     legend.justification = c(1, 0) ) +
   ofce_caption(
