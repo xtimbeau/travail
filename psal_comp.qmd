@@ -53,9 +53,9 @@ L'analyse du partage de la valeur ajoutée est au cœur des débats sur la redis
 
 -   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, mais qu'il est difficile de dépasser. Elle a des conséquences pour les comparaisons entre périodes pour un même pays parce que la part des non salariés varie dans le temps, de façon différente suivant les branches et entre pays.
 
--   Etre soigneux sur le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour par auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée.
+-   Définir le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour par auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée. La notion provilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers.
 
--   Utiliser la notion de valeur ajoutée nette plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. Cette dernière notion découle de l'application de tables de mortalité à un inventaire permanent des investissements non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée.
+-   Utiliser la notion de valeur ajoutée nette (de la CCF) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. Cette dernière notion découle de l'application de tables de mortalité à un inventaire permanent des investissements non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire par leur amortissement, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapprotée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée.
 
 ```{r}
 #| label: fig-psal
@@ -133,6 +133,8 @@ On détaille dans la suite de ce document les effets des corrections appliquées
 
 ## Evolution des salaires réels
 
+L'évolution des salaries réels est un complément à celle du partage de la valeur ajoutée. Par passer de l'un à l'autre, il faut non seuelemtn prendre en compte les évolutions de la valeur ajoutée, mais aussi les effets de l'évolution du ratio prix à la consommation sur prix de valeur ajoutée.
+
 On déflate la masse salariale (comptabilité nationale, comptes trimestriels) par les prix à la consommation. On utilise les masses salariales ($D1$, dans [`namq_10_a10`](https://ec.europa.eu/eurostat/databrowser/view/NAMQ_10_A10/default/table?lang=en)) par branches pour comparer branches (principalement) marchandes et (principalement) non marchandes divisées par l'emploi salarié ([`namq_10_a10_e`](https://ec.europa.eu/eurostat/databrowser/view/NAMQ_10_A10_E__custom_7475124/default/table?lang=en)). Les prix sont les déflateurs de la consommation ($P31\_S14$ dans [`namq_10_fcs`](https://ec.europa.eu/eurostat/databrowser/product/page/NAMQ_10_FCS)) chaînés (voir le code pour les détails).
 
 On distingue 4 agrégations : l'ensemble des branches (ou l'ensemble de l'économie), les branches non marchandes, les branches marchandes et les branches marchandes hors immobilier.
@@ -155,33 +157,33 @@ date <- meta$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 data <- salaires |> 
   filter(time >= "1995-01-01") |> 
-  select(geo, time, wr, wr_md, wr_nmd, wr_hifi) |> 
+  select(geo, time, wr, wr_md, wr_nmd, wr_hi) |> 
   mutate(
     tooltip = glue(
     "<b>{lbl(geo)}</b>
     {date_trim(time)}</b>
     Salaire réel, toute l'économie {round(wr,1)} k€/an
     Salaire réel, branches marchandes {round(wr_md,1)} k€/an
-    Salaire réel, branches marchandes hors imm.&fin. {round(wr_hifi,1)} k€/an
+    Salaire réel, branches marchandes hors imm. {round(wr_hi,1)} k€/an
     Salaire réel, branches non marchandes {round(wr_nmd,1)} k€/an")) |> 
-  pivot_longer(c(wr, wr_md, wr_nmd, wr_hifi)) |> 
+  pivot_longer(c(wr, wr_md, wr_nmd, wr_hi)) |> 
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
 
 labels_branches <- c(wr = "Ttes branches", wr_md = "Marchand", 
-                     wr_nmd = "Non marchand", wr_hifi = "Marchand hors imm.&fin.")
+                     wr_nmd = "Non marchand", wr_hi = "Marchand hors imm.")
 sal <- ggplot(data) +
   aes(x=time, y=value, 
       alpha = name, linewidth = name, linetype = name,
       color = geo) +
   scale_alpha_manual(
-    values = c(wr=1, wr_md = 1, wr_nmd = 0.75, wr_hifi = 0.75),
+    values = c(wr=1, wr_md = 1, wr_nmd = 0.75, wr_hi = 0.75),
     labels = labels_branches, name = NULL) +
   scale_linetype_manual(
-    values = c(wr="solid", wr_md ="solid", wr_nmd ="solid", wr_hifi = "11"),
+    values = c(wr="solid", wr_md ="solid", wr_nmd ="solid", wr_hi = "11"),
     labels = labels_branches,
     name = NULL) +
   scale_linewidth_manual(
-    values = c(wr=.5, wr_md = 0.1, wr_nmd = 0.25, wr_hifi = 0.5),
+    values = c(wr=.5, wr_md = 0.1, wr_nmd = 0.25, wr_hi= 0.5),
     labels = labels_branches, name = NULL) +
   geom_point_interactive(
     data = ~.x |> 
@@ -222,7 +224,9 @@ En Italie et en Espagne, la masse salariale dans les branches non marchandes est
 
 ## Part des salaires dans la valeur ajoutée, comptes de branche
 
-On utilise les données de comptabilité nationale, en trimestriel, par branche ([`nasq_10_nf_tr`](https://ec.europa.eu/eurostat/databrowser/view/nasq_10_nf_tr/default/table?lang=en)`)`. La part des salaires est corrigée de la part des non salariés (données annuelles [`nama_10_a64_e`](https://ec.europa.eu/eurostat/databrowser/view/nama_10_a64_e/default/table?lang=en), extrapolées en maintenant le ratio salariés/non salariés à sa dernière valeur observée et en considérant que le salaire des non salariés est identique par branche (en 9 branches, hors immobilier) à celui des salariés – cette hypothèse sous estime probablement le salaire des non salariés mais elle est difficile à lever, sauf à utiliser les enquêtes force de travail et faire confiance au revenu qui y est déclaré).
+On utilise les données de comptabilité nationale, en trimestriel, par branche ([`nasq_10_nf_tr`](https://ec.europa.eu/eurostat/databrowser/view/nasq_10_nf_tr/default/table?lang=en)), réagrégé au niveau de l'ensemble de l'économie. Le passage par les comptes de branches permet de distinguer branches marchandes et non marchandes ou d'autres regroupements, comme l'exclusion des services immobiliers. Ce passage permet également de conduire la correction salariés non salariés au niveau des branches. D'après l'INSEE, (voir le blog "[Combien pèse l'industrie en France et en Allemagne](https://blog.insee.fr/combien-pese-l-industrie-en-france-et-en-allemagne/)"), tous les pays ne produisent pas une comptabilité de branche mais pour certains (notamment l'Allemagne) une comptabilité sectorielle. La différence tient aux entreprises qui produisent plusieurs produits (un constructeur automobile propose des services financiers pour l'achat des véhicules) et dont l'activité est imputé à différentes branches (industrie et services financiers) dans la comptabilité de branche alors que dans une comptabilité de secteur l'acitvité est versée dans le principal secteur (ou le secteur d'immatriculation de l'entreprise chapeau). Cette différence empêche normalement les comparaisons des comptes de branches entre pays, y compris à l'intérieur de l'Union Européenne. Cependant, pour comparer la part des salaries dans la valeur ajoutée sur des agrégats larges (branches marchandes par exemple), cette dérogation à la norme comptable n'est que modérément problématique : de toute façon, l'automobile et les services financiers sont agrégés et c'est la correction pour la masse salariale des non salariés qui peut être modifiée. Mais si la même délimitation est employée pour les salariés et les non salariés que pour l'activité, l'erreur est probablement minime.
+
+La part des salaires est corrigée de la part des non salariés (données annuelles [`nama_10_a64_e`](https://ec.europa.eu/eurostat/databrowser/view/nama_10_a64_e/default/table?lang=en), extrapolées en maintenant le ratio salariés/non salariés à sa dernière valeur observée) en considérant que le salaire des non salariés est identique dans chaque branche à celui des salariés – cette hypothèse sous estime probablement le salaire des non salariés mais elle est difficile à lever, sauf à utiliser les enquêtes force de travail et faire confiance aux revenus qui y sont déclarés, en perdant la variation d'une année à l'autre. En revanche, on prend bien en compte que les non salariés de la branche agricole n'ont pas le même revenu que ceux de la branche "information et communication". La décomposition employée est à 9 branches et on peut conduire la même correction à un niveau de désaggrégation plus fin.
 
 La masse salariale est rapportée soit à la valeur ajoutée brute ($B1G$), soit à la valeur ajoutée nette ($B1N=B1G-P51C$). Comme la consommation de capital fixe ($P51C$) n'est pas connue en trimestriel, elle est dérivée des comptes annuels en 21 branches (niveau 1 de la nace rev2 [`nama_10_a64`](https://ec.europa.eu/eurostat/databrowser/view/nama_10_a64/default/table?lang=en)), agrégée en 9 branches, puis extrapolée pour les années non connues (ici 2024 et 2025) en conservant un ratio constant dans la valeur ajouté brute. Le détail se trouve dans le code.
 
@@ -434,13 +438,13 @@ gg <- ggplot(data) +
 girafy(gg)
 ```
 
-## Part des salaires dans la valeur ajoutée, comptes de secteur
+## Part des salaires dans la valeur ajoutée, comptes d'agents
 
-Les comptes de secteurs permettent une analyse plus simple pour les seules entreprises non financières. Cela évite normalement d'avoir à prendre en compte la cas des non salariés, et bien que ce ne soit pas un champ exhaustif, cela doit permettre une analyse sur un champ économique plus strict (au sens de la forme légale des entités considérées). La notion d'impôt sur les sociétés ets mieux définie et le stock de capital productif est mieux connu du fait de l'obligation légale de déclaration des comptes.
+Les comptes d'agents (ou de secteurs institutionels) permettent une analyse plus simple, parce qu'ils permettent de distinguer les seules entreprises non financières. Cela évite d'avoir à prendre en compte les non salariés, cela exclue les services immobiliers produits par els ménages. C'est donc une analyse sur un champ économique plus strict (au sens de la forme légale des entités considérées). La notion d'impôt sur les sociétés est aussi mieux définie et le stock de capital productif est mieux connu du fait de l'obligation légale de déclaration des comptes des entreprises.
 
-Malheureusemet, comme identifié par l'INSEE, la pratique des instituts nationaux européens n'est pas celle de l'INSEE. Par exemple, en Allemagne, le secteur S11 inclu les quasi-sociétés et les entrepreneurs individuels. La normalisation des concepts est par ailleurs peu probable, puisqu'elle est liée aux pratiques administratives. Les comptes de branches opèrent un reclassement des entités économiques qui améliore la comparabilité. En pratique cette précaution ne paraît pas essentielle.
+Malheureusemet, comme identifié par l'INSEE, la pratique des instituts nationaux européens n'est pas conforme à celle de l'INSEE. Par exemple, en Allemagne, le secteur S11 inclut les quasi-sociétés et les entrepreneurs individuels. La normalisation des concepts est par ailleurs peu probable dans le futur, puisqu'elle est liée aux pratiques administratives.
 
-Comme pour les graphiques précédents, les données trimestrielles sont annualisées (pour éliminer la variablibilité trimestrielle qui nuit à la lisibilité et qui n'a pas beaucoup de sens).
+Comme pour les graphiques précédents, les données trimestrielles sont annualisées (pour éliminer la variablibilité trimestrielle qui nuit à la lisibilité et qui n'a pas beaucoup de sens). En trait pointillé, on représente la part de la valeur ajoutée dans les branches marchandes hors immobilier et corrigée de la non salarisation pour mesurer la différence des concepts.
 
 ```{r}
 #| label: fig-s11psal
@@ -478,6 +482,12 @@ snfq <- source_data("snf_ratio.r") |>
 date <- sourcoise::sourcoise_meta("snf_ratio.r")$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
+
+data <- snfq |> 
+  select(geo, time, psal_branche = psal) |> 
+  left_join(naq |> select(geo, time, psal_snf  = psal, psalb_snf = psalb), by = c("geo", "time")) |> 
+  pivot_longer(starts_with("psal")) |> 
+  separate(name, into = c("concept", "champ"))
 psnf <- ggplot(snfq |> filter(time >= "1995-01-01")) +
   aes(x=time, y=psal, col = geo) +
   geom_line_interactive(
