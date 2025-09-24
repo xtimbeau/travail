@@ -127,7 +127,7 @@ psal <- ggplot(naq |> filter(champ %in% c("mdhi"))) +
 girafy(psal, 1.5)
 ```
 
-La part des salaires dans la valeur ajoutée nette est croissante en France (@fig-psal) (de 10 points de 1998 à 2025), comme en Espagne (de 9 points). Elle atteint en France le niveau le plus élevé des pays sélectionnés, pour autant que l'on puisse comparer entre pays. La part des salaires dans la valeur ajoutée est la plus basse aux Pays-Bas et est sur une pente décroissante depuis plus de 20 ans, alors qu'elle semble stable en Belgique et en Allemagne. L'Italie affiche une importante variabilité temporelle.
+La part des salaires dans la valeur ajoutée nette est croissante en France (@fig-psal) (de 10 points de 1998 à 2025), comme en Espagne (de 9 points). Elle atteint en France le niveau le plus élevé des pays sélectionnés, pour autant que l'on puisse comparer entre pays. La part des salaires dans la valeur ajoutée est la plus basse aux Pays-Bas et est sur une pente décroissante depuis plus de 20 ans, alors qu'elle semble stable en Belgique et en Allemagne. L’Italie affiche une variabilité temporelle importante.
 
 Elle est cependant stable en France depuis 2020 (voire légèrement décroissante). Ce même mouvement s'observe dans les autres pays, plus nettement. La phase d'inflation à partir de 2022 a induit une moindre indexation des salaires (voir @fig-salaires) puis un rattrapage. Ce profil général a pris néanmoins des tournures assez différentes d'un pays à l'autre. La déflation salariale a plutôt été plus limité en France, conduisant à une hausse de la part des salaires, alors qu'elle a été très marquée aux Pays-Bas – sans doute aussi par des effets de la crise énergétique différents entre pays, sans compter des questions de mesure des indices de prix qui peuvent rendre difficile les comparaisons. Mais au-delà des problèmes de mesures, la part des salaires est plus volatile aux Pays-Bas qu'en France, ce qui tend à montrer que la dépréciation réelle des salaires c'est fait aux Pays-Bas à l'avantage des firmes.
 
@@ -139,7 +139,7 @@ On explore également les conséquences en matière de taux de profit (part des 
 
 ## Evolution des salaires réels
 
-L'évolution des salaries réels est un complément à celle du partage de la valeur ajoutée. Par passer de l'un à l'autre, il faut non seuelemtn prendre en compte les évolutions de la valeur ajoutée, mais aussi les effets de l'évolution du ratio prix à la consommation sur prix de valeur ajoutée.
+L'évolution des salaries réels est un complément à celle du partage de la valeur ajoutée. Par passer de l'un à l'autre, il faut non seulement prendre en compte les évolutions de la valeur ajoutée, mais aussi les effets de l'évolution du ratio prix à la consommation sur prix de valeur ajoutée.
 
 On déflate la masse salariale (comptabilité nationale, comptes trimestriels) par les prix à la consommation. On utilise les masses salariales ($D1$, dans [`namq_10_a10`](https://ec.europa.eu/eurostat/databrowser/view/NAMQ_10_A10/default/table?lang=en)) par branches pour comparer branches (principalement) marchandes et (principalement) non marchandes divisées par l'emploi salarié ([`namq_10_a10_e`](https://ec.europa.eu/eurostat/databrowser/view/NAMQ_10_A10_E__custom_7475124/default/table?lang=en)). Les prix sont les déflateurs de la consommation ($P31\_S14$ dans [`namq_10_fcs`](https://ec.europa.eu/eurostat/databrowser/product/page/NAMQ_10_FCS)) chaînés (voir le code pour les détails).
 
@@ -230,7 +230,7 @@ En Italie et en Espagne, la masse salariale dans les branches non marchandes est
 
 ## Part des salaires dans la valeur ajoutée, comptes de branche
 
-On utilise les données de comptabilité nationale, en trimestriel, par branche ([`nasq_10_nf_tr`](https://ec.europa.eu/eurostat/databrowser/view/nasq_10_nf_tr/default/table?lang=en)), réagrégé au niveau de l'ensemble de l'économie. Le passage par les comptes de branches permet de distinguer branches marchandes et non marchandes ou d'autres regroupements, comme l'exclusion des services immobiliers. Ce passage permet également de conduire la correction salariés non salariés au niveau des branches. D'après l'INSEE, (voir le blog "[Combien pèse l'industrie en France et en Allemagne](https://blog.insee.fr/combien-pese-l-industrie-en-france-et-en-allemagne/)"), tous les pays ne produisent pas une comptabilité de branche mais pour certains (notamment l'Allemagne) une comptabilité sectorielle. La différence tient aux entreprises qui produisent plusieurs produits (un constructeur automobile propose des services financiers pour l'achat des véhicules) et dont l'activité est imputé à différentes branches (industrie et services financiers) dans la comptabilité de branche alors que dans une comptabilité de secteur l'acitvité est versée dans le principal secteur (ou le secteur d'immatriculation de l'entreprise chapeau). Cette différence empêche normalement les comparaisons des comptes de branches entre pays, y compris à l'intérieur de l'Union Européenne. Cependant, pour comparer la part des salaries dans la valeur ajoutée sur des agrégats larges (branches marchandes par exemple), cette dérogation à la norme comptable n'est que modérément problématique : de toute façon, l'automobile et les services financiers sont agrégés et c'est la correction pour la masse salariale des non salariés qui peut être modifiée. Mais si la même délimitation est employée pour les salariés et les non salariés que pour l'activité, l'erreur est probablement minime.
+On utilise les données de comptabilité nationale, en trimestriel, par branche ([`nasq_10_nf_tr`](https://ec.europa.eu/eurostat/databrowser/view/nasq_10_nf_tr/default/table?lang=en)), ré-agrégées au niveau de l'ensemble de l'économie. Le passage par les comptes de branches permet de distinguer branches marchandes et non marchandes ou d'autres regroupements, comme l'exclusion des services immobiliers. Ce passage permet également de conduire la correction salariés non salariés au niveau des branches. D'après l'INSEE, (voir le blog "[Combien pèse l'industrie en France et en Allemagne](https://blog.insee.fr/combien-pese-l-industrie-en-france-et-en-allemagne/)"), tous les pays ne produisent pas une comptabilité de branche mais pour certains (notamment l'Allemagne) une comptabilité sectorielle. La différence tient aux entreprises qui produisent plusieurs produits (un constructeur automobile propose des services financiers pour l'achat des véhicules) et dont l'activité est imputé à différentes branches (industrie et services financiers) dans la comptabilité de branche alors que dans une comptabilité de secteur l'acitvité est versée dans le principal secteur (ou le secteur d'immatriculation de l'entreprise chapeau). Cette différence empêche normalement les comparaisons des comptes de branches entre pays, y compris à l'intérieur de l'Union Européenne. Cependant, pour comparer la part des salaries dans la valeur ajoutée sur des agrégats larges (branches marchandes par exemple), cette dérogation à la norme comptable n'est que modérément problématique : de toute façon, l'automobile et les services financiers sont agrégés et c'est la correction pour la masse salariale des non salariés qui peut être modifiée. Mais si la même délimitation est employée pour les salariés et les non salariés que pour l'activité, l'erreur est probablement minime.
 
 La part des salaires est corrigée de la part des non salariés (données annuelles [`nama_10_a64_e`](https://ec.europa.eu/eurostat/databrowser/view/nama_10_a64_e/default/table?lang=en), extrapolées en maintenant le ratio salariés/non salariés à sa dernière valeur observée) en considérant que le salaire des non salariés est identique dans chaque branche à celui des salariés – cette hypothèse sous estime probablement le salaire des non salariés mais elle est difficile à lever, sauf à utiliser les enquêtes force de travail et faire confiance aux revenus qui y sont déclarés, en perdant la variation d'une année à l'autre. En revanche, on prend bien en compte que les non salariés de la branche agricole n'ont pas le même revenu que ceux de la branche "information et communication". La décomposition employée est à 9 branches et on peut conduire la même correction à un niveau de désaggrégation plus fin.
 
@@ -446,11 +446,11 @@ girafy(gg)
 
 ## Part des salaires dans la valeur ajoutée, comptes d'agents
 
-Les comptes d'agents (ou de secteurs institutionels) permettent une analyse plus simple, parce qu'ils permettent de distinguer les seules entreprises non financières. Cela évite d'avoir à prendre en compte les non salariés, cela exclue les services immobiliers produits par els ménages. C'est donc une analyse sur un champ économique plus strict (au sens de la forme légale des entités considérées). La notion d'impôt sur les sociétés est aussi mieux définie et le stock de capital productif est mieux connu du fait de l'obligation légale de déclaration des comptes des entreprises.
+Les comptes d'agents (ou de secteurs institutionnels) permettent une analyse plus simple, parce qu'ils permettent de distinguer les seules entreprises non financières. Cela évite d'avoir à prendre en compte les non salariés, cela exclue les services immobiliers produits par les ménages. C'est donc une analyse sur un champ économique plus strict (au sens de la forme légale des entités considérées). La notion d'impôt sur les sociétés est aussi mieux définie et le stock de capital productif est mieux connu du fait de l'obligation légale de déclaration des comptes des entreprises.
 
-Malheureusemet, comme identifié par l'INSEE, la pratique des instituts nationaux européens n'est pas conforme à celle de l'INSEE. Par exemple, en Allemagne, le secteur S11 inclut les quasi-sociétés et les entrepreneurs individuels. La normalisation des concepts est par ailleurs peu probable dans le futur, puisqu'elle est liée aux pratiques administratives.
+Malheureusement, comme identifié par l'INSEE, la pratique des instituts nationaux européens n'est pas conforme à celle de l'INSEE. Par exemple, en Allemagne, le secteur S11 inclut les quasi-sociétés et les entrepreneurs individuels. La normalisation des concepts est par ailleurs peu probable dans le futur, puisqu'elle est liée aux pratiques administratives.
 
-Comme pour les graphiques précédents, les données trimestrielles sont annualisées (pour éliminer la variablibilité trimestrielle qui nuit à la lisibilité et qui n'a pas beaucoup de sens). En trait pointillé, on représente la part de la valeur ajoutée dans les branches marchandes hors immobilier et corrigée de la non salarisation pour mesurer la différence des concepts.
+Comme pour les graphiques précédents, les données trimestrielles sont annualisées (pour éliminer la variabilité trimestrielle qui nuit à la lisibilité et qui n'a pas beaucoup de sens). En trait pointillé, on représente la part de la valeur ajoutée dans les branches marchandes hors immobilier et corrigée de la non salarisation pour mesurer la différence des concepts.
 
 ```{r}
 #| label: fig-s11psal
@@ -471,8 +471,8 @@ snfq <- source_data("snf_ratio.r") |>
     msa = D1,
     psal = D1/B1N,
     psalb = D1/B1G,
-    div = (D4-D41)/B1N,
-    divb = (D4-D41)/B1G,
+    div = (D42)/B1N,
+    divb = (D42)/B1G,
     isp = (D5+D2+D3)/B1N,
     tp = (B1N-D1-D5-D2-D3)/B1N ) |> 
   mutate(tooltip = glue(
@@ -483,36 +483,49 @@ snfq <- source_data("snf_ratio.r") |>
     Rémunérations dans la VAB : {round(psalb*100,1)}%
     Profits nets (d'IS, taxes et subvention) dans la VAN : {round(tp*100,1)}%
     Dividendes nets dans la VAN : {round(div*100,1)}%")) |> 
-  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE"))) |> 
+  filter(time>= "1995-01-01")
 
 date <- sourcoise::sourcoise_meta("snf_ratio.r")$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
-
-
+naq_a <-  naq |> 
+  filter(champ == "mdhi") |> 
+  select(geo, time, psal_snf  = psal, psalb_snf = psalb)
 data <- snfq |> 
-  select(geo, time, psal_branche = psal) |> 
-  left_join(naq |> select(geo, time, psal_snf  = psal, psalb_snf = psalb), by = c("geo", "time")) |> 
+  select(geo, time, psal_branche = psal, psalb_branche = psalb) |> 
+  left_join(naq_a, by = c("geo", "time")) |> 
   pivot_longer(starts_with("psal")) |> 
-  separate(name, into = c("concept", "champ"))
-psnf <- ggplot(snfq |> filter(time >= "1995-01-01")) +
-  aes(x=time, y=psal, col = geo) +
-  geom_line_interactive(
-    data=naq |> filter(champ == "mdhifi"), 
-    aes(y=psal, 
-        tooltip = "mesurée par les comptes de branches (marchand hors finance)"),
-    alpha = 0.75, linewidth = 0.25, linetype = "11") +
+  separate(name, into = c("concept", "champ")) |> 
+  filter(time>="1995-01-01") |> 
+  mutate(
+    tooltip2 = glue("Valeur ajoutée {ifelse(concept=='psal', 'nette', 'brute')}; {ifelse(champ=='snf', 'SNF', 'branches marchandes hors imm.')}") )
+
+psnf <- ggplot(data) +
+  aes(x=time,  col = geo) +
+  scale_alpha_manual(
+    values = c(psal = 1, psalb=0.5),
+    labels = c(psal = "VA nette", psalb="VA brute"),
+    name = NULL)+
+  scale_linetype_manual(
+    values = c(branche = "solid", snf="11"),
+    labels = c(branche = "Branches non marchandes hors imm.", snf = "SNF"),
+    name  = NULL) +
+  scale_linewidth_manual(
+    values = c(psal = .5, psalb=0.2),
+    labels = c(psal = "VA nette", psalb="VA brute"),
+    name  = NULL)+
   geom_ribbon(
+    data = snfq,
     aes(ymin = psalb, ymax =psal, fill = geo), alpha =0.1, color = NA) +
   geom_line_interactive(
-     aes(y=psalb, tooltip = "Part des salaires dans la VAB, SNF"),
-     alpha = 0.5, linewidth = 0.33) +
-   geom_line_interactive(
-     aes(y = psal, tooltip = "Part des salaires dans la VAN, SNF"), 
-     linewidth = 0.5) +
+    aes(y=value, linetype = champ, linewidth = concept, alpha = concept,
+        group = interaction(champ, concept, geo),
+      tooltip = tooltip2)) +
   geom_point_interactive(
+     data = snfq,
      aes( y = psal, fill = geo,
         tooltip = tooltip, data_id = time),
-        size = 1, stroke = 0.1, shape = 21, color = "white",
+        size = 1, stroke = 0.25, shape = 21, color = "white",
         hover_nearest = TRUE, show.legend=FALSE) +
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
@@ -521,7 +534,15 @@ psnf <- ggplot(snfq |> filter(time >= "1995-01-01")) +
   scale_y_continuous(labels = scales::label_percent(1), limits = c(NA, 1)) +
   scale_color_pays(format = "eurostat") +
   thm +
-  guides(color = "none", fill = "none") +
+  theme(
+    legend.position = "bottom",
+    legend.justification = c(0.5, 1),
+    legend.direction = "horizontal",
+    legend.spacing.y = unit(4, "pt") ) +
+  guides(color = "none", fill = "none",
+         linetype = guide_legend(ncol = 1),
+         linewidth = guide_legend(ncol = 1),
+         alpha = guide_legend(ncol = 1)) +
   ofce_caption(
     source = "Eurostat, comptes nationaux trimestriels de secteur (nasq_10_nf_tr), téléchargés le {date}, calcul de l'auteur.",
     code =  "github.com/xtimbeau/travail/snf_ratio.r",
@@ -532,31 +553,44 @@ girafy(psnf, 1.5)
 
 ## Profits nets et dividendes dans les comptes d'agent
 
-Les comptes des sociétés non financières permettent d'éxaminer d'autres éléments du compte. On affiche ici le profit net sur la valeur ajoutée nette, et le taux de dividendes nets sur la valeur ajoutée nette.
+Les comptes des sociétés non financières permettent d’examiner d'autres éléments du compte. On affiche ici le profit net sur la valeur ajoutée nette, et le taux de dividendes nets sur la valeur ajoutée nette.
 
-Les profits nets sont définis comme la valeur ajoutée nette de la consommation de cpaital fixe moins la rémunération dedes salariés, moins les taxes nettes des subventions moins l'impôt sur les sociétés :
+Les profits nets sont définis comme la valeur ajoutée nette de la consommation de capital fixe moins la rémunération des salariés, moins les taxes nettes des subventions moins l'impôt sur les sociétés :
 
 $$
 \Pi = B1G - P51C - D1 - (D2-D3) - D5
 $$
 
-Les dividendes sont la ligne $D4$ nette de ce qui est payé et reçu par le secteur S11 et des intérêts ($D41$).
+Les dividendes sont la ligne \$D42\$ nette de ce qui est payé et reçu par le secteur S11.
 
 ```{r}
 #| label: fig-profits
 #| fig-cap: Profits nets dans la VA, comptes de secteur
 #| fig-asp: 1
 
-pprofit <- ggplot(snfq |> filter(time >= "1995-01-01")) +
-  aes(x=time, y=tp, col = geo) +
-   geom_line_interactive(
-     aes(tooltip = "Profits nets sur VAN, SNF"),
-     show.legend=FALSE) +
- geom_line_interactive(
-     aes(y=div, tooltip = "Dividendes nets sur VAN, SNF"),
-     show.legend=FALSE, linewidth = 0.25) +
+data <- snfq |> 
+  filter(time >= "1995-01-01") |> 
+  select(time, geo, tp, div) |> 
+  pivot_longer(c(tp, div)) |> 
+  mutate(tooltip2 = glue("{ifelse(name=='tp', 'Profits nets sur VAN, SNF', 'Dividendes nets sur VAN, SNF' )}")) |> 
+  mutate(name = factor(name, c("tp","div")))
+
+pprofit <- ggplot(data) +
+  aes(x=time, col = geo) +
+  scale_linewidth_manual(
+    values = c(tp = 0.5, div = 0.25), 
+    labels = c(tp = "Profits nets", div = "Dividendes"), 
+    name = NULL) +
+  scale_alpha_manual(
+    values = c(tp = 1, div = 0.5),
+    labels = c(tp = "Profits nets", div = "Dividendes"), 
+    name = NULL) +
+  geom_line_interactive(
+     aes( y=value, linewidth = name, alpha = name, tooltip = tooltip2),
+     hover_nearest = TRUE) +
   geom_point_interactive(
-     aes(fill = geo,
+    data = snfq,
+    aes(fill = geo, y = tp,
         tooltip = tooltip, data_id = time),
         size = 1, stroke = 0.2, shape = 21, color = "white",
         hover_nearest = TRUE, show.legend=FALSE) +
@@ -567,6 +601,9 @@ pprofit <- ggplot(snfq |> filter(time >= "1995-01-01")) +
   scale_y_continuous(labels = scales::label_percent(1)) +
   scale_color_pays(format = "eurostat") +
   thm +
+  theme(legend.position = c(0.35, 0.95),
+        legend.justification = c(0, 1)) +
+  guides(color = "none", fill = "none") +
   ofce_caption(
     source = "Eurostat, comptes nationaux trimestriels de secteur (nasq_10_nf_tr), téléchargés le {date}, calcul de l'auteur.",
     code =  "github.com/xtimbeau/travail/snf_ratio.r",
@@ -575,7 +612,7 @@ pprofit <- ggplot(snfq |> filter(time >= "1995-01-01")) +
 girafy(pprofit, 1.5)
 ```
 
-On peut rapporter ces notions aux éléments qui viennent du compte de capital. Le premier concept est le profit rapporté au stock de capital physique (tel que valorisé dans la comptabilité nationale, c'est-à-dire à la valeur de remplacement et au prix de marché). Mlaheureusement, à part la France, aucun pays dans notre échantillon ne diffuse ces données sur Eurostat.
+On peut rapporter ces notions aux éléments qui viennent du compte de capital. Le premier concept est le profit rapporté au stock de capital physique (tel que valorisé dans la comptabilité nationale, c'est-à-dire à la valeur de remplacement et au prix de marché). Malheureusement, à part la France, aucun pays dans notre échantillon ne diffuse ces données sur Eurostat.
 
 On rapporte également à une notion financière, à savoir la valeur nette des actions au passif des comptes d'entreprises. Les conventions de valorisation des actions non côtées sont délicates et difficiles à suivre d'un pays à l'autres. On choisit ici d'augmenter ces actions de la valeur nette résiduelle des entreprises non financières ($BF90$). On a donc :
 

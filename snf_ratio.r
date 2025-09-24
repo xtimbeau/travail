@@ -20,7 +20,7 @@ snfq <-"nasq_10_nf_tr" |>
     filters = list(unit = "CP_MEUR",
                    sector = "S11",
                    s_adj = c("SCA", "NSA"),
-                   na_item = c("B1G", "B1N", "D1", "D5", "D4", "D42_TO_D45", "D41", "D3", "D2"),
+                   na_item = c("B1G", "B1N", "D1", "D5", "D4", "D42_TO_D45", "D41", "D42", "D3", "D2"),
                    geo = pays2) ) |>
   drop_na(values) |>
   group_by(geo, time, na_item, direct) |>
@@ -47,7 +47,7 @@ snfa <- "nasa_10_nf_tr" |>
   get_eurostat(
     filters = list(unit = "CP_MEUR",
                    sector = "S11",
-                   na_item = c("B1G", "B1N", "D1", "D5", "D4"),
+                   na_item = c("B1G", "B1N", "D1", "D5", "D42"),
                    geo = pays2) ) |>
   drop_na(values) |>
   pivot_wider(names_from = direct, values_from = values) |>
