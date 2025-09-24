@@ -39,7 +39,7 @@ snfqa <- snfq |>
   mutate(year = floor_date(time, unit="year")) |>
   group_by(year, geo) |>
   summarize(
-    across(c(B1G, B1N, D1, D4, D41, D42_TO_D45, D5), ~sum(.x)/n()*4) ) |>
+    across(c(B1G, B1N, D1, D4, D41, D42, D42_TO_D45, D5), ~sum(.x)/n()*4) ) |>
   rename(
     time = year )
 
