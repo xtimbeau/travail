@@ -42,12 +42,12 @@ format:
 
 ```{r, include=FALSE}
 ofce::init_qmd()
-thm <- theme_ofce(
-  marquee=TRUE,
+thm <- theme_ofce(marquee=TRUE,
   panel.spacing = unit(9, "point"),
   axis.text = element_text(size=rel(0.7)),
-  strip.text = element_marquee(size = rel(0.75))
-)
+  strip.text = element_marquee(size = rel(0.75)),
+  legend.position = "bottom",
+  legend.justification = "center")
 ```
 
 ## Du partage de la VA au partage des richesses
@@ -107,16 +107,15 @@ psal <- ggplot(naq |> filter(champ %in% c("mdhi"))) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
     labels = date1d ) +
-  guides( fill = "none", color = "none") + 
+  guides( fill = "none", color = "none",
+          linetype = guide_legend(nrow = 1),
+          alpha = guide_legend(nrow = 1)) + 
   scale_y_continuous(
     labels = scales::label_percent(1), 
                      breaks = scales::pretty_breaks(5),
                      limits = c(NA, NA)) +
   scale_color_pays(format = "eurostat") +
   thm +
-  theme(
-    legend.position = c(1, 0.025),
-    legend.justification = c(1, 0) ) +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}.",
@@ -206,11 +205,10 @@ sal <- ggplot(data) +
   ylab("Salaire annuel réel en k€") + xlab(NULL) +
   scale_y_log10(breaks = c(10, 20, 30, 40, 50, 50, 60)) +
   scale_color_pays(format = "eurostat") +
-  theme_ofce(
-    legend.position = c(1, 0.025),
-    legend.justification = c(1,0),
-    strip.text = element_marquee(size = rel(0.8))  ) +
-  guides(linetype = "legend", linewidth = "legend", color = "none", fill="none") +
+  thm +
+  theme(
+    legend.direction = "horizontal") +
+  guides(color = "none", fill="none") +
   ofce_caption(
     wrap = 0,
     source = "Eurostat, comptes nationaux trimestriels de branche (namq_10_a10), téléchargé le {date},
@@ -487,14 +485,15 @@ Comme pour les graphiques précédents, les données trimestrielles sont annuali
 
 ```{r}
 #| label: fig-s11psal
-#| fig-cap: Part des salaires dans la VA, comptes de secteur
+#| fig-cap: Part des salaires dans la VA, SNF, comptes d'agents
 #| fig-asp: 1
 
 snfq <- source_data("snf_ratio.r") |> 
   pluck("snfq") |>
+  filter(sector == "S11" ) |> 
   mutate(year = floor_date(time, "year")) |> 
   select(-starts_with("s_adj_"), -time) |> 
-  group_by(geo, year) |> 
+  group_by(geo, year, sector) |> 
   summarize(across(everything(), ~sum(.x)/n()*4),
             .groups = "drop") |> 
   rename(time = year) |> 
@@ -522,16 +521,16 @@ snfq <- source_data("snf_ratio.r") |>
 date <- sourcoise::sourcoise_meta("snf_ratio.r")$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 naq_a <-  naq |> 
-  filter(champ == "mdhi") |> 
-  select(geo, time, psal_snf  = psal, psalb_snf = psalb)
+  filter(champ == "mdhifi") |> 
+  select(geo, time, psal_branche  = psal, psalb_branche = psalb)
 data <- snfq |> 
-  select(geo, time, psal_branche = psal, psalb_branche = psalb) |> 
+  select(geo, time, psal_snf = psal, psalb_snf = psalb) |> 
   left_join(naq_a, by = c("geo", "time")) |> 
   pivot_longer(starts_with("psal")) |> 
   separate(name, into = c("concept", "champ")) |> 
-  filter(time>="1995-01-01") |> 
+  filter(time>="1995-01-01", !(concept=="psalb"&champ=="branche")) |> 
   mutate(
-    tooltip2 = glue("Valeur ajoutée {ifelse(concept=='psal', 'nette', 'brute')}; {ifelse(champ=='snf', 'SNF', 'branches marchandes hors imm.')}") )
+    tooltip2 = glue("Valeur ajoutée {ifelse(concept=='psal', 'nette', 'brute')}; {ifelse(champ=='snf', 'SNF', 'branches marchandes hors imm.&fin.')}") )
 
 psnf <- ggplot(data) +
   aes(x=time,  col = geo) +
@@ -540,8 +539,8 @@ psnf <- ggplot(data) +
     labels = c(psal = "VA nette", psalb="VA brute"),
     name = NULL)+
   scale_linetype_manual(
-    values = c(branche = "solid", snf="11"),
-    labels = c(branche = "Branches non marchandes hors imm.", snf = "SNF"),
+    values = c(snf = "solid", branche="11"),
+    labels = c(branche = "Branches non marchandes hors imm.&fin.", snf = "SNF"),
     name  = NULL) +
   scale_linewidth_manual(
     values = c(psal = .5, psalb=0.2),
@@ -574,17 +573,120 @@ psnf <- ggplot(data) +
     legend.spacing.y = unit(4, "pt") ) +
   guides(color = "none", fill = "none",
          linetype = guide_legend(ncol = 1),
-         linewidth = guide_legend(ncol = 1),
-         alpha = guide_legend(ncol = 1)) +
+         linewidth = guide_legend(order=1, ncol = 1),
+         alpha = guide_legend(order=1, ncol = 1)) +
   ofce_caption(
-    source = "Eurostat, comptes nationaux trimestriels de secteur (nasq_10_nf_tr), téléchargés le {date}, calcul de l'auteur.",
+    source = "Eurostat, comptes nationaux trimestriels d'agents ou de secteurs institutionels (nasq_10_nf_tr), téléchargés le {date}, calcul de l'auteur.",
     code =  "github.com/xtimbeau/travail/snf_ratio.r",
     champ = "Sociétés non financières (les définitions varient suivant les pays)")
 
 girafy(psnf, 1.5)
 ```
 
-## Profits nets et dividendes dans les comptes d'agent
+```{r}
+#| label: fig-s1112psal
+#| fig-cap: Part des salaires dans la VA, SNF+SF, comptes d'agents
+#| fig-asp: 1
+
+snffq <- source_data("snf_ratio.r") |> 
+  pluck("snfq") |> 
+  mutate(year = floor_date(time, "year")) |> 
+  select(-starts_with("s_adj_")) |> 
+  group_by(geo, time, year) |> 
+  summarize(across(-sector, ~sum(.x)),
+            .groups = "drop") |> 
+  group_by(geo, year) |> 
+  select(-time) |> 
+  summarize(across(everything(), ~sum(.x)/n()*4),
+            .groups = "drop") |> 
+  rename(time = year) |> 
+  mutate(
+    van = B1N,
+    vab = B1G,
+    msa = D1,
+    psal = D1/B1N,
+    psalb = D1/B1G,
+    div = (D42)/B1N,
+    divb = (D42)/B1G,
+    isp = (D5+D2+D3)/B1N,
+    tp = (B1N-D1-D5-D2-D3)/B1N ) |> 
+  mutate(tooltip = glue(
+    "<b>{lbl(geo)}</b>
+    {year(time)}
+    Impôts net de subvention dans la VAN : {round(100*isp,1)}%
+    Rémunérations dans la VAN : {round(psal*100,1)}%
+    Rémunérations dans la VAB : {round(psalb*100,1)}%
+    Profits nets (d'IS, taxes et subvention) dans la VAN : {round(tp*100,1)}%
+    Dividendes nets dans la VAN : {round(div*100,1)}%")) |> 
+  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE"))) |> 
+  filter(time>= "1995-01-01")
+
+date <- sourcoise::sourcoise_meta("snf_ratio.r")$data_date |> ymd_hms() 
+date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
+naq_a <-  naq |> 
+  filter(champ == "mdhi") |> 
+  select(geo, time, psal_branche  = psal, psalb_branche = psalb)
+data <- snfq |> 
+  select(geo, time, psal_snf = psal, psalb_snf = psalb) |> 
+  left_join(naq_a, by = c("geo", "time")) |> 
+  pivot_longer(starts_with("psal")) |> 
+  separate(name, into = c("concept", "champ")) |> 
+  filter(time>="1995-01-01", !(concept=="psalb"&champ=="branche")) |> 
+  mutate(
+    tooltip2 = glue("Valeur ajoutée {ifelse(concept=='psal', 'nette', 'brute')}; {ifelse(champ=='snf', 'SNF', 'branches marchandes hors imm..')}") )
+
+psnff <- ggplot(data) +
+  aes(x=time,  col = geo) +
+  scale_alpha_manual(
+    values = c(psal = 1, psalb=0.5),
+    labels = c(psal = "VA nette", psalb="VA brute"),
+    name = NULL)+
+  scale_linetype_manual(
+    values = c(snf = "solid", branche="11"),
+    labels = c(branche = "Branches non marchandes hors imm..", snf = "SNF&SF"),
+    name  = NULL) +
+  scale_linewidth_manual(
+    values = c(psal = .5, psalb=0.2),
+    labels = c(psal = "VA nette", psalb="VA brute"),
+    name  = NULL)+
+  geom_ribbon(
+    data = snfq,
+    aes(ymin = psalb, ymax =psal, fill = geo), alpha =0.1, color = NA) +
+  geom_line_interactive(
+    aes(y=value, linetype = champ, linewidth = concept, alpha = concept,
+        group = interaction(champ, concept, geo),
+      tooltip = tooltip2)) +
+  geom_point_interactive(
+     data = snfq,
+     aes( y = psal, fill = geo,
+        tooltip = tooltip, data_id = time),
+        size = 1, stroke = 0.25, shape = 21, color = "white",
+        hover_nearest = TRUE, show.legend=FALSE) +
+  ylab("% de la VA") + xlab(NULL) +
+  facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
+  scale_ofce_date(
+   labels = date1d ) +
+  scale_y_continuous(labels = scales::label_percent(1)) +
+  scale_color_pays(format = "eurostat") +
+  thm +
+  theme(
+    legend.position = "bottom",
+    legend.justification = c(0.5, 1),
+    legend.direction = "horizontal",
+    legend.spacing.y = unit(4, "pt") ) +
+  guides(color = "none", fill = "none",
+         linetype = guide_legend(ncol = 1),
+         linewidth = guide_legend(order=1,ncol = 1),
+         alpha = guide_legend(order=1,ncol = 1)) +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux trimestriels d'agents ou de secteurs institutionels (nasq_10_nf_tr), téléchargés le {date}, calcul de l'auteur.",
+    code =  "github.com/xtimbeau/travail/snf_ratio.r",
+    champ = "Sociétés non financières et financières (les définitions varient suivant les pays)")
+
+girafy(psnff, 1.5)
+```
+
+## Profits nets et dividendes dans les comptes d'agents
 
 Les comptes des sociétés non financières permettent d’examiner d'autres éléments du compte. On affiche ici le profit net sur la valeur ajoutée nette, et le taux de dividendes nets sur la valeur ajoutée nette.
 

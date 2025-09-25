@@ -69,6 +69,14 @@ naq_a10 <- "namq_10_a10" |>
               select(nace_r2 = a10, md=marchand, hi = hors_imm, hifi, hfi),
             by = "nace_r2")
 
+men <- "nasq_10_nf_tr" |>
+  get_eurostat(
+    filters = list(unit = "CP_MEUR",
+                   sector = c("S14"),
+                   s_adj = c("SCA", "NSA"),
+                   na_item = c("B1G", "B1N", "D1", "D5", "D4", "D42_TO_D45", "D41", "D42", "D3", "D2"),
+                   geo = pays2) )
+
 naq <- naq_a10 |>
   group_by(geo, time) |>
   summarize(
