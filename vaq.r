@@ -69,6 +69,24 @@ naq_a10 <- "namq_10_a10" |>
               select(nace_r2 = a10, md=marchand, hi = hors_imm, hifi, hfi),
             by = "nace_r2")
 
+L68A <- "nama_10_a64" |>
+  get_eurostat(filters = list(unit = "CP_MEUR",
+                              nace_r2  = c("L", "L68A"),
+                              na_item = c("B1G", "D1", "D11", "P51C", "D29X39"),
+                              geo = pays2) ) |>
+  drop_na(values) |>
+  pivot_wider(names_from = c(na_item, nace_r2), values_from = values) |>
+  group_by(geo) |>
+  mutate(p51c = ifelse(is.na(P51C_L68A), P51C_L*B1G_L68A/B1G_L, P51C_L68A),
+         d1 = 0,
+         d29x39 = ifelse(is.na(D29X39_L68A), D29X39_L*B1G_L68A/B1G_L, D29X39_L68A) ) |>
+  transmute(time, geo,
+            nace_r2 = 'Lbis',
+            B1G = B1G_L68A,
+            P51C = p51c,
+            D1 = d1,
+            D29X39 = d29x39)
+
 men <- "nasq_10_nf_tr" |>
   get_eurostat(
     filters = list(unit = "CP_MEUR",
