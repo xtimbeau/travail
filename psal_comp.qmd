@@ -247,8 +247,11 @@ Les données trimestrielles sont annualisées pour la lisibilité et pour simpli
 #| fig-asp: 1
 #| fig-cap: Non salarisation, part des salaires dans la VA nette, comptes de branches
 
-champs  <- c("md" = "marchand", "mdhifi" = "marchand hors immobilier et services financiers",
-            "mdhfi"= "marchand hors services financiers", "tb" = "Toutes branches (marchandes et non marchandes)")
+champs  <- c("md" = "marchand", 
+             "mdhifi" = "marchand hors immobilier et services financiers",
+            "mdhfi"= "marchand hors services financiers", 
+            "mdhi"= "marchand hors imm.", 
+            "tb" = "Toutes branches (marchandes et non marchandes)")
 naq <- source_data("vaq.r")$naa |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
@@ -268,27 +271,43 @@ annot <-  tribble(
   mutate(time = as.Date(time),
          geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
 
-labels_champ = c(tb = "Ttes branches", md="Marchand", mdhifi = "Marchand hors imm.&fin.")
+labels_champ = c(tb = "Ttes branches", md="Marchand", 
+                 mdhifi = "Marchand hors imm.&fin.",
+                 mdhi = "Marchand hors imm.")
 
-psal <- ggplot(naq |> filter(champ %in% c("tb", "mdhifi"))) +
-  aes(x=time, y=psal, col = geo, linetype = champ, alpha = champ) +
-  scale_alpha_manual(values = c(tb=.25, md=.25, mdhifi = 1),
-                     labels = labels_champ,
-                     name = NULL) +
-  scale_linetype_manual(values = c(tb="11", md="solid", mdhifi ="solid"),
-                        labels = labels_champ,
-                        name = NULL) +
-  geom_ribbon(aes(ymin = psalnc, ymax = psal, fill = geo), 
-              color = NA, alpha=0.1, show.legend = FALSE) +
+data <- naq |> 
+  filter(champ %in% c("tb", "mdhi")) |> 
+  select(time, geo, champ, psal, psalnc) |> 
+  pivot_longer(c(psal, psalnc), names_to = "concept") |> 
+  mutate(
+    tooltip2 = ifelse(concept=="psal", 
+                      "Part des salaires dans la VAN, non corrigée de la non salarisation",
+                      "Part des salaires dans la VAN, corrigée de la non salarisation"))
+
+psal <- ggplot(data) +
+  aes(x=time, col = geo) +
+  scale_alpha_manual(
+    values = c(tb=.75, md=.75, mdhi = 1),
+    labels = labels_champ,
+    name = NULL) +
+  scale_linetype_manual(
+    values = c(tb="11", md="solid", mdhi ="solid"),
+    labels = labels_champ,
+    name = NULL) +
+  scale_linewidth_manual(
+    values = c(psal=.5, psalnc=0.2),
+    labels = c(psal="Corrigé de la non salarisation", psalnc="Non corrigé"),
+    name = NULL) +
+  geom_ribbon(
+    data = naq |> filter(champ %in%c("mdhi", "tb")),
+    aes(ymin = psalnc, ymax = psal, fill = geo, group = champ), 
+        color = NA, alpha=0.1, show.legend = FALSE) +
   geom_line_interactive( 
-    aes(y=psalnc, tooltip = "Part des salaires dans la VAN, non corrigée de la non salarisation"),
-    linewidth = 0.2) +
-  geom_line_interactive(
-    aes(tooltip = "Part des salaires dans la VAN, corrigée de la non salarisation"),
-    linewidth = 0.5) +
+    aes(y=value, linetype = champ, linewidth = concept, alpha = champ,
+        tooltip = tooltip2)) +
   geom_point_interactive(
-    data = ~.x |> filter(champ == "mdhifi"),
-    aes(tooltip = tooltip, data_id = time, fill = geo),
+    data = naq |> filter(champ == "mdhi"),
+    aes(y=psal, tooltip = tooltip, data_id = time, fill = geo),
     size = 1, stroke = 0.2, shape = 21, color = "white",
     hover_nearest = TRUE, show.legend=FALSE) +
 #  geom_marquee(
@@ -298,15 +317,17 @@ psal <- ggplot(naq |> filter(champ %in% c("tb", "mdhifi"))) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
     labels = date1d ) +
-  guides( fill = "none", color = "none") + 
+  guides( fill = "none", color = "none",
+          linewidth = guide_legend(ncol = 1),
+          alpha = guide_legend(ncol = 1), 
+          linetype = guide_legend(ncol = 1)) + 
   scale_y_continuous(labels = scales::label_percent(1), 
-                     breaks = scales::pretty_breaks(3),
-                     limits = c(.5, 1)) +
+                     breaks = scales::pretty_breaks(3)) +
   scale_color_pays(format = "eurostat") +
   thm +
   theme(
-    legend.position = c(1, 0.025),
-    legend.justification = c(1, 0) ) +
+    legend.position = "bottom",
+    legend.justification = c(0.5, 0) ) +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}.",
@@ -321,7 +342,7 @@ La correction de la non salarisation, en imputant une masse salariale pour les e
 
 ```{r}
 #| label: fig-psalnetbrut
-#| fig-asp: 1.25
+#| fig-asp: 1
 #| fig-cap: Part des salaires dans la VA nette et brute, comptes de branches
 
 champs  <- c("md" = "marchand",
@@ -347,43 +368,55 @@ annot <-  tribble(
   mutate(time = as.Date(time),
          geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
 
-psal <- ggplot(naq |> filter(champ %in% c("tb", "mdhifi"))) +
-  aes(x=time, y=psal, col = geo, linetype = champ, alpha = champ) +
-  scale_alpha_manual(values = c(tb=.25, md=.25, mdhifi = 1),
-                        labels = labels_champ,
-                        name = NULL) +
-  scale_linetype_manual(values = c(tb="11", md="solid", mdhifi ="solid"),
-                        labels = labels_champ,
-                        name = NULL) +
-  geom_ribbon(aes(ymin = psalb, ymax = psal, fill = geo), 
-              color = NA, alpha=0.1, show.legend = FALSE) +
+data <- naq |>
+  select(geo, time, champ, psal, psalb) |> 
+  filter(champ %in% c("tb", "mdhi")) |> 
+  pivot_longer(c(psal, psalb), names_to = "concept") |> 
+  mutate(
+    tooltip2 = glue("{ifelse(concept=='psal', 'VA nette', 'VA brute')}")
+  )
+
+psal <- ggplot() +
+  aes(x=time,  col = geo) +
+  scale_alpha_manual(
+    values = c(psalb=.25, psal = 1),
+    labels = c(psal="VA nette", psalb="VA brute"),
+    name = NULL) +
+  scale_linetype_manual(
+    values = c(tb="11", mdhi ="solid"),
+    labels = labels_champ,
+    name = NULL) +
+  scale_linewidth_manual(
+    values = c(psal=.5, psalb=.25),
+    labels = c(psal="VA nette", psalb="VA brute"),
+    name = NULL) +
+  geom_ribbon(
+     data = naq |> filter(champ %in% c("tb", "mdhi")),
+     aes(ymin = psalb, ymax = psal, fill = geo, group = champ), 
+     color = NA, alpha=0.1, show.legend = FALSE) +
   geom_line_interactive( 
-    aes(y=psalb, 
-        tooltip = "Part des salaires dans la VAB, corrigée de la non salarisation",
-        data_id = champ),
-    linewidth = 0.2) +
-  geom_line_interactive(
-    aes(tooltip = "Part des salaires dans la VAN, corrigée de la non salarisation",
-        data_id = champ),
-    linewidth = 0.5) +
-  geom_point_interactive(
-    data = ~.x |> filter(champ == "mdhifi"),
-    aes(tooltip = tooltip, data_id = time, fill = geo),
-    size = 1, stroke = 0.2, shape = 21, color = "white",
-    hover_nearest = TRUE) +
+    data = data,
+    aes(y=value, linetype = champ, linewidth = concept, alpha = concept,
+        group = interaction(geo, champ, concept),
+        tooltip = tooltip2,
+        data_id = time)) +
+   geom_point_interactive(
+     data = naq |> filter(champ == "mdhi"),
+     aes(tooltip = tooltip, data_id = time, fill = geo, y=psal),
+     size = 1, stroke = 0.2, shape = 21, color = "white",
+     hover_nearest = TRUE) +
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
     labels = date1d ) +
   scale_y_continuous(labels = scales::label_percent(1),
-                     breaks = scales::pretty_breaks(3),
-                     limits = c(.5, 1)) +
+                     breaks = scales::pretty_breaks(3)) +
   scale_color_pays(format = "eurostat") +
   thm +
   guides(fill = "none", color = "none") +
   theme(
-    legend.position = c(1, 0.025),
-    legend.justification = c(1, 0) ) +
+    legend.position = "bottom",
+    legend.justification = c(.5, 0) ) +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}.",
@@ -397,7 +430,7 @@ La notion de part des salaires dans la valeur ajoutée nette consiste à réduir
 
 ```{r}
 #| label: fig-psalcompote
-#| fig-asp: 1
+#| fig-asp: 1.25
 #| fig-cap: Tous concepts, comparaison entre pays
 
 data <- naq |> 
@@ -531,7 +564,7 @@ psnf <- ggplot(data) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
    labels = date1d ) +
-  scale_y_continuous(labels = scales::label_percent(1), limits = c(NA, 1)) +
+  scale_y_continuous(labels = scales::label_percent(1)) +
   scale_color_pays(format = "eurostat") +
   thm +
   theme(
