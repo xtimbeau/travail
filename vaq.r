@@ -69,6 +69,21 @@ naq_a10 <- "namq_10_a10" |>
               select(nace_r2 = a10, md=marchand, hi = hors_imm, hifi, hfi),
             by = "nace_r2")
 
+naq_L <- naq_a10 |>
+  filter(nace_r2 == "L") |>
+  mutate(year = year(time),
+         D29X39 = B1G * d29x39) |>
+  group_by(geo, year) |>
+  summarize(
+    nq = n(),
+    across(c(B1G, D1, D29X39), ~sum(.x, na.rm=TRUE)*4/nq),
+    .groups = "drop") |>
+  mutate(time = ym(str_c(year, "-01"))) |>
+  select(-year) |>
+  rename(B1Gq = B1G,
+         D1q = D1,
+         D29X39q = D29X39)
+
 L68A <- "nama_10_a64" |>
   get_eurostat(filters = list(unit = "CP_MEUR",
                               nace_r2  = c("L", "L68A"),
@@ -77,31 +92,61 @@ L68A <- "nama_10_a64" |>
   drop_na(values) |>
   pivot_wider(names_from = c(na_item, nace_r2), values_from = values) |>
   group_by(geo) |>
-  mutate(p51c = ifelse(is.na(P51C_L68A), P51C_L*B1G_L68A/B1G_L, P51C_L68A),
-         d1 = 0,
-         d29x39 = ifelse(is.na(D29X39_L68A), D29X39_L*B1G_L68A/B1G_L, D29X39_L68A) ) |>
+  mutate(
+    r51c = P51C_L68A/P51C_L,
+    r2939 = D29X39_L68A/D29X39_L,
+    rb1g = B1G_L68A/B1G_L,
+    p51c = ifelse(is.na(P51C_L68A), P51C_L*B1G_L68A/B1G_L, P51C_L68A),
+    d1 = 0,
+    d29x39 = ifelse(is.na(D29X39_L68A), D29X39_L*B1G_L68A/B1G_L, D29X39_L68A) ) |>
   transmute(time, geo,
             nace_r2 = 'Lbis',
-            B1G = B1G_L68A,
-            P51C = p51c,
-            D1 = d1,
-            D29X39 = d29x39)
+            B1G = B1G_L - B1G_L68A,
+            B1G_L,
+            r68a = B1G_L68A/B1G_L,
+            P51C = P51C_L - p51c,
+            D1 = D1_L - d1,
+            D29X39 = D29X39_L - d29x39) |>
+  right_join(naq_L, by = c("time", "geo")) |>
+  arrange(geo, time) |>
+  group_by(geo) |>
+  mutate(rp51c = P51C/B1G,
+         rd29 = D29X39/B1G,
+         rb1 = B1G/B1Gq) |>
+  fill(c(rp51c, rd29, rb1)) |>
+  mutate(
+    B1G = rb1 * B1Gq,
+    P51C = rp51c * B1G,
+    D29X39 = rd29 * B1G) |>
+  mutate(
+    rB1G = B1G/B1G_L,
+    rP51C = P51C/B1G,
+    rD29X39 = D29X39/B1G )
 
-men <- "nasq_10_nf_tr" |>
-  get_eurostat(
-    filters = list(unit = "CP_MEUR",
-                   sector = c("S14"),
-                   s_adj = c("SCA", "NSA"),
-                   na_item = c("B1G", "B1N", "D1", "D5", "D4", "D42_TO_D45", "D41", "D42", "D3", "D2"),
-                   geo = pays2) )
+L68Aq <- L68A |>
+  mutate(year = year(time)) |>
+  select(geo, year, rP51C, rD29X39, rB1G, nace_r2) |>
+  left_join(naq_a10 |> filter(nace_r2 == "L") |> transmute(time, year=year(time), geo, B1G, msa, msanc),
+            by = c("geo", "year")) |>
+  transmute(
+    nace_r2, time, geo,
+    md = FALSE, hi = FALSE, hifi = FALSE, hfi = FALSE,
+    him = TRUE,
+    vab = B1G * rB1G,
+    van = vab - rP51C * vab,
+    ip = rD29X39 * vab,
+    msa, msanc)
 
 naq <- naq_a10 |>
+  mutate(him = hi&md) |>
+  bind_rows(L68Aq) |>
   group_by(geo, time) |>
   summarize(
     across(c(van, vab, msa, msanc, ip), ~sum(.x[md], na.rm=TRUE), .names = "{.col}_md"),
     across(c(van, vab, msa, msanc, ip), ~sum(.x[hi&md], na.rm=TRUE), .names = "{.col}_mdhi"),
     across(c(van, vab, msa, msanc, ip), ~sum(.x[hifi&md], na.rm=TRUE), .names = "{.col}_mdhifi"),
     across(c(van, vab, msa, msanc, ip), ~sum(.x[hfi&md], na.rm=TRUE), .names = "{.col}_mdhfi"),
+    across(c(van, vab, msa, msanc, ip), ~sum(.x[him], na.rm=TRUE), .names = "{.col}_mdhim"),
     across(c(van, vab, msa, msanc, ip), ~sum(.x, na.rm=TRUE), .names = "{.col}_tb"),
     .groups = "drop") |>
   pivot_longer(starts_with(c("van", "vab", "msa", "ip"))) |>
@@ -140,6 +185,15 @@ na_tot <-  "nama_10_gdp" |>
   drop_na() |>
   pivot_wider(names_from = na_item, values_from = values) |>
   transmute(geo, time, d2131 = D21 - D31)
+
+# men <- "nasq_10_nf_tr" |>
+#   get_eurostat(
+#     filters = list(unit = "CP_MEUR",
+#                    sector = c("S14"),
+#                    s_adj = c("SCA", "NSA"),
+#                    na_item = c("B1G", "B1N", "D1", "D5", "D4", "D42_TO_D45", "D41", "D42", "D3", "D2"),
+#                    geo = pays2) )
+
 
 max_y <- max(year(na_tot$time))
 
