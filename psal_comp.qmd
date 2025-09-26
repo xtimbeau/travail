@@ -56,11 +56,17 @@ L'analyse du partage de la valeur ajoutée est au cœur des débats sur la redis
 
 -   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, mais qu'il est difficile de dépasser. Elle a des conséquences pour les comparaisons entre périodes pour un même pays parce que la part des non salariés varie dans le temps, de façon différente suivant les branches et entre pays.
 
--   Définir le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour par auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus expérimentale, en enlevant de la valeur ajoutée marchande la sous branche "loyers imputés aux propriétaires occupants (L68a)".
+-   Définir le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour par auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus expérimentale, en enlevant de la valeur ajoutée marchande la sous branche "*loyers imputés aux propriétaires occupants* (L68a)".
 
 -   Utiliser la notion de valeur ajoutée nette (de la CCF) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. Cette dernière notion découle de l'application de tables de mortalité à un inventaire permanent des investissements non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire par leur amortissement, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée.
 
-```{r}
+Le concept que nous privilégions est donc défini comme suit (où, pour chaque branche $D1_b$ est la masse salariale chargée, $B1G_b$ la valeur ajoutée brute, $P51C_b$ la $CCF_b$, les trois notions en euros aux prix courants et $ns_b$ et $sal_b$ les effectifs en personne par branche) :
+
+$$
+S_{net, n.s., -OQL}  = \frac{\sum_{b\in{TT-L-O-Q}}{D1_b*(1+ns_b/sal_b)}}{\sum_{b\in{TT-L-O-Q}}{B1G_b - P51C_b}}
+$$
+
+```{r, results='asis'}
 #| label: fig-psal
 #| fig-asp: 1
 #| fig-cap: Part des salaires dans la VA nette
@@ -85,12 +91,12 @@ labels_champ = c(tb = "Ttes branches", md="Marchand", mdhifi = "Marchand hors im
                  mdhim = "Marchand hors L68A (ménages)",
                  mdhi = "Marchand hors imm.")
 
-psal <- imap(c(mdhi = "Hors services immobiliers (-L)", mdhim = "Hors loyers imputés (-L68A)"),
-  ~ggplot(naq |> filter(champ == .y)) +
+psal <- imap(c("Hors services immobiliers (-L)" = "mdhi", "Hors loyers imputés (-L68A)" = "mdhim"),
+  ~ggplot(naq |> filter(champ == .x)) +
     aes(x=time, y=psal, col = geo, group = geo) +
     geom_line(color = "grey85", layout = "fixed", linewidth = 0.2) +
     geom_line_interactive(
-      aes(tooltip = "Part des salaires dans la VAN,<br>corrigée de la non salarisation,<br>{.x}" |> glue()),
+      aes(tooltip = "Part des salaires dans la VAN,<br>corrigée de la non salarisation,<br>{.y}" |> glue()),
       linewidth = 0.5) +
     geom_point_interactive(
       aes(tooltip = tooltip, data_id = time, fill = geo),
@@ -113,8 +119,8 @@ psal <- imap(c(mdhi = "Hors services immobiliers (-L)", mdhim = "Hors loyers imp
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}.",
     code =  "github.com/xtimbeau/travail/vaq.r",
-    champ = "Branches marchandes {tolower(.x)}.",
-    note = "La CCF provient des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà.") ) 
+    champ = "Branches marchandes {tolower(.y)}.",
+    note = "La CCF ou les impôts nets de subventions proviennent des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà. Le partage de la valeur ajoutée pour les derniers points évolue comme le partage dans la valeur ajoutée brute.") ) 
 
 ofce::tabsetize(psal)
 ```
@@ -236,7 +242,7 @@ Les données trimestrielles sont annualisées pour la lisibilité et pour simpli
 ```{r}
 #| label: fig-psalcnc
 #| fig-asp: 1
-#| fig-cap: Non salarisation, part des salaires dans la VA nette, comptes de branches
+#| fig-cap: Correction pour la non salarisation ou non, comptes de branches
 
 champs  <- c("md" = "marchand", 
              "mdhifi" = "marchand hors immobilier et services financiers",
@@ -334,7 +340,7 @@ La correction de la non salarisation, en imputant une masse salariale pour les e
 ```{r}
 #| label: fig-psalnetbrut
 #| fig-asp: 1
-#| fig-cap: Part des salaires dans la VA nette et brute, comptes de branches
+#| fig-cap: Nette ou brute, comptes de branches
 
 champs  <- c("md" = "marchand",
             "mdhifi" = "marchand hors immobilier et services financiers",
@@ -429,7 +435,7 @@ data <- naq |>
   select(geo, time, champ, psal, psalnc, psalb, psalncb) |> 
   pivot_longer(c(psal, psalnc, psalb, psalncb)) |> 
   mutate(name = factor(name, c("psal", "psalb", "psalnc", "psalncb")),
-         champ = factor(champ, c("tb", "md", "mdhi", "mdhfi", "mdhifi")))
+         champ = factor(champ, c("tb", "md", "mdhi", "mdhim", "mdhfi", "mdhifi")))
 
 strips_name <- c(psal = "Nette, avec n.s.",
                 psalnc = "Nette, sans n.s.",
@@ -438,6 +444,7 @@ strips_name <- c(psal = "Nette, avec n.s.",
 strips_champ <- c(tb = "Ttes branches",
                 md = "Marchand",
                 mdhi = "hors imm.",
+                mdhim = "hors loy. imp.",
                 mdhfi = "hors fin.",
                 mdhifi = "hors imm.&fin.")
 
@@ -626,7 +633,7 @@ data <- snfq |>
   separate(name, into = c("concept", "champ")) |> 
   filter(time>="1995-01-01", !(concept=="psalb"&champ=="branche")) |> 
   mutate(
-    tooltip2 = glue("Valeur ajoutée {ifelse(concept=='psal', 'nette', 'brute')}; {ifelse(champ=='snf', 'SNF', 'branches marchandes hors imm..')}") )
+    tooltip2 = glue("Valeur ajoutée {ifelse(concept=='psal', 'nette', 'brute')}; {ifelse(champ=='snf', 'SNF', 'branches marchandes hors imm.')}") )
 
 psnff <- ggplot(data) +
   aes(x=time,  col = geo) +
@@ -636,7 +643,7 @@ psnff <- ggplot(data) +
     name = NULL)+
   scale_linetype_manual(
     values = c(snf = "solid", branche="11"),
-    labels = c(branche = "Branches non marchandes hors imm..", snf = "SNF&SF"),
+    labels = c(branche = "Branches non marchandes hors imm..", snf = "SNF+SF"),
     name  = NULL) +
   scale_linewidth_manual(
     values = c(psal = .5, psalb=0.2),
@@ -689,11 +696,11 @@ $$
 \Pi = B1G - P51C - D1 - (D2-D3) - D5
 $$
 
-Les dividendes sont la ligne \$D42\$ nette de ce qui est payé et reçu par le secteur S11.
+Les dividendes sont la ligne $D42$ nette de ce qui est payé et reçu par le secteur des sociétés non financières (SNF ou S11).
 
 ```{r}
 #| label: fig-profits
-#| fig-cap: Profits nets dans la VA, comptes de secteur
+#| fig-cap: Profits nets dans la VA, SNF, comptes de secteur
 #| fig-asp: 1
 
 data <- snfq |> 
@@ -710,7 +717,7 @@ pprofit <- ggplot(data) +
     labels = c(tp = "Profits nets", div = "Dividendes"), 
     name = NULL) +
   scale_alpha_manual(
-    values = c(tp = 1, div = 0.5),
+    values = c(tp = 1, div = 0.75),
     labels = c(tp = "Profits nets", div = "Dividendes"), 
     name = NULL) +
   geom_line_interactive(
@@ -729,8 +736,7 @@ pprofit <- ggplot(data) +
   scale_y_continuous(labels = scales::label_percent(1)) +
   scale_color_pays(format = "eurostat") +
   thm +
-  theme(legend.position = c(0.35, 0.95),
-        legend.justification = c(0, 1)) +
+  theme(legend.direction = "horizontal") +
   guides(color = "none", fill = "none") +
   ofce_caption(
     source = "Eurostat, comptes nationaux trimestriels de secteur (nasq_10_nf_tr), téléchargés le {date}, calcul de l'auteur.",
@@ -742,7 +748,7 @@ girafy(pprofit, 1.5)
 
 On peut rapporter ces notions aux éléments qui viennent du compte de capital. Le premier concept est le profit rapporté au stock de capital physique (tel que valorisé dans la comptabilité nationale, c'est-à-dire à la valeur de remplacement et au prix de marché). Malheureusement, à part la France, aucun pays dans notre échantillon ne diffuse ces données sur Eurostat.
 
-On rapporte également à une notion financière, à savoir la valeur nette des actions au passif des comptes d'entreprises. Les conventions de valorisation des actions non côtées sont délicates et difficiles à suivre d'un pays à l'autres. On choisit ici d'augmenter ces actions de la valeur nette résiduelle des entreprises non financières ($BF90$). On a donc :
+On rapporte également à une notion financière, à savoir la valeur nette des actions au passif des comptes d'entreprises. Les conventions de valorisation des actions non côtées sont délicates et difficiles à suivre d'un pays à l'autre. On choisit ici d'augmenter ces actions de la valeur nette résiduelle des entreprises non financières ($BF90$). On a donc :
 
 $$
 \begin{align}
@@ -760,11 +766,13 @@ On obtient le graphe suivant :
 
 assetsnfi <- source_data("snf_ratio.r") |> 
   pluck("assetsnfi") |> 
+  filter(sector == "S11") |> 
   transmute(geo, time, phycap = N1N + N2N) |>
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
 
 assetsfi <- source_data("snf_ratio.r") |> 
   pluck("assetsfi") |> 
+  filter(sector == "S11") |> 
   select(geo, time, net_shares, net_shares_augmented) |>
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
 
@@ -772,12 +780,16 @@ snfq_a <- snfq |>
   filter(time >= "1995-01-01") |> 
   left_join(assetsfi, by = c("geo", "time")) |> 
   left_join(assetsnfi, by = c("geo", "time")) |> 
-  mutate(rendphy = tp*B1N/phycap,
-         rendshare = tp*B1N/net_shares,
-         rendshareaug = tp*B1N/net_shares_augmented)
+  transmute(
+    geo, time,
+    rendphy = tp*B1N/phycap,
+    rendshare = tp*B1N/net_shares,
+    rendshareaug = tp*B1N/net_shares_augmented) |> 
+  pivot_longer(-c(geo, time))
 
 ptprofit <- ggplot(snfq_a) +
-  aes(x=time, col = geo) +
+  aes(x=time, col = geo, linetype = name, alpha = name) +
+  scale_alpha_manual() +
   geom_line_interactive(
      aes(y = rendphy, 
          tooltip = "rendement physique, SNF"),
@@ -814,7 +826,7 @@ girafy(ptprofit, 1.5)
 
 ## Au delà de l'Europe
 
-L'accès aux données de l'OCDE est devenu particulièrement opaque, mais je m'en suis sorti. Il est possible d'utiliser des données de comptabilité nationale, au niveau de l'ensemble de l'économie (y compris donc les branches non marchandes et l'immobilier). La correction pour la non-salarisation est assurée par les données de l'Economic Outlook (avec une trimestrialisation ad hoc). Au lieu de la valeur ajoutée, on utilise le PIB, auquel on enlève la conosmmation de capital fixe (dans les données OCDE, il n'y a pas de données de CCF pour le Japon). Le concept de part des salaires n'est donc pas tout à fait le même que dans les autres analyses.
+L'accès aux données de l'OCDE est devenu particulièrement opaque, mais je m'en suis sorti. Il est possible d'utiliser des données de comptabilité nationale, au niveau de l'ensemble de l'économie (y compris donc les branches non marchandes et l'immobilier). La correction pour la non-salarisation est assurée par les données de l'*Economic Outlook* (avec une trimestrialisation *ad hoc*). Au lieu de la valeur ajoutée, on utilise le PIB, auquel on enlève la consommation de capital fixe (dans les données OCDE, il n'y a pas de données de CCF pour le Japon). Le concept de part des salaires n'est donc pas tout à fait le même que dans les autres analyses.
 
 On obtient ce graphique :
 
@@ -861,7 +873,7 @@ psaloecd <- ggplot(data |> filter(year(time)>=1995)) +
 girafy(psaloecd, 1.5)
 ```
 
-En revanche, Eurostat a un programme de coopération (avec l'OCDE) pour intégrer les données dans un même cadre.
+En revanche, Eurostat a un programme de coopération (avec l'OCDE) pour intégrer les données dans le cadre d'Eurostat (sans que les méthodes ne soient plus homogènes pour autant).
 
 On utilise ces données ([`naidsa_10_nf_tr`](https://ec.europa.eu/eurostat/databrowser/view/naidsa_10_nf_tr__custom_13241966/default/table?lang=en)) pour construire des indicateurs comparables en comparant des pays autres que ceux de la zone euro.
 
