@@ -6,11 +6,11 @@ nace <- source_data("nace.r")$nace
 m_a20 <- nace  |> pull(a20) |> unique()
 m_a10 <- nace |> pull(a10) |> unique()
 
-pays2 <- c("DE", "FR", "IT", "ES", "NL", "BE")
-
 adj <- c("SCA", "SA", "CA", "NSA")
 
-label_pays <- set_names(countrycode::countrycode(pays2, "eurostat", "country.name.fr"), pays2)
+pays <- source_data("nace.r")$pays1
+
+label_pays <- set_names(countrycode::countrycode(pays, "eurostat", "country.name.fr"), pays2)
 
 naq10_e <- source_data("naq10_e")$naq_e
 
@@ -18,7 +18,7 @@ naa_a64 <- "nama_10_a64" |>
   get_eurostat(filters = list(unit = "CP_MEUR",
                               nace_r2  = m_a20,
                               na_item = c("B1G", "D1", "D11", "P51C", "D29X39"),
-                              geo = pays2) ) |>
+                              geo = pays) ) |>
   drop_na(values) |>
   pivot_wider(id_cols = c(nace_r2, geo, time),
               names_from =  na_item, values_from = values) |>
@@ -40,7 +40,7 @@ naq_a10 <- "namq_10_a10" |>
   get_eurostat(filters = list(unit = "CP_MEUR",
                               nace_r2  = m_a10,
                               na_item = c("B1G", "D1", "D11"),
-                              geo = pays2) ) |>
+                              geo = pays) ) |>
   select(na_item, geo, time, values, nace_r2, s_adj) |>
   mutate(s_adj = factor(s_adj, adj)) |>
   arrange(s_adj) |>
@@ -88,7 +88,7 @@ L68A <- "nama_10_a64" |>
   get_eurostat(filters = list(unit = "CP_MEUR",
                               nace_r2  = c("L", "L68A"),
                               na_item = c("B1G", "D1", "D11", "P51C", "D29X39"),
-                              geo = pays2) ) |>
+                              geo = pays) ) |>
   drop_na(values) |>
   pivot_wider(names_from = c(na_item, nace_r2), values_from = values) |>
   group_by(geo) |>
@@ -176,7 +176,7 @@ naa <- naq |>
 
 na_tot <-  "nama_10_gdp" |>
   get_eurostat(
-    filters = list(geo = pays2,
+    filters = list(geo = pays,
                    na_item = c("D21", "D31"),
                    unit = "CP_MEUR")) |>
   drop_na() |>
@@ -195,7 +195,7 @@ na_tot <-  "nama_10_gdp" |>
 max_y <- max(year(na_tot$time))
 
 nq_tot <- get_eurostat("namq_10_gdp",
-                       filters = list(geo = pays2,
+                       filters = list(geo = pays,
                                       na_item = c("D21X31"),
                                       unit = "CP_MEUR")) |>
   drop_na() |>
@@ -217,12 +217,12 @@ nq_tot <- get_eurostat("namq_10_gdp",
 d51 <- "nasa_10_nf_tr" |>
   get_eurostat(
     filters = list(na_item = c("B1G", "D51"), direct = "PAID",
-                   geo = pays2, unit = "CP_MEUR",
+                   geo = pays, unit = "CP_MEUR",
                    sector = c("S11", "S12"))) |>
   drop_na() |>
   pivot_wider(names_from = sector, values_from = values) |>
-  mutate(tb = S11 + S12, md = S11 + S12, mdhi = S11+S12, mdhifi = S11, mdhfi = S11) |>
-  pivot_longer(c(tb, md, mdhi, mdhifi, mdhfi), names_to = "champ", values_to = "value") |>
+  mutate(tb = S11 + S12, md = S11 + S12, mdhi = S11+S12, mdhim = S11+S12, mdhifi = S11, mdhfi = S11) |>
+  pivot_longer(c(tb, md, mdhi, mdhim, mdhifi, mdhfi), names_to = "champ", values_to = "value") |>
   select(-S11, -S12) |>
   pivot_wider(names_from = na_item, values_from = value) |>
   select(geo, time, is=D51, B1Ga = B1G, champ) |>

@@ -2,7 +2,7 @@ library(tidyverse)
 library(eurostat)
 library(ofce)
 
-pays2 <- c("DE", "FR", "IT", "ES", "NL", "BE")
+pays <- source_data("nace.r")$pays1
 
 nace <- source_data("nace.r")$nace
 m_a20 <- nace  |> pull(a20) |> unique()
@@ -11,7 +11,7 @@ m_a10 <- nace |> pull(a10) |> unique()
 assets_a10 <- get_eurostat("nama_10_nfa_st",
                            filters = list(
                              asset10 = "N11N",
-                             geo = pays2,
+                             geo = pays,
                              nace_r2 = m_a20, unit = "CRC_MEUR"  ) ) |>
   drop_na() |>
   arrange(desc(time)) |>

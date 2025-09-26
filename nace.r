@@ -28,4 +28,9 @@ nace  <- tribble( ~a20, ~a10, ~marchand, ~hors_imm, ~hifi, ~hfi,  ~hi,
 marchand <- nace |> filter(hors_imm&marchand) |> pull(a20)
 marchand2 <- unique(c(nace |> filter(hors_imm&marchand) |> pull(a10)))
 
-return(list(marchand = marchand, marchand2 = marchand2, nace = nace))
+pays1 <- c("DE", "FR", "IT", "ES", "NL", "BE")
+
+pays2 <- c("DE", "FR", "IT", "ES", "NL", "BE", "IE", "AT", "PT", "FI", "EL", "LU")
+
+
+return(list(marchand = marchand, marchand2 = marchand2, nace = nace, pays1 = pays1, pays2 = pays2))

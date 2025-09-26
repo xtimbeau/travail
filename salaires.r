@@ -2,12 +2,13 @@ library(tidyverse)
 library(eurostat)
 library(ofce)
 
-pays2 <- c("DE", "FR", "IT", "ES", "NL", "BE")
-label_pays <- set_names(countrycode::countrycode(pays2, "eurostat", "country.name.fr"), pays2)
+pays <- source_data("nace.r")$pays1
+
+label_pays <- set_names(countrycode::countrycode(pays, "eurostat", "country.name.fr"), pays)
 nace <- source_data("nace.r")$nace
 eq <- get_eurostat("namq_10_a10_e",
                    filters = list(na_item = "SAL_DC",
-                                  geo = pays2,
+                                  geo = pays,
                                   unit = "THS_PER")) |>
   drop_na(values) |>
   mutate(s_adj = factor(s_adj, c("SCA", "SA", "CA", "NSA"))) |>
@@ -20,7 +21,7 @@ eq <- get_eurostat("namq_10_a10_e",
 
 d1 <- get_eurostat("namq_10_a10",
                    filters = list(na_item = c("D1", "D11", "D12"),
-                                  geo = pays2,
+                                  geo = pays,
                                   unit = "CP_MEUR")) |>
   mutate(s_adj = factor(s_adj, c("SCA", "SA", "CA", "NSA"))) |>
   drop_na() |>
@@ -34,7 +35,7 @@ d1 <- get_eurostat("namq_10_a10",
 
 pc <- "namq_10_fcs" |>
   get_eurostat(
-    filters = list(na_item = "P31_S14", unit = c("CP_MEUR", "CLV20_MEUR"), geo = pays2)) |>
+    filters = list(na_item = "P31_S14", unit = c("CP_MEUR", "CLV20_MEUR"), geo = pays)) |>
   drop_na(values) |>
   mutate(s_adj = factor(s_adj, c("SCA", "SA", "CA", "NSA"))) |>
   group_by(across(-c(s_adj, values))) |>
@@ -72,6 +73,6 @@ salaires <- eq |>
     wr_hifi = 4*slider::slide_dbl(w_hifi, .before = 3, .f = mean)/pc,
     wr_hi = 4*slider::slide_dbl(w_hi, .before = 3, .f = mean)/pc) |>
   ungroup() |>
-  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+  mutate(geo = factor(geo, pays))
 
 return(salaires)

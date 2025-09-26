@@ -760,9 +760,6 @@ $$
 On obtient le graphe suivant :
 
 ```{r}
-#| label: fig-tprofit
-#| fig-cap: Rendements du capital, compte de secteur
-#| fig-asp: 1
 
 assetsnfi <- source_data("snf_ratio.r") |> 
   pluck("assetsnfi") |> 
@@ -785,41 +782,132 @@ snfq_a <- snfq |>
     rendphy = tp*B1N/phycap,
     rendshare = tp*B1N/net_shares,
     rendshareaug = tp*B1N/net_shares_augmented) |> 
-  pivot_longer(-c(geo, time))
+  mutate(tooltip2 = glue(
+  "<b>{lbl(geo)}</b>
+  {year(time)}
+  Rendement productif SNF : {round(100*rendphy,1)}% par an
+  Rendement financier SNF : {round(100*rendshareaug,1)}% par an")) |> 
+  pivot_longer(-c(geo, time, tooltip2)) |> 
+  mutate(
+    tooltip = glue("Profits sur {ifelse(name=='rendphy', 'actifs productifs', 'fonds propres augmentés de la valeur résiduelle')}") )
 
-ptprofit <- ggplot(snfq_a) +
-  aes(x=time, col = geo, linetype = name, alpha = name) +
-  scale_alpha_manual() +
+ptprofitsnf <- ggplot(snfq_a |> filter(name != "rendshare")) +
+  aes(x=time, col = geo, linewidth = name, alpha = name) +
+  scale_alpha_manual(
+    values = c(rendphy = 0.75, rendshareaug = 1),
+    labels = c(rendphy = "rendement productif", rendshareaug = "rendement financier"),
+    name = NULL
+  ) +
+  scale_linewidth_manual(
+    values = c(rendphy = 0.25, rendshareaug = .5),
+    labels = c(rendphy = "rendement productif", rendshareaug = "rendement financier"),
+    name = NULL
+  ) +
   geom_line_interactive(
-     aes(y = rendphy, 
-         tooltip = "rendement physique, SNF"),
-     show.legend=FALSE) +
- # geom_line_interactive(
- #     aes(y = rendshare, 
- #         tooltip = "Dividendes nets sur les fonds propres, SNF"),
- #     show.legend=FALSE, linewidth = 0.25) +
- geom_line_interactive(
-     aes(y = rendshareaug, 
-         tooltip = "rendement financier, SNF"),
-     show.legend=FALSE, linewidth = 0.25) +
+     aes(y = value, 
+         tooltip = tooltip) ) +
   geom_point_interactive(
-     aes(fill = geo, y = rendshareaug,
-        tooltip = tooltip, data_id = time),
+    data = ~.x |> filter(name == "rendshareaug"),
+     aes(fill = geo, y = value,
+        tooltip = tooltip2, data_id = time),
         size = 1, stroke = 0.2, shape = 21, color = "white",
         hover_nearest = TRUE, show.legend=FALSE) +
   ylab("% du stock de capital") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
    labels = date1d ) +
-  scale_y_continuous(labels = scales::label_percent(1)) +
+  scale_y_continuous(labels = scales::label_percent(1), limits = c(0,0.3)) +
   scale_color_pays(format = "eurostat") +
   thm +
+  theme(legend.direction = "horizontal") +
+  guides(fill = "none", color = "none") +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels de secteur (nasa_10_nf_tr), capital productif par branche (nama_10_nfa_bs) et comptes de patrimoine (naidsa_10_f_bs), téléchargés le {date}, calcul de l'auteur.",
     code =  "github.com/xtimbeau/travail/snf_ratio.r",
     champ = "Sociétés non financières (les définitions varient suivant les pays)")
 
-girafy(ptprofit, 1.5)
+
+assetsnfi <- source_data("snf_ratio.r") |> 
+  pluck("assetsnfi") |>  
+  group_by(geo, time) |> 
+  summarize(across(c(N1N,N2N,N11N), ~sum(.x)),
+            .groups = "drop") |> 
+  transmute(geo, time, phycap = N1N + N2N) |>
+  filter(phycap>0) |> 
+  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+
+assetsfi <- source_data("snf_ratio.r") |> 
+  pluck("assetsfi") |> 
+  group_by(geo, time) |>  
+  summarize(across(c(net_shares, net_shares_augmented), sum),
+            .groups = "drop") |> 
+  select(geo, time, net_shares, net_shares_augmented) |>
+  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+
+snfq_a <- snfq |> 
+  filter(time >= "1995-01-01") |> 
+  group_by(geo, time) |> 
+  summarize(
+    tp = sum(B1N*tp)/sum(B1N),
+    B1N = sum(B1N)  ) |> 
+  left_join(assetsfi, by = c("geo", "time")) |> 
+  left_join(assetsnfi, by = c("geo", "time")) |> 
+  transmute(
+    geo, time,
+    rendphy = tp*B1N/phycap,
+    rendshare = tp*B1N/net_shares,
+    rendshareaug = tp*B1N/net_shares_augmented) |> 
+  mutate(tooltip2 = glue(
+  "<b>{lbl(geo)}</b>
+  {year(time)}
+  Rendement productif SNF+SF : {round(100*rendphy,1)}% par an
+  Rendement financier SNF+SF : {round(100*rendshareaug,1)}% par an")) |> 
+  pivot_longer(-c(geo, time, tooltip2)) |> 
+  mutate(
+    tooltip = glue("Profits sur {ifelse(name=='rendphy', 'actifs productifs', 'fonds propres augmentés de la valeur résiduelle')}") )
+
+ptprofitsnff <- ggplot(snfq_a |> filter(name != "rendshare")) +
+  aes(x=time, col = geo, linewidth = name, alpha = name) +
+  scale_alpha_manual(
+    values = c(rendphy = 0.75, rendshareaug = 1),
+    labels = c(rendphy = "rendement productif", rendshareaug = "rendement financier"),
+    name = NULL
+  ) +
+  scale_linewidth_manual(
+    values = c(rendphy = 0.25, rendshareaug = .5),
+    labels = c(rendphy = "rendement productif", rendshareaug = "rendement financier"),
+    name = NULL
+  ) +
+  geom_line_interactive(
+     aes(y = value, 
+         tooltip = tooltip) ) +
+  geom_point_interactive(
+    data = ~.x |> filter(name == "rendshareaug"),
+     aes(fill = geo, y = value,
+        tooltip = tooltip2, data_id = time),
+        size = 1, stroke = 0.2, shape = 21, color = "white",
+        hover_nearest = TRUE, show.legend=FALSE) +
+  ylab("% du stock de capital") + xlab(NULL) +
+  facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
+  scale_ofce_date(
+   labels = date1d ) +
+  scale_y_continuous(labels = scales::label_percent(1), limits = c(0,0.3)) +
+  scale_color_pays(format = "eurostat") +
+  thm +
+  theme(legend.direction = "horizontal") +
+  guides(fill = "none", color = "none") +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels de secteur (nasa_10_nf_tr), capital productif par branche (nama_10_nfa_bs) et comptes de patrimoine (naidsa_10_f_bs), téléchargés le {date}, calcul de l'auteur.",
+    code =  "github.com/xtimbeau/travail/snf_ratio.r",
+    champ = "Sociétés non financières (les définitions varient suivant les pays)")
+```
+
+```{r, results="asis"}
+#| label: fig-tprofitsnff
+#| fig-cap: Rendements du capital, compte de secteur
+#| fig-asp: 1
+
+tabsetize(list("SNF" = ptprofitsnf, "SNF+SF" = ptprofitsnff))
 ```
 
 ## Profits nets dans les comptes de branche
