@@ -93,17 +93,14 @@ L68A <- "nama_10_a64" |>
   pivot_wider(names_from = c(na_item, nace_r2), values_from = values) |>
   group_by(geo) |>
   mutate(
-    r51c = P51C_L68A/P51C_L,
-    r2939 = D29X39_L68A/D29X39_L,
     rb1g = B1G_L68A/B1G_L,
-    p51c = ifelse(is.na(P51C_L68A), P51C_L*B1G_L68A/B1G_L, P51C_L68A),
+    p51c = ifelse(is.na(P51C_L68A), P51C_L*rb1g, P51C_L68A),
     d1 = 0,
-    d29x39 = ifelse(is.na(D29X39_L68A), D29X39_L*B1G_L68A/B1G_L, D29X39_L68A) ) |>
+    d29x39 = ifelse(is.na(D29X39_L68A), D29X39_L*rb1g, D29X39_L68A) ) |>
   transmute(time, geo,
-            nace_r2 = 'Lbis',
+            rb1g,
             B1G = B1G_L - B1G_L68A,
             B1G_L,
-            r68a = B1G_L68A/B1G_L,
             P51C = P51C_L - p51c,
             D1 = D1_L - d1,
             D29X39 = D29X39_L - d29x39) |>
@@ -112,14 +109,14 @@ L68A <- "nama_10_a64" |>
   group_by(geo) |>
   mutate(rp51c = P51C/B1G,
          rd29 = D29X39/B1G,
-         rb1 = B1G/B1Gq) |>
-  fill(c(rp51c, rd29, rb1)) |>
+         rb1g = B1G/B1Gq) |>
+  fill(c(rp51c, rd29, rb1g)) |>
   mutate(
-    B1G = rb1 * B1Gq,
+    nace_r2 = 'Lbis',
+    B1G = rb1g * B1Gq,
     P51C = rp51c * B1G,
-    D29X39 = rd29 * B1G) |>
-  mutate(
-    rB1G = B1G/B1G_L,
+    D29X39 = rd29 * B1G,
+    rB1G = B1G/B1Gq,
     rP51C = P51C/B1G,
     rD29X39 = D29X39/B1G )
 

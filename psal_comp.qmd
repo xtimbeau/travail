@@ -56,9 +56,9 @@ L'analyse du partage de la valeur ajoutée est au cœur des débats sur la redis
 
 -   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, mais qu'il est difficile de dépasser. Elle a des conséquences pour les comparaisons entre périodes pour un même pays parce que la part des non salariés varie dans le temps, de façon différente suivant les branches et entre pays.
 
--   Définir le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour par auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée. La notion provilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers.
+-   Définir le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour par auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus expérimentale, en enlevant de la valeur ajoutée marchande la sous branche "loyers imputés aux propriétaires occupants (L68a)".
 
--   Utiliser la notion de valeur ajoutée nette (de la CCF) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. Cette dernière notion découle de l'application de tables de mortalité à un inventaire permanent des investissements non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire par leur amortissement, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapprotée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée.
+-   Utiliser la notion de valeur ajoutée nette (de la CCF) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. Cette dernière notion découle de l'application de tables de mortalité à un inventaire permanent des investissements non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire par leur amortissement, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée.
 
 ```{r}
 #| label: fig-psal
@@ -85,19 +85,17 @@ labels_champ = c(tb = "Ttes branches", md="Marchand", mdhifi = "Marchand hors im
                  mdhim = "Marchand hors L68A (ménages)",
                  mdhi = "Marchand hors imm.")
 
-psal <- ggplot(naq |> filter(champ %in% c("mdhi"))) +
-  aes(x=time, y=psal, col = geo, group = geo) +
-  geom_line(color = "grey85", layout = "fixed", linewidth = 0.2) +
-  geom_line_interactive(
-    aes(tooltip = "Part des salaires dans la VAN,<br>corrigée de la non salarisation,<br>branches marchandes hors immobilier"),
-    linewidth = 0.5) +
-  geom_point_interactive(
-    aes(tooltip = tooltip, data_id = time, fill = geo),
-    size = 1, stroke = 0.2, shape = 21, color = "white",
-    hover_nearest = TRUE, show.legend=FALSE) +
-#  geom_marquee(
-#    data = annot, hjust = 0, 
-#    aes(label = label),  size = 6, size.unit = "pt", show.legend=FALSE) +
+psal <- imap(c(mdhi = "Hors services immobiliers (-L)", mdhim = "Hors loyers imputés (-L68A)"),
+  ~ggplot(naq |> filter(champ == .y)) +
+    aes(x=time, y=psal, col = geo, group = geo) +
+    geom_line(color = "grey85", layout = "fixed", linewidth = 0.2) +
+    geom_line_interactive(
+      aes(tooltip = "Part des salaires dans la VAN,<br>corrigée de la non salarisation,<br>{.x}" |> glue()),
+      linewidth = 0.5) +
+    geom_point_interactive(
+      aes(tooltip = tooltip, data_id = time, fill = geo),
+      size = 1, stroke = 0.2, shape = 21, color = "white",
+      hover_nearest = TRUE, show.legend=FALSE) +
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
@@ -115,10 +113,10 @@ psal <- ggplot(naq |> filter(champ %in% c("mdhi"))) +
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}.",
     code =  "github.com/xtimbeau/travail/vaq.r",
-    champ = "Branches marchandes hors services immobiliers (L dans la NACE r2).",
-    note = "La CCF provient des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà.")
+    champ = "Branches marchandes {tolower(.x)}.",
+    note = "La CCF provient des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà.") ) 
 
-girafy(psal, 1.5)
+ofce::tabsetize(psal)
 ```
 
 La part des salaires dans la valeur ajoutée nette est croissante en France (@fig-psal) (de 10 points de 1998 à 2025), comme en Espagne (de 9 points). Elle atteint en France le niveau le plus élevé des pays sélectionnés, pour autant que l'on puisse comparer entre pays. La part des salaires dans la valeur ajoutée est la plus basse aux Pays-Bas et est sur une pente décroissante depuis plus de 20 ans, alors qu'elle semble stable en Belgique et en Allemagne. L’Italie affiche une variabilité temporelle importante.
