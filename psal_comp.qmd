@@ -528,8 +528,8 @@ gg <- ggplot(data) +
     linewidth = 0.25,
     show.legend = FALSE, hover_nearest = TRUE) +
   theme_ofce(
-    strip.text = element_marquee(size=rel(0.6)),
-    axis.text = element_marquee(size=rel(0.6))
+    strip.text = element_marquee(size=rel(0.7)),
+    axis.text = element_marquee(size=rel(0.7))
   ) +
   facet_grid(rows=vars(champ), cols = vars(name),
              labeller = labeller(name= strips_name, champ = strips_champ)) + 
@@ -1106,3 +1106,4 @@ psali <- ggplot(snfia) +
 
 girafy(psali, 1.5)
 ```
+
