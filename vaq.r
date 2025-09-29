@@ -3,6 +3,7 @@ library(eurostat)
 library(ofce)
 
 nace <- source_data("nace.r")$nace
+
 m_a20 <- nace  |> pull(a20) |> unique()
 m_a10 <- nace |> pull(a10) |> unique()
 
@@ -10,7 +11,7 @@ adj <- c("SCA", "SA", "CA", "NSA")
 
 pays <- source_data("nace.r")$pays1
 
-label_pays <- set_names(countrycode::countrycode(pays, "eurostat", "country.name.fr"), pays2)
+label_pays <- set_names(countrycode::countrycode(pays, "eurostat", "country.name.fr"), pays)
 
 naq10_e <- source_data("naq10_e")$naq_e
 
@@ -144,6 +145,7 @@ naq <- naq_a10 |>
     across(c(van, vab, msa, msanc, ip), ~sum(.x[hifi&md], na.rm=TRUE), .names = "{.col}_mdhifi"),
     across(c(van, vab, msa, msanc, ip), ~sum(.x[hfi&md], na.rm=TRUE), .names = "{.col}_mdhfi"),
     across(c(van, vab, msa, msanc, ip), ~sum(.x[him], na.rm=TRUE), .names = "{.col}_mdhim"),
+    across(c(van, vab, msa, msanc, ip), ~sum(.x[him&hfi], na.rm=TRUE), .names = "{.col}_mdhimfi"),
     across(c(van, vab, msa, msanc, ip), ~sum(.x, na.rm=TRUE), .names = "{.col}_tb"),
     .groups = "drop") |>
   pivot_longer(starts_with(c("van", "vab", "msa", "ip"))) |>
@@ -154,8 +156,8 @@ naq <- naq_a10 |>
     psalb = msa/vab,
     psalnc = msanc/van,
     psalbnc = msanc/vab,) |>
-  filter(geo %in% c("DE", "FR", "IT", "ES", "NL", "BE"), time >= "1995-01-01") |>
-  mutate(geo = factor(geo,  c("DE", "FR", "IT", "ES", "NL", "BE")))
+  filter(geo %in% pays, time >= "1995-01-01") |>
+  mutate(geo = factor(geo,  pays))
 
 naa <- naq |>
   mutate(year = year(time)) |>
@@ -171,8 +173,8 @@ naa <- naq |>
     psalnc = msanc/van,
     psalbnc = msanc/vab,
     time = ym(str_c(year, "-01"))) |>
-  filter(geo %in% c("DE", "FR", "IT", "ES", "NL", "BE"), time >= "1995-01-01") |>
-  mutate(geo = factor(geo,  c("DE", "FR", "IT", "ES", "NL", "BE")))
+  filter(geo %in% pays, time >= "1995-01-01") |>
+  mutate(geo = factor(geo,  pays))
 
 na_tot <-  "nama_10_gdp" |>
   get_eurostat(
@@ -221,9 +223,9 @@ d51 <- "nasa_10_nf_tr" |>
                    sector = c("S11", "S12"))) |>
   drop_na() |>
   pivot_wider(names_from = sector, values_from = values) |>
-  mutate(tb = S11 + S12, md = S11 + S12, mdhi = S11+S12, mdhim = S11+S12, mdhifi = S11, mdhfi = S11) |>
-  pivot_longer(c(tb, md, mdhi, mdhim, mdhifi, mdhfi), names_to = "champ", values_to = "value") |>
+  mutate(tb = S11 + S12, md = S11 + S12, mdhi = S11+S12, mdhim = S11+S12, mdhimfi = S11, mdhifi = S11, mdhfi = S11) |>
   select(-S11, -S12) |>
+  pivot_longer(c(tb, md, mdhi, mdhim, mdhimfi, mdhifi, mdhfi), names_to = "champ", values_to = "value") |>
   pivot_wider(names_from = na_item, values_from = value) |>
   select(geo, time, is=D51, B1Ga = B1G, champ) |>
   right_join(naa |> select(time, geo, B1G = vab, van, msa, ip, champ), by = c("time", "geo", "champ")) |>

@@ -13,6 +13,7 @@ bibliography: references.bib
 echo: false
 message: false
 warning: false
+abstract: "On explore ici différentes façons de calculer la notion de part des salaires dasn la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers des ménages* peut être calculé pour les principaux pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et a cru de façon importante. Bien que plus fragile empiriquement, la notion de rendement du capital productif confirme ce diagnostic et illustre un problème particulerement préoccupant du tissu productif français. L'ensemble des éléments présentés ici est reproductible à partir des codes fournis.<br>`r  wordcountaddin::word_count('psal_comp.qmd')` mots."
 
 format:
   ofce-html:
@@ -52,18 +53,18 @@ thm <- theme_ofce(marquee=TRUE,
 
 ## Du partage de la VA au partage des richesses
 
-L'analyse du partage de la valeur ajoutée est au cœur des débats sur la redistribution des richesses. Un indicateur souvent retenu est celui de la part des salaires dans la valeur ajoutée. Nous discutons ici de la construction de cet indicateur et de sa comparabilité entre pays (européens ou non). Trois points sont importants pour disposer du bon concept :
+L'analyse du partage de la valeur ajoutée est au cœur des débats sur la redistribution des richesses (voir notamment @hurlin1996, @timbeau2002, @cotis2009, @husson2010, @askenazy2012, @piton2019, @timbeau2025). Un indicateur souvent retenu est celui de la part des salaires dans la valeur ajoutée. Nous discutons ici de la construction de cet indicateur et de sa comparabilité entre pays (européens ou non). Trois points sont importants pour disposer du bon concept :
 
 -   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, mais qu'il est difficile de dépasser. Elle a des conséquences pour les comparaisons entre périodes pour un même pays parce que la part des non salariés varie dans le temps, de façon différente suivant les branches et entre pays.
 
 -   Définir le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour par auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus expérimentale, en enlevant de la valeur ajoutée marchande la sous branche "*loyers imputés aux propriétaires occupants* (L68a)".
 
--   Utiliser la notion de valeur ajoutée nette (de la CCF) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. Cette dernière notion découle de l'application de tables de mortalité à un inventaire permanent des investissements non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire par leur amortissement, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée.
+-   Utiliser la notion de valeur ajoutée nette (de la consommation de capital fixe (CCF)) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. Cette dernière notion découle de l'application de tables de mortalité à un inventaire permanent des investissements non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire mesurée par leur amortissement physique ou fiscal, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée.
 
 Le concept que nous privilégions est donc défini comme suit (où, pour chaque branche $D1_b$ est la masse salariale chargée, $B1G_b$ la valeur ajoutée brute, $P51C_b$ la $CCF_b$, les trois notions en euros aux prix courants et $ns_b$ et $sal_b$ les effectifs en personne par branche) :
 
 $$
-S_{net, n.s., -OQL}  = \frac{\sum_{b\in{TT-L-O-Q}}{D1_b*(1+ns_b/sal_b)}}{\sum_{b\in{TT-L-O-Q}}{B1G_b - P51C_b}}
+S_{net, n.s., -LOQ}  = \frac{\sum_{b\in{TT-LOQ}}{D1_b*(1+ns_b/sal_b)}}{\sum_{b\in{TT-LOQ}}{B1G_b - P51C_b}}
 $$
 
 ```{r, results='asis'}
@@ -131,7 +132,77 @@ Elle est cependant stable en France depuis 2020 (voire légèrement décroissant
 
 Au début des années 2000, deux pays se distinguaient des autres (l'Espagne et l'Italie) par une part des salaires plus faibles. L'écart avec l'Allemagne atteignait alors plus de 15 points. Moins développés, une part peut être plus importante de l'investissement expliquait cette situation. La généralisation de l'approche à d'autres pays de l'Union Européenne permettrait de confirmer cette hypothèse. Aujourd'hui la situation est différente, l'écart entre l'Allemagne et ces pays s'étant drastiquement réduit (moins de 8 points entre l'Italie et l'Allemagne) et les Pays-Bas prenant la place du pays où la part des salaires est la plus basse et la France où elle est nettement plus haute.
 
-On détaille dans la suite de ce document les effets des corrections appliquées, ainsi que la différence entre les mesures dérivées des comptes de branche ou des comptes d'agents. Ces éléments sont un peu fastidieux, mais ils s'avèrent assez importants et pas toujours très intuitifs.
+La construction d'un taux de rendement du capital est sans doute assez fragile parce qu'il faut ajouter à l'évaluation du partage de la valeur ajoutée une estimation des impôts payés (notamment l'impôt sur les sociétés) et une évaluation du stock de capital. En utilisant les données de stock de capital productif le diagnostic présenté sur le @fig-psal est confirmé par le @fig-rp. La France y occupe une position singulière avec un rendement du capital productif particulièrement faible et décroissant depuis le début des années 2000 alors qu'il est constant dans beaucoup de pays ou même croissant comme aux Pays-Bas. Une explication possible est le déplacement de la base fiscale en Europe comme le suggèrent @tørsløv2022.
+
+```{r}
+#| label: fig-rp
+#| fig-asp: 1
+#| fig-cap: Rendement du capital productif
+
+champs  <- c("md" = "Marchand", "mdhifi" = "Marchand hors immobilier et services financiers",
+            "mdhi"= "Marchand hors services immobiliers", 
+            "mdhim"= "Marchand hors imm. des ménages (L68A)", 
+            "mdhimfi"= "Marchand hors fin. et imm. des ménages (L68A)", 
+            "mdhfi"= "Marchand hors services financiers", 
+            "tb" = "Toutes branches (marchandes et non marchandes)")
+nace <- source_data("nace.r")
+naa <- source_data("vaq.r")$naaa |> 
+  mutate(geo = factor(geo, nace$pays1)) |> 
+  filter(champ == "mdhim") |> 
+  mutate(tooltip = glue(
+    "<b>{lbl(geo)}</b>
+     {year(time)}
+     profits nets d'impôts sur capital productif : {round(r*100,1)}%"  ))
+
+date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
+date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
+
+tpbranches <- imap( 
+  c("Marchand-L68A" = "mdhim",
+    "Marchand-K-L68A" = "mdhimfi"), ~{
+      data <- source_data("vaq.r")$naaa |> 
+        mutate(geo = factor(geo, nace$pays1)) |> 
+        filter(champ == .x) |> 
+        mutate(tooltip = glue(
+          "<b>{lbl(geo)}</b>
+          {year(time)}
+          Branches marchandes {.y}
+          profits nets d'impôts sur capital productif : {round(r*100,1)}%"  ))
+      
+      ggplot(data) +
+        aes(x=time, y=tp, col = geo, group = geo) +
+        geom_line(color = "grey85", layout = "fixed", linewidth = 0.2) +
+        geom_line_interactive(
+          aes(tooltip = "Rendement du capital productif" |> glue()),
+          linewidth = 0.5) +
+        geom_point_interactive(
+          aes(tooltip = tooltip, data_id = time, fill = geo),
+          size = 1, stroke = 0.2, shape = 21, color = "white",
+          hover_nearest = TRUE, show.legend=FALSE) +
+        ylab("% du capital") + xlab(NULL) +
+        facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
+        scale_ofce_date(
+          labels = date1d ) +
+        guides( fill = "none", color = "none",
+                linetype = guide_legend(nrow = 1),
+                alpha = guide_legend(nrow = 1)) + 
+        scale_y_continuous(
+          labels = scales::label_percent(1), 
+          breaks = scales::pretty_breaks(5),
+          limits = c(NA, NA)) +
+        scale_color_pays(format = "eurostat") +
+        thm +
+        ofce_caption(
+          source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10), actifs productifs (nama_10_nfa_st), téléchargés le {date}.",
+          code =  "github.com/xtimbeau/travail/vaq.r",
+          champ = "Branches marchandes {tolower(.y)}.",
+          note = "La CCF ou les impôts nets de subventions proviennent des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà. Le partage de la valeur ajoutée pour les derniers points évolue comme le partage dans la valeur ajoutée brute. L'impôt sur les sociétés (D51) des sociétés financières (S12) est affecté à la branche K (services financiers) et celui des sociétés non financières (S11) aux branches marchandes hors services financiers (K) et services immobiliers produits par les ménages (L68A).") })
+
+girafy(tpbranches[[2]])
+```
+
+On détaille en les discutant dans la suite de ce document les effets des corrections appliquées, ainsi que la différence entre les mesures dérivées des comptes de branche ou des comptes d'agents. Ces éléments sont un peu fastidieux, mais ils s'avèrent assez importants et pas toujours très intuitifs.
 
 On explore également les conséquences en matière de taux de profit (part des profits nets dans la valeur ajoutée) ou rendement du capital (profits nets divisés par les actifs).
 
@@ -324,6 +395,7 @@ psal <- ggplot(data) +
   thm +
   theme(
     legend.position = "bottom",
+    legend.direction = "horizontal",
     legend.justification = c(0.5, 0) ) +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
@@ -445,6 +517,7 @@ strips_champ <- c(tb = "Ttes branches",
                 md = "Marchand",
                 mdhi = "hors imm.",
                 mdhim = "hors loy. imp.",
+                mdhimfi = "hors fin.&loy. imp.",
                 mdhfi = "hors fin.",
                 mdhifi = "hors imm.&fin.")
 
@@ -693,7 +766,7 @@ Les comptes des sociétés non financières permettent d’examiner d'autres él
 Les profits nets sont définis comme la valeur ajoutée nette de la consommation de capital fixe moins la rémunération des salariés, moins les taxes nettes des subventions moins l'impôt sur les sociétés :
 
 $$
-\Pi = B1G - P51C - D1 - (D2-D3) - D5
+\Pi = B1G - P51C - D1 - (D2-D3) - D5 = B2N-D5
 $$
 
 Les dividendes sont la ligne $D42$ nette de ce qui est payé et reçu par le secteur des sociétés non financières (SNF ou S11).
@@ -748,12 +821,12 @@ girafy(pprofit, 1.5)
 
 On peut rapporter ces notions aux éléments qui viennent du compte de capital. Le premier concept est le profit rapporté au stock de capital physique (tel que valorisé dans la comptabilité nationale, c'est-à-dire à la valeur de remplacement et au prix de marché). Malheureusement, à part la France, aucun pays dans notre échantillon ne diffuse ces données sur Eurostat.
 
-On rapporte également à une notion financière, à savoir la valeur nette des actions au passif des comptes d'entreprises. Les conventions de valorisation des actions non côtées sont délicates et difficiles à suivre d'un pays à l'autre. On choisit ici d'augmenter ces actions de la valeur nette résiduelle des entreprises non financières ($BF90$). On a donc :
+On rapporte également à une notion financière, à savoir la valeur nette des actions au passif des comptes d'entreprises. Les conventions de valorisation des actions non cotées sont délicates et difficiles à suivre d'un pays à l'autre. On choisit ici d'augmenter ces actions de la valeur nette résiduelle des entreprises non financières ($BF90$). On a donc :
 
 $$
 \begin{align}
-r_{productif} & = \frac{B2N-D5}{N1N+N2N} \\
-r_{financier} & = \frac{B2N-D5}{F51+F52+BF90}
+r_{productif} & = \frac{\Pi}{N1N+N2N} \\
+r_{financier} & = \frac{\Pi}{F51+F52+BF90}
 \end{align}
 $$
 
@@ -911,6 +984,20 @@ tabsetize(list("SNF" = ptprofitsnf, "SNF+SF" = ptprofitsnff))
 ```
 
 ## Profits nets dans les comptes de branche
+
+En utilisant d'une part la valeur ajoutée des branches marchandes hors services immobiliers produits par les ménages et la valeur des actifs productifs issue de la base des stocks de capital productif ([nama_10_nfa_st](https://ec.europa.eu/eurostat/databrowser/view/NAMA_10_NFA_ST__custom_2046386/default/table?lang=en)) sur le même champ (i.e. en enlevant la sous branche L68A), on peut estimer un rendement du capital productif.
+
+```{r, results="asis"}
+#| label: fig-tprofitbranches
+#| fig-cap: Rendements du capital, compte de branches, marchand hors services immobiliers produits par les ménages
+#| fig-asp: 1
+
+tabsetize(tpbranches)
+```
+
+Le rendement calculé sur le @fig-tprofitbranches diffère de celui du @fig-tprofitsnff. La différence vient en partie de la difficulté à imputer l'impôt des sociétés aux seules entreprises des branches marchandes – des entités légales dans les branches non marchandes peuvent être soumises à l'impôt sur les sociétés et de la valorisation des actifs. Dans l'approche comptes d'agents (ou de secteurs institutionnels), on affecte la valeur nette résiduelle des entreprises au stock de capital. De plus, le stock de capital n'est pas dans l'approche du @fig-tprofitsnff limité au capital productif mais intègre également des actifs financiers qui n'ont pas de contrepartie physique parce qu'ils sont hors territoire français.
+
+La France conserve une singularité marquée par la baisse continue du taux de profit au cours du temps. Le rendement apparent du capital est ainsi très bas, plus bas que dans tous les autres pays considérés où il est plutôt stable (l'Italie fait exception avec une forte volatilité).
 
 ## Au delà de l'Europe
 

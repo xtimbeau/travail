@@ -21,7 +21,7 @@ men <- "nama_10_nfa_bs" |>
   get_eurostat(
     filters = list(
       asset10 = "N111N",
-      geo = pays2,
+      geo = pays,
       sector = "S14_S15", unit = "CP_MEUR" ) ) |>
   transmute(geo, time, wim = values) |>
   drop_na(wim)
@@ -37,7 +37,8 @@ assets <- assets_a10 |>
     assets_tb = sum(assets, na.rm=TRUE),
     .groups = "drop") |>
   left_join(men, by = c("geo", "time")) |>
-  mutate(assets_mdhim = assets_md - wim) |>
+  mutate(assets_mdhim = assets_md - wim,
+         assets_mdhimfi = assets_mdhfi - wim) |>
   select(-wim) |>
   pivot_longer(starts_with("assets_")) |>
   separate(name, into = c("var", "champ"), sep = "_") |>
