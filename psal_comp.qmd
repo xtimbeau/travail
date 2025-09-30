@@ -1120,4 +1120,3 @@ psali <- ggplot(snfia) +
 
 girafy(psali, 1.5)
 ```
-
