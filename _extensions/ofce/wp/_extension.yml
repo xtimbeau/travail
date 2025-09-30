@@ -74,16 +74,18 @@ contributes:
         - html_template/title-metadata.html
         - html_template/toc.html
     pdf:
-      documentclass: scrreprt
+      documentclass: article
       toc-depth: 1
       pdffont: OpenSans
       number-sections: true
       number-depth: 3
-      classoption:
-        - DIV=11
-        - twoside=semi
       papersize: a4
       fontsize: 9pt
+      geometry:
+        - top = 2cm
+        - bottom = 2cm
+        - left = 2cm
+        - right = 2cm
       linestretch: 1.25
       extra_dependencies: ["float"]
       fig-dpi: 600

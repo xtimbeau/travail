@@ -28,7 +28,16 @@ snfia <- "naidsa_10_nf_tr" |>
   mutate(across(c(PAID, RECV), ~replace_na(.x, 0))) |>
   mutate(values = ifelse(na_item %in% c("B1G", "B1N", "D1", "D5", "P51C"), PAID, PAID-RECV)) |>
   select(-PAID, -RECV) |>
-  pivot_wider(names_from = na_item, values_from = values)
+  pivot_wider(names_from = na_item, values_from = values) |>
+  mutate(
+    vab = B1G,
+    van = B1N,
+    msa = D1,
+    psal = D1/B1N,
+    div = D42/B1N,
+    isp = (D5+D2+D3)/B1N,
+    tp = (B1N-D1-D5-D2-D3)/B1N,
+    label_geo = eurostat::label_eurostat(geo,"geo",lang="fr"))
 
 assetsfi <- "naidsa_10_f_bs" |>
   get_eurostat(

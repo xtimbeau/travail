@@ -72,9 +72,7 @@ girafy <- function(plot, r=2.5, o = 0.5,  ...) {
   }
 
   if(knitr::is_latex_output()) {
-    if("patchwork" %in% class(plot))
-      return( plot & theme_ofce(base_size = 7))
-    return( plot + theme_ofce(base_size = 7))
+    return( plot )
   }
 
   plot
