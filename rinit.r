@@ -1,6 +1,6 @@
 library(knitr)
 opts_chunk$set(
-  fig.pos="htb",
+  fig.pos="H",
   out.extra="",
   dev="ragg_png",
   dev.args = list(bg = "transparent"),
@@ -61,16 +61,24 @@ girafe_opts <- function(x, ...) girafe_options(
 
 girafy <- function(plot, r=2.5, o = 0.5,  ...) {
   if(knitr::is_html_output()| interactive()) {
-    girafe(ggobj = plot) |>
-      girafe_options(
-        opts_hover_inv(css = glue("opacity:{o};")),
-        opts_hover(css = glue("r:{r}px;")),
-        opts_tooltip(css = tooltip_css)) |>
-      girafe_options(...)
-  } else {
-    plot
+    return(
+      girafe(ggobj = plot) |>
+        girafe_options(
+          opts_hover_inv(css = glue("opacity:{o};")),
+          opts_hover(css = glue("r:{r}px;")),
+          opts_tooltip(css = tooltip_css)) |>
+        girafe_options(...)
+    )
   }
-}
+
+  if(knitr::is_latex_output()) {
+    if("patchwork" %in% class(plot))
+      return( plot & theme_ofce(base_size = 7))
+    return( plot + theme_ofce(base_size = 7))
+  }
+
+  plot
+  }
 
 milliards <- function(x, n_signif = 3L) {
   stringr::str_c(

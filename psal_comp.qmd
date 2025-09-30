@@ -39,16 +39,30 @@ format:
       - text: NACE rev2
         icon: file-code
         href: nace.r
+  ofce-pdf: default
 ---
 
 ```{r, include=FALSE}
 ofce::init_qmd()
-thm <- theme_ofce(marquee=TRUE,
-  panel.spacing = unit(9, "point"),
-  axis.text = element_text(size=rel(0.7)),
-  strip.text = element_marquee(size = rel(0.75)),
-  legend.position = "bottom",
-  legend.justification = "center")
+if(knitr::is_html_output()) 
+  thm <- theme_ofce(
+    bsae.size = 9,
+    marquee=TRUE,
+    panel.spacing = unit(9, "point"),
+    axis.text = element_text(size=rel(0.7)),
+    strip.text = element_marquee(size = rel(0.7)),
+    legend.position = "bottom",
+    legend.justification = "center") else 
+      thm <- theme_ofce(
+        base.size = 6,
+        marquee=TRUE,
+        plot.caption = element_marquee(size = rel(0.5)),
+        panel.spacing = unit(3, "point"),
+        axis.title = element_text(size=rel(0.7)),
+        axis.text = element_text(size=rel(0.7)),
+        strip.text = element_marquee(size = rel(0.7)),
+        legend.position = "bottom",
+        legend.justification = "center") 
 ```
 
 ## Du partage de la VA au partage des richesses
@@ -824,10 +838,10 @@ On peut rapporter ces notions aux éléments qui viennent du compte de capital. 
 On rapporte également à une notion financière, à savoir la valeur nette des actions au passif des comptes d'entreprises. Les conventions de valorisation des actions non cotées sont délicates et difficiles à suivre d'un pays à l'autre. On choisit ici d'augmenter ces actions de la valeur nette résiduelle des entreprises non financières ($BF90$). On a donc :
 
 $$
-\begin{align}
+\begin{aligned}
 r_{productif} & = \frac{\Pi}{N1N+N2N} \\
 r_{financier} & = \frac{\Pi}{F51+F52+BF90}
-\end{align}
+\end{aligned}
 $$
 
 On obtient le graphe suivant :
