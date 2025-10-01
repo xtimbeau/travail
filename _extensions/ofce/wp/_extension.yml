@@ -21,16 +21,16 @@ contributes:
       citation:
         type: article-journal
       crossref:
-        fig-prefix: figure
+        fig-prefix: graphique
         tbl-prefix: tableau
         eq-prefix: équation
         sec-prefix: section
         tip-prefix: encadré
-        fig-title: "**Figure**"
+        fig-title: "**Graphique**"
         tip-title: "**Encadré**"
         title-delim: "**.**"
         tbl-title: "**Tableau**"
-        lof-title: Figures
+        lof-title: Graphiques
         lot-title: Tableaux
       logo: ofce.png
       filters:

@@ -1,10 +1,11 @@
 library(tidyverse)
 library(eurostat)
+library(ofce)
 
-pays2 <- c("DE", "FR", "IT", "ES", "NL", "BE")
-nace <- source_data("nace.r")$nace
-m_a20 <- nace  |> pull(a20) |> unique()
-m_a10 <- nace |> pull(a10) |> unique()
+nace <- source_data("nace.r")
+pays <- nace$pays2
+m_a20 <- nace$nace  |> pull(a20) |> unique()
+m_a10 <- nace$nace |> pull(a10) |> unique()
 
 adj <- c("SCA", "SA", "CA", "NSA")
 
@@ -12,7 +13,7 @@ naq <- get_eurostat("namq_10_a10",
                     filters = list(
                       nace_r2 = m_a10,
                       na_item = "D1",
-                      geo = pays2,
+                      geo = pays,
                       unit = "CP_MEUR") ) |>
   drop_na() |>
   mutate(s_adj = factor(s_adj, adj)) |>
@@ -23,13 +24,13 @@ naq <- get_eurostat("namq_10_a10",
   rename(D1 = values)
 
 naa_e.raw <- get_eurostat("nama_10_a64_e",
-                          filters = list(nace_r2  = m_a20, geo = pays2,
+                          filters = list(nace_r2  = m_a20, geo = pays,
                                          unit = c("THS_PER"),
                                          na_item = c("SAL_DC", "SELF_DC")) ) |>
   drop_na(values) |>
   select(nace_r2, geo, time, values, na_item) |>
   pivot_wider(names_from = na_item, values_from = values) |>
-  left_join(nace |> select(a20, a10), by = c("nace_r2"="a20")) |>
+  left_join(nace$nace |> select(a20, a10), by = c("nace_r2"="a20")) |>
   group_by(a10, geo, time) |>
   summarize(across(c(SAL_DC, SELF_DC), sum),
             .groups = "drop") |>

@@ -9,7 +9,7 @@ m_a10 <- nace |> pull(a10) |> unique()
 
 adj <- c("SCA", "SA", "CA", "NSA")
 
-pays <- source_data("nace.r")$pays1
+pays <- source_data("nace.r")$pays2
 
 label_pays <- set_names(countrycode::countrycode(pays, "eurostat", "country.name.fr"), pays)
 
@@ -247,8 +247,8 @@ naa_ext <- naa |>
          psalnc = msanc/van,
          psalb = msa/vab,
          psalncb = msanc/vab) |>
-  filter(geo %in% c("DE", "FR", "IT", "ES", "NL", "BE"), time >= "1995-01-01") |>
-  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE"))) |>
+  filter(geo %in% pays, time >= "1995-01-01") |>
+  mutate(geo = factor(geo, pays)) |>
   mutate(
     tp = (van - msa - ip - is)/van,
     tpb = (van - msa)/van )
@@ -261,6 +261,6 @@ naa_ext2 <- naa_ext |>
   left_join( assets, by =c("geo", "time", "champ") ) |>
   mutate(r = tp*van/assets) |>
   arrange( desc(time), geo) |>
-  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+  mutate(geo = factor(geo, pays))
 
 return(list(naa = naa_ext, naaa = naa_ext2))

@@ -2,7 +2,7 @@ library(tidyverse)
 library(eurostat)
 library(ofce)
 
-pays <- source_data("nace.r")$pays1
+pays <- source_data("nace.r")$pays2
 
 nace <- source_data("nace.r")$nace
 m_a20 <- nace  |> pull(a20) |> unique()
@@ -43,6 +43,7 @@ assets <- assets_a10 |>
   pivot_longer(starts_with("assets_")) |>
   separate(name, into = c("var", "champ"), sep = "_") |>
   pivot_wider(names_from = var, values_from = value) |>
-  arrange(desc(time))
+  mutate(geo = factor(geo, pays)) |>
+  arrange(geo, desc(time))
 
 return(list(assets = assets, assets_a10 = assets_a10))

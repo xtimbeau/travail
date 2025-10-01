@@ -45,10 +45,11 @@ format:
 
 ```{r, include=FALSE}
 ofce::init_qmd()
+P6 <- source_data("nace.r")$pays1 
 options(ofce.tabsetize.pdf = "one")
 if(knitr::is_html_output()) {
   thm <- theme_ofce(
-    base.size = 9,
+    base_size = 9,
     marquee=TRUE,
     panel.spacing = unit(9, "point"),
     plot.caption = element_marquee(size = rel(0.55)),
@@ -57,7 +58,7 @@ if(knitr::is_html_output()) {
     legend.position = "bottom",
     legend.justification = "center") } else { 
       thm <- theme_ofce(
-        base.size = 6,
+        base_size = 6,
         marquee=TRUE,
         plot.caption = element_marquee(size = rel(0.5)),
         panel.spacing = unit(3, "point"),
@@ -71,23 +72,11 @@ if(knitr::is_html_output()) {
 
 ## Du partage de la VA au partage des richesses
 
-L'analyse du partage de la valeur ajoutée est au cœur des débats sur la redistribution des richesses (voir notamment @hurlin1996, @timbeau2002, @cotis2009, @husson2010, @askenazy2012, @piton2019, @timbeau2025). Un indicateur souvent retenu est celui de la part des salaires dans la valeur ajoutée. Nous discutons ici de la construction de cet indicateur et de sa comparabilité entre pays (européens ou non). Trois points sont importants pour disposer du bon concept :
-
--   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, mais qu'il est difficile de dépasser. Elle a des conséquences pour les comparaisons entre périodes pour un même pays parce que la part des non salariés varie dans le temps, de façon différente suivant les branches et entre pays.
-
--   Définir le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour par auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus expérimentale, en enlevant de la valeur ajoutée marchande la sous branche "*loyers imputés aux propriétaires occupants* (L68a)".
-
--   Utiliser la notion de valeur ajoutée nette (de la consommation de capital fixe (CCF)) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. Cette dernière notion découle de l'application de tables de mortalité à un inventaire permanent des investissements non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire mesurée par leur amortissement physique ou fiscal, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée.
-
-Le concept que nous privilégions est donc défini comme suit (où, pour chaque branche $D1_b$ est la masse salariale chargée, $B1G_b$ la valeur ajoutée brute, $P51C_b$ la $CCF_b$, les trois notions en euros aux prix courants et $ns_b$ et $sal_b$ les effectifs en personne par branche) :
-
-$$
-S_{net, n.s., -LOQ}  = \frac{\sum_{b\in{TT-LOQ}}{D1_b*(1+ns_b/sal_b)}}{\sum_{b\in{TT-LOQ}}{B1G_b - P51C_b}}
-$$
+L'analyse du partage de la valeur ajoutée (@fig-psal) est au cœur des débats sur la redistribution des richesses (voir notamment @hurlin1996, @timbeau2002, @cotis2009, @husson2010, @askenazy2012, @piton2019, @timbeau2025). Un indicateur souvent retenu est celui de la part des salaires dans la valeur ajoutée. Nous discutons ici de la construction de cet indicateur et de sa comparabilité entre pays (européens ou non).
 
 ```{r}
 #| label: fig-psal
-#| fig-asp: 0.9
+#| fig-asp: 0.85
 #| fig-cap: Part des salaires dans la VA nette
 
 champs  <- c("md" = "Marchand", "mdhifi" = "Marchand hors immobilier et services financiers",
@@ -96,12 +85,13 @@ champs  <- c("md" = "Marchand", "mdhifi" = "Marchand hors immobilier et services
             "mdhfi"= "Marchand hors services financiers", 
             "tb" = "Toutes branches (marchandes et non marchandes)")
 naq <- source_data("vaq.r")$naa |> 
+  filter(geo %in% P6) |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
     {year(time)} 
     {champs[champ]}
-    Rémunérations (y.c. les non salariés) dans la VAN : {round(psal*100,1)}%")) |>
-  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+    Part des salaires dans la VAN : {round(psal*100,1)}%")) |>
+  mutate(geo = factor(geo, P6))
 
 date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
@@ -110,10 +100,10 @@ labels_champ = c(tb = "Ttes branches", md="Marchand", mdhifi = "Marchand hors im
                  mdhim = "Marchand hors L68A (ménages)",
                  mdhi = "Marchand hors imm.")
 
-psal <- imap(c("Hors services immobiliers (-L)" = "mdhi", "Hors loyers imputés (-L68A)" = "mdhim"),
+psal <- imap(c("hors services immobiliers (-L)" = "mdhi", "hors loyers imputés des ménages (-L68A)" = "mdhim"),
   ~ggplot(naq |> filter(champ == .x)) +
     aes(x=time, y=psal, col = geo, group = geo) +
-    geom_line(color = "grey85", layout = "fixed", linewidth = 0.2) +
+    geom_line(color = "grey80", layout = "fixed", linewidth = 0.2) +
     geom_line_interactive(
       aes(tooltip = "Part des salaires dans la VAN,<br>corrigée de la non salarisation,<br>{.y}" |> glue()),
       linewidth = 0.5) +
@@ -137,23 +127,51 @@ psal <- imap(c("Hors services immobiliers (-L)" = "mdhi", "Hors loyers imputés 
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
-    champ = "Branches marchandes {tolower(.y)}.",
+    champ = "Branches marchandes {.y}.",
     note = "La CCF ou les impôts nets de subventions proviennent des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà. Le partage de la valeur ajoutée pour les derniers points évolue comme le partage dans la valeur ajoutée brute.") ) 
 
-girafy(psal[[2]])
+girafy(psal[[2]], 1.25)
 ```
 
-La part des salaires dans la valeur ajoutée nette est croissante en France (@fig-psal) (de 10 points de 1998 à 2025), comme en Espagne (de 9 points). Elle atteint en France le niveau le plus élevé des pays sélectionnés, pour autant que l'on puisse comparer entre pays. La part des salaires dans la valeur ajoutée est la plus basse aux Pays-Bas et est sur une pente décroissante depuis plus de 20 ans, alors qu'elle semble stable en Belgique et en Allemagne. L’Italie affiche une variabilité temporelle importante.
+Trois points sont importants pour disposer du bon concept :
 
-Elle est cependant stable en France depuis 2020 (voire légèrement décroissante). Ce même mouvement s'observe dans les autres pays, plus nettement. La phase d'inflation à partir de 2022 a induit une moindre indexation des salaires (voir @fig-salaires) puis un rattrapage. Ce profil général a pris néanmoins des tournures assez différentes d'un pays à l'autre. La déflation salariale a plutôt été plus limité en France, conduisant à une hausse de la part des salaires, alors qu'elle a été très marquée aux Pays-Bas – sans doute aussi par des effets de la crise énergétique différents entre pays, sans compter des questions de mesure des indices de prix qui peuvent rendre difficile les comparaisons. Mais au-delà des problèmes de mesures, la part des salaires est plus volatile aux Pays-Bas qu'en France, ce qui tend à montrer que la dépréciation réelle des salaires c'est fait aux Pays-Bas à l'avantage des firmes.
+-   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, mais qu'il est difficile de dépasser. Elle a des conséquences pour les comparaisons entre périodes pour un même pays parce que la part des non salariés varie dans le temps, de façon différente suivant les branches et entre pays.
+
+-   Définir le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour par auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus expérimentale, en enlevant de la valeur ajoutée marchande la sous branche "*loyers imputés aux propriétaires occupants* (L68a)".
+
+-   Utiliser la notion de valeur ajoutée nette (de la consommation de capital fixe (CCF)) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. Cette dernière notion découle de l'application de tables de mortalité à un inventaire permanent des investissements non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire mesurée par leur amortissement physique ou fiscal, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée.
+
+Le concept que nous privilégions est donc défini comme suit (où, pour chaque branche $D1_b$ est la masse salariale chargée, $B1G_b$ la valeur ajoutée brute, $P51C_b$ la $CCF_b$, les trois notions en euros aux prix courants et $ns_b$ et $sal_b$ les effectifs en personne par branche) :
+
+$$
+S_{net, n.s., -LOQ}  = \frac{\sum_{b\in{TT-LOQ}}{D1_b*(1+ns_b/sal_b)}}{\sum_{b\in{TT-LOQ}}{B1G_b - P51C_b}}
+$$
+
+La part des salaires dans la valeur ajoutée nette est croissante en France (@fig-psal) (de 10 points de 1998 à 2025), comme en Espagne (de 9 points). Elle atteint en France le niveau le plus élevé des pays sélectionnés, pour autant que l'on puisse comparer entre pays.
+
+La part des salaires dans la valeur ajoutée est la plus basse aux Pays-Bas et est sur une pente décroissante depuis plus de 20 ans, alors qu'elle semble stable en Belgique et en Allemagne. L’Italie affiche une variabilité temporelle importante, avec un pic de la part des salaires dans la valeur ajoutée en 2013, puis une franche décroissance (de plus de 13 points) interrompue dans la période récente suite à la période d'inflation et la forte relance budgétaire.
+
+En France, la hausse est franche après la crise financière de 2008, suivant une période de grande stabilité de 1995 à 2007. Cette hausse peut découler d'un effet de structure sectorielle, mais le @fig-salaires indique une autre singularité française. Contrairement à de nombreux pays, les salaires réels sont restés sur une pente croissante, interrompue par la phase d'inflation à partir de la fin de l'année 2021, alors que dans les 5 autres pays, 2008 marque une cassure dans la progression de salaires réels.
+
+Depuis 2018, en France, la part des salaires est stabilisée, à un haut niveau. L'inflation et le retard d'ajustement des salaires sur l'inflation explique probablement cette trajectoire. On observe des mouvements comparables dans d'autres pays, bien que plus violent en Allemagne ou en Italie par exemple.
 
 Au début des années 2000, deux pays se distinguaient des autres (l'Espagne et l'Italie) par une part des salaires plus faibles. L'écart avec l'Allemagne atteignait alors plus de 15 points. Moins développés, une part peut être plus importante de l'investissement expliquait cette situation. La généralisation de l'approche à d'autres pays de l'Union Européenne permettrait de confirmer cette hypothèse. Aujourd'hui la situation est différente, l'écart entre l'Allemagne et ces pays s'étant drastiquement réduit (moins de 8 points entre l'Italie et l'Allemagne) et les Pays-Bas prenant la place du pays où la part des salaires est la plus basse et la France où elle est nettement plus haute.
+
+```{r}
+naq_full <- ofce::source_data("vaq.r")$naa 
+naq_full |> 
+  mutate(year = year(time)) |>
+  filter( year %in% c(1995, 2025), champ == "mdhifi" ) |>
+  select(year, geo, psal) |> 
+  pivot_wider(names_from = year, values_from = psal, names_glue = "y{year}") |> 
+  ggplot()+geom_point(aes(x=y2025, y=y1995))
+```
 
 La construction d'un taux de rendement du capital est sans doute assez fragile parce qu'il faut ajouter à l'évaluation du partage de la valeur ajoutée une estimation des impôts payés (notamment l'impôt sur les sociétés) et une évaluation du stock de capital. En utilisant les données de stock de capital productif le diagnostic présenté sur le @fig-psal est confirmé par le @fig-rp. La France y occupe une position singulière avec un rendement du capital productif particulièrement faible et décroissant depuis le début des années 2000 alors qu'il est constant dans beaucoup de pays ou même croissant comme aux Pays-Bas. Une explication possible est le déplacement de la base fiscale en Europe comme le suggèrent @tørsløv2022.
 
 ```{r}
 #| label: fig-rp
-#| fig-asp: 0.9
+#| fig-asp: 0.85
 #| fig-cap: Rendement du capital productif
 
 champs  <- c("md" = "Marchand", "mdhifi" = "Marchand hors immobilier et services financiers",
@@ -162,9 +180,10 @@ champs  <- c("md" = "Marchand", "mdhifi" = "Marchand hors immobilier et services
             "mdhimfi"= "Marchand hors fin. et imm. des ménages (L68A)", 
             "mdhfi"= "Marchand hors services financiers", 
             "tb" = "Toutes branches (marchandes et non marchandes)")
-nace <- source_data("nace.r")
+
 naa <- source_data("vaq.r")$naaa |> 
-  mutate(geo = factor(geo, nace$pays1)) |> 
+  filter(geo %in% P6) |> 
+  mutate(geo = factor(geo, P6)) |> 
   filter(champ == "mdhim") |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
@@ -177,8 +196,9 @@ date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 tpbranches <- imap( 
   c("Marchand-L68A" = "mdhim",
     "Marchand-K-L68A" = "mdhimfi"), ~{
-      data <- source_data("vaq.r")$naaa |> 
-        mutate(geo = factor(geo, nace$pays1)) |> 
+      data <- source_data("vaq.r")$naaa |>
+        filter(geo %in% P6) |> 
+        mutate(geo = factor(geo, P6)) |> 
         filter(champ == .x) |> 
         mutate(tooltip = glue(
           "<b>{lbl(geo)}</b>
@@ -233,7 +253,7 @@ On distingue 4 agrégations : l'ensemble des branches (ou l'ensemble de l'écono
 ```{r}
 #| label: fig-salaires
 #| fig-cap: Salaires réels en Europe
-#| fig-asp: 0.9
+#| fig-asp: 0.85
 
 library(lubridate)
 
@@ -247,6 +267,7 @@ meta <- sourcoise::sourcoise_meta("salaires.r")
 date <- meta$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 data <- salaires |> 
+  filter(geo %in% P6) |> 
   filter(time >= "1995-01-01") |> 
   select(geo, time, wr, wr_md, wr_nmd, wr_hi) |> 
   mutate(
@@ -258,7 +279,7 @@ data <- salaires |>
     Salaire réel, branches marchandes hors imm. {round(wr_hi,1)} k€/an
     Salaire réel, branches non marchandes {round(wr_nmd,1)} k€/an")) |> 
   pivot_longer(c(wr, wr_md, wr_nmd, wr_hi)) |> 
-  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+  mutate(geo = factor(geo, P6))
 
 labels_branches <- c(wr = "Ttes branches", wr_md = "Marchand", 
                      wr_nmd = "Non marchand", wr_hi = "Marchand hors imm.")
@@ -324,7 +345,7 @@ Les données trimestrielles sont annualisées pour la lisibilité et pour simpli
 
 ```{r}
 #| label: fig-psalcnc
-#| fig-asp: 0.9
+#| fig-asp: 0.85
 #| fig-cap: Correction pour la non salarisation ou non, comptes de branches
 
 champs  <- c("md" = "marchand", 
@@ -333,13 +354,14 @@ champs  <- c("md" = "marchand",
             "mdhi"= "marchand hors imm.", 
             "tb" = "Toutes branches (marchandes et non marchandes)")
 naq <- source_data("vaq.r")$naa |> 
+  filter(geo %in% P6) |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
     {year(time)} 
     {champs[champ]}
     Rémunérations (y.c. les non salariés) dans la VAN : {round(psal*100,1)}%
     Rémunérations (sans les non salariés) dans la VAN : {round(100*psalnc,1)}%")) |>
-  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+  mutate(geo = factor(geo, P6))
 
 date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
@@ -349,7 +371,7 @@ annot <-  tribble(
     "1996-01-01", .89, "Branches marchandes hors immobilier et finance", "DE", "mdhifi",
     "1996-01-01", .61, "Branches marchandes et non marchandes", "DE", "tb") |> 
   mutate(time = as.Date(time),
-         geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+         geo = factor(geo, P6))
 
 labels_champ = c(tb = "Ttes branches", md="Marchand", 
                  mdhifi = "Marchand hors imm.&fin.",
@@ -421,7 +443,7 @@ La correction de la non salarisation, en imputant une masse salariale pour les e
 
 ```{r}
 #| label: fig-psalnetbrut
-#| fig-asp: 0.9
+#| fig-asp: 0.85
 #| fig-cap: Nette ou brute, comptes de branches
 
 champs  <- c("md" = "marchand",
@@ -429,6 +451,7 @@ champs  <- c("md" = "marchand",
             "mdhfi"= "marchand hors services financiers", 
             "tb" = "Toutes branches (marchandes et non marchandes)")
 naq <- source_data("vaq.r")$naa |> 
+  filter(geo %in% P6) |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
     {year(time)} 
@@ -512,6 +535,7 @@ La notion de part des salaires dans la valeur ajoutée nette consiste à réduir
 #| fig-cap: Tous concepts, comparaison entre pays
 
 data <- naq |> 
+  filter(geo %in% P6) |> 
   filter(time>="1995-01-01") |>
   select(geo, time, champ, psal, psalnc, psalb, psalncb) |> 
   pivot_longer(c(psal, psalnc, psalb, psalncb)) |> 
@@ -564,11 +588,11 @@ Comme pour les graphiques précédents, les données trimestrielles sont annuali
 ```{r}
 #| label: fig-s11psal
 #| fig-cap: Part des salaires dans la VA, SNF, comptes d'agents
-#| fig-asp: 0.9
+#| fig-asp: 0.85
 
 snfq <- source_data("snf_ratio.r") |> 
   pluck("snfq") |>
-  filter(sector == "S11" ) |> 
+  filter(sector == "S11", geo %in% P6) |> 
   mutate(year = floor_date(time, "year")) |> 
   select(-starts_with("s_adj_"), -time) |> 
   group_by(geo, year, sector) |> 
@@ -593,7 +617,7 @@ snfq <- source_data("snf_ratio.r") |>
     Rémunérations dans la VAB : {round(psalb*100,1)}%
     Profits nets (d'IS, taxes et subvention) dans la VAN : {round(tp*100,1)}%
     Dividendes nets dans la VAN : {round(div*100,1)}%")) |> 
-  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE"))) |> 
+  mutate(geo = factor(geo, P6)) |> 
   filter(time>= "1995-01-01")
 
 date <- sourcoise::sourcoise_meta("snf_ratio.r")$data_date |> ymd_hms() 
@@ -663,10 +687,11 @@ girafy(psnf, 1.5)
 ```{r}
 #| label: fig-s1112psal
 #| fig-cap: Part des salaires dans la VA, SNF+SF, comptes d'agents
-#| fig-asp: 0.8
+#| fig-asp: 0.85 
 
 snffq <- source_data("snf_ratio.r") |> 
   pluck("snfq") |> 
+  filter(geo %in% P6) |> 
   mutate(year = floor_date(time, "year")) |> 
   select(-starts_with("s_adj_")) |> 
   group_by(geo, time, year) |> 
@@ -695,7 +720,7 @@ snffq <- source_data("snf_ratio.r") |>
     Rémunérations dans la VAB : {round(psalb*100,1)}%
     Profits nets (d'IS, taxes et subvention) dans la VAN : {round(tp*100,1)}%
     Dividendes nets dans la VAN : {round(div*100,1)}%")) |> 
-  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE"))) |> 
+  mutate(geo = factor(geo, P6)) |> 
   filter(time>= "1995-01-01")
 
 date <- sourcoise::sourcoise_meta("snf_ratio.r")$data_date |> ymd_hms() 
@@ -838,15 +863,15 @@ On obtient le graphe suivant :
 
 assetsnfi <- source_data("snf_ratio.r") |> 
   pluck("assetsnfi") |> 
-  filter(sector == "S11") |> 
+  filter(sector == "S11", geo %in% P6) |> 
   transmute(geo, time, phycap = N1N + N2N) |>
-  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+  mutate(geo = factor(geo, P6))
 
 assetsfi <- source_data("snf_ratio.r") |> 
   pluck("assetsfi") |> 
-  filter(sector == "S11") |> 
+  filter(sector == "S11", geo %in% P6) |> 
   select(geo, time, net_shares, net_shares_augmented) |>
-  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+  mutate(geo = factor(geo, P6))
 
 snfq_a <- snfq |> 
   filter(time >= "1995-01-01") |> 
@@ -902,21 +927,23 @@ ptprofitsnf <- ggplot(snfq_a |> filter(name != "rendshare")) +
 
 
 assetsnfi <- source_data("snf_ratio.r") |> 
-  pluck("assetsnfi") |>  
+  pluck("assetsnfi") |>
+  filter(geo %in% P6) |> 
   group_by(geo, time) |> 
   summarize(across(c(N1N,N2N,N11N), ~sum(.x)),
             .groups = "drop") |> 
   transmute(geo, time, phycap = N1N + N2N) |>
   filter(phycap>0) |> 
-  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+  mutate(geo = factor(geo, P6))
 
 assetsfi <- source_data("snf_ratio.r") |> 
   pluck("assetsfi") |> 
+  filter(geo %in% P6) |> 
   group_by(geo, time) |>  
   summarize(across(c(net_shares, net_shares_augmented), sum),
             .groups = "drop") |> 
   select(geo, time, net_shares, net_shares_augmented) |>
-  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+  mutate(geo = factor(geo, P6))
 
 snfq_a <- snfq |> 
   filter(time >= "1995-01-01") |> 
@@ -978,7 +1005,7 @@ ptprofitsnff <- ggplot(snfq_a |> filter(name != "rendshare")) +
 ```{r, results="asis"}
 #| label: fig-tprofitsnff
 #| fig-cap: Rendements du capital, compte de secteur
-#| fig-asp: 0.9
+#| fig-asp: 0.85
 
 tabsetize(list("SNF" = ptprofitsnf, "SNF+SF" = ptprofitsnff))
 ```
@@ -990,7 +1017,7 @@ En utilisant d'une part la valeur ajoutée des branches marchandes hors services
 ```{r, results="asis"}
 #| label: fig-tprofitbranches
 #| fig-cap: Rendements du capital, compte de branches, marchand hors services immobiliers produits par les ménages
-#| fig-asp: 0.8
+#| fig-asp: 0.85
 
 tabsetize(tpbranches)
 ```
