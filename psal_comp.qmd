@@ -162,9 +162,10 @@ naq_full <- ofce::source_data("vaq.r")$naa
 naq_full |> 
   mutate(year = year(time)) |>
   filter( year %in% c(1995, 2025), champ == "mdhifi" ) |>
-  select(year, geo, psal) |> 
-  pivot_wider(names_from = year, values_from = psal, names_glue = "y{year}") |> 
-  ggplot()+geom_point(aes(x=y2025, y=y1995))
+  select(year, geo, psal, van) |> 
+  pivot_wider(names_from = year, values_from = c(psal,van)) |> 
+  ggplot()+aes(x=psal_2025, y=psal_1995, size = van_2025)+geom_point() + geom_text(aes(label=geo), color = "white", size = 9, size.unit = "pt", )+
+  geom_abline(slope = 1, intercept = 0)+scale_size(range = c(4, 8))
 ```
 
 La construction d'un taux de rendement du capital est sans doute assez fragile parce qu'il faut ajouter à l'évaluation du partage de la valeur ajoutée une estimation des impôts payés (notamment l'impôt sur les sociétés) et une évaluation du stock de capital. En utilisant les données de stock de capital productif le diagnostic présenté sur le @fig-psal est confirmé par le @fig-rp. La France y occupe une position singulière avec un rendement du capital productif particulièrement faible et décroissant depuis le début des années 2000 alors qu'il est constant dans beaucoup de pays ou même croissant comme aux Pays-Bas. Une explication possible est le déplacement de la base fiscale en Europe comme le suggèrent @tørsløv2022.
@@ -235,7 +236,7 @@ tpbranches <- imap(
           champ = "Branches marchandes {tolower(.y)}.",
           note = "La CCF ou les impôts nets de subventions sont extrapolés au delà de 2023 à partir des comptes annuels. L'impôt sur les sociétés (D51) des sociétés financières (S12) est affecté à la branche K (services financiers) et celui des sociétés non financières (S11) aux branches marchandes hors services financiers et immobilier des ménages (K&L68A).") })
 
-girafy(tpbranches[[2]])
+girafy(tpbranches[[2]], 1.25)
 ```
 
 On détaille en les discutant dans la suite de ce document les effets des corrections appliquées, ainsi que la différence entre les mesures dérivées des comptes de branche ou des comptes d'agents. Ces éléments sont un peu fastidieux, mais ils s'avèrent assez importants et pas toujours très intuitifs.
@@ -323,7 +324,7 @@ sal <- ggplot(data) +
     note = "Le salaire est défini comme la masse salariale divisée par l'emploi salarié, sur les 4 derniers trimestres, déflaté par le déflateur de la consommation chaîné.",
     ofce = FALSE)
 
-girafy(sal, 1)
+girafy(sal, 1.25)
 
 ```
 
@@ -436,7 +437,7 @@ psal <- ggplot(data) +
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
     champ = "Branches marchandes et non marchandes (en léger et pointillé) et branches marchandes hors services immobiliers et financiers (L et K dans la NACE r2) (en plein).")
 
-girafy(psal, 1.5)
+girafy(psal, 1.25)
 ```
 
 La correction de la non salarisation, en imputant une masse salariale pour les entrepreneurs individuels, augmente la part des salaires. La correction n'est pas constante dans le temps (c'est particulièrement fort pour la France) ni dans l'espace (la correction est très forte en Italie). La correction est plus importante lorsqu'on se limite aux branches marchandes hors services immobiliers et services financiers, sauf aux Pays-Bas.
@@ -524,7 +525,7 @@ psal <- ggplot() +
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, github.com/xtimbeau/travail/vaq.r.",
     champ = "Branches marchandes et non marchandes (en léger et pointillé) et branches marchandes hors services immobiliers et financiers (L et K dans la NACE r2) (en plein)")
 
-girafy(psal, 1.5)
+girafy(psal, 1.25)
 ```
 
 La notion de part des salaires dans la valeur ajoutée nette consiste à réduire le démominateur (la valeur ajoutée) de la consommation de capital fixe. Cela augmente donc le ratio. Cependant, cette correction n'est pas constante dans le temps (comme en France, en Espagne ou en Belgique). Comme on peut le voir sur le @fig-psalcompote, la variance entre les pays est plus basse pour la notion brute (non corrigé de la CCF) que nette. Pour les branches marchandes hors services immobiliers et services immobiliers, le classement entre pays est marginalement modifié, la Belgique ayant une part des salaires nette pus élevée que l'Allemagne, alors que sa part brute est plus faible qu'en Allemagne. Pour les autres pays, le classement est indentique (La France a la part la plus haute et les Pays-Bas plus faible).
@@ -574,7 +575,7 @@ gg <- ggplot(data) +
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.")
 
-girafy(gg)
+girafy(gg, 1.25)
 ```
 
 ## Part des salaires dans la valeur ajoutée, comptes d'agents
@@ -681,7 +682,7 @@ psnf <- ggplot(data) +
     source = "Eurostat, comptes nationaux trimestriels d'agents ou de secteurs institutionels (nasq_10_nf_tr), téléchargés le {date}, github.com/xtimbeau/travail/snf_ratio.r.",
     champ = "Sociétés non financières (les définitions varient suivant les pays)")
 
-girafy(psnf, 1.5)
+girafy(psnf, 1.25)
 ```
 
 ```{r}
@@ -784,7 +785,7 @@ psnff <- ggplot(data) +
     source = "Eurostat, comptes nationaux trimestriels d'agents ou de secteurs institutionels (nasq_10_nf_tr), téléchargés le {date}, github.com/xtimbeau/travail/snf_ratio.r.",
     champ = "Sociétés non financières et financières (les définitions varient suivant les pays)")
 
-girafy(psnff, 1.5)
+girafy(psnff, 1.25)
 ```
 
 ## Profits nets et dividendes dans les comptes d'agents
@@ -843,7 +844,7 @@ pprofit <- ggplot(data) +
     source = "Eurostat, comptes nationaux trimestriels de secteur (nasq_10_nf_tr), téléchargés le {date}, github.com/xtimbeau/travail/snf_ratio.r.",
     champ = "Sociétés non financières (les définitions varient suivant les pays)")
 
-girafy(pprofit, 1.5)
+girafy(pprofit, 1.25)
 ```
 
 On peut rapporter ces notions aux éléments qui viennent du compte de capital. Le premier concept est le profit rapporté au stock de capital physique (tel que valorisé dans la comptabilité nationale, c'est-à-dire à la valeur de remplacement et au prix de marché). Malheureusement, à part la France, aucun pays dans notre échantillon ne diffuse ces données sur Eurostat.
@@ -1071,7 +1072,7 @@ psaloecd <- ggplot(data |> filter(year(time)>=1995)) +
  code à github.com/xtimbeau/travail/oecd.r.",
     champ = "Toutes branches, y compris services immobiliers")
 
-girafy(psaloecd, 1.5)
+girafy(psaloecd, 1.25)
 ```
 
 En revanche, Eurostat a un programme de coopération (avec l'OCDE) pour intégrer les données dans le cadre d'Eurostat (sans que les méthodes ne soient plus homogènes pour autant).
@@ -1120,7 +1121,7 @@ psali <- ggplot(snfia) +
  code à github.com/xtimbeau/travail/snf_international.r.",
     champ = "Sociétés non financières (S11, la définition peut varier d'un pays à l'autre)")
 
-girafy(psali, 1.5)
+girafy(psali, 1.25)
 ```
 
 ### Références {.unlisted .unnumbered}
