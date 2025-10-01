@@ -2,7 +2,7 @@ library(tidyverse)
 library(eurostat)
 library(ofce)
 
-pays <- source_data("nace.r")$pays2
+pays <- source_data("nace.r")$pays3
 
 nace <- source_data("nace.r")$nace
 m_a20 <- nace  |> pull(a20) |> unique()

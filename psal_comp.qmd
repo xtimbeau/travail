@@ -14,7 +14,7 @@ bibliography: references.bib
 echo: false
 message: false
 warning: false
-abstract: "On explore ici différentes façons de calculer la notion de part des salaires dasn la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers des ménages* peut être calculé pour les principaux pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et a cru de façon importante. Bien que plus fragile empiriquement, la notion de rendement du capital productif confirme ce diagnostic et illustre un problème particulerement préoccupant du tissu productif français. L'ensemble des éléments présentés ici est reproductible à partir des codes fournis.<br>`r  wordcountaddin::word_count('psal_comp.qmd')` mots."
+abstract: "On explore ici différentes façons de calculer la notion de part des salaires dans la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers des ménages*. Il peut être calculé pour les pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et s'est accrue de façon importante. Bien que plus fragile empiriquement, la notion de rendement du capital productif confirme ce diagnostic et illustre un problème particulerement préoccupant du tissu productif français. L'ensemble des éléments présentés ici est reproductible à partir des codes fournis.<br>`r  wordcountaddin::word_count('psal_comp.qmd')` mots."
 
 format:
   wp-html:
@@ -155,17 +155,16 @@ En France, la hausse est franche après la crise financière de 2008, suivant un
 
 Depuis 2018, en France, la part des salaires est stabilisée, à un haut niveau (@fig-psal). L'inflation et le retard d'ajustement des salaires sur l'inflation explique probablement cette trajectoire. On observe des mouvements comparables dans d'autres pays, bien que plus violent en Allemagne ou en Italie par exemple.
 
-Au début des années 2000, deux pays se distinguaient des autres (l'Espagne et l'Italie) par une part des salaires plus faibles. L'écart avec l'Allemagne atteignait alors plus de 15 points. Moins développés, une part peut être plus importante de l'investissement expliquait cette situation. La généralisation de l'approche à d'autres pays de l'Union Européenne permet de confirmer cette hypothèse (@fig-psaleu). Aujourd'hui la situation est différente, l'écart entre l'Allemagne et ces pays s'étant drastiquement réduit (moins de 8 points entre l'Italie et l'Allemagne) et les Pays-Bas prenant la place du pays avancé où la part des salaires est la plus basse (avec l'exception du Luxembourg) et la France où elle est plus haute.
+Au début des années 2000, deux pays se distinguaient des autres (l'Espagne et l'Italie) par une part des salaires plus faibles. L'écart avec l'Allemagne atteignait alors plus de 15 points. En généralisant l'approche aux pays de l'Union Européenne, on peut en partie confirmer cette hypothèse (@fig-psaleu). Les pays qui ont connu un développement rapide, et donc des niveaux d'investissement élevés, on eu des parts des salaires basses (La Bulgarie, la Tchéquie, la Grèce par exemple). Mais ce n'est pas une observation systématique : certains pays moins développés ont eu par le passé une part très élevée des salaires dans la valeur ajouté, témoignant peut être de modes de formation des salaires et d'inflation particulier et hérités du passé. Cependant, comme le suggèrent la position singulière de quelques petits pays, parmi lesquels l'Irlande, le Luxembourg, Malte, Chypre ou les Pays-Bas dans une certaine mesure, c'est peut être du côté du déplacement de la base imposable des profits (optimisation fiscale), des prix de transferts et d'une position très particulière dans la chaîne de valeur qu'il faut aller chercher l'explication de très faibles parts des salaires dans la valeur ajoutée.
 
 ```{r}
 #| label: fig-psaleu
-#| fig-asp: 0.6
+#| fig-asp: 0.85
 #| fig-cap: Part des salaires dans la VA nette 1995 et 2025
 
 naq_full <- ofce::source_data("vaq.r")$naa |> 
-  filter(champ == "mdhim")
+  filter(champ == "mdhim") 
 data <- naq_full |> 
-  filter() |> 
   mutate(year = year(time)) |>
   filter( year %in% c(1995, 2025)) |>
   select(year, geo, psal, van) |> 
@@ -194,16 +193,16 @@ library(ggimage)
 psaleu <- ggplot(data_int) + 
   geom_segment(
     aes(x = x,  xend = xend, y = y, yend = yend, color = year),
-    key_glyph = draw_key_point ) +
+    key_glyph = draw_key_point, linewidth = 0.2) +
   ggimage::geom_flag( data = ~.x |> filter(i==1),
-                      aes(x= geo, y = 0.475, image = geo2c), size = .025)+
+                      aes(x= geo, y = 0.3, image = geo2c), size = .03)+
   scale_color_gradient(low="seagreen1", high = "seagreen4",
                        name = NULL,
                        breaks = c(1995,2025), labels = c(1995, 2025)) + 
   geom_point_interactive(
     data = ~.x |> filter(!i%in%c(0,1)), 
     hover_nearest = TRUE,
-    aes(x = geo, y=psal, tooltip = tooltip, color = year), size = 0.5, alpha = 0.5)+
+    aes(x = geo, y=psal, tooltip = tooltip, color = year), size = 0.3, alpha = 0.5)+
   geom_point_interactive(
     data = ~.x |> filter(i%in%c(0,1)), 
     aes(x = geo, y=yend, size = van_2025, color = year,
@@ -213,8 +212,8 @@ psaleu <- ggplot(data_int) +
   guides(color = guide_legend(), size= "none") +
   scale_x_discrete(labels = ~str_c("**", lbl(.x), "**")) + 
   scale_y_continuous(labels = scales::label_percent(1), 
-                     limits = c(0.485,1), oob = squish) + 
-  scale_size(range = c(1,4)) +
+                     limits = c(0.325,1), oob = squish) + 
+  scale_size(range = c(1,3)) +
   labs(x=NULL, y=NULL)+
   thm +
   theme(
@@ -225,7 +224,12 @@ psaleu <- ggplot(data_int) +
                                   vjust = 0.5, hjust = 1,
                                   margin = margin(r=-10, t=0, b=2)),
     axis.line = element_blank(),
-    axis.ticks = element_blank()) 
+    axis.ticks = element_blank()) +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
+    champ = "Branches marchandes hors services immobiliers des ménages (L86A).",
+    note = "Part des salaires dans la valeur ajoutée nette corrigée de la non salarisation.")
   
   
 girafy(psaleu , 1)

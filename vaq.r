@@ -9,7 +9,7 @@ m_a10 <- nace |> pull(a10) |> unique()
 
 adj <- c("SCA", "SA", "CA", "NSA")
 
-pays <- source_data("nace.r")$pays2
+pays <- source_data("nace.r")$pays3
 
 label_pays <- set_names(countrycode::countrycode(pays, "eurostat", "country.name.fr"), pays)
 

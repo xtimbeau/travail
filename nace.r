@@ -32,5 +32,11 @@ pays1 <- c("DE", "FR", "IT", "ES", "NL", "BE")
 
 pays2 <- c("DE", "FR", "IT", "ES", "NL", "BE", "IE", "AT", "PT", "FI", "EL", "LU")
 
+pop <- "demo_pjan" |>
+  get_eurostat(filters = list(sex="T", age = "TOTAL" )) |>
+  select(geo, time, pop = values )
 
-return(list(marchand = marchand, marchand2 = marchand2, nace = nace, pays1 = pays1, pays2 = pays2))
+pays3 <- pop |>
+  filter(year(time)==2024, geo %in% eurostat::eu_countries$code) |> arrange(desc(pop)) |> pull(geo)
+
+return(list(marchand = marchand, marchand2 = marchand2, nace = nace, pays1 = pays1, pays2 = pays2, pays3 = pays3))

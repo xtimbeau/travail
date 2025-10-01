@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://xtimbeau.github.io/travail/psal_comp.html</loc>
-    <lastmod>2025-10-01T16:24:07.131Z</lastmod>
-  </url>
-  <url>
     <loc>https://xtimbeau.github.io/travail/travail.html</loc>
     <lastmod>2025-09-22T12:04:20.371Z</lastmod>
   </url>
   <url>
     <loc>https://xtimbeau.github.io/travail/index.html</loc>
-    <lastmod>2025-09-09T08:43:26.526Z</lastmod>
+    <lastmod>2025-09-11T15:26:23.640Z</lastmod>
+  </url>
+  <url>
+    <loc>https://xtimbeau.github.io/travail/psal_comp.html</loc>
+    <lastmod>2025-10-01T17:38:03.391Z</lastmod>
   </url>
 </urlset>
