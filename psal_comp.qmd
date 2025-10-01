@@ -153,19 +153,82 @@ La part des salaires dans la valeur ajoutée est la plus basse aux Pays-Bas et e
 
 En France, la hausse est franche après la crise financière de 2008, suivant une période de grande stabilité de 1995 à 2007. Cette hausse peut découler d'un effet de structure sectorielle, mais le @fig-salaires indique une autre singularité française. Contrairement à de nombreux pays, les salaires réels sont restés sur une pente croissante, interrompue par la phase d'inflation à partir de la fin de l'année 2021, alors que dans les 5 autres pays, 2008 marque une cassure dans la progression de salaires réels.
 
-Depuis 2018, en France, la part des salaires est stabilisée, à un haut niveau. L'inflation et le retard d'ajustement des salaires sur l'inflation explique probablement cette trajectoire. On observe des mouvements comparables dans d'autres pays, bien que plus violent en Allemagne ou en Italie par exemple.
+Depuis 2018, en France, la part des salaires est stabilisée, à un haut niveau (@fig-psal). L'inflation et le retard d'ajustement des salaires sur l'inflation explique probablement cette trajectoire. On observe des mouvements comparables dans d'autres pays, bien que plus violent en Allemagne ou en Italie par exemple.
 
-Au début des années 2000, deux pays se distinguaient des autres (l'Espagne et l'Italie) par une part des salaires plus faibles. L'écart avec l'Allemagne atteignait alors plus de 15 points. Moins développés, une part peut être plus importante de l'investissement expliquait cette situation. La généralisation de l'approche à d'autres pays de l'Union Européenne permettrait de confirmer cette hypothèse. Aujourd'hui la situation est différente, l'écart entre l'Allemagne et ces pays s'étant drastiquement réduit (moins de 8 points entre l'Italie et l'Allemagne) et les Pays-Bas prenant la place du pays où la part des salaires est la plus basse et la France où elle est nettement plus haute.
+Au début des années 2000, deux pays se distinguaient des autres (l'Espagne et l'Italie) par une part des salaires plus faibles. L'écart avec l'Allemagne atteignait alors plus de 15 points. Moins développés, une part peut être plus importante de l'investissement expliquait cette situation. La généralisation de l'approche à d'autres pays de l'Union Européenne permet de confirmer cette hypothèse (@fig-psaleu). Aujourd'hui la situation est différente, l'écart entre l'Allemagne et ces pays s'étant drastiquement réduit (moins de 8 points entre l'Italie et l'Allemagne) et les Pays-Bas prenant la place du pays avancé où la part des salaires est la plus basse (avec l'exception du Luxembourg) et la France où elle est plus haute.
 
 ```{r}
-naq_full <- ofce::source_data("vaq.r")$naa 
-naq_full |> 
+#| label: fig-psaleu
+#| fig-asp: 0.6
+#| fig-cap: Part des salaires dans la VA nette 1995 et 2025
+
+naq_full <- ofce::source_data("vaq.r")$naa |> 
+  filter(geo != "IE", champ == "mdhim")
+data <- naq_full |> 
+  filter(geo != "IE") |> 
   mutate(year = year(time)) |>
-  filter( year %in% c(1995, 2025), champ == "mdhifi" ) |>
+  filter( year %in% c(1995, 2025)) |>
   select(year, geo, psal, van) |> 
   pivot_wider(names_from = year, values_from = c(psal,van)) |> 
-  ggplot()+aes(x=psal_2025, y=psal_1995, size = van_2025)+geom_point() + geom_text(aes(label=geo), color = "white", size = 9, size.unit = "pt", )+
-  geom_abline(slope = 1, intercept = 0)+scale_size(range = c(4, 8))
+  mutate(geo = fct_reorder(geo, psal_2025)) |> 
+  mutate(geo2c = countrycode(geo, "eurostat", "iso2c")) 
+  
+
+data_int <- data |> 
+  full_join(naq_full |> select(time, psal, geo), by = "geo") |> 
+  group_by(geo) |> 
+  mutate(
+    year = year(time),
+    i = (year - 1995)/(2025 - 1995),
+    psal_seg = psal_2025 * i  + psal_1995 * (1-i),
+    x  = geo, xend = geo,
+    y = lag(psal_seg),
+    yend = psal_seg ) |> 
+  mutate(
+    tooltip = glue("<b>{lbl(geo)}</b>
+                     Part des salaires dans la VAN en {year} : {round(100*psal,1)}%
+                     (VAN, cor. non sal., marchandes hors imm. mén.)")) |> 
+  ungroup()
+
+library(ggimage)
+psaleu <- ggplot(data_int) + 
+  geom_segment(
+    aes(x = x,  xend = xend, y = y, yend = yend, color = year),
+    key_glyph = draw_key_point ) +
+  ggimage::geom_flag( data = ~.x |> filter(i==1),
+                      aes(x= geo, y = 0.475, image = geo2c), size = .025)+
+  scale_color_gradient(low="seagreen1", high = "seagreen4",
+                       name = NULL,
+                       breaks = c(1995,2025), labels = c(1995, 2025)) + 
+  geom_point_interactive(
+    data = ~.x |> filter(!i%in%c(0,1)), 
+    hover_nearest = TRUE,
+    aes(x = geo, y=psal, tooltip = tooltip, color = year), size = 0.5, alpha = 0.5)+
+  geom_point_interactive(
+    data = ~.x |> filter(i%in%c(0,1)), 
+    aes(x = geo, y=yend, size = van_2025, color = year,
+        tooltip = tooltip),
+    hover_nearest = TRUE)  +
+  coord_flip()+
+  guides(color = guide_legend(), size= "none") +
+  scale_x_discrete(labels = ~str_c("**", lbl(.x), "**")) + 
+  scale_y_continuous(labels = scales::label_percent(1), 
+                     limits = c(0.485,1), oob = squish) + 
+  scale_size(range = c(1,4)) +
+  labs(x=NULL, y=NULL)+
+  thm +
+  theme(
+    legend.direction = "horizontal",
+    panel.grid.major.y = element_blank(),
+    legend.text = element_marquee(size = rel(0.7)),
+    axis.text.y = element_marquee(size = rel(1),
+                                  vjust = 0.5, hjust = 1,
+                                  margin = margin(r=-10, t=0, b=2)),
+    axis.line = element_blank(),
+    axis.ticks = element_blank()) 
+  
+  
+girafy(psaleu , 1)
 ```
 
 La construction d'un taux de rendement du capital est sans doute assez fragile parce qu'il faut ajouter à l'évaluation du partage de la valeur ajoutée une estimation des impôts payés (notamment l'impôt sur les sociétés) et une évaluation du stock de capital. En utilisant les données de stock de capital productif le diagnostic présenté sur le @fig-psal est confirmé par le @fig-rp. La France y occupe une position singulière avec un rendement du capital productif particulièrement faible et décroissant depuis le début des années 2000 alors qu'il est constant dans beaucoup de pays ou même croissant comme aux Pays-Bas. Une explication possible est le déplacement de la base fiscale en Europe comme le suggèrent @tørsløv2022.
@@ -245,7 +308,7 @@ On explore également les conséquences en matière de taux de profit (part des 
 
 ## Evolution des salaires réels
 
-L'évolution des salaries réels est un complément à celle du partage de la valeur ajoutée. Par passer de l'un à l'autre, il faut non seulement prendre en compte les évolutions de la valeur ajoutée, mais aussi les effets de l'évolution du ratio prix à la consommation sur prix de valeur ajoutée.
+L'évolution des salaries réels est un complément à celle du partage de la valeur ajoutée. Pour passer de l'un à l'autre, il faut non seulement prendre en compte les évolutions de la valeur ajoutée, mais aussi les effets de l'évolution du ratio prix à la consommation sur prix de valeur ajoutée.
 
 On déflate la masse salariale (comptabilité nationale, comptes trimestriels) par les prix à la consommation. On utilise les masses salariales ($D1$, dans [`namq_10_a10`](https://ec.europa.eu/eurostat/databrowser/view/NAMQ_10_A10/default/table?lang=en)) par branches pour comparer branches (principalement) marchandes et (principalement) non marchandes divisées par l'emploi salarié ([`namq_10_a10_e`](https://ec.europa.eu/eurostat/databrowser/view/NAMQ_10_A10_E__custom_7475124/default/table?lang=en)). Les prix sont les déflateurs de la consommation ($P31\_S14$ dans [`namq_10_fcs`](https://ec.europa.eu/eurostat/databrowser/product/page/NAMQ_10_FCS)) chaînés (voir le code pour les détails).
 
@@ -259,6 +322,7 @@ On distingue 4 agrégations : l'ensemble des branches (ou l'ensemble de l'écono
 library(lubridate)
 
 salaires <- source_data('salaires.r') |> 
+  filter(geo %in% P6) |> 
   mutate(tooltip = glue(
   "<b>{lbl(geo)}</b>
   {date_trim(time)}

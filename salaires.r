@@ -2,7 +2,7 @@ library(tidyverse)
 library(eurostat)
 library(ofce)
 
-pays <- source_data("nace.r")$pays1
+pays <- source_data("nace.r")$pays2
 
 label_pays <- set_names(countrycode::countrycode(pays, "eurostat", "country.name.fr"), pays)
 nace <- source_data("nace.r")$nace
