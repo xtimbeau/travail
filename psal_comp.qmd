@@ -163,9 +163,9 @@ Au début des années 2000, deux pays se distinguaient des autres (l'Espagne et 
 #| fig-cap: Part des salaires dans la VA nette 1995 et 2025
 
 naq_full <- ofce::source_data("vaq.r")$naa |> 
-  filter(geo != "IE", champ == "mdhim")
+  filter(champ == "mdhim")
 data <- naq_full |> 
-  filter(geo != "IE") |> 
+  filter() |> 
   mutate(year = year(time)) |>
   filter( year %in% c(1995, 2025)) |>
   select(year, geo, psal, van) |> 
