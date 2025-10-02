@@ -135,9 +135,11 @@ L68Aq <- L68A |>
     ip = rD29X39 * vab,
     msa, msanc)
 
-naq <- naq_a10 |>
+naq_a10 <- naq_a10 |>
   mutate(him = hi&md) |>
-  bind_rows(L68Aq) |>
+  bind_rows(L68Aq)
+
+naq <- naq_a10 |>
   group_by(geo, time) |>
   summarize(
     across(c(van, vab, msa, msanc, ip), ~sum(.x[md], na.rm=TRUE), .names = "{.col}_md"),
@@ -263,4 +265,4 @@ naa_ext2 <- naa_ext |>
   arrange( desc(time), geo) |>
   mutate(geo = factor(geo, pays))
 
-return(list(naa = naa_ext, naaa = naa_ext2))
+return(list(naa = naa_ext, naaa = naa_ext2, naq_a10 = naq_a10))
