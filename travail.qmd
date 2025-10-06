@@ -62,15 +62,15 @@ salaires <- source_data('salaires.r') |>
   mutate(tooltip = glue(
   "<b>{lbl(geo)}</b>
   {date_trim(time)}
-  Salaire nominal : {round(w,1)} k€ courants
-  Salaire réel : {round(wr,1)} k€ 2023"))
+  Salaire nominal : {round(w*pc,1)} k€ courants
+  Salaire réel : {round(w,1)} k€ 2023"))
 
 sal <- ggplot(salaires |> filter(time >= "1995-01-01")) +
-  aes(x=time, y=wr, col = geo) +
+  aes(x=time, y=w, col = geo) +
   geom_line(data = ~.x |> rename(GEO = geo) , aes(group=GEO), col = "gray80", linewidth = 0.25) +
   geom_point_interactive(aes(tooltip = tooltip, data_id = time),
                          size = 0.05, hover_nearest = TRUE, show.legend = FALSE) +
-  geom_ribbon(aes(ymin = wbr, ymax = wr, fill = geo, group = geo),
+  geom_ribbon(aes(ymin = wb, ymax = w, fill = geo, group = geo),
               color = "transparent", show.legend = FALSE, alpha = 0.1) +
   geom_line(show.legend=FALSE) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +

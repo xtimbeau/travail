@@ -55,23 +55,22 @@ salaires <- eq |>
   drop_na(md) |>
   group_by(geo, time) |>
   summarize(w = sum(D1)/sum(emp_sal),
-            wbrut = sum(D11)/sum(emp_sal),
+            wb = sum(D11)/sum(emp_sal),
             w_md = sum(D1[md])/sum(emp_sal[md]),
             w_nmd = sum(D1[!md])/sum(emp_sal[!md]),
             w_hifi = sum(D1[md&hifi])/sum(emp_sal[md&hifi]),
             w_hi = sum(D1[md&hi])/sum(emp_sal[md&hi]),
+            wb_md = sum(D11[md])/sum(emp_sal[md]),
+            wb_nmd = sum(D11[!md])/sum(emp_sal[!md]),
+            wb_hifi = sum(D11[md&hifi])/sum(emp_sal[md&hifi]),
+            wb_hi = sum(D11[md&hi])/sum(emp_sal[md&hi]),
             .groups = "drop") |>
   left_join(pc, by = c("time", "geo")) |>
   group_by(geo) |>
   mutate(
     pc = pc/pc[time == "2023-01-01"],
-    w = 4*slider::slide_dbl(w, .before = 3, .f = mean),
-    wr = w/pc,
-    wbr = 4*slider::slide_dbl(wbrut, .before = 3, .f = mean)/pc,
-    wr_md = 4*slider::slide_dbl(w_md, .before = 3, .f = mean)/pc,
-    wr_nmd = 4*slider::slide_dbl(w_nmd, .before = 3, .f = mean)/pc,
-    wr_hifi = 4*slider::slide_dbl(w_hifi, .before = 3, .f = mean)/pc,
-    wr_hi = 4*slider::slide_dbl(w_hi, .before = 3, .f = mean)/pc) |>
+    across(c(w, w_md, w_nmd, w_hifi, w_hi, wb, wb_md, wb_nmd, wb_hifi, wb_hi ),
+           ~4*slider::slide_dbl(.x, .before = 3, .f = mean)/pc) ) |>
   ungroup() |>
   mutate(geo = factor(geo, pays))
 
