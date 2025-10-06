@@ -708,7 +708,7 @@ La notion de part des salaires dans la valeur ajoutée nette consiste à réduir
 
 ```{r}
 #| label: fig-psalcompote
-#| fig-asp: 1.1
+#| fig-asp: 1
 #| fig-cap: Tous concepts, comparaison entre pays
 
 data <- naq |> 
@@ -791,7 +791,7 @@ names(tt) <- strips_champ
 
 ```
 
-```{r, results = "asis"}
+```{r, results="asis"}
 #| label: tbl-rang
 #| tbl-cap: Part des salaires dans la VA et rang, différents concepts 
 
@@ -1329,7 +1329,7 @@ On obtient ce graphique :
 ```{r}
 #| label: fig-psaloecd
 #| fig-cap: "Part des salaries dans le PIN, données SNA de l'OCDE"
-#| fig-asp: 0.9
+#| fig-asp: 0.85
 
 data <- ofce::source_data("oecd.r") |> 
   mutate(tooltip = glue(
