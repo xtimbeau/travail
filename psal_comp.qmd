@@ -754,9 +754,7 @@ gg <- ggplot(data) +
 girafy(gg, 1.25)
 ```
 
-```{r, results='asis'}
-#| label: tbl-rang
-#| tbl-cap: Part des salaires dans la VA et rang, différents concepts 
+```{r}
 
 tt <- imap(strips_champ, ~{
   source_data("vaq.r")$naa |> 
@@ -781,17 +779,26 @@ tt <- imap(strips_champ, ~{
     fmt_percent(starts_with("value"),decimals = 1) |> 
     cols_label(geo = "", geo_lbl = "") |> 
     opt_interactive() |> 
-    tab_options(table.font.size = 10) |> 
+    tab_options(table.font.size = 12) |> 
     cols_width(
       geo ~ px(30),
-      geo_lbl ~ px(80),
+      geo_lbl ~ px(90),
       TRUE ~ px(60)
     )
 }) 
 
 names(tt) <- strips_champ
 
-tabsetize(tt)
+```
+
+```{r, results = "asis"}
+#| label: tbl-rang
+#| tbl-cap: Part des salaires dans la VA et rang, différents concepts 
+
+if(knitr::is_html_output())
+  tabsetize(tt)
+if(knitr::is_latex_output())
+  tt[[3]]
 ```
 
 ## Impact du changement de structure de l'économie
