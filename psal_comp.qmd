@@ -15,6 +15,7 @@ bibliography: references.bib
 echo: false
 message: false
 warning: false
+keep-md: true
 abstract: "On explore ici différentes façons de calculer la notion de part des salaires dans la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers des ménages*. Il peut être calculé pour les pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et s'est accrue de façon importante. Bien que plus fragile empiriquement, la notion de rendement du capital productif confirme ce diagnostic et illustre un problème particulerement préoccupant du tissu productif français. L'ensemble des éléments présentés ici est reproductible à partir des codes fournis.<br>`r  wordcountaddin::word_count('psal_comp.qmd')` mots."
 citation:
   type: article-journal
@@ -67,23 +68,25 @@ P6 <- source_data("nace.r")$pays1
 options(ofce.tabsetize.pdf = "one")
 if(knitr::is_html_output()) {
   thm <- theme_ofce(
-    base_size = 9,
+    base_size = 10,
     marquee=TRUE,
     panel.spacing = unit(9, "point"),
-    plot.caption = element_marquee(size = rel(0.55)),
+    plot.caption = element_marquee(size = rel(0.7)),
+    axis.title = element_marquee(size=rel(0.7)),
     axis.text = element_marquee(size=rel(0.7)),
-    strip.text = element_marquee(size = rel(0.7)),
+    strip.text = element_marquee(size = rel(0.8)),
+    legend.text = element_marquee(size = rel(0.7)),
     legend.position = "bottom",
     legend.justification = "center") } else { 
       thm <- theme_ofce(
-        base_size = 6,
+        base_size = 8,
         marquee=TRUE,
-        plot.caption = element_marquee(size = rel(0.5)),
         panel.spacing = unit(3, "point"),
+        plot.caption = element_marquee(size = rel(0.7)),
         axis.title = element_marquee(size=rel(0.7)),
-        axis.text = element_marquee(size=rel(0.6)),
-        strip.text = element_marquee(size = rel(0.7)),
-        legend.text = element_marquee(size = rel(0.6)),
+        axis.text = element_marquee(size=rel(0.7)),
+        strip.text = element_marquee(size = rel(0.8)),
+        legend.text = element_marquee(size = rel(0.7)),
         legend.position = "bottom",
         legend.justification = "center") }
 ```
@@ -155,7 +158,7 @@ Trois points sont importants pour disposer du bon concept :
 
 -   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, mais qu'il est difficile de dépasser. Elle a des conséquences pour les comparaisons entre périodes pour un même pays parce que la part des non salariés varie dans le temps, de façon différente suivant les branches et entre pays.
 
--   Définir le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour par auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers des ménages ou, de façon plus précise, en enlevant de la valeur ajoutée marchande la sous branche "*loyers imputés aux propriétaires occupants* (L68a)" et en considérant que la masse salariale et l'emploi salarié ou non salarié associés sont nuls.
+-   Définir le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour par auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers des ménages ou, de façon plus précise, en enlevant de la valeur ajoutée marchande la sous branche "loyers imputés aux propriétaires occupants (L68a)" et en considérant que la masse salariale et l'emploi salarié ou non salarié associés aux services produits par les ménages sont nuls.
 
 -   Utiliser la notion de valeur ajoutée nette (de la consommation de capital fixe (CCF)) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. Cette dernière notion découle de l'application de tables de mortalité à un inventaire permanent des investissements non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire mesurée par leur amortissement physique ou fiscal, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée.
 
@@ -353,7 +356,8 @@ date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 tpbranches <- imap( 
-  c("Marchand-L68A" = "mdhim",
+  c("Marchand-L" = "mdhi",
+    "Marchand-L68A" = "mdhim",
     "Marchand-K-L68A" = "mdhimfi"), ~{
       data <- source_data("vaq.r")$naaa |>
         filter(geo %in% P6) |> 
@@ -385,7 +389,7 @@ tpbranches <- imap(
         scale_y_continuous(
           labels = scales::label_percent(1), 
           breaks = scales::pretty_breaks(5),
-          limits = c(NA, NA)) +
+          limits = c(0, .3)) +
         scale_color_pays(format = "eurostat") +
         thm +
         ofce_caption(
@@ -700,7 +704,7 @@ data <- naq |>
   select(geo, time, champ, psal, psalnc, psalb, psalncb) |> 
   pivot_longer(c(psal, psalnc, psalb, psalncb)) |> 
   mutate(name = factor(name, c("psal", "psalb", "psalnc", "psalncb")),
-         champ = factor(champ, c("tb", "md", "mdhi", "mdhim", "mdhfi", "mdhifi")))
+         champ = factor(champ, c("tb", "md", "mdhi", "mdhim", "mdhfi", "mdhimfi", "mdhifi")))
 
 strips_name <- c(psal = "Nette, avec n.s.",
                 psalnc = "Nette, sans n.s.",
@@ -735,6 +739,46 @@ gg <- ggplot(data) +
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.")
 
 girafy(gg, 1.25)
+```
+
+```{r, results='asis'}
+#| label: tbl-rang
+#| tbl-cap: Part des salaires dans la VA et rang, différents concepts 
+
+tt <- imap(strips_champ, ~{
+  source_data("vaq.r")$naa |> 
+    filter(time == "2023-01-01", champ == .y) |> 
+    select(geo, time, champ, psal, psalnc, psalb, psalncb) |> 
+    pivot_longer(c(psal, psalnc, psalb, psalncb)) |>
+    group_by(name) |> 
+    mutate(rank = rank(-value),
+           geo_lbl = lbl(geo),
+           geo = countrycode(geo, "eurostat", "iso2c")) |> 
+    arrange(geo) |> 
+    pivot_wider(names_from = c(name), values_from = c(value, rank)) |> 
+    relocate(geo, geo_lbl) |> 
+    arrange(desc(value_psal)) |> 
+    gt() |> 
+    cols_hide(c(time, champ)) |> 
+    tab_spanner(label = "Part des salaires dans la VA en 2023", columns = starts_with("value") ) |> 
+    tab_spanner(label = "Rang en 2023", columns = starts_with("rank") ) |> 
+    cols_label_with(starts_with("value"), ~strips_name[[str_remove(.x, "value_")]] ) |> 
+    cols_label_with(starts_with("rank"), ~strips_name[[str_remove(.x, "rank_")]] ) |> 
+    gt::fmt_flag(geo) |> 
+    fmt_percent(starts_with("value"),decimals = 1) |> 
+    cols_label(geo = "", geo_lbl = "") |> 
+    opt_interactive() |> 
+    tab_options(table.font.size = 10) |> 
+    cols_width(
+      geo ~ px(30),
+      geo_lbl ~ px(80),
+      TRUE ~ px(60)
+    )
+}) 
+
+names(tt) <- strips_champ
+
+tabsetize(tt)
 ```
 
 ## Impact du changement de structure de l'économie
@@ -1031,8 +1075,8 @@ Les dividendes sont la ligne $D42$ nette de ce qui est payé et reçu par le sec
 
 ```{r}
 #| label: fig-profits
-#| fig-cap: Profits nets dans la VA, SNF, comptes de secteur
-#| fig-asp: 0.9
+#| fig-cap: Profits nets dans la VA, SNF, comptes d'agents
+#| fig-asp: 0.85
 
 data <- snfq |> 
   filter(time >= "1995-01-01") |> 
@@ -1246,7 +1290,7 @@ En utilisant d'une part la valeur ajoutée des branches marchandes hors services
 
 ```{r, results="asis"}
 #| label: fig-tprofitbranches
-#| fig-cap: Rendements du capital, compte de branches, marchand hors services immobiliers produits par les ménages
+#| fig-cap: Rendements du capital, compte de branches
 #| fig-asp: 0.85
 
 tabsetize(tpbranches)
@@ -1258,7 +1302,7 @@ La France conserve une singularité marquée par la baisse continue du taux de p
 
 ## Au delà de l'Europe
 
-L'accès aux données de l'OCDE est devenu particulièrement opaque, mais je m'en suis sorti. Il est possible d'utiliser des données de comptabilité nationale, au niveau de l'ensemble de l'économie (y compris donc les branches non marchandes et l'immobilier). La correction pour la non-salarisation est assurée par les données de l'*Economic Outlook* (avec une trimestrialisation *ad hoc*). Au lieu de la valeur ajoutée, on utilise le PIB, auquel on enlève la consommation de capital fixe (dans les données OCDE, il n'y a pas de données de CCF pour le Japon). Le concept de part des salaires n'est donc pas tout à fait le même que dans les autres analyses.
+L'accès aux données de l'OCDE est devenu particulièrement opaque, mais je m'en suis sorti. Il est possible d'utiliser des données de comptabilité nationale, au niveau de l'ensemble de l'économie (y compris donc les branches non marchandes et l'immobilier). La correction pour la non-salarisation est assurée par les données de l'Economic Outlook (avec une trimestrialisation ad hoc). Au lieu de la valeur ajoutée, on utilise le PIB, auquel on enlève la consommation de capital fixe (dans les données OCDE, il n'y a pas de données de CCF pour le Japon). Le concept de part des salaires n'est donc pas tout à fait le même que dans les autres analyses.
 
 On obtient ce graphique :
 
