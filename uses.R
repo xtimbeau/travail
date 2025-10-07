@@ -1,6 +1,7 @@
 library(tidyverse)
 library(eurostat)
 library(ofce)
+library(melodi)
 
 pays <- source_data("nace.r")$pays1
 
@@ -31,4 +32,17 @@ uses <- "naio_10_cp1610" |>
   drop_na() |>
   select(geo, time, CI_L)
 
-left_join(vahim, uses, by = c("geo", "time"))
+fr_uses <- melodi::
+
+
+left_join(vahim, uses, by = c("geo", "time")) |>
+  mutate(r2 = CI_L/mdhi) |>
+  drop_na() |>
+  ggplot()+
+  aes(x=time, y=r2, color = geo, group = geo)+
+  geom_line(layout = "fixed", color = "gray85") +
+  geom_line() +
+  geom_line(aes(y=r), linetype = "11") +
+  facet_wrap(vars(geo)) +
+  scale_color_pays("eurostat") +
+  theme_ofce()
