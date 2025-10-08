@@ -16,7 +16,7 @@ echo: false
 message: false
 warning: false
 keep-md: true
-abstract: "On explore ici différentes façons de calculer la notion de part des salaires dans la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers des ménages*. Il peut être calculé pour les pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et s'est accrue de façon importante. Bien que plus fragile empiriquement, la notion de rendement du capital productif confirme ce diagnostic et illustre un problème particulerement préoccupant du tissu productif français. L'ensemble des éléments présentés ici est reproductible à partir des codes fournis.<br>3928 mots."
+abstract: "On explore ici différentes façons de calculer la notion de part des salaires dans la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers des ménages*. Il peut être calculé pour les pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et s'est accrue de façon importante. Bien que plus fragile empiriquement, la notion de rendement du capital productif confirme ce diagnostic et illustre un problème particulerement préoccupant du tissu productif français. L'ensemble des éléments présentés ici est reproductible à partir des codes fournis.<br>3979 mots."
 citation:
   type: article-journal
   container-title: "Document de travail de l'OFCE"
