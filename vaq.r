@@ -15,6 +15,11 @@ label_pays <- set_names(countrycode::countrycode(pays, "eurostat", "country.name
 
 naq10_e <- source_data("naq10_e")$naq_e
 
+emp_dom <- naq10_e |>
+  group_by(geo) |>
+  drop_na() |>
+  summarize(deb=min(time), fin=max(time))
+
 naa_a64 <- "nama_10_a64" |>
   get_eurostat(filters = list(unit = "CP_MEUR",
                               nace_r2  = m_a20,
@@ -37,6 +42,11 @@ naa_a64 <- "nama_10_a64" |>
   rename(B1Ga = B1G) |>
   select(-month)
 
+sna_a64_dom <- naa_a64 |>
+  group_by(geo) |>
+  drop_na() |>
+  summarize(deb=year(min(time)), fin=year(max(time)), .groups = "drop")
+
 naq_a10 <- "namq_10_a10" |>
   get_eurostat(filters = list(unit = "CP_MEUR",
                               nace_r2  = m_a10,
@@ -51,7 +61,14 @@ naq_a10 <- "namq_10_a10" |>
             .groups = "drop") |>
   pivot_wider(id_cols = c(nace_r2, geo, time),
               names_from =  na_item, values_from = c(values, s_adj)) |>
-  rename_with(~str_remove(.x, "values_")) |>
+  rename_with(~str_remove(.x, "values_"))
+
+sna_q10_dom <- naq_a10 |>
+  group_by(geo) |>
+  drop_na() |>
+  summarize(deb=date_trim(min(time)), fin=date_trim(max(time)), .groups = "drop")
+
+naq_a10 <- naq_a10 |>
   left_join(naq10_e, by = c("geo", "time", "nace_r2")) |>
   left_join(naa_a64, by = c("geo", "time", "nace_r2")) |>
   group_by(geo, nace_r2) |>

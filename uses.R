@@ -3,6 +3,12 @@ library(eurostat)
 library(ofce)
 library(melodi)
 
+info_melodi <- function(data) {
+  map(names(data |> select(-OBS_VALUE, -TIME_PERIOD)), ~count(data, across(all_of(.x))))
+}
+
+nace <- source_data("nace.r")$nace
+a20 <- nace$a20
 pays <- source_data("nace.r")$pays1
 
 vahim <- source_data("vaq.r")$naa |>
@@ -19,7 +25,6 @@ ggplot(vahim) +
   scale_color_pays() +
   theme_ofce()
 
-
 uses <- "naio_10_cp1610" |>
   eurostat::get_eurostat(
     filters = list(
@@ -32,8 +37,17 @@ uses <- "naio_10_cp1610" |>
   drop_na() |>
   select(geo, time, CI_L)
 
-fr_uses <- melodi::
+fr_tes <- melodi::get_all_data("DD_CNA_TEE") |>
+  filter(STO == "P2")
 
+fr_branches <- melodi::get_all_data("DD_CNA_BRANCHES") |>
+  filter(REF_SECTOR == "S1",
+         STO%in%c("B1G", "P51C", "D1", "D29X39", "EMP", "SELF"),
+         PRICES == "V",
+         UNIT_MEASURE == "XDC",
+         TRANSFORMATION == "N",
+         ACTIVITY %in% a20)
+fr_branches |> pivot_wider(names_from = ACCOUNTING_ENTRY , values_from = OBS_VALUE)
 
 left_join(vahim, uses, by = c("geo", "time")) |>
   mutate(r2 = CI_L/mdhi) |>
