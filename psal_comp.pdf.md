@@ -16,25 +16,17 @@ echo: false
 message: false
 warning: false
 keep-md: true
-abstract: "On explore ici différentes façons de calculer la notion de part des salaires dans la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers des ménages*. Il peut être calculé pour les pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et s'est accrue de façon importante. Bien que plus fragile empiriquement, la notion de rendement du capital productif confirme ce diagnostic et illustre un problème particulerement préoccupant du tissu productif français. L'ensemble des éléments présentés ici est reproductible à partir des codes fournis.<br>3979 mots."
+abstract: "On explore ici différentes façons de calculer la notion de part des salaires dans la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers des ménages*. Il peut être calculé pour les pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et s'est accrue de façon importante. Bien que plus fragile empiriquement, la notion de rendement du capital productif confirme ce diagnostic et illustre un problème particulerement préoccupant du tissu productif français. L'ensemble des éléments présentés ici est reproductible à partir des codes fournis. {{wordcount}} mots."
 citation:
   type: article-journal
   container-title: "Document de travail de l'OFCE"
   issue: xx-2025
   url: https://xtimbeau.github.io/travail/psal_comp.html
+filters:
+  - wordcount
 format:
   wp-html: default
   wp-pdf: default
-project:
-  ressources:
-    - vaq.r
-    - decomp.R
-    - salaires.r
-    - snf_ratio.r
-    - snf_international.r
-    - oecd.R
-    - naq10_e.R
-    - nace.r
 ---
 
 
@@ -55,11 +47,11 @@ L'analyse du partage de la valeur ajoutée (@fig-psal) est au cœur des débats 
 
 Trois points sont importants pour disposer du bon concept :
 
--   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, mais qu'il est difficile de dépasser. Elle a des conséquences pour les comparaisons entre périodes pour un même pays parce que la part des non salariés varie dans le temps, de façon différente suivant les branches et entre pays.
+-   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, mais qu'il est difficile de dépasser. Elle a des conséquences pour les comparaisons entre périodes pour un même pays parce que la part des non salariés varie dans le temps, de façon différente suivant les branches et entre pays (@fig-psalcnc).
 
--   Définir le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour par auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers des ménages ou, de façon plus précise, en enlevant de la valeur ajoutée marchande la sous branche "loyers imputés aux propriétaires occupants (L68a)" et en considérant que la masse salariale et l'emploi salarié ou non salarié associés aux services produits par les ménages sont nuls.
+-   Définir le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour par auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers des ménages ou, de façon plus précise, en enlevant de la valeur ajoutée marchande la sous branche "loyers imputés aux propriétaires occupants (L68a)" et en considérant que la masse salariale et l'emploi salarié ou non salarié associés aux services produits par les ménages sont nuls. Cette correction n'enlève pas pour autant les services immobiliers rendus aux ménages par des non ménages (acteurs institutionnels) ni les activités de bailleurs des ménages (puisque ce ne sont pas des loyers imputés dans ce cas mais des loyers effectifs, perçus sur des ménages ou auprès d'entités légales productives (@fig-psalcompote, @fig-structbranche).
 
--   Utiliser la notion de valeur ajoutée nette (de la consommation de capital fixe, la CCF) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. Cette dernière notion découle de l'application de tables de mortalité à un inventaire permanent des investissements non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire mesurée par leur amortissement physique ou fiscal, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée.
+-   Utiliser la notion de valeur ajoutée nette (de la consommation de capital fixe, la CCF) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. Cette dernière notion découle de l'application de tables de mortalité à un inventaire permanent des investissements non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire mesurée par leur amortissement physique ou fiscal, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée (@fig-psalnetbrut).
 
 Le concept que nous privilégions est donc défini comme suit (où, pour chaque branche $D1_b$ est la masse salariale chargée, $B1G_b$ la valeur ajoutée brute, $P51C_b$ la $CCF_b$, les trois notions en euros aux prix courants et $ns_b$ et $sal_b$ les effectifs en personne par branche) :
 
@@ -98,7 +90,7 @@ Part des salaires dans la VA nette 1995 et 2025
 
 
 
-La construction d'un taux de rendement du capital est sans doute assez fragile parce qu'il faut ajouter à l'évaluation du partage de la valeur ajoutée une estimation des impôts payés (notamment l'impôt sur les sociétés) et une évaluation du stock de capital. En utilisant les données de stock de capital productif le diagnostic présenté sur le @fig-psal est confirmé par le @fig-rp. La France y occupe une position singulière avec un rendement du capital productif particulièrement faible et décroissant depuis le début des années 2000 alors qu'il est constant dans beaucoup de pays ou même croissant comme aux Pays-Bas. Les politiques de l'offre successives depuis le choc fiscal de Nicolas Sarkozy, le pacte pour la croissance, la compétitivité et l'emploi de François Hollande en 2012 ou encore les politiques d'attractivité, en particulier fiscales, engagées par Emmanuel Macron depuis 2017. Tout au plus, on peut y associer la relative stabilisation du taux de profit net en France ( @fig-rp) à partir de 2012. Une explication possible de la dégradation du rendement du capital productif est à chercher du côté de son accroissement aux Pays-Bas sous l'effet du déplacement de la base fiscale à l'intérieur de l'Europe comme l'analysent @tørsløv2022.
+La construction d'un taux de rendement du capital est sans doute assez fragile parce qu'il faut ajouter à l'évaluation du partage de la valeur ajoutée une estimation des impôts payés (notamment l'impôt sur les sociétés) et une évaluation du stock de capital (voir @sec-profits pour la méthode). En utilisant les données de stock de capital productif le diagnostic présenté sur le @fig-psal est confirmé par le @fig-rp. La France y occupe une position singulière avec un rendement du capital productif particulièrement faible et décroissant depuis le début des années 2000 alors qu'il est constant dans beaucoup de pays ou même croissant comme aux Pays-Bas. Les politiques de l'offre successives depuis le choc fiscal de Nicolas Sarkozy, le pacte pour la croissance, la compétitivité et l'emploi de François Hollande en 2012 ou encore les politiques d'attractivité, en particulier fiscales, engagées par Emmanuel Macron depuis 2017. Tout au plus, on peut y associer la relative stabilisation du taux de profit net en France ( @fig-rp) à partir de 2012. Une explication possible de la dégradation du rendement du capital productif est à chercher du côté de son accroissement aux Pays-Bas sous l'effet du déplacement de la base fiscale à l'intérieur de l'Europe comme l'analysent @tørsløv2022.
 
 
 ::: {.cell}
@@ -110,7 +102,7 @@ La construction d'un taux de rendement du capital est sans doute assez fragile p
 
 
 
-On détaille en les discutant dans la suite de ce document les effets des corrections appliquées, ainsi que la différence entre les mesures dérivées des comptes de branche ou des comptes d'agents. Ces éléments sont un peu fastidieux, mais ils s'avèrent assez importants et pas toujours très intuitifs.
+On détaille en les discutant dans la suite de ce document les effets des corrections appliquées, ainsi que la différence entre les mesures dérivées des comptes de branche ou des comptes d'agents (ou de secteurs institutionnels). Ces éléments sont un peu fastidieux, mais ils s'avèrent assez importants et pas toujours très intuitifs.
 
 On explore également les conséquences en matière de taux de profit (part des profits nets dans la valeur ajoutée) ou rendement du capital (profits nets divisés par les actifs).
 
@@ -143,7 +135,7 @@ En Italie et en Espagne, la masse salariale dans les branches non marchandes est
 
 ## Part des salaires dans la valeur ajoutée, comptes de branche
 
-On utilise les données de comptabilité nationale, en trimestriel, par branche ([`nasq_10_nf_tr`](https://ec.europa.eu/eurostat/databrowser/view/nasq_10_nf_tr/default/table?lang=en)), ré-agrégées au niveau de l'ensemble de l'économie. Le passage par les comptes de branches permet de distinguer branches marchandes et non marchandes ou d'autres regroupements, comme l'exclusion des services immobiliers. Ce passage permet également de conduire la correction salariés non salariés au niveau des branches. D'après l'INSEE, (voir le blog "[Combien pèse l'industrie en France et en Allemagne](https://blog.insee.fr/combien-pese-l-industrie-en-france-et-en-allemagne/)"), tous les pays ne produisent pas une comptabilité de branche mais pour certains (notamment l'Allemagne) une comptabilité sectorielle. La différence tient aux entreprises qui produisent plusieurs produits (un constructeur automobile propose des services financiers pour l'achat des véhicules) et dont l'activité est imputé à différentes branches (industrie et services financiers) dans la comptabilité de branche alors que dans une comptabilité de secteur l'acitvité est versée dans le principal secteur (ou le secteur d'immatriculation de l'entreprise chapeau). Cette différence empêche normalement les comparaisons des comptes de branches entre pays, y compris à l'intérieur de l'Union Européenne. Cependant, pour comparer la part des salaries dans la valeur ajoutée sur des agrégats larges (branches marchandes par exemple), cette dérogation à la norme comptable n'est que modérément problématique : de toute façon, l'automobile et les services financiers sont agrégés et c'est la correction pour la masse salariale des non salariés qui peut être modifiée. Mais si la même délimitation est employée pour les salariés et les non salariés que pour l'activité, l'erreur est probablement minime.
+On utilise les données de comptabilité nationale, en trimestriel, par branche ([`nasq_10_nf_tr`](https://ec.europa.eu/eurostat/databrowser/view/nasq_10_nf_tr/default/table?lang=en)), ré-agrégées au niveau de l'ensemble de l'économie. Le passage par les comptes de branches permet de distinguer branches marchandes et non marchandes ou d'autres regroupements, comme l'exclusion des services immobiliers. Ce passage permet également de conduire la correction salariés non salariés au niveau des branches. D'après l'INSEE, (voir le blog "[Combien pèse l'industrie en France et en Allemagne](https://blog.insee.fr/combien-pese-l-industrie-en-france-et-en-allemagne/)"), tous les pays ne produisent pas une comptabilité de branche mais pour certains (notamment l'Allemagne) une comptabilité sectorielle. La différence tient aux entreprises qui produisent plusieurs produits (un constructeur automobile propose des services financiers pour l'achat des véhicules) et dont l'activité est imputé à différentes branches (industrie et services financiers) dans la comptabilité de branche alors que dans une comptabilité de secteur l’activité est versée dans le principal secteur (ou le secteur d'immatriculation de l'entreprise chapeau). Cette différence empêche normalement les comparaisons des comptes de branches entre pays, y compris à l'intérieur de l'Union Européenne. Cependant, pour comparer la part des salaries dans la valeur ajoutée sur des agrégats larges (branches marchandes par exemple), cette dérogation à la norme comptable n'est que modérément problématique : de toute façon, l'automobile et les services financiers sont agrégés et c'est la correction pour la masse salariale des non salariés qui peut être modifiée. Mais si la même délimitation est employée pour les salariés et les non salariés que pour l'activité, l'erreur est probablement minime.
 
 La part des salaires est corrigée de la part des non salariés (données annuelles [`nama_10_a64_e`](https://ec.europa.eu/eurostat/databrowser/view/nama_10_a64_e/default/table?lang=en), extrapolées en maintenant le ratio salariés/non salariés à sa dernière valeur observée) en considérant que le salaire des non salariés est identique dans chaque branche à celui des salariés – cette hypothèse sous estime probablement le salaire des non salariés mais elle est difficile à lever, sauf à utiliser les enquêtes force de travail et faire confiance aux revenus qui y sont déclarés, en perdant la variation d'une année à l'autre. En revanche, on prend bien en compte que les non salariés de la branche agricole n'ont pas le même revenu que ceux de la branche "information et communication". La décomposition employée est à 9 branches et on peut conduire la même correction à un niveau de désagrégation plus fin.
 
@@ -199,7 +191,7 @@ La notion de part des salaires dans la valeur ajoutée nette consiste à réduir
 \cmidrule(lr){3-6} \cmidrule(lr){7-10}
  &  & Nette, avec n.s. & Nette, sans n.s. & Brute, avec n.s. & Brute, sans n.s. & Nette, avec n.s. & Nette, sans n.s. & Brute, avec n.s. & Brute, sans n.s. \\ 
 \midrule\addlinespace[2.5pt]
-SI & Slov\\'enie & 90.0\% & 70.5\% & 73.5\% & 57.5\% & 1 & 4 & 1 & 4 \\ 
+SI & Slovénie & 90.0\% & 70.5\% & 73.5\% & 57.5\% & 1 & 4 & 1 & 4 \\ 
 FR & France & 87.5\% & 77.4\% & 70.8\% & 62.6\% & 2 & 1 & 2 & 1 \\ 
 LV & Lettonie & 83.1\% & 70.2\% & 66.7\% & 56.4\% & 3 & 5 & 4 & 7 \\ 
 FI & Finlande & 82.5\% & 73.5\% & 64.5\% & 57.5\% & 4 & 2 & 9 & 3 \\ 
@@ -212,16 +204,16 @@ PT & Portugal & 76.7\% & 64.4\% & 65.0\% & 54.6\% & 10 & 12 & 6 & 11 \\
 DK & Danemark & 74.8\% & 70.1\% & 60.7\% & 56.9\% & 11 & 6 & 14 & 6 \\ 
 ES & Espagne & 73.7\% & 62.1\% & 61.7\% & 52.0\% & 12 & 14 & 12 & 14 \\ 
 BG & Bulgarie & 73.5\% & 55.8\% & 64.4\% & 49.0\% & 13 & 19 & 10 & 18 \\ 
-CZ & Tch\\'equie & 73.3\% & 61.1\% & 57.3\% & 47.8\% & 14 & 16 & 18 & 20 \\ 
-SE & Su\`ede & 71.7\% & 66.9\% & 56.4\% & 52.6\% & 15 & 9 & 19 & 12 \\ 
+CZ & Tchéquie & 73.3\% & 61.1\% & 57.3\% & 47.8\% & 14 & 16 & 18 & 20 \\ 
+SE & Suède & 71.7\% & 66.9\% & 56.4\% & 52.6\% & 15 & 9 & 19 & 12 \\ 
 NL & Pays-Bas & 70.9\% & 57.5\% & 61.2\% & 49.6\% & 16 & 18 & 13 & 16 \\ 
-IT & Italie & 70.9\% & 53.5\% & 58.9\% & 44.5\% & 17 & 22 & 16 & 21 \\ 
-LT & Lituanie & 68.5\% & 59.3\% & 60.2\% & 52.1\% & 18 & 17 & 15 & 13 \\ 
+IT & Italie & 70.5\% & 53.2\% & 58.6\% & 44.2\% & 17 & 22 & 16 & 22 \\ 
+LT & Lituanie & 68.4\% & 59.3\% & 60.2\% & 52.1\% & 18 & 17 & 15 & 13 \\ 
 HU & Hongrie & 67.7\% & 61.9\% & 53.8\% & 49.2\% & 19 & 15 & 22 & 17 \\ 
 LU & Luxembourg & 65.2\% & 62.3\% & 57.5\% & 55.0\% & 20 & 13 & 17 & 10 \\ 
-SK & Slovaquie & 64.7\% & 53.6\% & 53.4\% & 44.3\% & 21 & 21 & 23 & 22 \\ 
+SK & Slovaquie & 64.7\% & 53.6\% & 53.4\% & 44.3\% & 21 & 21 & 23 & 21 \\ 
 MT & Malte & 62.2\% & 52.6\% & 49.3\% & 41.7\% & 22 & 23 & 25 & 23 \\ 
-GR & Gr\`ece & 61.8\% & 45.1\% & 55.1\% & 40.2\% & 23 & 25 & 20 & 24 \\ 
+GR & Grèce & 61.8\% & 45.1\% & 55.1\% & 40.2\% & 23 & 25 & 20 & 24 \\ 
 PL & Pologne & 61.6\% & 45.7\% & 53.9\% & 40.0\% & 24 & 24 & 21 & 25 \\ 
 CY & Chypre & 59.7\% & 53.8\% & 53.4\% & 48.1\% & 25 & 20 & 24 & 19 \\ 
 RO & Roumanie & 54.2\% & 44.6\% & 47.1\% & 38.7\% & 26 & 26 & 26 & 26 \\ 
@@ -278,7 +270,7 @@ Comme pour les graphiques précédents, les données trimestrielles sont annuali
 :::
 
 
-## Profits nets et dividendes dans les comptes d'agents
+## Profits nets et dividendes dans les comptes d'agents  {#sec-profitagent}
 
 Les comptes des sociétés non financières permettent d’examiner d'autres éléments du compte. On affiche ici le profit net sur la valeur ajoutée nette, et le taux de dividendes nets sur la valeur ajoutée nette.
 
@@ -332,7 +324,7 @@ Rendements du capital, compte de secteur
 
 ::::
 
-## Profits nets dans les comptes de branche
+## Profits nets dans les comptes de branche {#sec-profits}
 
 En utilisant d'une part la valeur ajoutée des branches marchandes hors services immobiliers produits par les ménages et la valeur des actifs productifs issue de la base des stocks de capital productif ([nama_10_nfa_st](https://ec.europa.eu/eurostat/databrowser/view/NAMA_10_NFA_ST__custom_2046386/default/table?lang=en)) sur le même champ (i.e. en enlevant la sous branche L68A), on peut estimer un rendement du capital productif.
 
@@ -381,7 +373,64 @@ On utilise ces données ([`naidsa_10_nf_tr`](https://ec.europa.eu/eurostat/datab
 :::
 
 
-### Références {.unlisted .unnumbered}
+## Références {.unnumbered}
 
 ::: {#refs}
 :::
+
+## Annexe 1 : derniers points connus  {.unnumbered}
+
+
+::: {.cell}
+
+:::
+
+
+
+::: {#tbl-data_trim .cell tbl-cap='Premiers et derniers points connus par pays et par variables'}
+::: {.cell-output-display}
+\begin{table}
+\fontsize{9.0pt}{11.0pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{\dimexpr 22.50pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedright\arraybackslash}p{\dimexpr 67.50pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}}
+\toprule
+ &  & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 90.00pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{B1G, D1} \\trimestriel, 17 branches}} & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 90.00pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{SAL, NSAL} \\annuel, 88 branches}} & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 90.00pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{P51C, D29x39, D51} \\annuel, 17 branches}} & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 90.00pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{L68A} \\annuel, 88 branches}} \\ 
+\cmidrule(lr){3-4} \cmidrule(lr){5-6} \cmidrule(lr){7-8} \cmidrule(lr){9-10}
+ &  & Prem. & Dern. & Prem. & Dern. & Prem. & Dern. & Prem. & Dern. \\ 
+\midrule\addlinespace[2.5pt]
+DE & Allemagne & 1991T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 \\ 
+FR & France & 1980T1 & 2025T2 & 1978 & 2024 & 1978 & 2024 & 1978 & 2023 \\ 
+IT & Italie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
+ES & Espagne & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 \\ 
+PL & Pologne & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2023 & 1995 & 2022 \\ 
+RO & Roumanie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2023 & 1995 & 2023 \\ 
+NL & Pays-Bas & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
+BE & Belgique & 1995T1 & 2025T1 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 \\ 
+CZ & Tchéquie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
+PT & Portugal & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 \\ 
+SE & Suède & 1993T1 & 2025T2 & 1993 & 2023 & 1993 & 2022 & 1993 & 2022 \\ 
+GR & Grèce & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 \\ 
+HU & Hongrie & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 \\ 
+AT & Autriche & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
+BG & Bulgarie & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 \\ 
+DK & Danemark & 1991T1 & 2025T2 & 1975 & 2024 & 1975 & 2024 & 1975 & 2024 \\ 
+FI & Finlande & 1990T1 & 2025T2 & 1980 & 2024 & 1980 & 2024 & 1980 & 2024 \\ 
+SK & Slovaquie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 \\ 
+IE & Irlande & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2023 & 1995 & 2023 \\ 
+HR & Croatie & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 \\ 
+LT & Lituanie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
+SI & Slovénie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
+LV & Lettonie & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 \\ 
+EE & Estonie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
+CY & Chypre & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 \\ 
+LU & Luxembourg & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
+MT & Malte & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
+\bottomrule
+\end{tabular*}
+\begin{minipage}{\linewidth}
+\emph{Note} : données téléchargées sur le site d'Eurostat (package eurostat v4.0.0) le \{date\} telles que publiées par Eurostat. Les instituts nationaux peuvent mettre à dispositon plus de données non (encore ?) prises en compte par Eurostat. Les pays sont classés par ordre de population décroissante.\\
+\end{minipage}
+\end{table}
+
+:::
+:::
+

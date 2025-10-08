@@ -1,5 +1,15 @@
 project:
   type: website
+  resources:
+    - vaq.r
+    - decomp.R
+    - salaires.r
+    - snf_ratio.r
+    - snf_international.r
+    - oecd.R
+    - naq10_e.R
+    - nace.r
+
 
 website:
   code-links:
