@@ -17,6 +17,10 @@ assets_a10 <- get_eurostat("nama_10_nfa_st",
   arrange(desc(time)) |>
   select(time, geo, nace_r2, assets = values)
 
+assets_dom <- assets_a10 |>
+  group_by(geo) |>
+  summarize(deb = year(min(time)), fin = max(year(time)))
+
 men <- "nama_10_nfa_bs" |>
   get_eurostat(
     filters = list(
@@ -46,4 +50,4 @@ assets <- assets_a10 |>
   mutate(geo = factor(geo, pays)) |>
   arrange(geo, desc(time))
 
-return(list(assets = assets, assets_a10 = assets_a10))
+return(list(assets = assets, assets_a10 = assets_a10, dom = assets_dom))

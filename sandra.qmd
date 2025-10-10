@@ -1,0 +1,33 @@
+---
+title: "Pour Sandra"
+format: typst
+editor: visual
+---
+
+On a en volume :
+
+$$
+K = K_{-1} + I - CCF
+$$
+
+Dans le SEC, le capital en volume n'est pas défini, mais on a dans les comptes de patrimoine en valeur :
+
+$$
+p_k K = p_{k, -1}K_{-1} + p_iI - p_{ccf}CCF + REV
+$$
+
+où $REV$ est le terme de réévalutation. (Il intègre également un terme de destruction, perte, mais bon laissons tomber).
+
+En notant $g=K/K_{-1}-1$ ke taux de croissance en valeur du capital (donc observé), on peut définir la récurrence suivante, sous l'hypohtèse que $p_{ccf}=p_i$ :
+
+$$
+p_k = \frac{p_{k,-1}}{1+g} + \frac{g}{1+g}p_i  + \rho
+$$
+
+Si on prend l'hypothèse alternative $p_{ccf}=p_{k,-1}$ (ce qui me semble plus pertinent) on a :
+
+$$
+p_k = \frac{(1+ \delta)}{1+g}p_{k,-1} + \frac{I}{K}p_i + \rho
+$$
+
+en notant $\delta=CCF/K_{-1}$ et $\rho = REV/K$

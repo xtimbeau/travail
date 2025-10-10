@@ -27,6 +27,16 @@ filters:
 format:
   wp-html: default
   wp-pdf: default
+crossref:
+  custom:
+    - key: apptbl
+      kind: float
+      reference-prefix: Tableau A
+      space-before-numbering: false
+      latex-env: apptbl
+      latex-list-of-file-extension: lost
+      latex-list-of-description: Tableaux annexes
+apptbl-cap-location: top
 ---
 
 
@@ -45,7 +55,7 @@ L'analyse du partage de la valeur ajoutée (@fig-psal) est au cœur des débats 
 
 
 
-Trois points sont importants pour disposer du bon concept :
+Trois points sont importants pour disposer du bon concept (voir [@reis2022] pour une discussion et une revue de littérature sur ce point) :
 
 -   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, mais qu'il est difficile de dépasser. Elle a des conséquences pour les comparaisons entre périodes pour un même pays parce que la part des non salariés varie dans le temps, de façon différente suivant les branches et entre pays (@fig-psalcnc).
 
@@ -270,7 +280,7 @@ Comme pour les graphiques précédents, les données trimestrielles sont annuali
 :::
 
 
-## Profits nets et dividendes dans les comptes d'agents  {#sec-profitagent}
+## Profits nets et dividendes dans les comptes d'agents {#sec-profitagent}
 
 Les comptes des sociétés non financières permettent d’examiner d'autres éléments du compte. On affiche ici le profit net sur la valeur ajoutée nette, et le taux de dividendes nets sur la valeur ajoutée nette.
 
@@ -347,9 +357,11 @@ Le rendement calculé sur le @fig-tprofitbranches diffère de celui du @fig-tpro
 
 La France conserve une singularité marquée par la baisse continue du taux de profit au cours du temps. Le rendement apparent du capital est ainsi très bas, plus bas que dans tous les autres pays considérés où il est plutôt stable (l'Italie fait exception avec une forte volatilité).
 
+@reis2022 conclut que le rendement du capital productif est plutôt constant au cours du temps, pour les 20 dernières années. L'analyse présentée ici le contredit pour la France et possiblement d'autres pays. Les données utilisées ne sont pas les mêmes, puisqu'il utilise principalement AMECO et que l'analyse conduite ici exploite plus de profondeur dans les données de comptabilité nationale.
+
 ## Au delà de l'Europe
 
-L'accès aux données de l'OCDE est devenu particulièrement opaque, mais je m'en suis sorti. Il est possible d'utiliser des données de comptabilité nationale, au niveau de l'ensemble de l'économie (y compris donc les branches non marchandes et l'immobilier). La correction pour la non-salarisation est assurée par les données de l'Economic Outlook (avec une trimestrialisation ad hoc). Au lieu de la valeur ajoutée, on utilise le PIB, auquel on enlève la consommation de capital fixe (dans les données OCDE, il n'y a pas de données de CCF pour le Japon). Le concept de part des salaires n'est donc pas tout à fait le même que dans les autres analyses.
+L'accès aux données de l'OCDE est devenu particulièrement opaque, mais je m'en suis sorti. Il est possible d'utiliser des données de comptabilité nationale, au niveau de l'ensemble de l'économie (y compris donc les branches non marchandes et l'immobilier). La correction pour la non-salarisation est assurée par les données de l'*Economic Outlook* (avec une trimestrialisation ad hoc). Au lieu de la valeur ajoutée, on utilise le PIB, auquel on enlève la consommation de capital fixe (dans les données OCDE, il n'y a pas de données de CCF pour le Japon publiées). Le concept de part des salaires n'est donc pas tout à fait le même que dans les autres analyses.
 
 On obtient ce graphique :
 
@@ -378,7 +390,8 @@ On utilise ces données ([`naidsa_10_nf_tr`](https://ec.europa.eu/eurostat/datab
 ::: {#refs}
 :::
 
-## Annexe 1 : derniers points connus  {.unnumbered}
+:::: {.content-visible when-format="html"}
+## Annexe 1 : derniers points connus {.unnumbered}
 
 
 ::: {.cell}
@@ -386,51 +399,55 @@ On utilise ces données ([`naidsa_10_nf_tr`](https://ec.europa.eu/eurostat/datab
 :::
 
 
+::: {#apptbl-data_trim}
 
-::: {#tbl-data_trim .cell tbl-cap='Premiers et derniers points connus par pays et par variables'}
+::: {.cell}
 ::: {.cell-output-display}
 \begin{table}
-\fontsize{9.0pt}{11.0pt}\selectfont
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{\dimexpr 22.50pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedright\arraybackslash}p{\dimexpr 67.50pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}}
+\fontsize{8.0pt}{10.0pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{\dimexpr 22.50pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedright\arraybackslash}p{\dimexpr 60.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 48.75pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 48.75pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 48.75pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 48.75pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 48.75pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 48.75pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 48.75pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 48.75pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 48.75pt -2\tabcolsep-1.5\arrayrulewidth}>{\centering\arraybackslash}p{\dimexpr 48.75pt -2\tabcolsep-1.5\arrayrulewidth}}
 \toprule
- &  & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 90.00pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{B1G, D1} \\trimestriel, 17 branches}} & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 90.00pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{SAL, NSAL} \\annuel, 88 branches}} & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 90.00pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{P51C, D29x39, D51} \\annuel, 17 branches}} & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 90.00pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{L68A} \\annuel, 88 branches}} \\ 
-\cmidrule(lr){3-4} \cmidrule(lr){5-6} \cmidrule(lr){7-8} \cmidrule(lr){9-10}
- &  & Prem. & Dern. & Prem. & Dern. & Prem. & Dern. & Prem. & Dern. \\ 
+ &  & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 97.50pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{B1G, D1} \\trim., 17 br\ldots{}gt\_linebreak\_indicator..namq\_10\_a10}} & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 97.50pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{SAL, NSAL} \\an., 88 br\ldots{}gt\_linebreak\_indicator..nama\_10\_a64\_e}} & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 97.50pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{P51C, D29x39, D51} \\an., 17 br\ldots{}gt\_linebreak\_indicator..nama\_10\_a64}} & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 97.50pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{L68A} \\an., 88 br\ldots{}gt\_linebreak\_indicator..nama\_10\_a64}} & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 97.50pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{N11N} \\an., 88 br\ldots{}gt\_linebreak\_indicator..nama\_10\_nfa\_st}} \\ 
+\cmidrule(lr){3-4} \cmidrule(lr){5-6} \cmidrule(lr){7-8} \cmidrule(lr){9-10} \cmidrule(lr){11-12}
+ &  & de & à & de & à & de & à & de & à & de & à \\ 
 \midrule\addlinespace[2.5pt]
-DE & Allemagne & 1991T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 \\ 
-FR & France & 1980T1 & 2025T2 & 1978 & 2024 & 1978 & 2024 & 1978 & 2023 \\ 
-IT & Italie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
-ES & Espagne & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 \\ 
-PL & Pologne & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2023 & 1995 & 2022 \\ 
-RO & Roumanie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2023 & 1995 & 2023 \\ 
-NL & Pays-Bas & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
-BE & Belgique & 1995T1 & 2025T1 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 \\ 
-CZ & Tchéquie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
-PT & Portugal & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 \\ 
-SE & Suède & 1993T1 & 2025T2 & 1993 & 2023 & 1993 & 2022 & 1993 & 2022 \\ 
-GR & Grèce & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 \\ 
-HU & Hongrie & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 \\ 
-AT & Autriche & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
-BG & Bulgarie & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 \\ 
-DK & Danemark & 1991T1 & 2025T2 & 1975 & 2024 & 1975 & 2024 & 1975 & 2024 \\ 
-FI & Finlande & 1990T1 & 2025T2 & 1980 & 2024 & 1980 & 2024 & 1980 & 2024 \\ 
-SK & Slovaquie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 \\ 
-IE & Irlande & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2023 & 1995 & 2023 \\ 
-HR & Croatie & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 \\ 
-LT & Lituanie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
-SI & Slovénie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
-LV & Lettonie & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 \\ 
-EE & Estonie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
-CY & Chypre & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 \\ 
-LU & Luxembourg & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
-MT & Malte & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
+DE & Allemagne & 1991T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 \\ 
+FR & France & 1980T1 & 2025T2 & 1978 & 2024 & 1978 & 2024 & 1978 & 2023 & 1978 & 2024 \\ 
+IT & Italie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 \\ 
+ES & Espagne & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 & 1995 & 2022 \\ 
+PL & Pologne & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2023 & 1995 & 2022 & 2000 & 2022 \\ 
+RO & Roumanie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2023 & 1995 & 2023 & 2000 & 2022 \\ 
+NL & Pays-Bas & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 \\ 
+BE & Belgique & 1995T1 & 2025T1 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 & 1995 & 2023 \\ 
+CZ & Tchéquie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
+PT & Portugal & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 & 2000 & 2022 \\ 
+SE & Suède & 1993T1 & 2025T2 & 1993 & 2023 & 1993 & 2022 & 1993 & 2022 & 1993 & 2022 \\ 
+GR & Grèce & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 \\ 
+HU & Hongrie & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 \\ 
+AT & Autriche & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
+BG & Bulgarie & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 & 2000 & 2022 \\ 
+DK & Danemark & 1991T1 & 2025T2 & 1975 & 2024 & 1975 & 2024 & 1975 & 2024 & 1975 & 2024 \\ 
+FI & Finlande & 1990T1 & 2025T2 & 1980 & 2024 & 1980 & 2024 & 1980 & 2024 & 1980 & 2024 \\ 
+SK & Slovaquie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 & 2000 & 2023 \\ 
+IE & Irlande & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 \\ 
+HR & Croatie & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 & 1995 & 2022 \\ 
+LT & Lituanie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2022 \\ 
+SI & Slovénie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 2000 & 2023 \\ 
+LV & Lettonie & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 & 1995 & 2022 \\ 
+EE & Estonie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 2000 & 2022 \\ 
+CY & Chypre & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 & 1995 & 2022 \\ 
+LU & Luxembourg & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 \\ 
+MT & Malte & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 2000 & 2023 \\ 
 \bottomrule
 \end{tabular*}
 \begin{minipage}{\linewidth}
-\emph{Note} : données téléchargées sur le site d'Eurostat (package eurostat v4.0.0) le \{date\} telles que publiées par Eurostat. Les instituts nationaux peuvent mettre à dispositon plus de données non (encore ?) prises en compte par Eurostat. Les pays sont classés par ordre de population décroissante.\\
+\emph{Note} : données téléchargées sur le site d'Eurostat (package eurostat v4.0.0) le 8/10/2025, telles que publiées par Eurostat. Les instituts nationaux peuvent mettre à dispositon plus de données non (encore ?) prises en compte par Eurostat. Les pays sont classés par ordre de population décroissante.\\
 \end{minipage}
 \end{table}
 
 :::
 :::
 
+Premiers et derniers points connus par pays et par variables
+:::
+::::

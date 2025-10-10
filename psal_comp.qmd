@@ -27,6 +27,16 @@ filters:
 format:
   wp-html: default
   wp-pdf: default
+crossref:
+  custom:
+    - key: apptbl
+      kind: float
+      reference-prefix: Tableau A
+      space-before-numbering: false
+      latex-env: apptbl
+      latex-list-of-file-extension: lost
+      latex-list-of-description: Tableaux annexes
+apptbl-cap-location: top
 ---
 
 ```{r, include=FALSE}
@@ -116,7 +126,7 @@ psal <- imap(c("hors services immobiliers (-L)" = "mdhi", "hors loyers imputés 
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
     champ = "Branches marchandes {.y}.",
-    note = "La CCF ou les impôts nets de subventions proviennent des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà. Le partage de la valeur ajoutée pour les derniers points évolue comme le partage dans la valeur ajoutée brute.") ) 
+    note = "La CCF ou les impôts nets de subventions proviennent des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà (voir tableau A1). Le partage de la valeur ajoutée pour les tous derniers points évolue donc comme le partage dans la valeur ajoutée brute.") ) 
 
 girafy(psal[[2]], 1.25)
 ```
@@ -125,7 +135,7 @@ girafy(psal[[2]], 1.25)
 margin_download(naq |> select(-tooltip))
 ```
 
-Trois points sont importants pour disposer du bon concept :
+Trois points sont importants pour disposer du bon concept (voir [@reis2022] pour une discussion et une revue de littérature sur ce point) :
 
 -   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, mais qu'il est difficile de dépasser. Elle a des conséquences pour les comparaisons entre périodes pour un même pays parce que la part des non salariés varie dans le temps, de façon différente suivant les branches et entre pays (@fig-psalcnc).
 
@@ -224,7 +234,7 @@ psaleu <- ggplot(data_int) +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
-    champ = "Branches marchandes hors services immobiliers des ménages (L86A).",
+    champ = "Branches marchandes hors services immobiliers des ménages (-L86A).",
     note = "Part des salaires dans la valeur ajoutée nette corrigée de la non salarisation.")
   
 data_intb <- data |> 
@@ -283,7 +293,7 @@ psalbeu <- ggplot(data_intb) +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
-    champ = "Branches marchandes hors services immobiliers des ménages (L86A).",
+    champ = "Branches marchandes hors services immobiliers des ménages (-L86A).",
     note = "Part des salaires dans la valeur ajoutée brute corrigée de la non salarisation.")
 
 tabsetize(list("VA nette" = psaleu, "VA brute" = psalbeu))
@@ -347,7 +357,7 @@ tpbranches <- imap(
           source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), actifs productifs (nama_10_nfa_st), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
           champ = "Branches marchandes {tolower(.y)}.",
-          note = "La CCF ou les impôts nets de subventions sont extrapolés au delà de 2023 à partir des comptes annuels. L'impôt sur les sociétés (D51) des sociétés financières (S12) est affecté à la branche K (services financiers) et celui des sociétés non financières (S11) aux branches marchandes hors services financiers et immobilier des ménages (K&L68A).") })
+          note = "La CCF ou les impôts nets de subventions sont extrapolés au delà de 2023 ou 2024 à partir des comptes annuels (voir tableau A1). L'impôt sur les sociétés (D51) des sociétés financières (S12) est affecté à la branche K (services financiers) et celui des sociétés non financières (S11) aux branches marchandes hors services financiers et immobilier des ménages (K+L68A).") })
 
 girafy(tpbranches[[2]], 1.25)
 ```
@@ -517,11 +527,12 @@ Les données trimestrielles sont annualisées pour la lisibilité et pour simpli
 #| fig-asp: 0.85
 #| fig-cap: Correction pour la non salarisation ou non, comptes de branches
 
-champs  <- c("md" = "marchand", 
-             "mdhifi" = "marchand hors immobilier et services financiers",
-            "mdhfi"= "marchand hors services financiers", 
-            "mdhi"= "marchand hors imm.", 
-            "tb" = "Toutes branches (marchandes et non marchandes)")
+champs  <- c(md = "marchand", 
+             mdhifi = "marchand hors immobilier et services financiers",
+             mdhfi= "marchand hors services financiers", 
+             mdhi= "marchand hors imm.", 
+             mdhim = "Marchand hors imm. mén.",
+             tb = "Toutes branches (marchandes et non marchandes)")
 naq <- source_data("vaq.r")$naa |> 
   filter(geo %in% P6) |> 
   mutate(tooltip = glue(
@@ -536,15 +547,16 @@ date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 annot <-  tribble(
-    ~time, ~psal, ~label, ~geo, ~champ,
-    "1996-01-01", .89, "Branches marchandes hors immobilier et finance", "DE", "mdhifi",
-    "1996-01-01", .61, "Branches marchandes et non marchandes", "DE", "tb") |> 
+  ~time, ~psal, ~label, ~geo, ~champ,
+  "1996-01-01", .89, "Branches marchandes hors immobilier et finance", "DE", "mdhifi",
+  "1996-01-01", .61, "Branches marchandes et non marchandes", "DE", "tb") |> 
   mutate(time = as.Date(time),
          geo = factor(geo, P6))
 
 labels_champ = c(tb = "Ttes branches", md="Marchand", 
                  mdhifi = "Marchand hors imm.&fin.",
-                 mdhi = "Marchand hors imm.")
+                 mdhi = "Marchand hors imm.",
+                 mdhim = "Marchand hors imm. mén.")
 
 data <- naq |> 
   filter(champ %in% c("tb", "mdhi")) |> 
@@ -570,20 +582,20 @@ psal <- ggplot(data) +
     labels = c(psal="Corrigé de la non salarisation", psalnc="Non corrigé"),
     name = NULL) +
   geom_ribbon(
-    data = naq |> filter(champ %in%c("mdhi", "tb")),
+    data = naq |> filter(champ %in%c("mdhim", "tb")),
     aes(ymin = psalnc, ymax = psal, fill = geo, group = champ), 
-        color = NA, alpha=0.1, show.legend = FALSE) +
+    color = NA, alpha=0.1, show.legend = FALSE) +
   geom_line_interactive( 
     aes(y=value, linetype = champ, linewidth = concept, alpha = champ,
         tooltip = tooltip2)) +
   geom_point_interactive(
-    data = naq |> filter(champ == "mdhi"),
+    data = naq |> filter(champ == "mdhim"),
     aes(y=psal, tooltip = tooltip, data_id = time, fill = geo),
     size = 1, stroke = 0.2, shape = 21, color = "white",
     hover_nearest = TRUE, show.legend=FALSE) +
-#  geom_marquee(
-#    data = annot, hjust = 0, 
-#    aes(label = label),  size = 6, size.unit = "pt", show.legend=FALSE) +
+  #  geom_marquee(
+  #    data = annot, hjust = 0, 
+  #    aes(label = label),  size = 6, size.unit = "pt", show.legend=FALSE) +
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
@@ -603,7 +615,7 @@ psal <- ggplot(data) +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
-    champ = "Branches marchandes et non marchandes (en léger et pointillé) et branches marchandes hors services immobiliers et financiers (L et K dans la NACE r2) (en plein).")
+ champ = "Branches marchandes et non marchandes (en léger et pointillé) et branches marchandes hors services immobiliers et financiers (L et K dans la NACE r2) (en plein).")
 
 girafy(psal, 1.25)
 ```
@@ -641,7 +653,7 @@ annot <-  tribble(
 
 data <- naq |>
   select(geo, time, champ, psal, psalb) |> 
-  filter(champ %in% c("tb", "mdhi")) |> 
+  filter(champ %in% c("tb", "mdhim")) |> 
   pivot_longer(c(psal, psalb), names_to = "concept") |> 
   mutate(
     tooltip2 = glue("{ifelse(concept=='psal', 'VA nette', 'VA brute')}")
@@ -691,7 +703,7 @@ psal <- ggplot() +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, github.com/xtimbeau/travail/vaq.r.",
-    champ = "Branches marchandes et non marchandes (en léger et pointillé) et branches marchandes hors services immobiliers et financiers (L et K dans la NACE r2) (en plein)")
+    champ = "Branches marchandes et non marchandes (en léger et pointillé) et branches marchandes hors services immobiliers des ménages (-L68A) (en plein)")
 
 girafy(psal, 1.25)
 ```
@@ -1073,7 +1085,7 @@ psnff <- ggplot(data) +
 girafy(psnff, 1.25)
 ```
 
-## Profits nets et dividendes dans les comptes d'agents  {#sec-profitagent}
+## Profits nets et dividendes dans les comptes d'agents {#sec-profitagent}
 
 Les comptes des sociétés non financières permettent d’examiner d'autres éléments du compte. On affiche ici le profit net sur la valeur ajoutée nette, et le taux de dividendes nets sur la valeur ajoutée nette.
 
@@ -1312,9 +1324,11 @@ Le rendement calculé sur le @fig-tprofitbranches diffère de celui du @fig-tpro
 
 La France conserve une singularité marquée par la baisse continue du taux de profit au cours du temps. Le rendement apparent du capital est ainsi très bas, plus bas que dans tous les autres pays considérés où il est plutôt stable (l'Italie fait exception avec une forte volatilité).
 
+@reis2022 conclut que le rendement du capital productif est plutôt constant au cours du temps, pour les 20 dernières années. L'analyse présentée ici le contredit pour la France et possiblement d'autres pays. Les données utilisées ne sont pas les mêmes, puisqu'il utilise principalement AMECO et que l'analyse conduite ici exploite plus de profondeur dans les données de comptabilité nationale.
+
 ## Au delà de l'Europe
 
-L'accès aux données de l'OCDE est devenu particulièrement opaque, mais je m'en suis sorti. Il est possible d'utiliser des données de comptabilité nationale, au niveau de l'ensemble de l'économie (y compris donc les branches non marchandes et l'immobilier). La correction pour la non-salarisation est assurée par les données de l'Economic Outlook (avec une trimestrialisation ad hoc). Au lieu de la valeur ajoutée, on utilise le PIB, auquel on enlève la consommation de capital fixe (dans les données OCDE, il n'y a pas de données de CCF pour le Japon). Le concept de part des salaires n'est donc pas tout à fait le même que dans les autres analyses.
+L'accès aux données de l'OCDE est devenu particulièrement opaque, mais je m'en suis sorti. Il est possible d'utiliser des données de comptabilité nationale, au niveau de l'ensemble de l'économie (y compris donc les branches non marchandes et l'immobilier). La correction pour la non-salarisation est assurée par les données de l'*Economic Outlook* (avec une trimestrialisation ad hoc). Au lieu de la valeur ajoutée, on utilise le PIB, auquel on enlève la consommation de capital fixe (dans les données OCDE, il n'y a pas de données de CCF pour le Japon publiées). Le concept de part des salaires n'est donc pas tout à fait le même que dans les autres analyses.
 
 On obtient ce graphique :
 
@@ -1414,21 +1428,22 @@ girafy(psali, 1.25)
 ::: {#refs}
 :::
 
-## Annexe 1 : derniers points connus  {.unnumbered}
+:::: {.content-visible when-format="html"}
+## Annexe 1 : derniers points connus {.unnumbered}
 
 ```{r}
 doms <- source_data("vaq.r")$dom
 pays <- source_data("nace.r")$pays3
 emp_dom <- source_data("naq10_e.r")$dom
+assets_dom <- source_data("assets.r")$dom
 meta <- sourcoise::sourcoise_meta("vaq.r")
 date <- meta$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 ```
 
+::: {#apptbl-data_trim}
 ```{r}
-#| label: tbl-data_trim
-#| tbl-cap: Premiers et derniers points connus par pays et par variables
 
 doms$snq |>
   rename(debq = deb, finq = fin) |>
@@ -1438,6 +1453,8 @@ doms$snq |>
   rename(deba = deb, fina = fin) |> 
   left_join(doms$l68a, by = "geo") |> 
   rename(debl = deb, finl = fin) |> 
+  left_join(assets_dom, by = "geo") |> 
+  rename(debk = deb, fink = fin) |> 
   mutate(geo = factor(geo, pays)) |> 
   arrange(geo) |> 
   mutate(geo_lbl = lbl(geo),
@@ -1445,27 +1462,25 @@ doms$snq |>
   relocate(geo, geo_lbl) |> 
   gt() |> 
   fmt_flag(geo) |> 
-  tab_spanner(label = md("**B1G, D1**<br>trimestriel, 17 branches"), columns = c(debq, finq)) |> 
-  tab_spanner(label = md("**SAL, NSAL**<br>annuel, 88 branches"), columns = c(debs, fins)) |> 
-  tab_spanner(label = md("**P51C, D29x39, D51**<br>annuel, 17 branches"), columns = c(deba, fina)) |> 
-  tab_spanner(label = md("**L68A**<br>annuel, 88 branches"), columns = c(debl, finl)) |> 
-  cols_label(
-    geo="", geo_lbl = "",
-    debq = "Prem.",
-    finq = "Dern.",
-    debs = "Prem.",
-    fins = "Dern.",
-    deba = "Prem.",
-    fina = "Dern.",
-    debl = "Prem.",
-    finl = "Dern.") |> 
-  cols_align('right', -c(geo, geo_lbl)) |> 
+  tab_spanner(label = md("**B1G, D1**<br>trim., 17 br.<br>namq_10_a10"), columns = c(debq, finq)) |> 
+  tab_spanner(label = md("**SAL, NSAL**<br>an., 88 br.<br>nama_10_a64_e"), columns = c(debs, fins)) |> 
+  tab_spanner(label = md("**P51C, D29x39, D51**<br>an., 17 br.<br>nama_10_a64"), columns = c(deba, fina)) |> 
+  tab_spanner(label = md("**L68A**<br>an., 88 br.<br>nama_10_a64"), columns = c(debl, finl)) |> 
+  tab_spanner(label = md("**N11N**<br>an., 88 br.<br>nama_10_nfa_st"), columns = c(debk, fink)) |> 
+  cols_label(geo="", geo_lbl = "") |> 
+  cols_label_with(
+    columns = starts_with(c("deb", "fin")), 
+    fn = ~ifelse(str_detect(.x, "deb"), "de", "à")) |> 
+  cols_align('center', -c(geo, geo_lbl)) |> 
   cols_align('left', c(geo, geo_lbl))  |> 
   opt_interactive() |> 
-  tab_options(table.font.size = 12) |> 
+  tab_options(table.font.size = 11) |> 
   cols_width(
       geo ~ px(30),
-      geo_lbl ~ px(90),
-      everything() ~ px(60)) |> 
-  tab_source_note(md("*Note* : données téléchargées sur le site d'Eurostat (package eurostat v4.0.0) le {date} telles que publiées par Eurostat. Les instituts nationaux peuvent mettre à dispositon plus de données non (encore ?) prises en compte par Eurostat. Les pays sont classés par ordre de population décroissante."))
+      geo_lbl ~ px(80),
+      everything() ~ px(65)) |> 
+  tab_source_note(md(glue("*Note* : données téléchargées sur le site d'Eurostat (package eurostat v4.0.0) le {date}, telles que publiées par Eurostat. Les instituts nationaux peuvent mettre à dispositon plus de données non (encore ?) prises en compte par Eurostat. Les pays sont classés par ordre de population décroissante.")))
 ```
+Premiers et derniers points connus par pays et par variables
+:::
+::::
