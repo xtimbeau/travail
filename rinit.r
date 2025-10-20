@@ -35,6 +35,7 @@ options(
   ofce.caption.ofce = FALSE,
   ofce.caption.wrap = 0,
   ofce.source_data.src_in = "file",
+  sourcoise.grow_cache = Inf,
   ofce.source_data.force_exec = FALSE)
 showtext_opts(dpi = 120)
 showtext_auto()
