@@ -16,7 +16,7 @@ echo: false
 message: false
 warning: false
 keep-md: true
-abstract: "On explore ici différentes façons de calculer la notion de part des salaires dans la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers des ménages*. Il peut être calculé pour les pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et s'est accrue de façon importante. Bien que plus fragile empiriquement, la notion de rendement du capital productif confirme ce diagnostic et illustre un problème particulerement préoccupant du tissu productif français. L'ensemble des éléments présentés ici est reproductible à partir des codes fournis. {{wordcount}} mots."
+abstract: "On explore ici différentes façons de calculer la notion de part des salaires dans la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers des ménages*. Il peut être calculé pour les pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et s'est accrue de façon importante. Bien que plus fragile empiriquement, la notion de rendement du capital productif confirme ce diagnostic et illustre un problème particulerement préoccupant du tissu productif français. L'ensemble des éléments présentés ici est reproductible à partir des codes fournis."
 citation:
   type: article-journal
   container-title: "Document de travail de l'OFCE"
@@ -36,7 +36,15 @@ crossref:
       latex-env: apptbl
       latex-list-of-file-extension: lost
       latex-list-of-description: Tableaux annexes
+    - key: appfig
+      kind: float
+      reference-prefix: Graphique A
+      space-before-numbering: false
+      latex-env: appfig
+      latex-list-of-file-extension: lost
+      latex-list-of-description: Graphiques annexes
 apptbl-cap-location: top
+appfig-cap-location: top
 ---
 
 ```{r, include=FALSE}
@@ -48,22 +56,12 @@ if(knitr::is_html_output()) {
     base_size = 10,
     marquee=TRUE,
     panel.spacing = unit(9, "point"),
-    plot.caption = element_marquee(size = rel(0.7)),
-    axis.title = element_marquee(size=rel(0.7)),
-    axis.text = element_marquee(size=rel(0.7)),
-    strip.text = element_marquee(size = rel(0.8)),
-    legend.text = element_marquee(size = rel(0.7)),
     legend.position = "bottom",
     legend.justification = "center") } else { 
       thm <- theme_ofce(
         base_size = 8,
         marquee=TRUE,
         panel.spacing = unit(3, "point"),
-        plot.caption = element_marquee(size = rel(0.7)),
-        axis.title = element_marquee(size=rel(0.7)),
-        axis.text = element_marquee(size=rel(0.7)),
-        strip.text = element_marquee(size = rel(0.8)),
-        legend.text = element_marquee(size = rel(0.7)),
         legend.position = "bottom",
         legend.justification = "center") }
 ```
@@ -72,7 +70,7 @@ if(knitr::is_html_output()) {
 
 L'analyse du partage de la valeur ajoutée (@fig-psal) est au cœur des débats sur la redistribution des richesses (voir notamment @hurlin1996, @timbeau2002, @cotis2009, @husson2010, @askenazy2012, @piton2019, @timbeau2025). Un indicateur souvent retenu est celui de la part des salaires dans la valeur ajoutée. Nous discutons ici de la construction de cet indicateur et de sa comparabilité entre pays (européens ou non).
 
-```{r}
+```{r, results="asis"}
 #| label: fig-psal
 #| fig-asp: 0.85
 #| fig-cap: Part des salaires dans la VA nette
@@ -98,7 +96,10 @@ labels_champ = c(tb = "Ttes branches", md="Marchand", mdhifi = "Marchand hors im
                  mdhim = "Marchand hors L68A (ménages)",
                  mdhi = "Marchand hors imm.")
 
-psal <- imap(c("hors services immobiliers (-L)" = "mdhi", "hors loyers imputés des ménages (-L68A)" = "mdhim"),
+psal <- imap(
+  c("hors services immobiliers (-L)" = "mdhi", 
+    "Marchand" = "md",
+    "hors loyers imputés des ménages (-L68A)" = "mdhim"),
   ~ggplot(naq |> filter(champ == .x)) +
     aes(x=time, y=psal, col = geo, group = geo) +
     geom_line(color = "grey80", layout = "fixed", linewidth = 0.2) +
@@ -126,9 +127,9 @@ psal <- imap(c("hors services immobiliers (-L)" = "mdhi", "hors loyers imputés 
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
     champ = "Branches marchandes {.y}.",
-    note = "La CCF ou les impôts nets de subventions proviennent des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà (voir tableau A1). Le partage de la valeur ajoutée pour les tous derniers points évolue donc comme le partage dans la valeur ajoutée brute.") ) 
+    note = "La CCF ou les impôts nets de subventions proviennent des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà (voir tableau A1). Le partage de la valeur ajoutée pour les tous derniers points évolue donc comme le partage dans la valeur ajoutée brute. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") ) 
 
-girafy(psal[[2]], 1.25)
+tabsetize(psal, r = 1.25)
 ```
 
 ```{r, results="asis"}
@@ -139,14 +140,14 @@ Trois points sont importants pour disposer du bon concept (voir [@reis2022] pour
 
 -   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, mais qu'il est difficile de dépasser. Elle a des conséquences pour les comparaisons entre périodes pour un même pays parce que la part des non salariés varie dans le temps, de façon différente suivant les branches et entre pays (@fig-psalcnc).
 
--   Définir le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour par auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers des ménages ou, de façon plus précise, en enlevant de la valeur ajoutée marchande la sous branche "loyers imputés aux propriétaires occupants (L68a)" et en considérant que la masse salariale et l'emploi salarié ou non salarié associés aux services produits par les ménages sont nuls. Cette correction n'enlève pas pour autant les services immobiliers rendus aux ménages par des non ménages (acteurs institutionnels) ni les activités de bailleurs des ménages (puisque ce ne sont pas des loyers imputés dans ce cas mais des loyers effectifs, perçus sur des ménages ou auprès d'entités légales productives (@fig-psalcompote, @fig-structbranche).
+-   Définir le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour part auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus précise, en enlevant de la valeur ajoutée marchande la branche "services immobiliers (L)" (@applfig-psalcompote, @fig-structbranche). Omettre les services immobiliers pose cependant un problème, parce que les loyers versés par les entreprises à leurs bailleurs sont souvent un prix de transfert et non un prix de marché. C'est donc un élément qui peut être utilisé comme véhicule pour de l'otpimisation fiscale, d'autant plus que la fiscalité immobilière peut être avantageuse. Nous explorons cette dimension dans la @sec-immobilier en particulier pour la France.
 
 -   Utiliser la notion de valeur ajoutée nette (de la consommation de capital fixe, la CCF) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. Cette dernière notion découle de l'application de tables de mortalité à un inventaire permanent des investissements non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire mesurée par leur amortissement physique ou fiscal, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée (@fig-psalnetbrut).
 
 Le concept que nous privilégions est donc défini comme suit (où, pour chaque branche $D1_b$ est la masse salariale chargée, $B1G_b$ la valeur ajoutée brute, $P51C_b$ la $CCF_b$, les trois notions en euros aux prix courants et $ns_b$ et $sal_b$ les effectifs en personne par branche) :
 
 $$
-s_{net, n.s., -L68AOQ}  = \frac{\sum_{b\in{TT-L68AOQ}}{D1_b*(1+ns_b/sal_b)}}{\sum_{b\in{TT-L68AOQ}}{B1G_b - P51C_b}}
+s_{net, n.s., -LOQ}  = \frac{\sum_{b\in{TT-LOQ}}{D1_b*(1+ns_b/sal_b)}}{\sum_{b\in{TT-LOQ}}{B1G_b - P51C_b}}
 $$
 
 La part des salaires dans la valeur ajoutée nette est croissante en France (@fig-psal) (de 10 points de 1998 à 2025), comme en Espagne (de 9 points). Elle atteint en France le niveau le plus élevé des pays sélectionnés, pour autant que l'on puisse comparer entre pays.
@@ -169,7 +170,7 @@ Au début des années 2000, deux pays se distinguaient des autres (l'Espagne et 
 #| fig-cap: Part des salaires dans la VA nette 1995 et 2025
 
 naq_full <- ofce::source_data("vaq.r")$naa |> 
-  filter(champ == "mdhim") 
+  filter(champ == "mdhi") 
 data <- naq_full |> 
   mutate(year = year(time)) |>
   filter( year %in% c(1995, 2025)) |>
@@ -192,7 +193,7 @@ data_int <- data |>
   mutate(
     tooltip = glue("<b>{lbl(geo)}</b>
                      Part des salaires dans la VAN en {year} : {round(100*psal,1)}%
-                     (VA nette, cor. non sal., marchandes hors imm. mén.)")) |> 
+                     (VA nette, cor. non sal., marchandes hors imm.)")) |> 
   ungroup()
 
 library(ggimage)
@@ -234,7 +235,7 @@ psaleu <- ggplot(data_int) +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
-    champ = "Branches marchandes hors services immobiliers des ménages (-L86A).",
+    champ = "Branches marchandes hors services immobiliers (-L).",
     note = "Part des salaires dans la valeur ajoutée nette corrigée de la non salarisation.")
   
 data_intb <- data |> 
@@ -251,7 +252,7 @@ data_intb <- data |>
   mutate(
     tooltip = glue("<b>{lbl(geo)}</b>
                      Part des salaires dans la VAB en {year} : {round(100*psalb,1)}%
-                     (VA brute, cor. non sal., marchandes hors imm. mén.)")) |> 
+                     (VA brute, cor. non sal., marchandes hors imm.)")) |> 
   ungroup()
 
 library(ggimage)
@@ -293,7 +294,7 @@ psalbeu <- ggplot(data_intb) +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
-    champ = "Branches marchandes hors services immobiliers des ménages (-L86A).",
+    champ = "Branches marchandes hors services immobiliers (-L).",
     note = "Part des salaires dans la valeur ajoutée brute corrigée de la non salarisation.")
 
 tabsetize(list("VA nette" = psaleu, "VA brute" = psalbeu))
@@ -321,7 +322,8 @@ data4tp <- source_data("vaq.r")$naaa |>
 tpbranches <- imap( 
   c("Marchand-L" = "mdhi",
     "Marchand-L68A" = "mdhim",
-    "Marchand-K-L68A" = "mdhimfi"), ~{
+    "Marchand-K-L68A" = "mdhimfi",
+    " " = "md"), ~{
       data <-  data4tp |> 
         filter(champ == .x) |> 
         mutate(tooltip = glue(
@@ -331,7 +333,7 @@ tpbranches <- imap(
           profits nets d'impôts sur capital productif : {round(r*100,1)}%"  ))
       
       ggplot(data) +
-        aes(x=time, y=tp, col = geo, group = geo) +
+        aes(x=time, y=r, col = geo, group = geo) +
         geom_line(color = "grey85", layout = "fixed", linewidth = 0.2) +
         geom_line_interactive(
           aes(tooltip = "Rendement du capital productif" |> glue()),
@@ -350,16 +352,16 @@ tpbranches <- imap(
         scale_y_continuous(
           labels = scales::label_percent(1), 
           breaks = scales::pretty_breaks(5),
-          limits = c(0, .3)) +
+          limits = c(0, .15)) +
         scale_color_pays(format = "eurostat") +
         thm +
         ofce_caption(
           source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), actifs productifs (nama_10_nfa_st), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
           champ = "Branches marchandes {tolower(.y)}.",
-          note = "La CCF ou les impôts nets de subventions sont extrapolés au delà de 2023 ou 2024 à partir des comptes annuels (voir tableau A1). L'impôt sur les sociétés (D51) des sociétés financières (S12) est affecté à la branche K (services financiers) et celui des sociétés non financières (S11) aux branches marchandes hors services financiers et immobilier des ménages (K+L68A).") })
+          note = "La CCF ou les impôts nets de subventions sont extrapolés au delà de 2023 ou 2024 à partir des comptes annuels (voir tableau A1). L'impôt sur les sociétés (D51) des sociétés financières (S12) est affecté à la branche K (services financiers) et celui des sociétés non financières (S11) aux branches marchandes hors services financiers et immobilier des ménages (K+L68A). Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") })
 
-girafy(tpbranches[[2]], 1.25)
+girafy(tpbranches[[1]], 1.25)
 ```
 
 ```{r, results="asis"}
@@ -582,14 +584,14 @@ psal <- ggplot(data) +
     labels = c(psal="Corrigé de la non salarisation", psalnc="Non corrigé"),
     name = NULL) +
   geom_ribbon(
-    data = naq |> filter(champ %in%c("mdhim", "tb")),
+    data = naq |> filter(champ %in%c("mdhi", "tb")),
     aes(ymin = psalnc, ymax = psal, fill = geo, group = champ), 
     color = NA, alpha=0.1, show.legend = FALSE) +
   geom_line_interactive( 
     aes(y=value, linetype = champ, linewidth = concept, alpha = champ,
         tooltip = tooltip2)) +
   geom_point_interactive(
-    data = naq |> filter(champ == "mdhim"),
+    data = naq |> filter(champ == "mdhi"),
     aes(y=psal, tooltip = tooltip, data_id = time, fill = geo),
     size = 1, stroke = 0.2, shape = 21, color = "white",
     hover_nearest = TRUE, show.legend=FALSE) +
@@ -653,7 +655,7 @@ annot <-  tribble(
 
 data <- naq |>
   select(geo, time, champ, psal, psalb) |> 
-  filter(champ %in% c("tb", "mdhim")) |> 
+  filter(champ %in% c("tb", "mdhi")) |> 
   pivot_longer(c(psal, psalb), names_to = "concept") |> 
   mutate(
     tooltip2 = glue("{ifelse(concept=='psal', 'VA nette', 'VA brute')}")
@@ -709,101 +711,6 @@ girafy(psal, 1.25)
 ```
 
 La notion de part des salaires dans la valeur ajoutée nette consiste à réduire le démominateur (la valeur ajoutée) de la consommation de capital fixe. Cela augmente donc le ratio. Cependant, cette correction n'est pas constante dans le temps (comme en France, en Espagne ou en Belgique). Comme on peut le voir sur le @fig-psalcompote, la variance entre les pays est plus basse pour la notion brute (non corrigé de la CCF) que nette. Pour les branches marchandes hors services immobiliers et services immobiliers, le classement entre pays est marginalement modifié, la Belgique ayant une part des salaires nette pus élevée que l'Allemagne, alors que sa part brute est plus faible qu'en Allemagne. Pour les autres pays, le classement est indentique (La France a la part la plus haute et les Pays-Bas plus faible).
-
-```{r}
-#| label: fig-psalcompote
-#| fig-asp: 1
-#| fig-cap: Tous concepts, comparaison entre pays
-
-data <- naq |> 
-  filter(geo %in% P6) |> 
-  filter(time>="1995-01-01") |>
-  select(geo, time, champ, psal, psalnc, psalb, psalncb) |> 
-  pivot_longer(c(psal, psalnc, psalb, psalncb)) |> 
-  mutate(name = factor(name, c("psal", "psalb", "psalnc", "psalncb")),
-         champ = factor(champ, c("tb", "md", "mdhi", "mdhim", "mdhfi", "mdhimfi", "mdhifi")))
-
-strips_name <- c(psal = "Nette, avec n.s.",
-                psalnc = "Nette, sans n.s.",
-                psalb = "Brute, avec n.s.",
-                psalncb = "Brute, sans n.s.")
-strips_champ <- c(tb = "Ttes branches",
-                md = "Marchand",
-                mdhi = "hors imm.",
-                mdhim = "hors loy. imp.",
-                mdhimfi = "hors fin.&loy. imp.",
-                mdhfi = "hors fin.",
-                mdhifi = "hors imm.&fin.")
-
-gg <- ggplot(data) +
-  aes(x=time, y = value, color = geo) + 
-  geom_line_interactive(
-    aes(tooltip = lbl(geo), data_id = geo),
-    linewidth = 0.25,
-    show.legend = FALSE, hover_nearest = TRUE) +
-  thm +
-  facet_grid(rows=vars(champ), cols = vars(name),
-             labeller = labeller(name= strips_name, champ = strips_champ)) + 
-  scale_y_continuous(labels = scales::label_percent(1),
-                     breaks = scales::breaks_pretty(n=3)) +
-  scale_ofce_date(
-    labels = date1d
-    ) +
-  ylab("% de la VA") +
-  scale_color_pays("eurostat") +
-  ofce_caption(
-    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.")
-
-girafy(gg, 1.25)
-```
-
-```{r}
-
-tt <- imap(strips_champ, ~{
-  source_data("vaq.r")$naa |> 
-    filter(time == "2023-01-01", champ == .y) |> 
-    select(geo, time, champ, psal, psalnc, psalb, psalncb) |> 
-    pivot_longer(c(psal, psalnc, psalb, psalncb)) |>
-    group_by(name) |> 
-    mutate(rank = rank(-value),
-           geo_lbl = lbl(geo),
-           geo = countrycode(geo, "eurostat", "iso2c")) |> 
-    arrange(geo) |> 
-    pivot_wider(names_from = c(name), values_from = c(value, rank)) |> 
-    relocate(geo, geo_lbl) |> 
-    arrange(desc(value_psal)) |> 
-    gt() |> 
-    cols_hide(c(time, champ)) |> 
-    tab_spanner(label = "Part des salaires dans la VA en 2023", columns = starts_with("value") ) |> 
-    tab_spanner(label = "Rang en 2023", columns = starts_with("rank") ) |> 
-    cols_label_with(starts_with("value"), ~strips_name[[str_remove(.x, "value_")]] ) |> 
-    cols_label_with(starts_with("rank"), ~strips_name[[str_remove(.x, "rank_")]] ) |> 
-    gt::fmt_flag(geo) |> 
-    fmt_percent(starts_with("value"),decimals = 1) |> 
-    cols_label(geo = "", geo_lbl = "") |> 
-    opt_interactive() |> 
-    tab_options(table.font.size = 12) |> 
-    cols_width(
-      geo ~ px(30),
-      geo_lbl ~ px(90),
-      TRUE ~ px(60)
-    )
-}) 
-
-names(tt) <- strips_champ
-
-```
-
-```{r, results="asis"}
-#| label: tbl-rang
-#| tbl-cap: Part des salaires dans la VA et rang, différents concepts 
-
-if(knitr::is_html_output())
-  tabsetize(tt)
-if(knitr::is_latex_output())
-  tt[[3]]
-```
 
 ## Impact du changement de structure de l'économie
 
@@ -1423,13 +1330,19 @@ psali <- ggplot(snfia) +
 girafy(psali, 1.25)
 ```
 
+## Le rendement de l'immobilier
+
+{{< fa square >>}}  ({{wordcount}} mots)
+
 ## Références {.unnumbered}
 
 ::: {#refs}
 :::
 
+## Annexes
+
 :::: {.content-visible when-format="html"}
-## Annexe 1 : derniers points connus {.unnumbered}
+### Annexe A : derniers points connus {.unnumbered}
 
 ```{r}
 doms <- source_data("vaq.r")$dom
@@ -1479,8 +1392,250 @@ doms$snq |>
       geo ~ px(30),
       geo_lbl ~ px(80),
       everything() ~ px(65)) |> 
-  tab_source_note(md(glue("*Note* : données téléchargées sur le site d'Eurostat (package eurostat v4.0.0) le {date}, telles que publiées par Eurostat. Les instituts nationaux peuvent mettre à dispositon plus de données non (encore ?) prises en compte par Eurostat. Les pays sont classés par ordre de population décroissante.")))
+  tab_source_note(md(glue("*Note* : données téléchargées sur le site d'Eurostat (package eurostat v4.0.0) le {date}, telles que publiées par Eurostat. Les instituts nationaux peuvent mettre à dispositon plus de données non (encore ?) prises en compte par Eurostat. Les pays sont classés par ordre de population décroissante. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.")))
 ```
+
 Premiers et derniers points connus par pays et par variables
 :::
+
+### Annexe B : CCF et actifs dans les différents pays  {.unnumbered}
+
+::: {#appfig-ccf}
+
+```{r, results="asis"}
+#| fig-asp: 0.85
+naa <- source_data("vaq.r")$naaa |> 
+  filter(geo %in% P6) |> 
+  mutate(
+    ccf = (vab-van)/vab,
+    ccfina = (vab-van)/assets,
+    assetsinva = assets/vab) |> 
+  mutate(tooltip = glue(
+    "<b>{lbl(geo)}</b>
+    {year(time)} 
+    {champs[champ]}
+    CCF dans la VAN : {round(ccf*100,1)}%
+    CCF sur actifs productifs : {round(ccfina*100,1)}%
+    actifs productifs sur VAB : {round(assetsinva*100,1)}%")) |>
+  mutate(geo = factor(geo, P6))
+
+date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
+date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
+
+labels_champ = c(tb = "Ttes branches", md="Marchand", mdhifi = "Marchand-LK",
+                 mdhim = "Marchand-L68A",
+                 mdhi = "Marchand-L")
+ilc <- set_names(names(labels_champ), labels_champ)
+
+ccfs <- imap(
+  ilc,
+  ~ggplot(naa |> filter(champ == .x)) +
+    aes(x=time, y=ccf, col = geo, group = geo) +
+    geom_line(color = "grey80", layout = "fixed", linewidth = 0.2) +
+    geom_line(linewidth= 0.5) +
+    geom_point_interactive(
+      aes(tooltip = tooltip, data_id = time, fill = geo),
+      size = 1, stroke = 0.2, shape = 21, color = "white",
+      hover_nearest = TRUE, show.legend=FALSE) +
+  ylab("% de la VA") + xlab(NULL) +
+  facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
+  scale_ofce_date(
+    labels = date1d ) +
+  guides( fill = "none", color = "none",
+          linetype = guide_legend(nrow = 1),
+          alpha = guide_legend(nrow = 1)) + 
+  scale_y_continuous(
+    labels = scales::label_percent(1), 
+                     breaks = scales::pretty_breaks(5),
+                     limits = c(0, 0.25)) +
+  scale_color_pays(format = "eurostat") +
+  thm +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
+    champ = "Branches marchandes {.y}.",
+    note = "La CCF provient des comptes annuels, jusqu'en 2023 ou 2024 selon les pays (voir tableau A1). Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") ) 
+
+tabsetize(ccfs, 1.25)
+```
+CCF dans la valeur ajoutée
+:::
+
+::: {#appfig-ccfina}
+
+```{r, results="asis"}
+#| fig-asp: 0.85
+
+ccfsina <- imap(
+  ilc,
+  ~ggplot(naa |> filter(champ == .x) |> drop_na(ccfina)) +
+    aes(x=time, y=ccfina, col = geo, group = geo) +
+    geom_line(color = "grey80", layout = "fixed", linewidth = 0.2) +
+    geom_line()+
+    geom_point_interactive(
+      aes(tooltip = tooltip, data_id = time, fill = geo),
+      size = 1, stroke = 0.2, shape = 21, color = "white",
+      hover_nearest = TRUE, show.legend=FALSE) +
+  ylab("% de la VA") + xlab(NULL) +
+  facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
+  scale_ofce_date(
+    labels = date1d ) +
+  guides( fill = "none", color = "none",
+          linetype = guide_legend(nrow = 1),
+          alpha = guide_legend(nrow = 1)) + 
+  scale_y_continuous(
+    labels = scales::label_percent(1), 
+                     breaks = scales::pretty_breaks(5),
+                     limits = c(0, 0.15)) +
+  scale_color_pays(format = "eurostat") +
+  thm +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
+    champ = "Branches marchandes {.y}.",
+    note = "La CCF provient des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà (voir tableau A1). Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") ) 
+
+tabsetize(ccfsina, 1.25)
+```
+CCF rapportée aux actifs
+:::
+
+::: {#appfig-assetva}
+
+```{r, results="asis"}
+#| fig-asp: 0.85
+
+ccfsina <- imap(
+  ilc,
+  ~ggplot(naa |> filter(champ == .x) |> drop_na(ccfina)) +
+    aes(x=time, y=assetsinva, col = geo, group = geo) +
+    geom_line(color = "grey80", layout = "fixed", linewidth = 0.2) +
+    geom_line()+
+    geom_point_interactive(
+      aes(tooltip = tooltip, data_id = time, fill = geo),
+      size = 1, stroke = 0.2, shape = 21, color = "white",
+      hover_nearest = TRUE, show.legend=FALSE) +
+  ylab("% de la VA") + xlab(NULL) +
+  facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
+  scale_ofce_date(
+    labels = date1d ) +
+  guides( fill = "none", color = "none",
+          linetype = guide_legend(nrow = 1),
+          alpha = guide_legend(nrow = 1)) + 
+  scale_y_continuous(
+    labels = scales::label_percent(1), 
+                     breaks = scales::pretty_breaks(5),
+                     limits = c(0, NA)) +
+  scale_color_pays(format = "eurostat") +
+  thm +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
+    champ = "Branches marchandes {.y}.",
+    note = "La CCF provient des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà (voir tableau A1). Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") ) 
+
+tabsetize(ccfsina, 1.25)
+```
+Actifs productifs sur VAB
+:::
+
+### Annexe C : Différents concepts et champs de part des salaires {.unnumbered}
+
+::: {#appfig-psalcompote}
+
+```{r}
+#| fig-asp: 1
+
+data <- naq |> 
+  filter(geo %in% P6) |> 
+  filter(time>="1995-01-01") |>
+  select(geo, time, champ, psal, psalnc, psalb, psalncb) |> 
+  pivot_longer(c(psal, psalnc, psalb, psalncb)) |> 
+  mutate(name = factor(name, c("psal", "psalb", "psalnc", "psalncb")),
+         champ = factor(champ, c("tb", "md", "mdhi", "mdhim", "mdhfi", "mdhimfi", "mdhifi")))
+
+strips_name <- c(psal = "Nette, avec n.s.",
+                psalnc = "Nette, sans n.s.",
+                psalb = "Brute, avec n.s.",
+                psalncb = "Brute, sans n.s.")
+strips_champ <- c(tb = "Ttes branches",
+                md = "Marchand",
+                mdhi = "hors imm.",
+                mdhim = "hors loy. imp.",
+                mdhimfi = "hors fin.&loy. imp.",
+                mdhfi = "hors fin.",
+                mdhifi = "hors imm.&fin.")
+
+gg <- ggplot(data) +
+  aes(x=time, y = value, color = geo) + 
+  geom_line_interactive(
+    aes(tooltip = lbl(geo), data_id = geo),
+    linewidth = 0.25,
+    show.legend = FALSE, hover_nearest = TRUE) +
+  thm +
+  facet_grid(rows=vars(champ), cols = vars(name),
+             labeller = labeller(name= strips_name, champ = strips_champ)) + 
+  scale_y_continuous(labels = scales::label_percent(1),
+                     breaks = scales::breaks_pretty(n=3)) +
+  scale_ofce_date(
+    labels = date1d
+    ) +
+  ylab("% de la VA") +
+  scale_color_pays("eurostat") +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.")
+
+girafy(gg, 1.25)
+```
+
+Part des salaires dans la VA, tous concepts, comparaison entre pays
+
+:::
+
+::: {#apptbl-rang}
+
+```{r, results="asis"}
+
+tt <- imap(strips_champ, ~{
+  source_data("vaq.r")$naa |> 
+    filter(time == "2023-01-01", champ == .y) |> 
+    select(geo, time, champ, psal, psalnc, psalb, psalncb) |> 
+    pivot_longer(c(psal, psalnc, psalb, psalncb)) |>
+    group_by(name) |> 
+    mutate(rank = rank(-value),
+           geo_lbl = lbl(geo),
+           geo = countrycode(geo, "eurostat", "iso2c")) |> 
+    arrange(geo) |> 
+    pivot_wider(names_from = c(name), values_from = c(value, rank)) |> 
+    relocate(geo, geo_lbl) |> 
+    arrange(desc(value_psal)) |> 
+    gt() |> 
+    cols_hide(c(time, champ)) |> 
+    tab_spanner(label = "Part des salaires dans la VA en 2023", columns = starts_with("value") ) |> 
+    tab_spanner(label = "Rang en 2023", columns = starts_with("rank") ) |> 
+    cols_label_with(starts_with("value"), ~strips_name[[str_remove(.x, "value_")]] ) |> 
+    cols_label_with(starts_with("rank"), ~strips_name[[str_remove(.x, "rank_")]] ) |> 
+    gt::fmt_flag(geo) |> 
+    fmt_percent(starts_with("value"),decimals = 1) |> 
+    cols_label(geo = "", geo_lbl = "") |> 
+    opt_interactive() |> 
+    tab_options(table.font.size = 12) |> 
+    cols_width(
+      geo ~ px(30),
+      geo_lbl ~ px(90),
+      TRUE ~ px(60)
+    )
+}) 
+
+names(tt) <- strips_champ
+
+tabsetize(tt)
+```
+
+Part des salaires dans la VA et rang, différents concepts 
+
+:::
+
 ::::
+

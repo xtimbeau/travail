@@ -36,7 +36,15 @@ crossref:
       latex-env: apptbl
       latex-list-of-file-extension: lost
       latex-list-of-description: Tableaux annexes
+    - key: appfig
+      kind: float
+      reference-prefix: Graphique A
+      space-before-numbering: false
+      latex-env: appfig
+      latex-list-of-file-extension: lost
+      latex-list-of-description: Graphiques annexes
 apptbl-cap-location: top
+appfig-cap-location: top
 ---
 
 
@@ -45,13 +53,20 @@ apptbl-cap-location: top
 
 L'analyse du partage de la valeur ajoutée (@fig-psal) est au cœur des débats sur la redistribution des richesses (voir notamment @hurlin1996, @timbeau2002, @cotis2009, @husson2010, @askenazy2012, @piton2019, @timbeau2025). Un indicateur souvent retenu est celui de la part des salaires dans la valeur ajoutée. Nous discutons ici de la construction de cet indicateur et de sa comparabilité entre pays (européens ou non).
 
+:::: {#fig-psal} 
+
+
 
 ::: {.cell}
 ::: {.cell-output-display}
-![Part des salaires dans la VA nette](psal_comp_files/figure-pdf/fig-psal-1.png){#fig-psal fig-pos='H' width=100%}
+![Part des salaires dans la VA nette hors services immobiliers (-L)](psal_comp_files/figure-pdf/fig-psal-1-1.png){#fig-psal-1 fig-pos='H' width=100%}
 :::
 :::
 
+
+Part des salaires dans la VA nette
+
+::::
 
 
 
@@ -176,63 +191,6 @@ La correction de la non salarisation, en imputant une masse salariale pour les e
 
 
 La notion de part des salaires dans la valeur ajoutée nette consiste à réduire le démominateur (la valeur ajoutée) de la consommation de capital fixe. Cela augmente donc le ratio. Cependant, cette correction n'est pas constante dans le temps (comme en France, en Espagne ou en Belgique). Comme on peut le voir sur le @fig-psalcompote, la variance entre les pays est plus basse pour la notion brute (non corrigé de la CCF) que nette. Pour les branches marchandes hors services immobiliers et services immobiliers, le classement entre pays est marginalement modifié, la Belgique ayant une part des salaires nette pus élevée que l'Allemagne, alors que sa part brute est plus faible qu'en Allemagne. Pour les autres pays, le classement est indentique (La France a la part la plus haute et les Pays-Bas plus faible).
-
-
-::: {.cell}
-::: {.cell-output-display}
-![Tous concepts, comparaison entre pays](psal_comp_files/figure-pdf/fig-psalcompote-1.png){#fig-psalcompote fig-pos='H' width=100%}
-:::
-:::
-
-
-
-::: {.cell}
-
-:::
-
-
-
-::: {#tbl-rang .cell tbl-cap='Part des salaires dans la VA et rang, différents concepts'}
-\begin{table}
-\fontsize{9.0pt}{11.0pt}\selectfont
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{\dimexpr 22.50pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedright\arraybackslash}p{\dimexpr 67.50pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}}
-\toprule
- &  & \multicolumn{4}{>{\centering\arraybackslash}m{\dimexpr 180.00pt -2\tabcolsep-1.5\arrayrulewidth}}{Part des salaires dans la VA en 2023} & \multicolumn{4}{>{\centering\arraybackslash}m{\dimexpr 180.00pt -2\tabcolsep-1.5\arrayrulewidth}}{Rang en 2023} \\ 
-\cmidrule(lr){3-6} \cmidrule(lr){7-10}
- &  & Nette, avec n.s. & Nette, sans n.s. & Brute, avec n.s. & Brute, sans n.s. & Nette, avec n.s. & Nette, sans n.s. & Brute, avec n.s. & Brute, sans n.s. \\ 
-\midrule\addlinespace[2.5pt]
-SI & Slovénie & 90.0\% & 70.5\% & 73.5\% & 57.5\% & 1 & 4 & 1 & 4 \\ 
-FR & France & 87.5\% & 77.4\% & 70.8\% & 62.6\% & 2 & 1 & 2 & 1 \\ 
-LV & Lettonie & 83.1\% & 70.2\% & 66.7\% & 56.4\% & 3 & 5 & 4 & 7 \\ 
-FI & Finlande & 82.5\% & 73.5\% & 64.5\% & 57.5\% & 4 & 2 & 9 & 3 \\ 
-BE & Belgique & 81.8\% & 65.0\% & 64.7\% & 51.4\% & 5 & 11 & 8 & 15 \\ 
-EE & Estonie & 80.9\% & 69.5\% & 66.9\% & 57.5\% & 6 & 8 & 3 & 5 \\ 
-AT & Autriche & 79.4\% & 70.0\% & 63.1\% & 55.6\% & 7 & 7 & 11 & 8 \\ 
-HR & Croatie & 78.2\% & 66.2\% & 65.2\% & 55.2\% & 8 & 10 & 5 & 9 \\ 
-DE & Allemagne & 77.9\% & 71.2\% & 64.7\% & 59.2\% & 9 & 3 & 7 & 2 \\ 
-PT & Portugal & 76.7\% & 64.4\% & 65.0\% & 54.6\% & 10 & 12 & 6 & 11 \\ 
-DK & Danemark & 74.8\% & 70.1\% & 60.7\% & 56.9\% & 11 & 6 & 14 & 6 \\ 
-ES & Espagne & 73.7\% & 62.1\% & 61.7\% & 52.0\% & 12 & 14 & 12 & 14 \\ 
-BG & Bulgarie & 73.5\% & 55.8\% & 64.4\% & 49.0\% & 13 & 19 & 10 & 18 \\ 
-CZ & Tchéquie & 73.3\% & 61.1\% & 57.3\% & 47.8\% & 14 & 16 & 18 & 20 \\ 
-SE & Suède & 71.7\% & 66.9\% & 56.4\% & 52.6\% & 15 & 9 & 19 & 12 \\ 
-NL & Pays-Bas & 70.9\% & 57.5\% & 61.2\% & 49.6\% & 16 & 18 & 13 & 16 \\ 
-IT & Italie & 70.5\% & 53.2\% & 58.6\% & 44.2\% & 17 & 22 & 16 & 22 \\ 
-LT & Lituanie & 68.4\% & 59.3\% & 60.2\% & 52.1\% & 18 & 17 & 15 & 13 \\ 
-HU & Hongrie & 67.7\% & 61.9\% & 53.8\% & 49.2\% & 19 & 15 & 22 & 17 \\ 
-LU & Luxembourg & 65.2\% & 62.3\% & 57.5\% & 55.0\% & 20 & 13 & 17 & 10 \\ 
-SK & Slovaquie & 64.7\% & 53.6\% & 53.4\% & 44.3\% & 21 & 21 & 23 & 21 \\ 
-MT & Malte & 62.2\% & 52.6\% & 49.3\% & 41.7\% & 22 & 23 & 25 & 23 \\ 
-GR & Grèce & 61.8\% & 45.1\% & 55.1\% & 40.2\% & 23 & 25 & 20 & 24 \\ 
-PL & Pologne & 61.6\% & 45.7\% & 53.9\% & 40.0\% & 24 & 24 & 21 & 25 \\ 
-CY & Chypre & 59.7\% & 53.8\% & 53.4\% & 48.1\% & 25 & 20 & 24 & 19 \\ 
-RO & Roumanie & 54.2\% & 44.6\% & 47.1\% & 38.7\% & 26 & 26 & 26 & 26 \\ 
-IE & Irlande & 39.7\% & 33.5\% & 28.5\% & 24.1\% & 27 & 27 & 27 & 27 \\ 
-\bottomrule
-\end{tabular*}
-\end{table}
-:::
-
 
 ## Impact du changement de structure de l'économie
 
@@ -391,7 +349,7 @@ On utilise ces données ([`naidsa_10_nf_tr`](https://ec.europa.eu/eurostat/datab
 :::
 
 :::: {.content-visible when-format="html"}
-## Annexe 1 : derniers points connus {.unnumbered}
+## Annexe A : derniers points connus {.unnumbered}
 
 
 ::: {.cell}
@@ -409,31 +367,31 @@ On utilise ces données ([`naidsa_10_nf_tr`](https://ec.europa.eu/eurostat/datab
 \toprule
  &  & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 97.50pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{B1G, D1} \\trim., 17 br\ldots{}gt\_linebreak\_indicator..namq\_10\_a10}} & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 97.50pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{SAL, NSAL} \\an., 88 br\ldots{}gt\_linebreak\_indicator..nama\_10\_a64\_e}} & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 97.50pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{P51C, D29x39, D51} \\an., 17 br\ldots{}gt\_linebreak\_indicator..nama\_10\_a64}} & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 97.50pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{L68A} \\an., 88 br\ldots{}gt\_linebreak\_indicator..nama\_10\_a64}} & \multicolumn{2}{>{\centering\arraybackslash}m{\dimexpr 97.50pt -2\tabcolsep-1.5\arrayrulewidth}}{\shortstack[l]{\textbf{N11N} \\an., 88 br\ldots{}gt\_linebreak\_indicator..nama\_10\_nfa\_st}} \\ 
 \cmidrule(lr){3-4} \cmidrule(lr){5-6} \cmidrule(lr){7-8} \cmidrule(lr){9-10} \cmidrule(lr){11-12}
- &  & de & à & de & à & de & à & de & à & de & à \\ 
+ &  & de & \`a & de & \`a & de & \`a & de & \`a & de & \`a \\ 
 \midrule\addlinespace[2.5pt]
-DE & Allemagne & 1991T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 \\ 
+DE & Allemagne & 1991T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 \\ 
 FR & France & 1980T1 & 2025T2 & 1978 & 2024 & 1978 & 2024 & 1978 & 2023 & 1978 & 2024 \\ 
-IT & Italie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 \\ 
-ES & Espagne & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 & 1995 & 2022 \\ 
-PL & Pologne & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2023 & 1995 & 2022 & 2000 & 2022 \\ 
-RO & Roumanie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2023 & 1995 & 2023 & 2000 & 2022 \\ 
+IT & Italie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
+ES & Espagne & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 & 1995 & 2023 \\ 
+PL & Pologne & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 & 2000 & 2022 \\ 
+RO & Roumanie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 2000 & 2022 \\ 
 NL & Pays-Bas & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 \\ 
-BE & Belgique & 1995T1 & 2025T1 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 & 1995 & 2023 \\ 
-CZ & Tchéquie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
+BE & Belgique & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 & 1995 & 2024 \\ 
+CZ & Tch\\'equie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
 PT & Portugal & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 & 2000 & 2022 \\ 
-SE & Suède & 1993T1 & 2025T2 & 1993 & 2023 & 1993 & 2022 & 1993 & 2022 & 1993 & 2022 \\ 
-GR & Grèce & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 \\ 
-HU & Hongrie & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 \\ 
+SE & Su\`ede & 1993T1 & 2025T2 & 1993 & 2024 & 1993 & 2023 & 1993 & 2023 & 1993 & 2022 \\ 
+GR & Gr\`ece & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2022 \\ 
+HU & Hongrie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2022 \\ 
 AT & Autriche & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 \\ 
-BG & Bulgarie & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 & 2000 & 2022 \\ 
-DK & Danemark & 1991T1 & 2025T2 & 1975 & 2024 & 1975 & 2024 & 1975 & 2024 & 1975 & 2024 \\ 
+BG & Bulgarie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2023 & 1995 & 2023 & 2000 & 2022 \\ 
+DK & Danemark & 1995T1 & 2025T2 & 1975 & 2024 & 1975 & 2024 & 1975 & 2024 & 1975 & 2024 \\ 
 FI & Finlande & 1990T1 & 2025T2 & 1980 & 2024 & 1980 & 2024 & 1980 & 2024 & 1980 & 2024 \\ 
 SK & Slovaquie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 & 2000 & 2023 \\ 
-IE & Irlande & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2023 & 1995 & 2023 & 1995 & 2023 \\ 
-HR & Croatie & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 & 1995 & 2022 \\ 
+IE & Irlande & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 \\ 
+HR & Croatie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 & 1995 & 2022 \\ 
 LT & Lituanie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2022 \\ 
-SI & Slovénie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 2000 & 2023 \\ 
-LV & Lettonie & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 & 1995 & 2022 \\ 
+SI & Slov\\'enie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 2000 & 2023 \\ 
+LV & Lettonie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 & 1995 & 2022 \\ 
 EE & Estonie & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 2000 & 2022 \\ 
 CY & Chypre & 1995T1 & 2025T2 & 1995 & 2023 & 1995 & 2023 & 1995 & 2022 & 1995 & 2022 \\ 
 LU & Luxembourg & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 1995 & 2023 \\ 
@@ -441,13 +399,152 @@ MT & Malte & 1995T1 & 2025T2 & 1995 & 2024 & 1995 & 2024 & 1995 & 2024 & 2000 & 
 \bottomrule
 \end{tabular*}
 \begin{minipage}{\linewidth}
-\emph{Note} : données téléchargées sur le site d'Eurostat (package eurostat v4.0.0) le 8/10/2025, telles que publiées par Eurostat. Les instituts nationaux peuvent mettre à dispositon plus de données non (encore ?) prises en compte par Eurostat. Les pays sont classés par ordre de population décroissante.\\
+\emph{Note} : données téléchargées sur le site d'Eurostat (package eurostat v4.0.0) le 19/10/2025, telles que publiées par Eurostat. Les instituts nationaux peuvent mettre à dispositon plus de données non (encore ?) prises en compte par Eurostat. Les pays sont classés par ordre de population décroissante. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.\\
 \end{minipage}
 \end{table}
 
 :::
 :::
 
+
 Premiers et derniers points connus par pays et par variables
 :::
+
+## Annexe B : CCF et actifs dans les différents pays
+
+::: {#appfig-ccf}
+
+:::: {#unnamed-chunk-9} 
+
+
+
+::: {.cell}
+::: {.cell-output-display}
+![Ttes branches](psal_comp_files/figure-pdf/unnamed-chunk-9-1-1.png){fig-pos='H' width=100%}
+:::
+:::
+
+
+
+
 ::::
+CCF dans la valeur ajoutée
+:::
+
+::: {#appfig-ccfina}
+
+:::: {#unnamed-chunk-10} 
+
+
+
+::: {.cell}
+::: {.cell-output-display}
+![Ttes branches](psal_comp_files/figure-pdf/unnamed-chunk-10-1-1.png){fig-pos='H' width=100%}
+:::
+:::
+
+
+
+
+::::
+CCF rapportée aux actifs
+:::
+
+::: {#appfig-assetva}
+
+:::: {#unnamed-chunk-11} 
+
+
+
+::: {.cell}
+::: {.cell-output-display}
+![Ttes branches](psal_comp_files/figure-pdf/unnamed-chunk-11-1-1.png){fig-pos='H' width=100%}
+:::
+:::
+
+
+
+
+::::
+Actifs productifs sur VAB
+:::
+
+## Annexe C : Différents concepts et champs de part des salaires
+
+::: {#appfig-psalcompote}
+
+
+::: {.cell}
+::: {.cell-output-display}
+![](psal_comp_files/figure-pdf/unnamed-chunk-12-1.png){fig-pos='H' width=100%}
+:::
+:::
+
+
+Part des salaires dans la VA, tous concepts, comparaison entre pays
+
+:::
+
+::: {#apptbl-rang}
+
+:::: {#unnamed-chunk-13} 
+
+
+
+::: {.cell}
+::: {.cell-output-display}
+\begin{table}
+\fontsize{9.0pt}{11.0pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{\dimexpr 22.50pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedright\arraybackslash}p{\dimexpr 67.50pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}>{\raggedleft\arraybackslash}p{\dimexpr 45.00pt -2\tabcolsep-1.5\arrayrulewidth}}
+\toprule
+ &  & \multicolumn{4}{>{\centering\arraybackslash}m{\dimexpr 180.00pt -2\tabcolsep-1.5\arrayrulewidth}}{Part des salaires dans la VA en 2023} & \multicolumn{4}{>{\centering\arraybackslash}m{\dimexpr 180.00pt -2\tabcolsep-1.5\arrayrulewidth}}{Rang en 2023} \\ 
+\cmidrule(lr){3-6} \cmidrule(lr){7-10}
+ &  & Nette, avec n.s. & Nette, sans n.s. & Brute, avec n.s. & Brute, sans n.s. & Nette, avec n.s. & Nette, sans n.s. & Brute, avec n.s. & Brute, sans n.s. \\ 
+\midrule\addlinespace[2.5pt]
+SI & Slov\\'enie & 89.0\% & 72.3\% & 70.0\% & 56.9\% & 1 & 3 & 1 & 1 \\ 
+FI & Finlande & 81.0\% & 74.5\% & 58.2\% & 53.6\% & 2 & 1 & 15 & 7 \\ 
+DE & Allemagne & 79.8\% & 73.7\% & 59.9\% & 55.2\% & 3 & 2 & 10 & 3 \\ 
+LV & Lettonie & 78.6\% & 70.4\% & 61.6\% & 55.2\% & 4 & 4 & 3 & 4 \\ 
+AT & Autriche & 78.5\% & 70.1\% & 59.2\% & 52.9\% & 5 & 5 & 11 & 9 \\ 
+BE & Belgique & 78.5\% & 66.2\% & 61.1\% & 51.6\% & 6 & 9 & 5 & 13 \\ 
+FR & France & 77.6\% & 69.6\% & 61.1\% & 54.7\% & 7 & 7 & 6 & 5 \\ 
+EE & Estonie & 76.3\% & 67.3\% & 61.7\% & 54.4\% & 8 & 8 & 2 & 6 \\ 
+PT & Portugal & 76.3\% & 65.7\% & 60.3\% & 52.0\% & 9 & 10 & 8 & 11 \\ 
+NL & Pays-Bas & 74.9\% & 62.6\% & 60.8\% & 50.8\% & 10 & 14 & 7 & 15 \\ 
+DK & Danemark & 74.0\% & 70.0\% & 58.7\% & 55.5\% & 11 & 6 & 13 & 2 \\ 
+HR & Croatie & 73.6\% & 63.8\% & 59.9\% & 51.9\% & 12 & 12 & 9 & 12 \\ 
+CZ & Tch\\'equie & 70.9\% & 60.9\% & 53.3\% & 45.8\% & 13 & 17 & 19 & 20 \\ 
+BG & Bulgarie & 70.9\% & 56.9\% & 61.4\% & 49.3\% & 14 & 19 & 4 & 17 \\ 
+ES & Espagne & 70.7\% & 61.0\% & 58.4\% & 50.4\% & 15 & 16 & 14 & 16 \\ 
+LT & Lituanie & 69.0\% & 61.4\% & 58.9\% & 52.4\% & 16 & 15 & 12 & 10 \\ 
+SE & Su\`ede & 68.4\% & 64.9\% & 53.9\% & 51.2\% & 17 & 11 & 18 & 14 \\ 
+IT & Italie & 66.7\% & 52.2\% & 52.8\% & 41.3\% & 18 & 23 & 20 & 25 \\ 
+LU & Luxembourg & 66.7\% & 62.8\% & 56.5\% & 53.2\% & 19 & 13 & 16 & 8 \\ 
+SK & Slovaquie & 64.5\% & 56.0\% & 52.0\% & 45.1\% & 20 & 20 & 22 & 21 \\ 
+HU & Hongrie & 64.5\% & 60.1\% & 50.3\% & 46.8\% & 21 & 18 & 23 & 19 \\ 
+PL & Pologne & 61.7\% & 48.5\% & 54.3\% & 42.7\% & 22 & 25 & 17 & 22 \\ 
+MT & Malte & 60.3\% & 52.5\% & 48.9\% & 42.6\% & 23 & 22 & 24 & 23 \\ 
+CY & Chypre & 60.1\% & 54.5\% & 52.5\% & 47.6\% & 24 & 21 & 21 & 18 \\ 
+RO & Roumanie & 58.7\% & 50.8\% & 48.6\% & 42.0\% & 25 & 24 & 25 & 24 \\ 
+GR & Gr\`ece & 57.3\% & 44.7\% & 48.1\% & 37.5\% & 26 & 26 & 26 & 26 \\ 
+IE & Irlande & 44.1\% & 38.2\% & 32.6\% & 28.3\% & 27 & 27 & 27 & 27 \\ 
+\bottomrule
+\end{tabular*}
+\end{table}
+
+
+Ttes branches
+:::
+:::
+
+
+
+
+::::
+
+Part des salaires dans la VA et rang, différents concepts 
+
+:::
+
+::::
+
