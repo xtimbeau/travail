@@ -19,7 +19,6 @@ assets_a10 <- get_eurostat("nama_10_nfa_st",
   pivot_wider(names_from = asset10, values_from = values) |>
   mutate(N111N = replace_na(N111N, 0))
 
-
 men <- "nama_10_nfa_bs" |>
   get_eurostat(
     filters = list(
@@ -34,11 +33,11 @@ assets <- assets_a10 |>
   complete(geo, time, nace_r2) |>
   group_by(time, geo) |>
   summarise(
-    assets_md = sum(assets[md]),
-    assets_mdhi = sum(assets[md&hi]),
-    assets_mdhifi = sum(assets[md&hifi]),
-    assets_mdhfi = sum(assets[md&hfi]),
-    assets_tb = sum(assets),
+    assets_md = sum(N11N[md]),
+    assets_mdhi = sum(N11N[md&hi]),
+    assets_mdhifi = sum(N11N[md&hifi]),
+    assets_mdhfi = sum(N11N[md&hfi]),
+    assets_tb = sum(N11N),
     .groups = "drop") |>
   left_join(men, by = c("geo", "time")) |>
   mutate(assets_mdhim = assets_md - wim,
