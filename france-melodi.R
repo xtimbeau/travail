@@ -64,9 +64,25 @@ fr_tes_L <- melodi::get_all_data("DD_CNA_SUT") |>
     p2_l = OBS_VALUE ) |>
   arrange(time)
 
+fr_emp <- melodi::get_all_data("DD_CNA_BRANCHES") |>
+  filter(REF_SECTOR == "S1",
+         STO%in%c("SAL", "SELF", "EMP"),
+         UNIT_MEASURE == "FT",
+         TRANSFORMATION == "N",
+         ACTIVITY %in% TES_branches) |>
+  transmute(time = ymd(TIME_PERIOD, truncated=2),
+            value = OBS_VALUE,
+            STO,
+            nace_r2 = ACTIVITY) |>
+  filter(time>="1978-01-01") |>
+  pivot_wider(names_from = STO, values_from = value) |>
+  mutate(
+    across(c(EMP, SELF, SAL), ~replace_na(.x, 0)) ) |>
+  arrange(time, nace_r2)
+
 fr_branches <- melodi::get_all_data("DD_CNA_BRANCHES") |>
   filter(REF_SECTOR == "S1",
-         STO%in%c("B1G", "P51C", "D1", "D29X39", "EMP", "SELF"),
+         STO%in%c("B1G", "P51C", "D1", "D29X39", "D21X31"),
          PRICES == "V",
          UNIT_MEASURE == "XDC",
          TRANSFORMATION == "N",
@@ -107,9 +123,13 @@ men <- "DD_CNA_CONSO_MENAGES_PRODUITS" |>
 assets <- "DD_CNA_PATRIMOINE_BRANCHES" |>
   melodi::get_all_data() |>
   filter(ACTIVITY %in% TES_branches,
-         STO == "LE", PRICES=="U", COUNTERPART_AREA == "W0") |>
+         STO == "LE", PRICES=="U", COUNTERPART_AREA == "W0",
+         INSTR_ASSET %in% c("N1N", "N111N")) |>
   transmute(
     time = ymd(TIME_PERIOD, truncated=2),
     value = OBS_VALUE,
     nace_r2 = ACTIVITY,
-    asset = INSTR_ASSET)
+    asset = INSTR_ASSET) |>
+  arrange(desc(time), nace_r2, asset) |>
+  pivot_wider(names_from = asset, values_from = value) |>
+  mutate(across(c(N1N, N111N), ~replace_na(.x, 0)))
