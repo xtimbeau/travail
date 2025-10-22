@@ -1,16 +1,7 @@
 project:
   type: website
-  resources:
-    - vaq.r
-    - decomp.R
-    - salaires.r
-    - snf_ratio.r
-    - snf_international.r
-    - oecd.R
-    - naq10_e.R
-    - nace.r
-
-
+execute:
+  freeze: auto
 website:
   code-links:
     - text: Salaires dans la VA
@@ -37,6 +28,10 @@ website:
     - text: NACE rev2
       icon: file-code
       href: nace.r
+    - text: Immobilier en France
+      icon: file-code
+      href: france-melodi.r
+
   title: "Partage de la valeur ajoutée, comparaisons internationales"
   page-navigation: true
   site-url: "https://xtimbeau.github.io/travail/"

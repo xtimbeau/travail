@@ -252,7 +252,13 @@ d51 <- "nasa_10_nf_tr" |>
                    sector = c("S11", "S12"))) |>
   drop_na() |>
   pivot_wider(names_from = sector, values_from = values) |>
-  mutate(tb = S11 + S12, md = S11 + S12, mdhi = S11+S12, mdhim = S11+S12, mdhimfi = S11, mdhifi = S11, mdhfi = S11) |>
+  mutate(tb = S11 + S12,
+         md = S11 + S12,
+         mdhi = S11+S12,
+         mdhim = S11+S12,
+         mdhimfi = S11,
+         mdhifi = S11,
+         mdhfi = S11) |>
   select(-S11, -S12) |>
   pivot_longer(c(tb, md, mdhi, mdhim, mdhimfi, mdhifi, mdhfi), names_to = "champ", values_to = "value") |>
   pivot_wider(names_from = na_item, values_from = value) |>
@@ -280,7 +286,7 @@ naa_ext <- naa |>
   mutate(geo = factor(geo, pays)) |>
   mutate(
     tp = (van - msa - ip - is)/van,
-    tpb = (van - msa)/van )
+    tpb = (van - msa -ip)/van )
 
 assets <- source_data("assets.r")$assets  |>
   filter(assets>0)
@@ -288,7 +294,9 @@ assets <- source_data("assets.r")$assets  |>
 naa_ext2 <- naa_ext |>
   filter(year(time)<= max_y) |>
   left_join( assets, by =c("geo", "time", "champ") ) |>
-  mutate(r = tp*van/assets) |>
+  mutate(
+    r = tp*van/assets,
+    rb = tpb*van/assets) |>
   arrange( desc(time), geo) |>
   mutate(geo = factor(geo, pays))
 

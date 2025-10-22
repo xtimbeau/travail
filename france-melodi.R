@@ -224,47 +224,56 @@ melodi_m <- melodi |>
     rb = (van - d1 * (1 + self/sal) - d29x39) / n1n,
     rb2 = (van + dva - d1 * (1 + self/sal) - d29x39) / n1n)
 
-ggplot(melodi |> filter(md, time>="2000-01-01") )+
-  aes(x=time) +
-  geom_line(aes(y = rb), linewidth=0.75, color = "steelblue1" ) +
-  geom_line(aes(y = rb2), color = "pink2", linewidth=0.75, linetype = "11") +
-  ggbraid::geom_braid(aes(ymin = rb, ymax = rb2), color=NA, fill="palegreen2", alpha=0.25) +
-  theme_ofce()+
-  facet_wrap(vars(nace_r2))+scale_y_continuous(limits =c(-0.35, 0.35), oob=scales::oob_keep)
-lbl_nace <- as_labeller(codes |> pull(fr, name=nace_r2))
-ggplot(melodi2 |> filter(md, time>="2000-01-01") )+
-  aes(x=time) +
-  geom_point(data=ssi |> filter(md), aes(y = 0.18, size=van*40), color = "grey", alpha=0.5) +
-  scale_size_identity()+
-  geom_line(aes(y = rb), linewidth=0.75, color = "steelblue1" ) +
-  geom_line(aes(y = rb2), color = "pink2", linewidth=0.75, linetype = "11") +
-  ggbraid::geom_braid(aes(ymin = rb, ymax = rb2, fill=rb2>rb), color=NA, alpha=0.25, show.legend=FALSE) +
-  scale_fill_manual(values=c("red", "palegreen"))+
-  theme_ofce()+
-  facet_wrap(vars(nace), labeller = lbl_nace )+
-  scale_y_continuous(limits =c(-0.3, 0.3), oob=scales::oob_keep)
+return(list(full = melodi, a20 = melodi2, aggr = melodi_m))
 
-annotations <- tribble(
-  ~time, ~y, ~texte,
-  "2008-05-01", 0.1, "Rendement du capital productif corrigé  \ndes consommations intermédiaires  \nen services immobiliers auprès des entreprises",
-  "1988-03-01", 0.07, "Rendement du capital productif  \ndes branches marchandes hors immobilier",
-) |> mutate(time=ymd(time))
-
-
-ggplot(melodi_m |> filter(champ=="mdhi"))+
-  aes(x=time) +
-  geom_line(aes(y = rb), linewidth=0.75, color = "steelblue1" ) +
-  geom_line(aes(y = rb2), color = "pink2", linewidth=0.75, linetype = "11") +
-  ggbraid::geom_braid(aes(ymin = rb, ymax = rb2, fill=rb2>rb), color=NA, alpha=0.25, show.legend=FALSE) +
-  scale_fill_manual(values=c("red", "palegreen"))+
-  theme_ofce()+
-  geom_marquee(
-    data=annotations,
-    aes(label=texte, y=y),
-    size=9, size.unit="pt", hjust = 0, lineheight = 0.9) +
-  scale_y_continuous(labels = scales::label_percent(1),
-                     breaks = scales::pretty_breaks(10))+
-  scale_ofce_date()+
-  labs(x=NULL, y="% du stoick de capital")
-
-ggplot(melodi_m )+geom_line(aes(x=time, y = p2l/n1n, color = champ))
+# ggplot(melodi |> filter(md, time>="2000-01-01") )+
+#   aes(x=time) +
+#   geom_line(aes(y = rb), linewidth=0.75, color = "steelblue1" ) +
+#   geom_line(aes(y = rb2), color = "pink2", linewidth=0.75, linetype = "11") +
+#   ggbraid::geom_braid(aes(ymin = rb, ymax = rb2), color=NA, fill="palegreen2", alpha=0.25) +
+#   theme_ofce()+
+#   facet_wrap(vars(nace_r2))+scale_y_continuous(limits =c(-0.35, 0.35), oob=scales::oob_keep)
+#
+# lbl_nace <- as_labeller(codes |> pull(fr, name=nace_r2))
+# ggplot(melodi2 |> filter(md, time>="2000-01-01") )+
+#   aes(x=time) +
+#   geom_point(
+#     data=ssi |> filter(md),
+#     aes(y = -0.18, size=van*50), color = "pink", alpha=0.5) +
+#   geom_marquee(
+#     data=ssi |> filter(md),
+#     aes(y = -0.18, label = str_c(round(100*van),"%")),
+#     color = "black",
+#     size=7, size.unit="pt") +
+#   scale_size_identity()+
+#   geom_line(aes(y = rb), linewidth=0.75, color = "steelblue1" ) +
+#   geom_line(aes(y = rb2), color = "pink2", linewidth=0.75, linetype = "11") +
+#   ggbraid::geom_braid(aes(ymin = rb, ymax = rb2, fill=rb2>rb), color=NA, alpha=0.25, show.legend=FALSE) +
+#   scale_fill_manual(values=c("red", "palegreen"))+
+#   theme_ofce()+
+#   facet_wrap(vars(nace), labeller = lbl_nace )+
+#   scale_y_continuous(limits =c(-0.3, 0.3), oob=scales::oob_keep)
+#
+# annotations <- tribble(
+#   ~time, ~y, ~texte,
+#   "2008-10-01", 0.1, "Rendement du capital productif corrigé des consommations intermédiaires en services immobiliers auprès des entreprises",
+#   "1988-03-01", 0.07, "Rendement du capital productif des branches marchandes hors immobilier",
+# ) |> mutate(time=ymd(time))
+#
+# ggplot(melodi_m |> filter(champ=="mdhi"))+
+#   aes(x=time) +
+#   geom_line(aes(y = rb), linewidth=0.75, color = "steelblue1" ) +
+#   geom_line(aes(y = rb2), color = "pink2", linewidth=0.75, linetype = "11") +
+#   ggbraid::geom_braid(aes(ymin = rb, ymax = rb2, fill=rb2>rb), color=NA, alpha=0.25, show.legend=FALSE) +
+#   scale_fill_manual(values=c("red", "palegreen"))+
+#   theme_ofce()+
+#   geom_marquee(
+#     data=annotations,
+#     aes(label=texte, y=y),
+#     size=9, size.unit="pt", hjust = 0, vjust=1, lineheight = 1.1, width=unit(6, "cm")) +
+#   scale_y_continuous(labels = scales::label_percent(1),
+#                      breaks = scales::pretty_breaks(10))+
+#   scale_ofce_date()+
+#   labs(x=NULL, y="% du stoick de capital")
+#
+# ggplot(melodi_m )+geom_line(aes(x=time, y = p2l/n1n, color = champ))

@@ -29,8 +29,10 @@ men <- "nama_10_nfa_bs" |>
   drop_na(wim)
 
 assets <- assets_a10 |>
-  left_join(nace |> select(a20, hifi, md=marchand, hi = hors_imm, hfi), by = c("nace_r2"= "a20")) |>
   complete(geo, time, nace_r2) |>
+  left_join(nace |> select(a20, hifi, md=marchand, hi = hors_imm, hfi), by = c("nace_r2"= "a20")) |>
+  mutate(
+    across(c(N11N, N111N), ~ifelse(nace_r2=='U', replace_na(.x, 0), .x) )) |>
   group_by(time, geo) |>
   summarise(
     assets_md = sum(N11N[md]),

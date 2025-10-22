@@ -10,7 +10,7 @@ author:
 editor: visual
 date: "2025-09-08"
 date-modified: now
-wp: xx
+wp: 23
 bibliography: references.bib
 echo: false
 message: false
@@ -66,8 +66,8 @@ if(knitr::is_html_output()) {
         legend.justification = "center") }
 ```
 
-::: .aside
-[ {{wordcount}} mots]{style="font-size: 0.7rem; color: grey; font-style: italic;"}
+::: aside
+[{{wordcount}} mots]{style="font-size: 0.7rem; color: grey; font-style: italic;"}
 :::
 
 ## Du partage de la VA au partage des richesses
@@ -311,7 +311,7 @@ margin_download(data)
 
 ```
 
-### Le rendement du capital productif : le mauvais chiffre français 
+### Le rendement du capital productif : le mauvais chiffre français
 
 La construction d'un taux de rendement du capital est sans doute assez fragile parce qu'il faut ajouter à l'évaluation du partage de la valeur ajoutée une estimation des impôts payés (notamment l'impôt sur les sociétés) et une évaluation du stock de capital (voir @sec-profits pour la méthode). En utilisant les données de stock de capital productif le diagnostic présenté sur le @fig-psal est confirmé par le @fig-rp.
 
@@ -324,36 +324,52 @@ Une explication possible de la dégradation du rendement du capital productif es
 ```{r}
 #| label: fig-rp
 #| fig-asp: 0.85
-#| fig-cap: Rendement du capital productif
+#| fig-cap: Rendement du capital productif (avant et après IS)
 
 date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 data4tp <- source_data("vaq.r")$naaa |>
-        filter(geo %in% P6) |> 
-        mutate(geo = factor(geo, P6))
+  filter(geo %in% P6) |>
+  select(time, geo, champ, r, rb)
 
 tpbranches <- imap( 
-  c("Marchand-L" = "mdhi",
-    "Marchand-L68A" = "mdhim",
-    "Marchand-K-L68A" = "mdhimfi",
-    " " = "md"), ~{
+  c("Marchandes-L" = "mdhi",
+    "Marchandes-L68A" = "mdhim",
+    "Marchandes-K-L68A" = "mdhimfi",
+    "Marchandes" = "md"), ~{
       data <-  data4tp |> 
         filter(champ == .x) |> 
         mutate(tooltip = glue(
           "<b>{lbl(geo)}</b>
           {year(time)}
-          Branches marchandes {.y}
-          profits nets d'impôts sur capital productif : {round(r*100,1)}%"  ))
+          Branches {.y}
+          profits avant IS sur capital productif : {round(rb*100,1)}%
+          profits après IS (estimation) sur capital productif : {round(r*100,1)}%"  ))
+      data_long <- data |> 
+        pivot_longer(c(r, rb), names_to = "concept", values_to = "value") |> 
+        mutate(concept = factor(concept, c("rb", "r")))
       
-      ggplot(data) +
-        aes(x=time, y=r, col = geo, group = geo) +
-        geom_line(color = "grey85", layout = "fixed", linewidth = 0.2) +
-        geom_line_interactive(
-          aes(tooltip = "Rendement du capital productif" |> glue()),
-          linewidth = 0.5) +
+      ggplot(data_long) +
+        aes(x=time, y=value, col = geo) +
+        geom_line(
+          data=data,
+          aes(y = rb, group = geo),
+          color = "grey85", layout = "fixed", linewidth = 0.2) +
+        ggbraid::geom_braid(
+          data = data,
+          aes(y=NULL,ymin=r, ymax=rb, group=geo), 
+          fill="darkorchid", alpha=0.1, color = NA)+
+        scale_linetype_manual(values = c(r="11", rb="solid"),
+                              name=NULL, 
+                              label = c(r="Après IS", rb= "Avant IS"))+
+        scale_linewidth_manual(values = c(r=0.25, rb=0.5),
+                              name=NULL, 
+                              label = c(r="Après IS", rb= "Avant IS"))+
+        geom_line(aes(y=value, group=concept, linewidth=concept, linetype=concept))+
         geom_point_interactive(
-          aes(tooltip = tooltip, data_id = time, fill = geo),
+          data=data,
+          aes(y = rb, tooltip = tooltip, data_id = time, fill = geo),
           size = 1, stroke = 0.2, shape = 21, color = "white",
           hover_nearest = TRUE, show.legend=FALSE) +
         ylab("% du capital") + xlab(NULL) +
@@ -366,14 +382,16 @@ tpbranches <- imap(
         scale_y_continuous(
           labels = scales::label_percent(1), 
           breaks = scales::pretty_breaks(5),
-          limits = c(0, .2)) +
+          limits = c(0, .2),
+          oob = scales::oob_keep) +
         scale_color_pays(format = "eurostat") +
         thm +
         ofce_caption(
           source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), actifs productifs (nama_10_nfa_st), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
-          champ = "Branches marchandes {tolower(.y)}.",
-          note = "La CCF ou les impôts nets de subventions sont extrapolés au delà de 2023 ou 2024 à partir des comptes annuels (voir tableau A1). L'impôt sur les sociétés (D51) des sociétés financières (S12) est affecté à la branche K (services financiers) et celui des sociétés non financières (S11) aux branches marchandes hors services financiers et immobilier des ménages (K+L68A). Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") })
+          champ = "Branches {.y}.",
+          note = "Les actifs productifs sont connus, selon les pays, jusqu'en 2024 ou 2023 ou 2022 (voir tableau A1). L'impôt sur les sociétés (D51, IS) des sociétés financières (S12) est affecté à la branche K et celui des sociétés non financières (S11) aux branches marchandes hors services financiers et immobilier des ménages (K+L68A). Le trait pointillé est le rendement après IS et le trait plein avant IS. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") 
+      })
 
 girafy(tpbranches[[1]], 1.25)
 ```
@@ -815,7 +833,6 @@ Le rendement calculé sur le @fig-tprofitbranches diffère de celui du @fig-tpro
 La France conserve une singularité marquée par la baisse continue du taux de profit au cours du temps. Le rendement apparent du capital est ainsi très bas, plus bas que dans tous les autres pays considérés où il est plutôt stable (l'Italie fait exception avec une forte volatilité).
 
 @reis2022 conclut que le rendement du capital productif est plutôt constant au cours du temps, pour les 20 dernières années. L'analyse présentée ici le contredit pour la France et possiblement d'autres pays. Les données utilisées ne sont pas les mêmes, puisqu'il utilise principalement AMECO et que l'analyse conduite ici exploite plus de profondeur dans les données de comptabilité nationale.
-
 
 ## Comptes d'agents ou de secteurs institutionnels : Entreprise non financières et financières
 
@@ -1351,9 +1368,23 @@ girafy(psali, 1.25)
 
 ## Le rendement de l'immobilier {#sec-immobilier}
 
-blabla.
+Plusieurs explications peuvent être avancées à la dégradation du rendement du capital productif[^1] :
 
- {{< fa square >}} 
+[^1]: On peut aussi mettre en cause la qualité des comptes nationaux et leur incapacité à apporter une information même bruitée sur la réalité des économies contemporaines. Cette explication est commode lorsqu'on a une théorie envers laquelles les "faits" comptables sont têtus. Nous partons du principe qu'on peut
+
+-   une part des salaires dans la valeur ajoutée trop importante, ce que suggèrent les éléments présentés plus haut,
+
+-   une mauvaise évaluation de la valeur des actifs productifs conduisant à surestimer le stock de capital productif, par exemple en sous estimant la consommation de capital fixe. L'annexe B tend à contredire cette idée, la CCF étant plutôt plus élevée en France qu'ailleurs et le taux de dépréciation (CCF sur actif) étant assez stable dans le temps.
+
+-   un mécanisme d'optimisation fiscale par des prix de transfert vers d'autres pays européens (ce qu'explorent @tørsløv2022), en particulier les Pays-Bas, qui affichent un rendement élevé et croissant du capital productif,
+
+-   un autre mécanisme d'optimisation fiscale, par la séparation des activités productives et des locaux qui leur sont nécessaires. Les loyers sont alors un prix de transfert et permettraient de bénéficier de la fiscalité avantageuse de l'immobilier[^2].
+
+[^2]: Une recherche sur internet aboutit rapidement à des documents de ce type : [Les fondamentaux de l'investissement immobilier professionnel](https://www.frenchfigures.com/blog/placement-immobilier-entreprise#:~:text=Optimisation%20de%20l%27Imp%C3%B4t%20sur%20les%20Soci%C3%A9t%C3%A9s&text=Les%20loyers%20vers%C3%A9s%20par%20votre%20entreprise%20%C3%A0%20la%20structure%20d%C3%A9tenant,patrimoine%20immobilier%20du%20risque%20entrepreneurial.). Le principe est que les plus values immobilières sont moins taxées que les flux de revenus à terme.
+
+Nous explorons dans cette section cette piste. La difficulté est que l'activité résidentielle, et sa partie autoproduite, sont intégrées dans la branche "services immobiliers".
+
+{{< fa square >}}
 
 ## Références {.unnumbered}
 
