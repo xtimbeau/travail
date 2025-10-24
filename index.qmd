@@ -21,13 +21,14 @@ abstract: "On explore différentes façons de calculer la notion de part des sal
 citation:
   type: article-journal
   container-title: "Document de travail de l'OFCE"
-  issue: xx-2025
-  url: https://xtimbeau.github.io/travail/psal_comp.html
+  issue: 2025-23
+  url: https://xtimbeau.github.io/travail/
 filters:
   - wordcount
 format:
   wp-html: default
-  wp-pdf: default
+  wp-pdf:
+    output-file: "wp-ofce-2025-23 part des salaires dans la va.pdf"
 crossref:
   custom:
     - key: apptbl
@@ -777,21 +778,23 @@ decomp <- source_data("decomp.r") |>
 
 gd <- ggplot(decomp) +
   aes(x = time, color = geo) +
-  geom_line(
-    aes(y=psal),
-    linewidth = 0.2)+
-  geom_line(
-    aes(y=psal_si),
-    linewidth = 0.2, linetype = "11")+
   ggbraid::geom_braid(
     data = decomp,
     aes(ymin = psal_si, ymax = psal, fill = s_sec>0, group=geo), 
     alpha = 0.2,
-    color = NA) +
+    color = NA,  show.legend=FALSE) +
   scale_fill_manual(values = c("palegreen1", "pink")) +
+  ggnewscale::new_scale_fill() +
+  geom_line(
+    aes(y=psal),
+    linewidth = 0.5)+
+  geom_line(
+    aes(y=psal_si),
+    linewidth = 0.5, linetype = "11")+
   geom_point_interactive(
-    aes(y=s0+s_sec+s_psal, tooltip = tooltip, data_id = time),
-    hover_nearest = TRUE, size = .5)+
+    aes(y=s0+s_sec+s_psal, tooltip = tooltip, data_id = time, fill=geo),
+    color = "white", stroke = 0.5, shape = 21,
+    hover_nearest = TRUE, size = 1)+
   scale_alpha_manual(values=c(0.3, 0.1)) +
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
@@ -799,7 +802,7 @@ gd <- ggplot(decomp) +
     labels = date1d ) +
   scale_y_continuous(labels = scales::label_percent(1),
                      breaks = scales::pretty_breaks(3)) +
-  scale_color_pays(format = "eurostat", aesthetics = "color") +
+  scale_color_pays(format = "eurostat", aesthetics = c("color", "fill")) +
   guides(fill = "none", color = "none", alpha = "none") +
   theme(
     legend.position = "bottom",
