@@ -163,8 +163,12 @@ date_jour <- function(date) {
 
 date1 <- function(x) {
   fnan <- which(!is.na(x)) |> min()
+  r0 <- stringr::str_sub(x, 1, 2)
+  cgt <- r0 != lag(r0)
+  cgt[fnan] <- TRUE
+  cgt[is.na(cgt)] <- FALSE
   r <- stringr::str_sub(x, 3)
-  r[[fnan]] <- stringr::str_c(x[fnan])
+  r[cgt] <- stringr::str_c(x[cgt])
   return(r)
 }
 
@@ -183,3 +187,5 @@ conflicted::conflicts_prefer(dplyr::first, .quiet = TRUE)
 conflicted::conflicts_prefer(dplyr::last, .quiet = TRUE)
 conflicted::conflicts_prefer(dplyr::between, .quiet = TRUE)
 conflicted::conflicts_prefer(lubridate::quarter, .quiet = TRUE)
+
+ggplot2::set_theme(theme_ofce())

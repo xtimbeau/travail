@@ -146,8 +146,10 @@ men <- "DD_CNA_CONSO_MENAGES_PRODUITS" |>
   pivot_wider(names_from = PRODUCT, values_from = p31) |>
   transmute(
     time, nace_r2 = "L",
-    lymen = L68R1A+L68I0A+L68I0B+L68R1B) |>
-  arrange(time)
+    lymen = L68R1A+L68I0A+L68I0B+L68R1B,
+    lymenimp = L68I0A+L68I0B,
+    lymenree = L68R1A+L68R1B) |>
+  arrange(desc(time))
 
 assets <- "DD_CNA_PATRIMOINE_BRANCHES" |>
   melodi::get_all_data() |>
