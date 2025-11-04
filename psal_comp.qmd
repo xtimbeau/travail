@@ -66,8 +66,8 @@ if(knitr::is_html_output()) {
         legend.justification = "center") }
 ```
 
-::: .aside
-[ {{wordcount}} mots]{style="font-size: 0.7rem; color: grey; font-style: italic;"}
+::: aside
+[{{wordcount}} mots]{style="font-size: 0.7rem; color: grey; font-style: italic;"}
 :::
 
 ## Du partage de la VA au partage des richesses
@@ -311,13 +311,13 @@ margin_download(data)
 
 ```
 
-### Le rendement du capital productif : le mauvais chiffre français 
+### Le rendement du capital productif : le mauvais chiffre français
 
 La construction d'un taux de rendement du capital est sans doute assez fragile parce qu'il faut ajouter à l'évaluation du partage de la valeur ajoutée une estimation des impôts payés (notamment l'impôt sur les sociétés) et une évaluation du stock de capital (voir @sec-profits pour la méthode). En utilisant les données de stock de capital productif le diagnostic présenté sur le @fig-psal est confirmé par le @fig-rp.
 
 Le choix du champ est assez important pour conserver une cohérence entre numérateur et le dénominateur. Pour le champ hors immobilier, le profit net et le stock de cpaital excluent toutes les activités immobilières parce que dans la plupart des pays (Allemagne, France, Italie) seule la branche immobilière détient des actifs de type logement ($N111N$ dans la nomenclature de la NACE rev2). Dans quelques pays, une part minoritaire de la valeur du stock de logements est détenue par d'autres branches (F, K, O, Q, R, S en Espagne (15%) ou en Belgique (0,5%); K au Pays-Bas (5%)) que la branche services immobiliers -- ce qui suggère que la convention branche/secteur n'est pas complètement suivie ou a été interprétée assez librement.
 
-La France y occupe une position singulière avec un rendement du capital productif particulièrement faible et décroissant depuis le début des années 2000 alors qu'il est constant dans beaucoup de pays ou même croissant comme aux Pays-Bas. Les politiques de l'offre successives depuis le choc fiscal de Nicolas Sarkozy, le pacte pour la croissance, la compétitivité et l'emploi de François Hollande en 2012 ou encore les politiques d'attractivité, en particulier fiscales, engagées par Emmanuel Macron depuis 2017 n'ont apparemment pas changé grand chose à cette dégradation continue. Tout au plus, on peut y associer la relative stabilisation du taux de rendement net en France (@fig-rp) à partir de 2012.
+La France y occupe une position singulière avec un rendement du capital productif particulièrement faible et décroissant depuis le début des années 2000 alors qu'il est constant dans beaucoup de pays ou même croissant comme aux Pays-Bas. Les politiques de l'offre successives depuis le choc fiscal de Nicolas Sarkozy, le pacte pour la croissance, la compétitivité et l'emploi de François Hollande en 2012 ou encore les politiques d'attractivité, en particulier fiscales, engagées par Emmanuel Macron depuis 2017 n'ont apparemment pas changé grand chose à cette dégradation continue. Tout au plus, on peut y associer la relative stabilisation du taux de rendement net en France (@fig-rp) à partir de 2017.
 
 Une explication possible de la dégradation du rendement du capital productif est à chercher du côté de son accroissement aux Pays-Bas sous l'effet du déplacement de la base fiscale à l'intérieur de l'Europe comme l'analysent @tørsløv2022 ou encore d'un effet particulier de la fiscalité immobilière (@sec-immobilier).
 
@@ -815,7 +815,6 @@ Le rendement calculé sur le @fig-tprofitbranches diffère de celui du @fig-tpro
 La France conserve une singularité marquée par la baisse continue du taux de profit au cours du temps. Le rendement apparent du capital est ainsi très bas, plus bas que dans tous les autres pays considérés où il est plutôt stable (l'Italie fait exception avec une forte volatilité).
 
 @reis2022 conclut que le rendement du capital productif est plutôt constant au cours du temps, pour les 20 dernières années. L'analyse présentée ici le contredit pour la France et possiblement d'autres pays. Les données utilisées ne sont pas les mêmes, puisqu'il utilise principalement AMECO et que l'analyse conduite ici exploite plus de profondeur dans les données de comptabilité nationale.
-
 
 ## Comptes d'agents ou de secteurs institutionnels : Entreprise non financières et financières
 
@@ -1353,7 +1352,7 @@ girafy(psali, 1.25)
 
 blabla.
 
- {{< fa square >}} 
+{{< fa square >}}
 
 ## Références {.unnumbered}
 
