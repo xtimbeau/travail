@@ -205,6 +205,24 @@ naa <- naq |>
   filter(geo %in% pays, time >= "1995-01-01") |>
   mutate(geo = factor(geo,  pays))
 
+# check revenu mixte
+
+mixte <- source_data("mixte.r")$a
+
+cm <- naa |>
+  left_join(mixte, by = c("time", "geo")) |>
+  mutate(check = (msa - msanc)/b3g) |>
+  filter(champ == "tb") |>
+  select(geo, year, time, cm = check) |>
+  mutate(cm = 0.8/cm) |>
+  select(-time)
+
+naa <- naa |>
+  left_join(cm, by= c("geo", "year")) |>
+  mutate(
+    msam = msanc + cm * (msa - msanc),
+    psalm = msam/van )
+
 na_tot <-  "nama_10_gdp" |>
   get_eurostat(
     filters = list(geo = pays,
@@ -260,10 +278,14 @@ d51 <- "nasa_10_nf_tr" |>
          mdhifi = S11,
          mdhfi = S11) |>
   select(-S11, -S12) |>
-  pivot_longer(c(tb, md, mdhi, mdhim, mdhimfi, mdhifi, mdhfi), names_to = "champ", values_to = "value") |>
+  pivot_longer(
+    c(tb, md, mdhi, mdhim, mdhimfi, mdhifi, mdhfi),
+    names_to = "champ", values_to = "value") |>
   pivot_wider(names_from = na_item, values_from = value) |>
   select(geo, time, is=D51, B1Ga = B1G, champ) |>
-  right_join(naa |> select(time, geo, B1G = vab, van, msa, ip, champ), by = c("time", "geo", "champ")) |>
+  right_join(
+    naa |> select(time, geo, B1G = vab, van, msa, ip, champ),
+    by = c("time", "geo", "champ")) |>
   mutate(t2is = is/B1G,
          tis = is/(van-msa-ip)) |>
   group_by(geo, champ) |>
@@ -275,18 +297,21 @@ d51 <- "nasa_10_nf_tr" |>
     is2 = t2is*B1G)
 
 naa_ext <- naa |>
-  select(geo, time, van, vab, msa, msanc, ip, champ) |>
+  select(geo, time, van, vab, msa, msam, msanc, ip, champ) |>
   arrange(time, geo, champ) |>
   left_join(d51, by  = c("time", "geo", "champ")) |>
   mutate(psal = msa/van,
          psalnc = msanc/van,
+         psalm = msam/van,
          psalb = msa/vab,
          psalncb = msanc/vab) |>
   filter(geo %in% pays, time >= "1995-01-01") |>
   mutate(geo = factor(geo, pays)) |>
   mutate(
     tp = (van - msa - ip - is)/van,
-    tpb = (van - msa -ip)/van )
+    tpb = (van - msa -ip)/van,
+    tpm = (van - msam - ip - is)/van,
+    tpbm = (van - msam - ip)/van  )
 
 assets <- source_data("assets.r")$assets  |>
   filter(assets>0)
@@ -296,8 +321,10 @@ naa_ext2 <- naa_ext |>
   left_join( assets, by =c("geo", "time", "champ") ) |>
   mutate(
     r = tp*van/assets,
-    rb = tpb*van/assets) |>
-  arrange( desc(time), geo) |>
+    rb = tpb*van/assets,
+    rbm = tpbm*van/assets,
+    rm = tpm*van/assets) |>
+  arrange( desc(time), geo ) |>
   mutate(geo = factor(geo, pays))
 
 return(list(naa = naa_ext, naaa = naa_ext2, naq_a10 = naq_a10,

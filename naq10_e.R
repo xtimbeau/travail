@@ -23,16 +23,19 @@ naq <- get_eurostat("namq_10_a10",
   select(geo, time, nace_r2, values, s_adj) |>
   rename(D1 = values)
 
-naa_e.raw <- get_eurostat("nama_10_a64_e",
-                          filters = list(nace_r2  = m_a20, geo = pays,
-                                         unit = c("THS_PER"),
-                                         na_item = c("SAL_DC", "SELF_DC")) ) |>
+naa_e.raw <- "nama_10_a64_e" |>
+  get_eurostat(
+    filters = list(nace_r2  = m_a20, geo = pays,
+                   unit = c("THS_PER", "THS_HW"),
+                   na_item = c("SAL_DC", "SELF_DC")) ) |>
+  mutate(unit = case_match(unit, "THS_PER" ~ "p", "THS_HW" ~ "h")) |>
   drop_na(values) |>
-  select(nace_r2, geo, time, values, na_item) |>
-  pivot_wider(names_from = na_item, values_from = values) |>
+  select(nace_r2, geo, time, values, na_item, unit) |>
+  pivot_wider(names_from = c(na_item, unit), values_from = values) |>
+  rename(SAL_DC = SAL_DC_p, SELF_DC = SELF_DC_p) |>
   left_join(nace$nace |> select(a20, a10), by = c("nace_r2"="a20")) |>
   group_by(a10, geo, time) |>
-  summarize(across(c(SAL_DC, SELF_DC), sum),
+  summarize(across(c(SAL_DC, SELF_DC, SAL_DC_h, SELF_DC_h), sum),
             .groups = "drop") |>
   rename(nace_r2 = a10)
 
@@ -67,5 +70,21 @@ naq_e <- naq |>
   fill(tsal, tsalw) |>
   ungroup() |>
   drop_na(tsal)
+
+nsalw <- "ilc_di05" |>
+  get_eurostat(
+    filters = list(
+      wstatus = c("SAL", "NSAL"),
+      indic_il = "MEI_E",
+      age = "Y16-64",
+      sex = "T",
+      unit = "EUR",
+      geo = pays) ) |>
+  transmute(
+    time, geo, values, wstatus) |>
+  pivot_wider(names_from = wstatus, values_from = values) |>
+  drop_na() |>
+  mutate(w = NSAL/SAL)
+
 
 return(list(naq_e = naq_e, naa_e = naa_e, dom = emp_dom))
