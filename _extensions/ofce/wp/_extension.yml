@@ -27,7 +27,6 @@ contributes:
           crossref-tbl-title: "Tableau"
           crossref-lof-title: Graphiques
           crossref-lot-title: Tableaux
-
       fig-asp: 0.61
       cap-location: top
       citation:
