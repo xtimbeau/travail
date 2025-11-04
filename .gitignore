@@ -6,6 +6,7 @@
 /.quarto/
 _manuscript/
 travail_files/
+_freeze
 
 **/*.quarto_ipynb
 

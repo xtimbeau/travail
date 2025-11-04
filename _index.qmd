@@ -1,0 +1,13 @@
+---
+title: "Partage de la valeur ajoutée en Europe"
+---
+
+## Publié dans l'Economie Politique
+
+-   [Version publiée](https://shs.cairn.info/revue-l-economie-politique-2025-1-page-64?lang=fr)
+    -   [Version publiée en pdf](timbeau-2025-quelles-marges-de-manoeuvre-pour-revaloriser-le-travail.pdf)
+-   [version originale (non éditée) et mise à jour](travail.qmd)
+
+## Comparaisons internationales
+
+-   [Partage de la valeur ajoutée et profits en Europe](psal_comp.qmd)
