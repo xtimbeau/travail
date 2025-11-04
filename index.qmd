@@ -120,7 +120,7 @@ psal <- imap(
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
-    labels = date1d ) +
+    labels = date1d) +
   guides( fill = "none", color = "none",
           linetype = guide_legend(nrow = 1),
           alpha = guide_legend(nrow = 1)) + 
@@ -1824,7 +1824,7 @@ Part des salaires dans la VA et rang, différents concepts
 :::::::::
 
 ::: {.content-visible when-format="pdf"}
-## Suppléments  {.unnumbered}
+## Suppléments {.unnumbered}
 
 3 annexes (domaine des données, CCF et comparaisons entre pays) sont accessibles en ligne à l'adresse <https://xtimbeau.github.io/travail/>
 :::
