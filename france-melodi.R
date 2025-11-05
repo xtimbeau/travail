@@ -109,7 +109,7 @@ fr_emp <- melodi::get_all_data("DD_CNA_BRANCHES") |>
 
 fr_branches <- melodi::get_all_data("DD_CNA_BRANCHES") |>
   filter(REF_SECTOR == "S1",
-         STO%in%c("B1G", "P51C", "D1", "D29X39", "D21X31"),
+         STO%in%c("B1G", "P51C", "D1", "D29X39", "D21X31", "B2A3G", "B2G"),
          PRICES == "V",
          UNIT_MEASURE == "XDC",
          TRANSFORMATION == "N",
@@ -128,6 +128,7 @@ fr_branches <- melodi::get_all_data("DD_CNA_BRANCHES") |>
   select(time, nace_r2, na_item, value) |>
   pivot_wider(names_from = na_item, values_from = value) |>
   rename_with(tolower) |>
+  mutate(b3g = b2a3g - b2g) |>
   left_join(fr_tes_L, by = c("nace_r2", "time"))
 
 men <- "DD_CNA_CONSO_MENAGES_PRODUITS" |>
@@ -177,9 +178,12 @@ melodi <- fr_branches |>
     vab = b1g,
     van = b1g - p51c,
     psal = (d1 * (1 + self/sal)) / van,
+    psalm = (d1 + b3g*0.8) / van,
     p2lf = p2l[time=="1980-01-01"]/van[time=="1980-01-01"] * van,
     tp = (van - d1 * (1 + self/sal) - d29x39) / van,
-    rb = (van - d1 * (1 + self/sal) - d29x39) / n1n)
+    tpm = (van - d1 - b3g * 0.8 - d29x39) / van,
+    rb = (van - d1 * (1 + self/sal) - d29x39) / n1n,
+    rpm = (van - d1 - b3g * 0.8  - d29x39) / n1n)
 
 dvalL <- melodi |>
   group_by(time) |>
@@ -199,23 +203,27 @@ melodi <- melodi |>
 melodi2 <- melodi |>
   group_by(time, nace) |>
   summarize(
-    across(c(b1g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, dva), sum),
+    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, dva), sum),
     across(c(md, mdhi), first),
     .groups = "drop") |>
   mutate(
     vab = b1g,
     van = b1g - p51c,
     psal = (d1 * (1 + self/sal)) / van,
+    psalm = (d1 + b3g*0.8) / van,
     tp = (van - d1 * (1 + self/sal) - d29x39) / van,
+    tpm = (van - d1 - b3g * 0.8 - d29x39) / van,
     rb = (van - d1 * (1 + self/sal) - d29x39) / n1n,
+    rpm = (van - d1 - b3g * 0.8  - d29x39) / n1n,
     rb2 = (van + dva - d1 * (1 + self/sal) - d29x39) / n1n)
+
 ssi <- melodi2 |> filter(time == "2024-01-01",md) |> select(time, van, nace, md) |> mutate(van=van/sum(van))
 
 melodi_m <- melodi |>
   group_by(time) |>
   summarize(
-    across(c(b1g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, van, vab, dva), ~sum(.x[md]), .names = "{.col}_md" ),
-    across(c(b1g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, van, vab, dva), ~sum(.x[mdhi]), .names = "{.col}_mdhi" )) |>
+    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, van, vab, dva), ~sum(.x[md]), .names = "{.col}_md" ),
+    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, van, vab, dva), ~sum(.x[mdhi]), .names = "{.col}_mdhi" )) |>
   pivot_longer(cols = ends_with(c("md", "mdhi"))) |>
   separate(name, sep="_", into = c("var", "champ")) |>
   pivot_wider(names_from = var, values_from = value) |>
@@ -224,58 +232,10 @@ melodi_m <- melodi |>
     psal = (d1 * (1 + self/sal)) / van,
     tp = (van - d1 * (1 + self/sal) - d29x39) / van,
     rb = (van - d1 * (1 + self/sal) - d29x39) / n1n,
-    rb2 = (van + dva - d1 * (1 + self/sal) - d29x39) / n1n)
+    rb2 = (van + dva - d1 * (1 + self/sal) - d29x39) / n1n,
+    psalm = (d1 + 0.8 *b3g) / van,
+    tp = (van - d1 - 0.8 *b3g - d29x39) / van,
+    rb = (van - d1 - 0.8 *b3g - d29x39) / n1n,
+    rb2 = (van + dva - d1 - 0.8 *b3g - d29x39) / n1n)
 
 return(list(full = melodi, a20 = melodi2, aggr = melodi_m))
-
-# ggplot(melodi |> filter(md, time>="2000-01-01") )+
-#   aes(x=time) +
-#   geom_line(aes(y = rb), linewidth=0.75, color = "steelblue1" ) +
-#   geom_line(aes(y = rb2), color = "pink2", linewidth=0.75, linetype = "11") +
-#   ggbraid::geom_braid(aes(ymin = rb, ymax = rb2), color=NA, fill="palegreen2", alpha=0.25) +
-#   theme_ofce()+
-#   facet_wrap(vars(nace_r2))+scale_y_continuous(limits =c(-0.35, 0.35), oob=scales::oob_keep)
-#
-# lbl_nace <- as_labeller(codes |> pull(fr, name=nace_r2))
-# ggplot(melodi2 |> filter(md, time>="2000-01-01") )+
-#   aes(x=time) +
-#   geom_point(
-#     data=ssi |> filter(md),
-#     aes(y = -0.18, size=van*50), color = "pink", alpha=0.5) +
-#   geom_marquee(
-#     data=ssi |> filter(md),
-#     aes(y = -0.18, label = str_c(round(100*van),"%")),
-#     color = "black",
-#     size=7, size.unit="pt") +
-#   scale_size_identity()+
-#   geom_line(aes(y = rb), linewidth=0.75, color = "steelblue1" ) +
-#   geom_line(aes(y = rb2), color = "pink2", linewidth=0.75, linetype = "11") +
-#   ggbraid::geom_braid(aes(ymin = rb, ymax = rb2, fill=rb2>rb), color=NA, alpha=0.25, show.legend=FALSE) +
-#   scale_fill_manual(values=c("red", "palegreen"))+
-#   theme_ofce()+
-#   facet_wrap(vars(nace), labeller = lbl_nace )+
-#   scale_y_continuous(limits =c(-0.3, 0.3), oob=scales::oob_keep)
-#
-# annotations <- tribble(
-#   ~time, ~y, ~texte,
-#   "2008-10-01", 0.1, "Rendement du capital productif corrigé des consommations intermédiaires en services immobiliers auprès des entreprises",
-#   "1988-03-01", 0.07, "Rendement du capital productif des branches marchandes hors immobilier",
-# ) |> mutate(time=ymd(time))
-#
-# ggplot(melodi_m |> filter(champ=="mdhi"))+
-#   aes(x=time) +
-#   geom_line(aes(y = rb), linewidth=0.75, color = "steelblue1" ) +
-#   geom_line(aes(y = rb2), color = "pink2", linewidth=0.75, linetype = "11") +
-#   ggbraid::geom_braid(aes(ymin = rb, ymax = rb2, fill=rb2>rb), color=NA, alpha=0.25, show.legend=FALSE) +
-#   scale_fill_manual(values=c("red", "palegreen"))+
-#   theme_ofce()+
-#   geom_marquee(
-#     data=annotations,
-#     aes(label=texte, y=y),
-#     size=9, size.unit="pt", hjust = 0, vjust=1, lineheight = 1.1, width=unit(6, "cm")) +
-#   scale_y_continuous(labels = scales::label_percent(1),
-#                      breaks = scales::pretty_breaks(10))+
-#   scale_ofce_date()+
-#   labs(x=NULL, y="% du stoick de capital")
-#
-# ggplot(melodi_m )+geom_line(aes(x=time, y = p2l/n1n, color = champ))

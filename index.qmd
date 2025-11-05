@@ -47,6 +47,7 @@ crossref:
       latex-list-of-description: Graphiques annexes
 apptbl-cap-location: top
 appfig-cap-location: top
+thanks: "L'auteur remercie chaleureusement Elliot Aurissergues, Francçois Geerolf et Eric Heyer pour leurs remarques stimulantes. Elles m'ont amené à rendre plus complexe l'exploration des concepts mais la confusion qui en découle est de ma seule responsabilité. "
 ---
 
 ```{r, include=FALSE}
@@ -545,7 +546,7 @@ En Italie et en Espagne, la masse salariale dans les branches non marchandes est
 
 ## Comptes de branches : que changent les concepts et le champ ?
 
-### Part des salaires dans la valeur ajoutée, comptes de branche
+### Salariés et non salariés
 
 On utilise les données de comptabilité nationale, en trimestriel, par branche ([`nasq_10_nf_tr`](https://ec.europa.eu/eurostat/databrowser/view/nasq_10_nf_tr/default/table?lang=en)), ré-agrégées au niveau de l'ensemble de l'économie. Le passage par les comptes de branches permet de distinguer branches marchandes et non marchandes ou d'autres regroupements, comme l'exclusion des services immobiliers. Ce passage permet également de conduire la correction salariés non salariés au niveau des branches. D'après l'INSEE, (voir le blog "[Combien pèse l'industrie en France et en Allemagne](https://blog.insee.fr/combien-pese-l-industrie-en-france-et-en-allemagne/)"), tous les pays ne produisent pas une comptabilité de branche mais pour certains (notamment l'Allemagne) une comptabilité sectorielle. La différence tient aux entreprises qui produisent plusieurs produits (un constructeur automobile propose des services financiers pour l'achat des véhicules) et dont l'activité est imputé à différentes branches (industrie et services financiers) dans la comptabilité de branche alors que dans une comptabilité de secteur l’activité est versée dans le principal secteur (ou le secteur d'immatriculation de l'entreprise chapeau). Cette différence empêche normalement les comparaisons des comptes de branches entre pays, y compris à l'intérieur de l'Union Européenne. Cependant, pour comparer la part des salaries dans la valeur ajoutée sur des agrégats larges (branches marchandes par exemple), cette dérogation à la norme comptable n'est que modérément problématique : de toute façon, l'automobile et les services financiers sont agrégés et c'est la correction pour la masse salariale des non salariés qui peut être modifiée. Mais si la même délimitation est employée pour les salariés et les non salariés que pour l'activité, l'erreur est probablement minime.
 
@@ -656,7 +657,156 @@ psal <- ggplot(data) +
 girafy(psal, 1.5)
 ```
 
-La correction de la non salarisation, en imputant une masse salariale pour les entrepreneurs individuels, augmente la part des salaires. La correction n'est pas constante dans le temps (c'est particulièrement fort pour la France) ni dans l'espace (la correction est très forte en Italie). La correction est plus importante lorsqu'on se limite aux branches marchandes hors services immobiliers et services financiers, sauf aux Pays-Bas.
+La correction de la non salarisation, en imputant une masse salariale pour les entrepreneurs individuels à partir de la rémunération moyenne des salariés, augmente la part des salaires. La correction n'est pas constante dans le temps (c'est particulièrement fort pour la France) ni dans l'espace (la correction est très forte en Italie). La correction est plus importante lorsqu'on se limite aux branches marchandes hors services immobiliers et services financiers, sauf aux Pays-Bas.
+
+Cette convention d'imputation d'un salaire aux non salariés est assez habituelle. Elle pose cependant un problème de cohérence avec la notion de revenu mixte mesuré dans la comptabilité nationale. Le revenu mixte est le revenu des entrepreneurs individuels, autoentrepreneurs et autres catégories d'indépendants. Il n'intègre pas l'activité des ménages en tant qu'employeurs (employés de maison) ou en tant que bailleur (loyers perçus ou imputés) qui sont comptabilisés dans l'excédent brut d'exploitation des ménages (S14). Le @tbl-mixte résume pour les 6 principaux pays analysés l'écart entre masse salariale imputée (en 2024) et revenu mixte.
+
+```{r}
+#| label: tbl-mixte
+#| tbl-cap: "Revenu mixte et masse salariale imputée aux non salariés"
+
+pays <- source_data("nace.r")$pays1
+mixte <- source_data("mixte.r")$a
+nsal <- source_data("vaq.r")$naa |> 
+  transmute(geo, time, champ, msa, msanc) |> 
+  filter(champ == "tb", geo %in% pays) |> 
+  left_join(mixte, by = c("geo", "time")) |> 
+  mutate(
+    geo = factor(geo, pays) ) |> 
+  arrange(geo) |> 
+  transmute(
+    nsal = msa-msanc,
+    b3g,
+    rb3g = nsal/b3g-1, 
+    geo_label = countrycode(geo, "eurostat", "country.name.fr"),
+    geo = countrycode(geo, "eurostat", "iso3c"),
+    year = year(time)) |> 
+  pivot_wider(names_from = year, values_from = c(nsal, b3g, rb3g)) |> 
+  select(geo, geo_label, nsal_2024, b3g_2024, starts_with("rb3g")) |> 
+  rename_with(.cols  = starts_with("rb3g_"), .fn = ~str_remove(.x, "rb3g_")) |> 
+  rename(nsal = nsal_2024,
+         b3g = b3g_2024) |> 
+  mutate(r = nsal/b3g)
+
+nsal |> 
+  gt() |> 
+  fmt_flag(geo) |> 
+  cols_nanoplot(
+    columns = matches("[0-9]{4}"),
+    plot_type = "bar",
+    reference_line = 0,
+    autoscale = TRUE,
+    options = nanoplot_options(
+      data_bar_stroke_color = alpha("red", 0.5),
+      data_bar_fill_color = alpha("red", 0.5),
+      data_bar_negative_stroke_color = alpha("green",0.5),
+      data_bar_negative_fill_color = alpha("green", 0.5),
+      data_bar_stroke_width = 0)) |> 
+  cols_label(geo = "", geo_label ="",
+             nsal = "(a) Salaires des non sal.",
+             b3g = "(b) Revenu mixte", 
+             r = "(a)/(b)",
+             nanoplots = "de 1995 à 2025") |> 
+  fmt_number(c(nsal, b3g), decimals = 0, scale_by = 1/1000, dec_mark = ",", sep_mark = " ", pattern = "{x} Mds€") |> 
+  fmt_number(c(r), decimals = 0, scale_by = 100, dec_mark = ",", sep_mark = " ", pattern = "{x} %") |> 
+  cols_width(c(nsal, b3g, r) ~ px(120)) |> 
+  cols_align_decimal(c(nsal, b3g, r), dec_mark = ",") |> 
+  cols_align("center", nanoplots) |> 
+  tab_source_note(
+    md("*Champ* : Branches marchandes et non marchandes, année 2024 pour (a) et (b).") ) |> 
+  tab_source_note(
+    md("*Source* : Eurostat, comptes annuels de branche (nama_10_a64), et de transactions non financières (nasa_10_nf_tr).") )
+```
+
+En France et en Belgique, la convention employée surestime probablement la masse salariale que l'on peut imputer aux non salariés. En revanche, en Allemagne ou en Espagne, c'est potentiellement l'inverse. Le cas Français est intéressant, parce que le ratio masse salariale imputée sur revenu mixte devient plus grand que 1 en 2013 et et augmente quelques années avant. Le régime d'autoentrepreneur introduit en 2008 peut expliquer cette dynamique en augmentant le nombre de non salariés ayant de faibles revenus et éventuellement étant salariés par ailleurs.
+
+On peut construire à partir de ces éléments une correction alternative de la non salarisation en utilisant le revenu mixte – en retenant 80% du revenu mixte, le reste pour approcher la CCF – et non le nombre de non salariés comme base de la correction.
+
+```{r}
+#| label: fig-psalmixte
+#| fig-asp: 0.85
+#| fig-cap: Correction pour la non salarisation, effectifs ou revenu mixte, comptes de branches
+
+naq <- source_data("vaq.r")$naa |> 
+  filter(geo %in% P6) |> 
+  mutate(tooltip = glue(
+    "<b>{lbl(geo)}</b>
+    {year(time)} 
+    Part des salaires dans la VA nette, Branches marchandes
+    Correction par les effectifs : {round(psal*100,1)}%
+    Correction par le revenu mixte : {round(100*psalm,1)}%")) |>
+  mutate(geo = factor(geo, P6))
+
+date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
+date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
+
+labels = c(psal = "Correction par les effectifs", psalm = "Correction par le revenu mixte")
+
+psal_fr <- source_data("france-melodi.r")$aggr |> 
+  transmute(time, geo = "FR", champ, psal, psalm)
+
+data <- naq |> 
+  filter(champ %in% c("mdhi")) |> 
+  select(time, geo, champ, psal, psalm) |> 
+  left_join(psal_fr, by = c("champ", "geo", "time"), suffix = c("",".fr") ) |> 
+  mutate(psalm = ifelse(is.na(psalm.fr), psalm, psalm.fr)) |>
+  select(-psalm.fr, -psal.fr) |> 
+  pivot_longer(c(psal, psalm), names_to = "concept") |> 
+  mutate(
+    tooltip2 = ifelse(concept=="psal", 
+                      "Correction par les effectifs (et salaire égal au salaire moyen)",
+                      "Correction par le revenu mixte (80%)"))
+
+
+psal <- ggplot(data) +
+  aes(x=time, col = geo) +
+  ggbraid::geom_braid(
+    data = naq |> filter(champ %in%c("mdhi")) |> mutate(s = psal>psalm),
+    aes(ymin = psal, ymax = psalm, group = geo, fill = s), 
+    color = NA, alpha=0.2, show.legend = FALSE) +
+  scale_fill_manual(values = c("palegreen1", "pink")) +
+  ggnewscale::new_scale_fill() +
+  scale_alpha_manual(
+    values = c(psal=1, psalm = .75),
+    labels = labels,
+    name = NULL) +
+  scale_linewidth_manual(
+    values = c(psal=.5, psalm = 0.25),
+    labels = labels,
+    name = NULL) +
+  geom_line_interactive( 
+    aes(y=value, linewidth = concept, alpha = champ,
+        tooltip = tooltip2)) +
+  geom_point_interactive(
+    data = naq |> filter(champ == "mdhi"),
+    shape = 21, color="white", stroke = 0.5, size =1, 
+    aes(y=psal, tooltip = tooltip, data_id = time, fill = geo),
+    hover_nearest = TRUE, show.legend=FALSE) +
+  ylab("% de la VA") + xlab(NULL) +
+  facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
+  scale_ofce_date(
+    labels = date1d ) +
+  guides( fill = "none", color = "none" ) + 
+  scale_y_continuous(labels = scales::label_percent(1), 
+                     breaks = scales::pretty_breaks(3)) +
+  scale_color_pays(format = "eurostat") +
+  theme(
+    legend.position = "bottom",
+    legend.direction = "horizontal",
+    legend.justification = c(0.5, 0),
+    legend.text = element_marquee(margin= margin(l=1))) +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
+    champ = "Branches marchandes hors immobilier (-L).",
+    note = "La correction par le revenu mixte n'est pas exacte pour le champ considéré, sauf pour la France.")
+
+girafy(psal, 1.5)
+```
+
+La correction est assez importante pour la France et la Belgique, ce qui est conforme aux valeurs affichées dans le @tbl-mixte.
+
+### Valeur ajoutée nette ou brute
 
 ```{r}
 #| label: fig-psalnetbrut
@@ -831,7 +981,73 @@ tabsetize(tpbranches)
 
 Le rendement calculé sur le @fig-tprofitbranches diffère de celui du @fig-tprofitsnff. La différence vient en partie de la difficulté à imputer l'impôt des sociétés aux seules entreprises des branches marchandes – des entités légales dans les branches non marchandes peuvent être soumises à l'impôt sur les sociétés et de la valorisation des actifs. Dans l'approche comptes d'agents (ou de secteurs institutionnels), on affecte la valeur nette résiduelle des entreprises au stock de capital. De plus, le stock de capital n'est pas dans l'approche du @fig-tprofitsnff limité au capital productif mais intègre également des actifs financiers qui n'ont pas de contrepartie physique parce qu'ils sont hors territoire français.
 
-La France conserve une singularité marquée par la baisse continue du taux de profit au cours du temps. Le rendement apparent du capital est ainsi très bas, plus bas que dans tous les autres pays considérés où il est plutôt stable (l'Italie fait exception avec une forte volatilité).
+La France conserve une singularité marquée par la baisse continue du taux de profit au cours du temps. Le rendement apparent du capital est ainsi très bas, plus bas que dans tous les autres pays considérés où il est plutôt stable (l'Italie fait exception avec une forte volatilité). Cette singularité subsiste lorsqu'on utilise la correction de la non salarisation par le revenu mixte au lieu des comptes de branches (@fig-rpmixte). La position de la France est un peu moins singulière, mais le diagnostic subsiste.
+
+```{r}
+#| label: fig-rpmixte
+#| fig-asp: 0.85
+#| fig-cap: Rendement du capital productif, correction de la non salarisation par les effectifs ou le revenu mixte
+
+date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
+date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
+
+data4tp <- source_data("vaq.r")$naaa |>
+  filter(geo %in% P6) |>
+  select(time, geo, champ, r, rb, rbm)
+
+data <-  data4tp |> 
+  filter(champ == "mdhi") |> 
+  mutate(tooltip = glue(
+    "<b>{lbl(geo)}</b>
+          {year(time)}
+          Profits sur capital productif, avant IS, Branches marchandes,
+          Correction effectif : {round(rb*100,1)}%
+          Correction revenu mixte : {round(rbm*100,1)}%"  ))
+
+data_long <- data |> 
+  pivot_longer(c(rb, rbm), names_to = "concept", values_to = "value") |> 
+  mutate(concept = factor(concept, c("rb", "rbm")))
+
+tpmixte <- ggplot(data_long) +
+        aes(x=time, y=value, col = geo) +
+        geom_line(
+          data=data,
+          aes(y = rb, group = geo),
+          color = "grey85", layout = "fixed", linewidth = 0.2) +
+        scale_linetype_manual(values = c(rbm="11", rb="solid"),
+                              name=NULL, 
+                              label = c(rb="Correction effectif", rbm= "Correction revenu mixte"))+
+        scale_linewidth_manual(values = c(rbm=0.25, rb=0.5),
+                              name=NULL, 
+                              label = c(rb="Correction effectif", rbm= "Correction revenu mixte"))+
+        geom_line(aes(y=value, group=concept, linewidth=concept, linetype=concept))+
+        geom_point_interactive(
+          data=data,
+          aes(y = rb, tooltip = tooltip, data_id = time, fill = geo),
+          size = 1, stroke = 0.5, shape = 21, color = "white",
+          hover_nearest = TRUE, show.legend=FALSE) +
+        ylab("% du capital") + xlab(NULL) +
+        facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
+        scale_ofce_date(
+          labels = date1d ) +
+        guides( fill = "none", color = "none",
+                linetype = guide_legend(nrow = 1),
+                alpha = guide_legend(nrow = 1)) + 
+        scale_y_continuous(
+          labels = scales::label_percent(1), 
+          breaks = scales::pretty_breaks(5),
+          limits = c(0, .2),
+          oob = scales::oob_keep) +
+        scale_color_pays(format = "eurostat") +
+        ofce_caption(
+          source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10), actifs productifs (nama_10_nfa_st), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
+          champ = "Branches marchandes.",
+          note = "Le rendement du capital est calculé selon deux corrections de la non salarisation (par les effectifs, par le revenu mixte), La correction est appliquée au champ branches marchandes hors immobiliers alors que le revenu mixte est connu pour l'ensemble de l'économie.") +
+        theme(legend.box.spacing = unit(1, "pt"))
+
+girafy(tpmixte, 1.5)
+```
 
 @reis2022 conclut que le rendement du capital productif est plutôt constant au cours du temps, pour les 20 dernières années. L'analyse présentée ici le contredit pour la France et possiblement d'autres pays. Les données utilisées ne sont pas les mêmes, puisqu'il utilise principalement AMECO et que l'analyse conduite ici exploite plus de profondeur dans les données de comptabilité nationale.
 
