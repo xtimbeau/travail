@@ -214,7 +214,7 @@ cm <- naa |>
   mutate(check = (msa - msanc)/b3g) |>
   filter(champ == "tb") |>
   select(geo, year, time, cm = check) |>
-  mutate(cm = 0.8/cm) |>
+  mutate(cm = 0.88/cm) |>
   select(-time)
 
 naa <- naa |>

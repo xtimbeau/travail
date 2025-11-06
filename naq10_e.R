@@ -71,20 +71,6 @@ naq_e <- naq |>
   ungroup() |>
   drop_na(tsal)
 
-nsalw <- "ilc_di05" |>
-  get_eurostat(
-    filters = list(
-      wstatus = c("SAL", "NSAL"),
-      indic_il = "MEI_E",
-      age = "Y16-64",
-      sex = "T",
-      unit = "EUR",
-      geo = pays) ) |>
-  transmute(
-    time, geo, values, wstatus) |>
-  pivot_wider(names_from = wstatus, values_from = values) |>
-  drop_na() |>
-  mutate(w = NSAL/SAL)
 
 
 return(list(naq_e = naq_e, naa_e = naa_e, dom = emp_dom))

@@ -94,8 +94,9 @@ fr_tes_L <- melodi::get_all_data("DD_CNA_SUT") |>
 fr_emp <- melodi::get_all_data("DD_CNA_BRANCHES") |>
   filter(REF_SECTOR == "S1",
          STO%in%c("SAL", "SELF", "EMP"),
-         UNIT_MEASURE == "FT",
+         UNIT_MEASURE == "PS",
          TRANSFORMATION == "N",
+         COUNTERPART_AREA == "W2",
          ACTIVITY %in% br$nace_r2) |>
   transmute(time = ymd(TIME_PERIOD, truncated=2),
             value = OBS_VALUE,
@@ -219,23 +220,38 @@ melodi2 <- melodi |>
 
 ssi <- melodi2 |> filter(time == "2024-01-01",md) |> select(time, van, nace, md) |> mutate(van=van/sum(van))
 
+ccf_ei <- melodi::get_all_data("DD_CNA_AGREGATS") |>
+  filter(REF_SECTOR == "S14AA", STO %in% c("B3G", "P51C", "B3N"), PRICES=="V") |>
+  select(time = TIME_PERIOD, OBS_VALUE, STO) |>
+  pivot_wider(names_from = STO, values_from = OBS_VALUE) |>
+  mutate(time = ymd(time, truncated = 2)) |>
+  arrange(time) |>
+  rename_with(tolower) |>
+  drop_na() |>
+  mutate(ccfei = p51c/b3g)
+
 melodi_m <- melodi |>
   group_by(time) |>
   summarize(
     across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, van, vab, dva), ~sum(.x[md]), .names = "{.col}_md" ),
-    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, van, vab, dva), ~sum(.x[mdhi]), .names = "{.col}_mdhi" )) |>
-  pivot_longer(cols = ends_with(c("md", "mdhi"))) |>
+    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, van, vab, dva), ~sum(.x[mdhi]), .names = "{.col}_mdhi" ),
+    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, van, vab, dva), ~sum(.x), .names = "{.col}_tb" )) |>
+  pivot_longer(cols = ends_with(c("md", "mdhi", "tb"))) |>
   separate(name, sep="_", into = c("var", "champ")) |>
   pivot_wider(names_from = var, values_from = value) |>
+  left_join(ccf_ei |> select(time, ccfei), by = c("time")) |>
   group_by(champ) |>
   mutate(
-    psal = (d1 * (1 + self/sal)) / van,
-    tp = (van - d1 * (1 + self/sal) - d29x39) / van,
-    rb = (van - d1 * (1 + self/sal) - d29x39) / n1n,
-    rb2 = (van + dva - d1 * (1 + self/sal) - d29x39) / n1n,
-    psalm = (d1 + 0.8 *b3g) / van,
-    tp = (van - d1 - 0.8 *b3g - d29x39) / van,
-    rb = (van - d1 - 0.8 *b3g - d29x39) / n1n,
-    rb2 = (van + dva - d1 - 0.8 *b3g - d29x39) / n1n)
+    msanc = d1,
+    msa = d1 * (1 + self/sal),
+    msam = d1 + (1-ccfei)*b3g,
+    psal = msa / van,
+    tp = (van - msa - d29x39) / van,
+    rb = (van - msa - d29x39) / n1n,
+    rb2 = (van + dva - msa - d29x39) / n1n,
+    psalm = msam / van,
+    tp = (van - msa - d29x39) / van,
+    rb = (van - msam - d29x39) / n1n,
+    rb2 = (van + dva - msam - d29x39) / n1n)
 
 return(list(full = melodi, a20 = melodi2, aggr = melodi_m))

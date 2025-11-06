@@ -33,4 +33,19 @@ mixte_a <- "nasa_10_nf_tr" |>
   transmute(geo, time, b3g=values) |>
   drop_na()
 
-return(list(q = mixte_q, a = mixte_a))
+nsalw <- "ilc_di05" |>
+  get_eurostat(
+    filters = list(
+      wstatus = c("SAL", "NSAL"),
+      indic_il = "MEI_E",
+      age = "Y16-64",
+      sex = "T",
+      unit = "EUR",
+      geo = pays) ) |>
+  transmute(
+    time, geo, values, wstatus) |>
+  pivot_wider(names_from = wstatus, values_from = values) |>
+  drop_na() |>
+  mutate(w = NSAL/SAL)
+
+return(list(q = mixte_q, a = mixte_a, ilc = nsalw))

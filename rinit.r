@@ -178,6 +178,13 @@ dates_breaks <- function(by=4) {
   function(x) {
     seq(ceiling(x[[1]]),x[[2]], by = by ) }
 }
+
+cols_hide_pdf <- function(tbl, col) {
+  if(knitr::is_latex_output())
+    return(gt::cols_hide(data = tbl, columns = {{ col }} ))
+  return(tbl)
+}
+
 conflicted::conflicts_prefer(dplyr::filter, .quiet = TRUE)
 conflicted::conflicts_prefer(dplyr::select, .quiet = TRUE)
 conflicted::conflicts_prefer(dplyr::lag, .quiet = TRUE)
