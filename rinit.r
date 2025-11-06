@@ -185,6 +185,25 @@ cols_hide_pdf <- function(tbl, col) {
   return(tbl)
 }
 
+tableau.font.size <- 12
+my_tab_options <- function(data, ...) {
+  tab_options(data,
+              footnotes.font.size = "90%",
+              source_notes.font.size = "100%",
+              quarto.disable_processing= TRUE,
+              table.font.size = tableau.font.size,
+              table_body.hlines.style = "none",
+              column_labels.padding = 3,
+              data_row.padding = 2,
+              footnotes.multiline = FALSE,
+              footnotes.padding = 5,
+              source_notes.padding =  2,
+              table.border.bottom.style = "none",
+              row_group.padding = 2) |>
+    opt_footnote_marks("letters") |>
+    tab_options(...)
+}
+
 conflicted::conflicts_prefer(dplyr::filter, .quiet = TRUE)
 conflicted::conflicts_prefer(dplyr::select, .quiet = TRUE)
 conflicted::conflicts_prefer(dplyr::lag, .quiet = TRUE)

@@ -661,7 +661,7 @@ La correction de la non salarisation, en imputant une masse salariale pour les e
 
 Cette convention d'imputation d'un salaire aux non salariés est assez habituelle. Elle pose cependant un problème de cohérence avec la notion de revenu mixte mesuré dans la comptabilité nationale. Le revenu mixte est le revenu des entrepreneurs individuels, autoentrepreneurs et autres catégories d'indépendants. Il n'intègre pas l'activité des ménages en tant qu'employeurs (employés de maison) ou en tant que bailleur (loyers perçus ou imputés) qui sont comptabilisés dans l'excédent brut d'exploitation des ménages (S14). Le @tbl-mixte résume pour les 6 principaux pays analysés l'écart entre masse salariale imputée (en 2024) et revenu mixte.
 
-```{r, eval=FALSE}
+```{r}
 #| label: tbl-mixte
 #| tbl-cap: "Revenu mixte et masse salariale imputée aux non salariés"
 ##| html-table-processing: none
@@ -710,7 +710,7 @@ nsal |>
              r = "(a)/(b)",
              nanoplots = "de 1995 à 2025") |> 
   fmt_number(c(nsal, b3g), decimals = 0, scale_by = 1/1000, dec_mark = ",", sep_mark = " ", pattern = "{x} Mds€") |> 
-  fmt_number(c(r), decimals = 0, scale_by = 100, dec_mark = ",", sep_mark = " ", pattern = "{x} %") |> 
+  fmt_percent(c(r), decimals = 0, dec_mark = ",", sep_mark = " ") |> 
   cols_width(c(nsal, b3g, r) ~ px(100)) |> 
   cols_align_decimal(c(nsal, b3g, r), dec_mark = ",") |> 
   cols_align("center", nanoplots) |> 
@@ -718,7 +718,8 @@ nsal |>
     md("*Champ* : Branches marchandes et non marchandes, année 2024 pour (a) et (b).") ) |> 
   tab_source_note(
     md("*Source* : Eurostat, comptes annuels de branche (nama_10_a64), et de transactions non financières (nasa_10_nf_tr).") ) |> 
-  cols_hide_pdf("nanoplots")
+  cols_hide_pdf(c("nanoplots", "geo")) |> 
+  my_tab_options()
   
 ```
 
