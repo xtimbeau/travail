@@ -47,9 +47,10 @@ emp_dom <- naa_e.raw |>
 
 naa_e <- naa_e.raw |>
   transmute(
-    geo, time, nace_r2, SAL_DC, SELF_DC) |>
+    geo, time, nace_r2, SAL_DC, SELF_DC, SAL_DC_h, SELF_DC_h) |>
   cross_join(tibble(month = seq(1, 10, by=3))) |>
-  mutate(time = str_c(year(time), " ", month) |> lubridate::ym())
+  mutate(time = str_c(year(time), " ", month) |> lubridate::ym()) |>
+  select(-month)
 
 naq_e <- naq |>
   left_join(naa_e, by = c("geo", "time", "nace_r2")) |>
@@ -70,7 +71,5 @@ naq_e <- naq |>
   fill(tsal, tsalw) |>
   ungroup() |>
   drop_na(tsal)
-
-
 
 return(list(naq_e = naq_e, naa_e = naa_e, dom = emp_dom))

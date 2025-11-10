@@ -3,31 +3,32 @@ library(ofce)
 library(melodi)
 
 br <- tibble::tribble(
-  ~nace_r2, ~md, ~mdhi, ~nace,
-  "A", TRUE, TRUE, "A",
-  "B_D_E", TRUE, TRUE, "B_D_E",
-  "C10T12", TRUE, TRUE, "C",
-  "C13T15", TRUE, TRUE, "C",
-  "C16T18", TRUE, TRUE, "C",
-  "C19", TRUE, TRUE, "C",
-  "C20", TRUE, TRUE, "C",
-  "C21", TRUE, TRUE, "C",
-  "C22_23", TRUE, TRUE, "C",
-  "C24_25", TRUE, TRUE, "C",
-  "C26T28", TRUE, TRUE, "C",
-  "C29_30", TRUE, TRUE, "C",
-  "C31T33", TRUE, TRUE, "C",
-  "F", TRUE, TRUE, "F",
-  "G", TRUE, TRUE, "G",
-  "H", TRUE, TRUE, "H",
-  "I", TRUE, TRUE, "I",
-  "J", TRUE, TRUE, "J",
-  "K", TRUE, TRUE,  "K",
-  "L", TRUE, FALSE, "L",
-  "M_N", TRUE, TRUE, "M_N",
-  "OTQ", FALSE, FALSE, "OTQ",
-  "R", TRUE, TRUE, "R",
-  "S", TRUE, TRUE, "S" )
+  ~nace_r2, ~md,    ~mdhi,  ~mdhfi,  ~nace,
+  "A",      TRUE,   TRUE,   TRUE,  "A",
+  "B_D_E",  TRUE,   TRUE,   TRUE,  "B_D_E",
+  "C10T12", TRUE,   TRUE,   TRUE,  "C",
+  "C13T15", TRUE,   TRUE,   TRUE,  "C",
+  "C16T18", TRUE,   TRUE,   TRUE,  "C",
+  "C19",    TRUE,   TRUE,   TRUE,  "C",
+  "C20",    TRUE,   TRUE,   TRUE,  "C",
+  "C21",    TRUE,   TRUE,   TRUE,  "C",
+  "C22_23", TRUE,   TRUE,   TRUE,  "C",
+  "C24_25", TRUE,   TRUE,   TRUE,  "C",
+  "C26T28", TRUE,   TRUE,   TRUE,  "C",
+  "C29_30", TRUE,   TRUE,   TRUE,  "C",
+  "C31T33", TRUE,   TRUE,   TRUE,  "C",
+  "F",      TRUE,   TRUE,   TRUE,  "F",
+  "G",      TRUE,   TRUE,   TRUE,  "G",
+  "H",      TRUE,   TRUE,   TRUE,  "H",
+  "I",      TRUE,   TRUE,   TRUE,  "I",
+  "J",      TRUE,   TRUE,   TRUE,  "J",
+  "K",      TRUE,   TRUE,   FALSE,   "K",
+  "L",      TRUE,   FALSE,  TRUE,  "L",
+  "M_N",    TRUE,   TRUE,   TRUE,  "M_N",
+  "OTQ",    FALSE,  FALSE,  FALSE,  "OTQ",
+  "R",      TRUE,   TRUE,   TRUE,  "R",
+  "S",      TRUE,   TRUE,   TRUE,  "S" )
+
 codes <- vroom::vroom("ACTIVITY.codes.csv")
 colnames(codes) <- c("nace_r2", "fr", "en")
 codes <- codes |>
@@ -55,19 +56,7 @@ vahim <- source_data("vaq.r")$naa |>
 #   scale_color_pays("eurostat") +
 #   theme_ofce()
 
-uses <- "naio_10_cp1610" |>
-  eurostat::get_eurostat(
-    filters = list(
-      geo = pays,
-      ind_use = "TOTAL",
-      prd_ava = c("CPA_L68A", "CPA_L68B"),
-      unit = "MIO_EUR") ) |>
-  filter(stk_flow == "TOTAL", prd_ava == "CPA_L68B") |>
-  rename(CI_L = values) |>
-  drop_na() |>
-  select(geo, time, CI_L) |>
-  left_join(vahim, by=c("geo", "time")) |>
-  mutate(cil = CI_L/mdhi)
+uses <- source_data("uses.r")$u1610
 
 # uses |>
 #   mutate(r2 = CI_L/mdhi) |>
@@ -233,10 +222,17 @@ ccf_ei <- melodi::get_all_data("DD_CNA_AGREGATS") |>
 melodi_m <- melodi |>
   group_by(time) |>
   summarize(
-    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, van, vab, dva), ~sum(.x[md]), .names = "{.col}_md" ),
-    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, van, vab, dva), ~sum(.x[mdhi]), .names = "{.col}_mdhi" ),
-    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, van, vab, dva), ~sum(.x), .names = "{.col}_tb" )) |>
-  pivot_longer(cols = ends_with(c("md", "mdhi", "tb"))) |>
+    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, van, vab, dva),
+           ~sum(.x[md]), .names = "{.col}_md" ),
+    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, van, vab, dva),
+           ~sum(.x[mdhi]), .names = "{.col}_mdhi" ),
+    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, van, vab, dva),
+           ~sum(.x[mdhi&mdhfi]), .names = "{.col}_mdhifi" ),
+    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, van, vab, dva),
+           ~sum(.x[mdhfi]), .names = "{.col}_mdhfi" ),
+    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, emp, self, sal, n111n, n1n, lymen, van, vab, dva),
+           ~sum(.x), .names = "{.col}_tb" )) |>
+  pivot_longer(cols = ends_with(c("md", "mdhi", "mdhifi", "mdhfi", "tb"))) |>
   separate(name, sep="_", into = c("var", "champ")) |>
   pivot_wider(names_from = var, values_from = value) |>
   left_join(ccf_ei |> select(time, ccfei), by = c("time")) |>

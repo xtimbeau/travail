@@ -53,6 +53,7 @@ thanks: "Je remercie chaleureusement Elliot Aurissergues, Francçois Geerolf et 
 ```{r, include=FALSE}
 ofce::init_qmd()
 P6 <- source_data("nace.r")$pays1 
+
 options(ofce.tabsetize.pdf = "one")
 if(knitr::is_html_output()) {
   set_theme(theme_ofce(
@@ -147,7 +148,7 @@ margin_download(naq |> select(-tooltip))
 
 Trois points sont importants pour disposer du bon concept (voir @reis2022 pour une discussion et une revue de littérature sur ce point) :
 
--   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, mais qu'il est difficile de dépasser. Elle a des conséquences pour les comparaisons entre périodes pour un même pays parce que la part des non salariés varie dans le temps, de façon différente suivant les branches et entre pays (@fig-psalcnc).
+-   Corriger des non salariés et leur imputer une masse salariale. Cette correction est standard. Elle repose sur des hypothèses importantes comme le salaire affecté à un non salarié. Nous utilisons la décomposition en branches (ou en secteurs dans certains pays) pour affecter aux non salariés d'une branche le salaire moyen des salariés de cette branche. C'est une hypothèse assez forte, pour laquelle nous proposons une alternative, en utilisant la notion de revenu mixte. Malheureusement, le revenu mixte par branche – qui est important pour le point suivant – n'est pas diffusé systématiquement par les Etats membres de l'UE (en fait seule la France diffuse cette donnée). Cette correction a des conséquences importante pour les comparaisons entre périodes pour un même pays parce que non seulement la part des non salariés varie dans le temps, de façon différente suivant les branches et entre pays (@fig-psalcnc) mais aussi la rémunaration des non salariés varie dans le temps (voir l'annexe D consacrée à ce point).
 
 -   Définir le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour part auto produit (les loyers imputés aux propriétaires). La notion de partage de la valeur ajoutée n'a ici pas beaucoup de sens et la comparaison d'un pays à l'autre peut être très perturbée. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus précise, en enlevant de la valeur ajoutée marchande la branche "services immobiliers (L)" (@appfig-psalcompote, @fig-structbranche). Omettre les services immobiliers pose cependant un problème, parce que les loyers versés par les entreprises à leurs bailleurs sont souvent un prix de transfert et non un prix de marché. C'est donc un élément qui peut être utilisé comme véhicule pour de l'otpimisation fiscale, d'autant plus que la fiscalité immobilière peut être avantageuse. Nous explorons cette dimension dans la @sec-immobilier en particulier pour la France.
 
@@ -178,138 +179,12 @@ Au début des années 2000, deux pays se distinguaient des autres (l'Espagne et 
 #| fig-asp: 0.85
 #| fig-cap: Part des salaires dans la VA nette 1995 et 2025
 
-naq_full <- ofce::source_data("vaq.r")$naa |> 
-  filter(champ == "mdhi") 
-data <- naq_full |> 
-  mutate(year = year(time)) |>
-  filter( year %in% c(1995, 2025)) |>
-  select(year, geo, psal, van, psalb, vab) |> 
-  pivot_wider(names_from = year, values_from = c(psal,van, psalb, vab)) |> 
-  mutate(geo = fct_reorder(geo, psal_2025)) |> 
-  mutate(geo2c = countrycode(geo, "eurostat", "iso2c")) 
-  
-
-data_int <- data |> 
-  full_join(naq_full |> select(time, psal, geo), by = "geo") |> 
-  group_by(geo) |> 
-  mutate(
-    year = year(time),
-    i = (year - 1995)/(2025 - 1995),
-    psal_seg = psal_2025 * i  + psal_1995 * (1-i),
-    x  = geo, xend = geo,
-    y = lag(psal_seg),
-    yend = psal_seg ) |> 
-  mutate(
-    tooltip = glue("<b>{lbl(geo)}</b>
-                     Part des salaires dans la VAN en {year} : {round(100*psal,1)}%
-                     (VA nette, cor. non sal., marchandes hors imm.)")) |> 
-  ungroup()
-
-library(ggimage)
-psaleu <- ggplot(data_int) + 
-  geom_segment(
-    aes(x = x,  xend = xend, y = y, yend = yend, color = year),
-    key_glyph = draw_key_point, linewidth = 0.2) +
-  ggimage::geom_flag( data = ~.x |> filter(i==1),
-                      aes(x= geo, y = 0.3, image = geo2c), size = .03)+
-  scale_color_gradient(low="seagreen1", high = "seagreen4",
-                       name = NULL,
-                       breaks = c(1995,2025), labels = c(1995, 2025)) + 
-  geom_point_interactive(
-    data = ~.x |> filter(!i%in%c(0,1)), 
-    hover_nearest = TRUE,
-    aes(x = geo, y=psal, tooltip = tooltip, color = year), size = 0.3, alpha = 0.5)+
-  geom_point_interactive(
-    data = ~.x |> filter(i%in%c(0,1)), 
-    aes(x = geo, y=yend, size = van_2025, color = year,
-        tooltip = tooltip),
-    hover_nearest = TRUE)  +
-  coord_flip()+
-  guides(color = guide_legend(), size= "none") +
-  scale_x_discrete(labels = ~str_c(lbl(.x))) + 
-  scale_y_continuous(labels = scales::label_percent(1), 
-                     limits = c(0.325,1), oob = squish) + 
-  scale_size(range = c(1,3)) +
-  labs(x=NULL, y=NULL)+
-  theme(
-    legend.direction = "horizontal",
-    panel.grid.major.y = element_blank(),
-    legend.text = element_marquee(size = rel(0.7)),
-    axis.text.y = element_marquee(size = rel(1),
-                                  vjust = 0.5, hjust = 1,
-                                  margin = margin(r=-10, t=0, b=2)),
-    axis.line = element_blank(),
-    axis.ticks = element_blank()) +
-  ofce_caption(
-    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
-    champ = "Branches marchandes hors services immobiliers (-L).",
-    note = "Part des salaires dans la valeur ajoutée nette corrigée de la non salarisation.")
-  
-data_intb <- data |> 
-  mutate(geo = fct_reorder(geo, psalb_2025)) |>
-  full_join(naq_full |> select(time, psalb, geo), by = "geo") |> 
-  group_by(geo) |> 
-  mutate(
-    year = year(time),
-    i = (year - 1995)/(2025 - 1995),
-    psal_seg = psalb_2025 * i  + psalb_1995 * (1-i),
-    x  = geo, xend = geo,
-    y = lag(psal_seg),
-    yend = psal_seg ) |> 
-  mutate(
-    tooltip = glue("<b>{lbl(geo)}</b>
-                     Part des salaires dans la VAB en {year} : {round(100*psalb,1)}%
-                     (VA brute, cor. non sal., marchandes hors imm.)")) |> 
-  ungroup()
-
-library(ggimage)
-psalbeu <- ggplot(data_intb) + 
-  geom_segment(
-    aes(x = x,  xend = xend, y = y, yend = yend, color = year),
-    key_glyph = draw_key_point, linewidth = 0.2) +
-  ggimage::geom_flag( data = ~.x |> filter(i==1),
-                      aes(x= geo, y = 0.2, image = geo2c), size = .03)+
-  scale_color_gradient(low="orange1", high = "darkorange4",
-                       name = NULL,
-                       breaks = c(1995,2025), labels = c(1995, 2025)) + 
-  geom_point_interactive(
-    data = ~.x |> filter(!i%in%c(0,1)), 
-    hover_nearest = TRUE,
-    aes(x = geo, y=psalb, tooltip = tooltip, color = year), 
-    size = 0.3, alpha = 0.5)+
-  geom_point_interactive(
-    data = ~.x |> filter(i%in%c(0,1)), 
-    aes(x = geo, y=yend, size = vab_2025, color = year,
-        tooltip = tooltip),
-    hover_nearest = TRUE)  +
-  coord_flip()+
-  guides(color = guide_legend(), size= "none") +
-  scale_x_discrete(labels = ~str_c("**", lbl(.x), "**")) + 
-  scale_y_continuous(labels = scales::label_percent(1), 
-                     limits = c(0.25,1), oob = squish) + 
-  scale_size(range = c(1,3)) +
-  labs(x=NULL, y=NULL)+
-  theme(
-    legend.direction = "horizontal",
-    panel.grid.major.y = element_blank(),
-    legend.text = element_marquee(size = rel(0.7)),
-    axis.text.y = element_marquee(size = rel(1),
-                                  vjust = 0.5, hjust = 1,
-                                  margin = margin(r=-10, t=0, b=2)),
-    axis.line = element_blank(),
-    axis.ticks = element_blank()) +
-  ofce_caption(
-    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
-    champ = "Branches marchandes hors services immobiliers (-L).",
-    note = "Part des salaires dans la valeur ajoutée brute corrigée de la non salarisation.")
-
-tabsetize(list("VA nette" = psaleu, "VA brute" = psalbeu))
+psaleu <- source_data("ggvanettebrute.r")
+tabsetize(psaleu$gg)
 ```
 
 ```{r, results="asis"}
-margin_download(data)
+margin_download(psaleu$data)
 
 ```
 
@@ -550,7 +425,9 @@ En Italie et en Espagne, la masse salariale dans les branches non marchandes est
 
 On utilise les données de comptabilité nationale, en trimestriel, par branche ([`nasq_10_nf_tr`](https://ec.europa.eu/eurostat/databrowser/view/nasq_10_nf_tr/default/table?lang=en)), ré-agrégées au niveau de l'ensemble de l'économie. Le passage par les comptes de branches permet de distinguer branches marchandes et non marchandes ou d'autres regroupements, comme l'exclusion des services immobiliers. Ce passage permet également de conduire la correction salariés non salariés au niveau des branches. D'après l'INSEE, (voir le blog "[Combien pèse l'industrie en France et en Allemagne](https://blog.insee.fr/combien-pese-l-industrie-en-france-et-en-allemagne/)"), tous les pays ne produisent pas une comptabilité de branche mais pour certains (notamment l'Allemagne) une comptabilité sectorielle. La différence tient aux entreprises qui produisent plusieurs produits (un constructeur automobile propose des services financiers pour l'achat des véhicules) et dont l'activité est imputé à différentes branches (industrie et services financiers) dans la comptabilité de branche alors que dans une comptabilité de secteur l’activité est versée dans le principal secteur (ou le secteur d'immatriculation de l'entreprise chapeau). Cette différence empêche normalement les comparaisons des comptes de branches entre pays, y compris à l'intérieur de l'Union Européenne. Cependant, pour comparer la part des salaries dans la valeur ajoutée sur des agrégats larges (branches marchandes par exemple), cette dérogation à la norme comptable n'est que modérément problématique : de toute façon, l'automobile et les services financiers sont agrégés et c'est la correction pour la masse salariale des non salariés qui peut être modifiée. Mais si la même délimitation est employée pour les salariés et les non salariés que pour l'activité, l'erreur est probablement minime.
 
-La part des salaires est corrigée de la part des non salariés (données annuelles [`nama_10_a64_e`](https://ec.europa.eu/eurostat/databrowser/view/nama_10_a64_e/default/table?lang=en), extrapolées en maintenant le ratio salariés/non salariés à sa dernière valeur observée) en considérant que le salaire des non salariés est identique dans chaque branche à celui des salariés – cette hypothèse sous estime probablement le salaire des non salariés mais elle est difficile à lever, sauf à utiliser les enquêtes force de travail et faire confiance aux revenus qui y sont déclarés, en perdant la variation d'une année à l'autre. En revanche, on prend bien en compte que les non salariés de la branche agricole n'ont pas le même revenu que ceux de la branche "information et communication". La décomposition employée est à 9 branches et on peut conduire la même correction à un niveau de désagrégation plus fin.
+La part des salaires est corrigée de la part des non salariés (données annuelles [`nama_10_a64_e`](https://ec.europa.eu/eurostat/databrowser/view/nama_10_a64_e/default/table?lang=en), extrapolées en maintenant le ratio salariés/non salariés à sa dernière valeur observée) en considérant que le salaire des non salariés est identique dans chaque branche à celui des salariés – cette hypothèse, que nous appelons *correction par les effectifs*, sous estime probablement le salaire de certains des non salariés (notamment les professions libérales ou les artisans) mais elle est difficile à lever. Le développement des platerformes et dans certains pays de statuts (sociaux, fiscaux) particuliers (les microentrepreneurs – autoentrepreneurs en France) a introduit une nouvelle "classe" de non salariés possiblement moins rémunérés et avec des durées du travail plus basses que le reste des indépendants. L'annexe D compile quelques éléments quantitifs.
+
+En revanche, dans la correction par les effectifs, on prend bien en compte que les non salariés de la branche agricole n'ont pas le même revenu que ceux de la branche "information et communication". La décomposition employée est à 9 branches et on peut conduire la même correction à un niveau de désagrégation plus fin. Une alternative est employée en utilsant les données de revenu mixte. A défaut d'être totalement convaincante, du fait d'un manque de données diffusées, elle montre la complexité et l'importance de la correction pour le revenu des indépendants. Une solution aurait pu être de ne considérer que les entreprises (voir @sec-snff) mais là aussi les différentes pratiques de comptabilité ne garantissent pas un traitement homogène d'un pays à l'autre.
 
 La masse salariale est rapportée soit à la valeur ajoutée brute ($B1G$), soit à la valeur ajoutée nette ($B1N=B1G-P51C$). Comme la consommation de capital fixe ($P51C$) n'est pas connue en trimestriel, elle est dérivée des comptes annuels en 21 branches (niveau 1 de la NACE rev2 [`nama_10_a64`](#0)), agrégée en 9 branches, puis extrapolée pour les années non connues (ici 2024 et 2025) en conservant un ratio constant dans la valeur ajouté brute. Le détail se trouve dans le code.
 
@@ -723,11 +600,11 @@ nsal |>
   
 ```
 
-En France et en Belgique, la convention employée surestime probablement la masse salariale que l'on peut imputer aux non salariés. En revanche, en Allemagne ou en Espagne, c'est potentiellement l'inverse. Le cas Français est intéressant, parce que le ratio masse salariale imputée sur revenu mixte devient plus grand que 1 en 2013 et et augmente quelques années avant. Le régime d'autoentrepreneur introduit en 2008 peut expliquer cette dynamique en augmentant le nombre de non salariés ayant de faibles revenus et éventuellement étant salariés par ailleurs.
+En France et en Belgique, la convention employée surestime probablement la masse salariale que l'on peut imputer aux non salariés, puisqu'elle apparaît supérieure au revenu mixte. En revanche, en Allemagne ou en Espagne, c'est potentiellement l'inverse. Le cas Français est intéressant, parce que le ratio masse salariale imputée sur revenu mixte devient plus grand que 1 en 2013 et et augmente quelques années avant. Le régime d'autoentrepreneur introduit en 2008 peut expliquer cette dynamique en augmentant le nombre de non salariés ayant de faibles revenus et éventuellement étant salariés par ailleurs (voir l'annexe D pour plus de détails).
 
-On peut construire à partir de ces éléments une correction alternative de la non salarisation en utilisant le revenu mixte – en retenant 90% du revenu mixte[^1], le reste pour approcher la CCF – et non le nombre de non salariés (correction par les effectifs) comme base de la correction.
+On peut construire à partir du revenu mixte une correction alternative de la non salarisation en utilisant le revenu mixte – en retenant 88% du revenu mixte[^1], le reste pour approcher la CCF – et non le nombre de non salariés (correction par les effectifs) comme base de la correction.
 
-[^1]: Le chiffre de 90% est retenu à partir des comptes nationaux français qui permettent de calculer le ratio CCF sur revenu mixte pour les entrepreneurs individuels (secteur institutionnel S14AA). Pour la France nous utilisons le ratio calculé chaque année (qui varie entre 9,4% et 13,8% entre 1995 et 2024).
+[^1]: Le chiffre de 88% est établi à partir des comptes nationaux français qui permettent de calculer le ratio CCF sur revenu mixte pour les entrepreneurs individuels (secteur institutionnel S14AA). Pour la France nous utilisons le ratio calculé chaque année (qui varie entre 9,4% et 13,8% entre 1995 et 2024). Ce chiffre est plus faible que celui pour l'ensemble de l'économie marchande (de l'ordre de 20%, voir l'annexe B), ce qui peut s'expliquer par le fait que les structures fortement capitalistiques (et avec une forte CCF) sont moins suceptibles d'être des indépedants, parce qu'il est nécessaire de les financer par une structure de capital à responsabilité limitée et faisant intervenir des actionnaires qui ne sont pas le seul dirigeant. Enfin, nous supposons que dans le cas des indépendants la part des profits est nulle et que la rémunération de l'indépendant est équivalente à un revenu d'activité, ce qui est conforme au traitement fiscal en général. Lorsque l'entrepreneur souhaite bénéficier d'une fiscalité différente sur les revenus d'activité et les revenus du capital, il est contraint de passer d'un régime d'indépendant à une structure juridique moins souple.
 
 ```{r}
 #| label: fig-psalmixte
@@ -1074,7 +951,7 @@ girafy(tpmixte, 1.5)
 
 @reis2022 conclut que le rendement du capital productif est plutôt constant au cours du temps, pour les 20 dernières années. L'analyse présentée ici le contredit pour la France et possiblement d'autres pays. Les données utilisées ne sont pas les mêmes, puisqu'il utilise principalement AMECO et que l'analyse conduite ici exploite plus de profondeur dans les données de comptabilité nationale.
 
-## Comptes d'agents ou de secteurs institutionnels : Entreprise non financières et financières
+## Comptes d'agents ou de secteurs institutionnels : Entreprise non financières et financières {#sec-snff}
 
 ### Part des salaires dans la valeur ajoutée, comptes d'agents
 
@@ -1560,43 +1437,9 @@ On utilise ces données ([`naidsa_10_nf_tr`](https://ec.europa.eu/eurostat/datab
 #| fig-cap: Part des salaires dans la valeur ajoutée, comptes de secteur, comparaisons internationales
 #| fig-asp: 0.6
 
-snfia <- source_data("snf_international.r") |> 
-  pluck("snfia") |>
-  mutate(tooltip = glue(
-    "<b>{label_geo}</b>
-    {year(time)}
-    Impôts net de subvention dans la VAN : {round(100*isp,1)}%
-    Rémunérations dans la VAN : {round(psal*100,1)}%
-    Profits nets (d'IS, taxes et subvention) dans la VAN : {round(tp*100,1)}%
-    Dividendes nets dans la VAN : {round(div*100,1)}%")) |> 
-  mutate(geo = factor(geo, c("EA20", "US", "UK", "JP", "CA", "CH"))) |> 
-  filter(year(time)>=1995)
-
-meta <- sourcoise::sourcoise_meta("snf_ratio.r")
-date <- meta$data_date |> ymd_hms() 
-date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
-lbl_eurostat <- function(x) eurostat::label_eurostat(x, "geo", lang = "fr", custom_dic=c("EA20"= "Zone euro"))
-psali <- ggplot(snfia) +
-  aes(x=time, y=psal, col = geo) +
-  geom_line_interactive(
-    aes(tooltip = "Part des salaires dans la VAN"), show.legend=FALSE) +
-  geom_point_interactive(
-    aes(tooltip = tooltip, data_id = time, fill = geo),
-    size = 1, stroke = 0.5, shape = 21, color = "white",
-    hover_nearest = TRUE, show.legend=FALSE) +
-  ylab("% de la VA") + xlab(NULL) +
-  facet_wrap(vars(geo), ncol = 3, labeller = lbl_eurostat) +
-  scale_ofce_date(
-    labels = date1d
-  ) +
-  scale_y_continuous(labels = scales::label_percent(1), limits = c(NA, 1)) +
-  scale_color_pays(format = "eurostat") +
-  ofce_caption(
-    source = "Eurostat, comptes nationaux annuels (naidsa_10_nf_tr), téléchargés le {date},
- code à github.com/xtimbeau/travail/snf_international.r.",
-    champ = "Sociétés non financières (S11, la définition peut varier d'un pays à l'autre)")
-
+psali <- source_data("psali.r")
 girafy(psali, 1.5)
+
 ```
 
 ## Le rendement de l'immobilier {#sec-immobilier}
@@ -1708,7 +1551,7 @@ gg <- ggplot(data ) +
 girafy(gg)
 ```
 
-Le @fig-rendfr confirme cette idée, mais illustre l'ordre de grandeur que les services immobiliers pourraient avoir sur le rendement du capital. Les deux courbes présentées sont d'une part le rendement avant IS du capital productif des branches marchandes non immobilières et d'autre part le même rendement, mais en modifiant la valeur ajoutée des branches marchandes non immobilières en appliquant le ratio consommation intermédiaire en services immobiliers de 1980 (il était alors de 3,3%). Cela représente plus d'un point de rendement. {{< fa square >}}
+Le @fig-rendfr confirme cette idée, mais illustre l'ordre de grandeur que les services immobiliers pourraient avoir sur le rendement du capital. Les deux courbes présentées sont d'une part le rendement avant IS du capital productif des branches marchandes non immobilières et d'autre part le même rendement, mais en modifiant la valeur ajoutée des branches marchandes non immobilières en appliquant le ratio consommation intermédiaire en services immobiliers de 1980 (il était alors de 3,3%). Cela représente plus d'un point de rendement.
 
 ```{r}
 #| label: fig-rendfr
@@ -1766,12 +1609,14 @@ gg <- ggplot(data_long) +
 girafy(gg)
 ```
 
+{{< fa square >}}
+
 ## Références {.unnumbered}
 
 ::: {#refs}
 :::
 
-::::::::: {.content-visible when-format="html"}
+::::::::::: {.content-visible when-format="html"}
 ## Annexes {.unnumbered}
 
 ### Annexe A : derniers points connus {.unnumbered}
@@ -2060,10 +1905,253 @@ tabsetize(tt)
 
 Part des salaires dans la VA et rang, différents concepts
 :::
-:::::::::
+
+### Annexe D : Rémunération des non salariés {.unnumbered}
+
+::: {@appfig-mixte}
+```{r, results="asis"}
+#| fig-asp: 0.85 
+PA <- source_data("nace.r")$pays2 
+anD <- source_data("annexeD.r") |> 
+  mutate(
+    reff = self/sal,
+    reffh = selfh/salh,
+    rb3g = b3g/d1, 
+    rb3n = ifelse(geo=="FR", b3n/d1, 0.88*b3g/d1),
+    rwpc = w,
+    across(c(reff, reffh, rb3n), ~.x/reff, .names = "{.col}pc")) |> 
+  relocate(geo, time, champ, starts_with("r")) |> 
+  filter(geo %in% PA) |> 
+  mutate(geo = factor(geo, PA),
+         tooltip = glue(
+         "<b>{lbl(geo)}</b>
+         Part des non salaries, toutes branches, selon :
+           - les effectifs : {round(reff*100, 1)}%
+           - les heures travaillées : {round(reffh*100, 1)}%
+           - le revenu (b3n/d1) : {round(rb3n*100, 1)}%
+           - le revenu (egalisé) issu de EU-SILC : : {round(rb3n*100, 1)}"))
+
+date <- sourcoise::sourcoise_meta("annexeD.r")$data_date |> ymd_hms() 
+date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
+
+data <- anD |> 
+  filter(champ == "tb") |>
+  select(geo, time, tooltip, reff, reffh, rb3n) |> 
+  pivot_longer(-c(geo, time, tooltip), names_to = "concept") |> 
+  mutate(
+    concept = factor(concept, c("reff", "reffh", "rb3n")),
+    principal = concept == "reff") |> 
+  filter(time>="1995-01-01")
+
+datapc <- anD |> 
+  filter(champ == "tb") |>
+  select(geo, time, tooltip, reffpc, reffhpc, rb3npc, rwpc) |>
+  rename_with(.fn = ~str_remove(.x, "pc$"), .cols = starts_with("r")) |> 
+  pivot_longer(-c(geo, time, tooltip), names_to = "concept") |> 
+  mutate(
+    concept = factor(concept, c("reff", "reffh", "rb3n", "rw")),
+    principal = concept== "rb3n") |> 
+  filter(time>="1995-01-01")
+
+labels <- c(reff = "Effectifs", reffh = "Heures", rb3n = "Revenu mixte", rw = "Revenu EU-SILC")
+
+gD <-imap(
+  list("Agrégé" = data, "Par tête" = datapc), 
+  ~ ggplot(.x) +
+  aes(x=time, y=value, col = geo, group = concept, 
+      linewidth = concept, linetype = concept, alpha = concept) +
+  geom_line()+
+  geom_point_interactive(
+    data = ~filter(.x, principal),
+    aes(tooltip = tooltip, data_id = time, fill = geo),
+    size = 1, stroke = 0.5, shape = 21, color = "white",
+    hover_nearest = TRUE, show.legend=FALSE) +
+  ylab(NULL) + xlab(NULL) +
+  facet_wrap(vars(geo), ncol = 3, labeller = lbl, scales = "free_y") +
+  scale_ofce_date(
+    labels = date1d) +
+  scale_alpha_manual(
+    values = c(reff = 1, reffh = 0.5, rb3n = 1, rw = 0.5),
+    labels = labels,
+    name = NULL) +
+  scale_linewidth_manual(
+    values = c(reff = 0.25, reffh = 0.5, rb3n = 0.25, rw =0.5),
+    labels = labels,
+    name = NULL) +
+  scale_linetype_manual(
+    values = c(reff = "solid", reffh = "11", rb3n = "solid", rw = "12"),
+    labels = labels,
+    name = NULL) +
+  guides( 
+    fill = "none", color = "none",
+    linetype = guide_legend(nrow = 1),
+    alpha = guide_legend(nrow = 1)) + 
+  scale_y_continuous(
+    labels = scales::label_percent(1), 
+    breaks = scales::pretty_breaks(3)) +
+  scale_color_pays(format = "eurostat") +
+  ofce_caption(
+    note = "Les échelles de chaque pays sont ajustées et donc différentes.",
+    source = "Eurostat, comptes nationaux annuels de secteur (nasa_10_nf_tr), emploi (nama_10_a64_e), EU-SILC (ilc_di05), téléchargés le {date}, code à github.com/xtimbeau/travail/annexeD.r.",
+ champ = "Toutes branches.") )
+
+tabsetize(gD, r = 1.5)
+```
+
+Différentes mesures du revenu des non salariés
+:::
+
+::: {#appfig-mixtefr}
+```{r, results="asis"}
+#| fig-asp: 0.85 
+anD <- source_data("annexeD.r") |> 
+  filter(geo == "FR", champ %in% c("tb", "md", "mdhi")) |> 
+  mutate(
+    reff = self/sal,
+    reffh = selfh/salh,
+    rb3n = b3n/d1,
+    rb3npc = b3n/self/(d1/sal)) |> 
+  relocate(geo, time, champ, starts_with("r")) |> 
+  mutate(tooltip = glue(
+         "<b>France</b>
+         {champs[champ]} 
+         Part des non salaries, selon :
+           - les effectifs : {round(reff*100, 1)}%
+           - les heures travaillées : {round(reffh*100, 1)}%
+           - le revenu (b3n/d1) : {round(rb3n*100, 1)}%")) |> 
+  select(time, champ, reff, reffh, rb3n, rb3npc, tooltip) |> 
+  pivot_longer(c(reff, reffh, rb3n, rb3npc), names_to = "concept") |> 
+  mutate(principal = concept == "md")
+
+date <- sourcoise::sourcoise_meta("annexeD.r")$data_date |> ymd_hms() 
+date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
+
+labels <- c(reff = "Effectifs", reffh = "Heures", rb3n = "Revenu mixte", rw = "Revenu EU-SILC")
+
+gD2 <-imap(
+  c("Effectifs" = "reff", "Heures" = "reffh", "Revenu mixte" = "rb3n", "Revenu mixte par tête" = "rb3npc"),   ~ {
+    data <- anD |> 
+    filter(concept == .x) |>
+    select(time, champ, value, tooltip, principal) |> 
+    mutate(
+      champ = factor(champ, c("tb", "md", "mdhi")),
+      principal = champ == "md") |> 
+    filter(time>="1995-01-01")
+  labels <- c(md = "Marchandes", 
+              tb = "Toutes branches", 
+              mdhi = "Marchandes hors immo.")
+  ggplot(data) +
+    aes(x=time, y=value, col = champ, group = champ, 
+        linewidth = champ, linetype = champ) +
+    cols4all::scale_color_discrete_c4a_cat(
+      "tableau.10", name = NULL,
+      labels = labels) +
+    cols4all::scale_fill_discrete_c4a_cat("tableau.10") +
+    geom_line()+
+    geom_point_interactive(
+      aes(tooltip = tooltip, data_id = time, fill = champ),
+      size = 1, stroke = 0.5, shape = 21, color = "white",
+      hover_nearest = TRUE, show.legend=FALSE) +
+  ylab(NULL) + xlab(NULL) +
+  scale_ofce_date(
+    labels = date1d) +
+  scale_linewidth_manual(
+    values = c(tb = 0.25, md = 0.5, mdhi = 0.25),
+    labels = labels,
+    name = NULL) +
+  scale_linetype_manual(
+    values = c(tb = "11", md = "solid", mdhi = "solid"),
+    labels = labels,
+    name = NULL) +
+  guides(fill = "none") + 
+  scale_y_continuous(
+    labels = scales::label_percent(1), 
+    breaks = scales::pretty_breaks(3)) +
+    theme(legend.direction = "horizontal") +
+  ofce_caption(
+    source = "INSEE, téléchargés le {date}, code à   github.com/xtimbeau/travail/annexeD.r.",
+ champ = "voir légende") 
+  })
+
+tabsetize(gD2, r = 1.5)
+```
+
+Différentes mesures du revenu des non salariés
+:::
+
+### Annexe E : Base 2020 et 2014 depuis 1949 {.unnumbered}
+
+::: {#fig-psalfr49}
+
+```{r, results="asis"}
+#| fig-asp: 0.85
+
+cn14 <- source_data("france CN 2014.R") |> 
+  select(time, champ, psal, starts_with("na"))
+cn20 <- source_data("france-melodi.r")$aggr |> 
+  select(time, champ, psal = psalm)
+
+champs  <- c("md" = "Marchand", 
+             "mdhifi" = "Marchand hors immobilier et services financiers",
+            "mdhi"= "Marchand hors services immobiliers", 
+            "mdhfi"= "Marchand hors services financiers", 
+            "tb" = "Toutes branches (marchandes et non marchandes)")
+
+data <- full_join(cn14, cn20, by=c("time", "champ"), suffix = c(".14", ".20")) |>
+  mutate(
+    across(starts_with("na"), ~replace_na(.x, FALSE)),
+    na = naccf | nab3g | nad29 | nad39,
+    tooltip = glue(
+      "<b>year(time)</b>
+      Part des salaires dans la VAN, correction par le revenu mixte (voir note)
+      CNA 2020 : {round(psal.20,1)}%
+      CNA 2014 : {round(psal.14,1)}%" ) ) |> 
+  pivot_longer(c(psal.20, psal.14))
+
+psal <- imap(
+  c("Marchand" = "md",
+    "Hors immo." = "mdhi", 
+    "Hors  fi." = "mdhfi",
+    "Hors immmo.&fin." = "mdhifi",
+    "Marchand et non marchand" = "tb"),
+  ~ggplot(data |> filter(champ == .x)) +
+    aes(x=time, y=value, col = name, group = name, linewidth  = na) +
+    geom_line() +
+    scale_linewidth_manual(values = c(0.75, 0.25 )) +
+    geom_point_interactive(
+      aes(tooltip = tooltip, data_id = time, fill = name),
+      size = 1, stroke = 0.5, shape = 21, color = "white",
+      hover_nearest = TRUE, show.legend=FALSE) +
+    ylab("% de la VA") + xlab(NULL) +
+    scale_ofce_date(
+      labels = date1d) +
+    guides( fill = "none") +
+    PrettyCols::scale_color_pretty_d(
+      "Joyful",
+      name = NULL,
+      labels = c(psal.14 = "CNA 2014", psal.20 = "CNA 2020")) +
+    theme(legend.direction = "horizontal") +
+    PrettyCols::scale_fill_pretty_d("Joyful") +
+    scale_y_continuous(
+      labels = scales::label_percent(1), 
+      breaks = scales::pretty_breaks(5)) +
+    guides(linewidth = "none") +
+    ofce_caption(
+      source = "INSEE, comptes nationaux annuels base 2014 (de 2022) et base 2020 (de 2025), code à github.com/xtimbeau/travail/france CN 2014.r.",
+      champ = "Branches {tolower(.y)}.",
+      note = "La construction de la part des salaires de 1949 à 1978 demande la rétropolation de la CCF (P51C), des subventions (D29) et impôts à la production (D39) à partir de la valeur ajoutée brute ainsi que du revenu mixte à partir des effectifs salariés et non salariés.") ) 
+
+tabsetize(psal, r = 1.25)
+
+```
+Part des salaires en France 1949-2025
+
+:::
+
+:::::::::::
 
 ::: {.content-visible when-format="pdf"}
-## Suppléments {.unnumbered}
+## Suppléments {#fappfig-psalcompote .unnumbered}
 
-3 annexes (domaine des données, CCF et comparaisons entre pays) sont accessibles en ligne à l'adresse <https://xtimbeau.github.io/travail/>
+4 annexes (domaine des données, CCF, comparaisons entre pays et rémunération des non salariés) sont accessibles en ligne à l'adresse <https://xtimbeau.github.io/travail/>
 :::
