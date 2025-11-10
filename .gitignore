@@ -7,7 +7,8 @@
 _manuscript/
 travail_files/
 _freeze
-
+_site
+site_libs
 **/*.quarto_ipynb
 **/*_files/*
 nul

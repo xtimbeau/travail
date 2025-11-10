@@ -1616,7 +1616,7 @@ girafy(gg)
 ::: {#refs}
 :::
 
-::::::::::: {.content-visible when-format="html"}
+:::::::::::: {.content-visible when-format="html"}
 ## Annexes {.unnumbered}
 
 ### Annexe A : derniers points connus {.unnumbered}
@@ -2082,7 +2082,6 @@ Différentes mesures du revenu des non salariés
 ### Annexe E : Base 2020 et 2014 depuis 1949 {.unnumbered}
 
 ::: {#fig-psalfr49}
-
 ```{r, results="asis"}
 #| fig-asp: 0.85
 
@@ -2144,11 +2143,10 @@ psal <- imap(
 tabsetize(psal, r = 1.25)
 
 ```
+
 Part des salaires en France 1949-2025
-
 :::
-
-:::::::::::
+::::::::::::
 
 ::: {.content-visible when-format="pdf"}
 ## Suppléments {#fappfig-psalcompote .unnumbered}

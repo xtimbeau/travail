@@ -28,9 +28,16 @@ website:
     - text: NACE rev2
       icon: file-code
       href: nace.r
-    - text: Immobilier en France
+    - text: CNA2020 France
       icon: file-code
       href: france-melodi.r
+    - text: CNA2014 France
+      icon: file-code
+      href: france CN 2014.r
+    - text: Non salariés France
+      icon: file-code
+      href: annexeD.r
+
 
   title: "Partage de la valeur ajoutée, comparaisons internationales"
   page-navigation: true
