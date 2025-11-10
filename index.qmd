@@ -2101,10 +2101,10 @@ data <- full_join(cn14, cn20, by=c("time", "champ"), suffix = c(".14", ".20")) |
     across(starts_with("na"), ~replace_na(.x, FALSE)),
     na = naccf | nab3g | nad29 | nad39,
     tooltip = glue(
-      "<b>year(time)</b>
+      "<b>{year(time)}</b>
       Part des salaires dans la VAN, correction par le revenu mixte (voir note)
-      CNA 2020 : {round(psal.20,1)}%
-      CNA 2014 : {round(psal.14,1)}%" ) ) |> 
+      CNA 2020 : {round(psal.20*100,1)}%
+      CNA 2014 : {round(psal.14*100,1)}%" ) ) |> 
   pivot_longer(c(psal.20, psal.14))
 
 psal <- imap(
