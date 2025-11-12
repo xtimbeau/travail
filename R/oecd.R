@@ -7,8 +7,8 @@ sectors <- "OECD.SDD.NAD,DSD_NASEC10@DF_TABLE14,1.1"
 eo <- "OECD.ECO.MAD,DSD_EO@DF_EO,1.3"
 query <- "A..GBR.........."
 pays <- "USA+FRA+DEU+GBR+ITA+ESP+NLD+BEL+JPN"
-jpn <-  OECD::get_dataset(sna, query)
-sna_str <- OECD::get_data_structure(sna)
+# jpn <-  OECD::get_dataset(sna, query)
+# sna_str <- OECD::get_data_structure(sna)
 
 b1g <-  OECD::get_dataset(sna, "Q..{pays}...B1G.._T...V.N.T0101" |> glue())
 b1gq <-  OECD::get_dataset(sna, "Q..{pays}...B1GQ....XDC.V.N.T0103" |> glue())

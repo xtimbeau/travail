@@ -3,42 +3,40 @@ project:
 execute:
   freeze: auto
 website:
-  code-links:
-    - text: Salaires dans la VA
-      icon: file-code
-      href: vaq.r
-    - text: Décomposition
-      icon: file-code
-      href: decomp.R
-    - text: Salaires trimestriels
-      icon: file-code
-      href: salaires.r
-    - text: Comptes des SNF (s11)
-      icon: file-code
-      href: snf_ratio.r
-    - text: SNF (coop. inter. Eurostat)
-      icon: file-code
-      href: snf_international.r
-    - text: SNA (OCDE)
-      icon: file-code
-      href: oecd.R
-    - text: Emploi salarié et non salarié
-      icon: file-code
-      href: naq10_e.R
-    - text: NACE rev2
-      icon: file-code
-      href: nace.r
-    - text: CNA2020 France
-      icon: file-code
-      href: france-melodi.r
-    - text: CNA2014 France
-      icon: file-code
-      href: france CN 2014.r
-    - text: Non salariés France
-      icon: file-code
-      href: annexeD.r
-
-
+  # code-links:
+  #   - text: Salaires dans la VA
+  #     icon: file-code
+  #     href: R/vaq.r
+  #   - text: Décomposition
+  #     icon: file-code
+  #     href: R/decomp.R
+  #   - text: Salaires trimestriels
+  #     icon: file-code
+  #     href: R/salaires.r
+  #   - text: Comptes des SNF (s11)
+  #     icon: file-code
+  #     href: R/snf_ratio.r
+  #   - text: SNF (coop. inter. Eurostat)
+  #     icon: file-code
+  #     href: R/snf_international.r
+  #   - text: SNA (OCDE)
+  #     icon: file-code
+  #     href: R/oecd.R
+  #   - text: Emploi salarié et non salarié
+  #     icon: file-code
+  #     href: R/naq10_e.R
+  #   - text: NACE rev2
+  #     icon: file-code
+  #     href: R/nace.r
+  #   - text: CNA2020 France
+  #     icon: file-code
+  #     href: R/france-melodi.r
+  #   - text: CNA2014 France
+  #     icon: file-code
+  #     href: R/france CN 2014.r
+  #   - text: Non salariés France
+  #     icon: file-code
+  #     href: R/annexeD.r
   title: "Partage de la valeur ajoutée, comparaisons internationales"
   page-navigation: true
   site-url: "https://xtimbeau.github.io/travail/"
@@ -53,7 +51,7 @@ website:
   navbar:
     title: false
     search: true
-    code-tools: false
+    code-tools: true
     bakground: "#FEFEFE"
     logo: www/ofce_m.png
     logo-alt: "OFCE"
@@ -62,16 +60,9 @@ website:
       - text: " "
         icon: person-circle
         href: about.html
-
-  sidebar:
-      - id: fr
-        collapse-level: 1
-        title: "Quelles marges de manoeuvres pour revaloriser le travail"
-        file: travail.qmd
-      - id: inter
-        collapse-level: 1
-        title: "Stat: comparaisons part des salaires et profits"
-        file: psal_comp.qmd
+      - text: " "
+        icon: github
+        href: https://github.com/xtimbeau/travail
 
 comments:
   hypothesis: true

@@ -8,7 +8,7 @@ author:
     affiliation-url: "http://www.ofce.fr"
     orcid: "0000-0002-6198-5953"
 editor: visual
-date: "2025-09-08"
+date: "2025-10-24"
 date-modified: now
 wp: 23
 annee: 2025
@@ -47,7 +47,7 @@ crossref:
       latex-list-of-description: Graphiques annexes
 apptbl-cap-location: top
 appfig-cap-location: top
-thanks: "Je remercie chaleureusement Elliot Aurissergues, François Geerolf et Eric Heyer pour leurs remarques pertinentes et stimulantes. Elles m'ont amené à aller plus loin dans la complexité des concepts et dans l'exploration des données. La confusion qui en découle est de ma seule responsabilité. "
+thanks: "Je remercie chaleureusement Elliot Aurissergues, François Geerolf et Eric Heyer pour leurs remarques pertinentes et stimulantes. Elles m'ont amené à aller plus loin dans les concepts et les données. La confusion qui en découle est de ma seule responsabilité. "
 ---
 
 ```{r, include=FALSE}
@@ -148,15 +148,15 @@ margin_download(naq |> select(-tooltip))
 
 Trois points sont importants pour disposer du bon concept (voir @reis2022 pour une discussion et une revue de littérature sur ce point) :
 
--   Corriger des non salariés et leur imputer une masse salariale. La correction habituelle consiste à affecter aux non salariés le même salaire que les salariés (généralement de la même branche) ; c'est ainsi que traitent la question @cette2019 et @tresor2025. Nous procédons à cette correction (appelée correction pas les effectifs) au niveau 21 branches de la NACE rev 2. Nous proposons une alternative en utilisant la mesure du revenu mixte (dite correction par le revenu mixte), parce que l'affectation d'un salarie égal aux non salariés et aux salariés par branches conduit à affecter une masse salariale équivalente supérieure au revenu mixte des non salariés[^1]. En France, le revenu mixte (des non-salariés donc) est passé de 30% de la masse salariale (autant pour le ratio des effectifs) au début des années 1970 à un peu moins de 10% (presque 15% pour les effectifs) en 2024. Malheureusement, le revenu mixte par branche n'est pas diffusé systématiquement par les Etats membres de l'UE. Ces corrections modidient singificativement la part des salaires dans la valeur ajoutée, suivant la méthode, parce que non seulement la part des non salariés et de leur revenu mixte varie dans le temps, de façon différente par un effet de structure (moins d'agriculteurs) et de nature (les non salariés sont moins rémunérés aujourd'hui), de façon différente par pays (@fig-psalcnc et voir les annexes D et G consacrées à ce point).
+-   **Corriger des non salariés et leur imputer une masse salariale**. La correction habituelle consiste à affecter aux non salariés le même salaire que les salariés (généralement de la même branche) ; c'est ainsi que traitent la question @cette2019 et @tresor2025. Nous procédons à cette correction (appelée *correction par les effectifs*) aux 21 branches de la NACE rev. 2 niveau 1. Nous proposons une alternative en utilisant la mesure du revenu mixte (dite *correction par le revenu mixte*), parce que l'affectation d'un salarie égal aux non salariés et aux salariés par branches conduit à imputer un équivalent masse salariale supérieur au revenu mixte des non salariés[^1]. En France, le revenu mixte (des non-salariés) est passé de 30% de la masse salariale (autant pour le ratio des effectifs) au début des années 1970 à un peu moins de 10% (presque 15% pour les effectifs) en 2024. Malheureusement, le revenu mixte par branche n'est pas diffusé systématiquement par les Etats membres de l'UE. Ces corrections modifient significativement la part des salaires dans la valeur ajoutée, suivant la méthode, parce que non seulement la part des non salariés et de leur revenu mixte varie dans le temps, de façon différente par un effet de structure (moins d'agriculteurs) et de nature (les non salariés sont moins rémunérés aujourd'hui), de façon différente par pays (@fig-psalcnc et voir les annexes D et G consacrées à ce point).
 
--   Définir le champ considéré. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour part auto produit (les loyers imputés aux propriétaires) et pour part produits par les ménages pour d'autres ménages (les propriétaires bailleurs). Suivant les pays ou les périodes, le nombre de propriétaires occupants peut être très différent (@cette2019 fait ce point que @tresor2025 semble ignorer). Mais le vrai problème est que le partage de la valeur ajoutée n'a ici pas de sens dansle cas d'un loyer imputé ou d'un propriétaire bailleur. La consommation de services immobiliers par les ménages représentait en France en 2024 un peu moins de 300 milliards d'euros soit aprroximativement `r round(300/1666*100)`% de la valeur ajoutée brute hors services immobilier. On comprend donc que ce point n'est pas du tout négigeable. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus précise, en enlevant de la valeur ajoutée marchande la branche "services immobiliers (L)" (@appfig-psalcompote, @fig-structbranche). Omettre les services immobiliers pose cependant un problème, parce que les loyers versés par les entreprises à leurs bailleurs sont souvent un prix de transfert et non un prix de marché. C'est donc un élément qui peut être utilisé comme véhicule pour de l'otpimisation fiscale, d'autant plus que la fiscalité immobilière peut être avantageuse. Nous explorons cette dimension dans la @sec-immobilier en particulier pour la France.
+-   **Définir le champ considéré**. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour part auto produit (les loyers imputés aux propriétaires) et pour part produits par les ménages pour d'autres ménages (les propriétaires bailleurs). Suivant les pays ou les périodes, le nombre de propriétaires occupants peut être très différent (@cette2019 fait ce point que @tresor2025 semble ignorer). Mais le vrai problème est que le partage de la valeur ajoutée n'a ici pas de sens dansle cas d'un loyer imputé ou d'un propriétaire bailleur. La consommation de services immobiliers par les ménages représentait en France en 2024 un peu moins de 300 milliards d'euros soit aprroximativement `r round(300/1666*100)`% de la valeur ajoutée brute hors services immobilier. On comprend donc que ce point n'est pas du tout négigeable. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus précise, en enlevant de la valeur ajoutée marchande la branche "services immobiliers (L)" (@appfig-psalcompote, @fig-structbranche). Omettre les services immobiliers pose cependant un problème, parce que les loyers versés par les entreprises à leurs bailleurs sont souvent un prix de transfert et non un prix de marché. C'est donc un élément qui peut être utilisé comme véhicule pour de l'otpimisation fiscale, d'autant plus que la fiscalité immobilière peut être avantageuse. Nous explorons cette dimension dans la @sec-immobilier en particulier pour la France.
 
--   Utiliser la notion de valeur ajoutée nette (de la consommation de capital fixe, la CCF) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. Cette dernière notion découle de l'application de tables de mortalité à un inventaire permanent des investissements non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire mesurée par leur amortissement physique ou fiscal, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée (@fig-psalnetbrut). Ce point est signalé par @tresor2025, mais les auteurs ont préféré le concept de valeur ajoutée brute pour des raisons de comparabilité entre études – au détriment de la comparabilité dans le temps et dans l'espace.
+-   **Utiliser la notion de valeur ajoutée nette** (de la consommation de capital fixe, la CCF) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. Cette dernière notion découle de l'application de tables de mortalité à un inventaire permanent des investissements non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire mesurée par leur amortissement physique ou fiscal, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée (@fig-psalnetbrut). Ce point est signalé par @tresor2025, mais les auteurs ont préféré le concept de valeur ajoutée brute pour des raisons de comparabilité entre études – au détriment de la comparabilité dans le temps et dans l'espace.
 
 [^1]: Merci à E. Aurissergues pour m'avoir pointé cette anomalie.
 
-Le concept que nous privilégions est donc défini comme suit (où, pour chaque branche $D1_b$ est la masse salariale chargée, $B1G_b$ la valeur ajoutée brute, $P51C_b$ la $CCF_b$, les trois notions en euros aux prix courants et $ns_b$ et $sal_b$ les effectifs en personne ou le revenu mixte par branche)[^2] :
+Le concept que nous privilégions est ainsi défini comme suit (où, pour chaque branche $D1_b$ est la masse salariale chargée, $B1G_b$ la valeur ajoutée brute, $P51C_b$ la $CCF_b$, les trois notions en euros aux prix courants et $ns_b$ et $sal_b$ les effectifs en personne ou le revenu mixte par branche)[^2] :
 
 [^2]: @cette2019 utilisent une définition plus large des branches non marchande en incluant les branches R, T et U.
 
@@ -164,13 +164,13 @@ $$
 s_{net, n.s., -LOPQ}  = \frac{\sum_{b\in{TT-LOPQ}}{D1_b*(1+ns_b/sal_b)}}{\sum_{b\in{TT-LOPQ}}{B1G_b - P51C_b}}
 $$
 
-La part des salaires dans la valeur ajoutée nette est croissante en France (@fig-psal) (de 10 points de 1998 à 2025), comme en Espagne (de 9 points). Elle atteint en France le niveau le plus élevé des pays sélectionnés (correction des non salariés par les effectifs), pour autant que l'on puisse comparer entre pays. Ce résultat constraste avec les évaluations récents de @cette2019 et @tresor2025.
+La part des salaires dans la valeur ajoutée nette est croissante en France (@fig-psal) (de 10 points de 1998 à 2025), comme en Espagne (de 9 points). Elle atteint en France le niveau le plus élevé des pays sélectionnés (correction des non salariés par les effectifs), pour autant que l'on puisse comparer entre pays. Ce résultat contraste avec les évaluations récentes de @cette2019 et @tresor2025 qui concluent à une stabilité de la part des salaires dans la valeur ajoutée autour de ce qu'ils supposent être une valeur d'équilibre.
 
 Théoriquement[^3], l'évolution de part des salaires dans la valeur ajoutée dépend de la fonction de production agrégée (ce qui suppose qu'elle existe). Si l'élasticité de substitution entre le capital et la travail est unitaire alors on s'attend à ce que le partage soit indépendant du prix relatif du travail et du capital. La part des salaires est alors uniquement déterminée par la forme de la fonction de production et devrait converger dans tous les pays vers une valeur semblable, par diffusion de la technologie. Une structure de l'économie par branche différente peut cependant se traduire par des parts différentes d'un pays à l'autre.
 
 [^3]: @cette2019 propose une modélisation simple des principaux déterminants du partage de la valeur ajoutée sur la base d'une fonction de production. @reis2022 étend l'analyse en équilibre néokeynéisien.
 
-L'élasticité estimée généralement, au moins à moyen terme, est sensiblement inférieure à 1, en tout cas sur données macroéconomique. Cela implique qu'une hausse du prix du travail relativement par au capital se traduit par une hausse de la part du travail dans la valeur ajoutée – la réciproque étant bien entendu vraie si c'est le capital qui est relativement plus cher. Cela peut conduire à des variations plus persistantes de la part des salaires dans la valeur ajoutée, mais ces variations doivent reproduire celles des prix relatifs.
+L'élasticité estimée généralement, au moins à moyen terme, est sensiblement inférieure à 1, en tout cas sur données macroéconomique. Cela implique qu'une hausse du prix du travail relativement par au capital se traduit par une hausse de la part du travail dans la valeur ajoutée – la réciproque étant bien entendu vraie si c'est le capital qui est relativement plus cher. Cela peut conduire à des variations plus persistantes de la part des salaires dans la valeur ajoutée (ce qu'on appelle le *wage push)*, mais ces variations doivent reproduire celles des prix relatifs.
 
 La part des salaires dans la valeur ajoutée est la plus basse aux Pays-Bas et est sur une pente décroissante depuis plus de 20 ans, alors qu'elle semble stable en Belgique et en Allemagne. L’Italie affiche une variabilité temporelle importante, avec un pic de la part des salaires dans la valeur ajoutée en 2013, puis une franche décroissance (de plus de 13 points) interrompue dans la période récente suite à la période d'inflation et la forte relance budgétaire.
 
@@ -194,13 +194,13 @@ margin_download(psaleu$data)
 
 ```
 
-### Rendement finanicer du capital productif : la France au plus bas
+### Rendement financier du capital productif : la France au plus bas
 
-La construction d'un taux de rendement financier du capital est sans doute assez fragile parce qu'il faut ajouter à l'évaluation du partage de la valeur ajoutée une estimation des impôts payés (notamment l'impôt sur les sociétés) et une évaluation du stock de capital (voir @sec-profits pour la méthode). En utilisant les données de stock de capital productif le diagnostic présenté sur le @fig-psal est confirmé par le @fig-rp.
+La construction d'un taux de rendement financier du capital est sans doute assez fragile parce qu'il faut ajouter à l'évaluation du partage de la valeur ajoutée une estimation des impôts payés (notamment l'impôt sur les sociétés) et une évaluation du stock de capital (voir @sec-profits pour la méthode). En utilisant les données de stock de capital productif, le diagnostic présenté sur le @fig-psal est confirmé par le @fig-rp.
 
-Le choix du champ est assez important pour conserver une cohérence entre numérateur et le dénominateur. Pour le champ hors immobilier, le profit net et le stock de cpaital excluent toutes les activités immobilières parce que dans la plupart des pays (Allemagne, France, Italie) seule la branche immobilière détient des actifs de type logement ($N111N$ dans la nomenclature de la NACE rev2). Dans quelques pays, une part minoritaire de la valeur du stock de logements est détenue par d'autres branches (F, K, O, Q, R, S en Espagne (15%) ou en Belgique (0,5%); K au Pays-Bas (5%)) que la branche services immobiliers -- ce qui suggère que la convention branche/secteur n'est pas complètement suivie ou a été interprétée assez librement.
+Le choix du champ est assez important pour conserver une cohérence entre numérateur et le dénominateur. Pour le champ hors immobilier, le profit net et le stock de capital excluent toutes les activités immobilières parce que dans la plupart des pays (Allemagne, France, Italie) seule la branche immobilière détient des actifs de type logement ($N111N$ dans la nomenclature de la NACE rev. 2). Dans quelques pays, une part minoritaire de la valeur du stock de logements est détenue par d'autres branches (F, K, O, Q, R, S en Espagne (15%) ou en Belgique (0,5%); K au Pays-Bas (5%)) que la branche services immobiliers – ce qui suggère que la séparation branche/secteur n'est pas complètement assurée ou a été interprétée assez librement.
 
-La France y occupe une position singulière avec un rendement du capital productif particulièrement faible et décroissant depuis le début des années 2000 alors qu'il est constant dans beaucoup de pays ou même croissant comme aux Pays-Bas. Les politiques de l'offre successives depuis le choc fiscal de Nicolas Sarkozy, le pacte pour la croissance, la compétitivité et l'emploi de François Hollande en 2012 ou encore les politiques d'attractivité, en particulier fiscales, engagées par Emmanuel Macron depuis 2017 n'ont apparemment pas changé grand chose à cette dégradation continue. Tout au plus, on peut y associer la relative stabilisation du taux de rendement net en France (@fig-rp) à partir de 2017.
+La France occupe une position singulière avec un rendement du capital productif particulièrement faible et décroissant depuis le début des années 2000 alors qu'il est constant dans beaucoup de pays ou même croissant comme aux Pays-Bas. Les politiques de l'offre successives, depuis le choc fiscal de Nicolas Sarkozy, le pacte pour la croissance, la compétitivité et l'emploi de François Hollande en 2012 ou encore les politiques d'attractivité, en particulier fiscales, engagées par Emmanuel Macron depuis 2017 n'ont apparemment pas changé grand chose à cette dégradation continue. Tout au plus, on peut y associer la relative stabilisation du taux de rendement net en France (@fig-rp) à partir de 2017.
 
 Une explication possible de la dégradation du rendement du capital productif est à chercher du côté de son accroissement aux Pays-Bas – malgré un poids de l'IS de plus en plus lourd dans ce pays – sous l'effet du déplacement de la base fiscale à l'intérieur de l'Europe comme l'analysent @tørsløv2022 ou encore d'un effet particulier de la fiscalité immobilière (@sec-immobilier).
 
@@ -423,25 +423,27 @@ tabsetize(list("avec cot.soc. employeur" = sal,
 margin_download(data |> select(-tooltip, -tooltipb))
 ```
 
-En Italie et en Espagne, la masse salariale dans les branches non marchandes est supérieures à celle des branches non marchandes. Aux Pays-Bas et en Allemagne il n'y a pas de différence notable. En France, elle est significativement plus basse. Notons que les branches non marchandes ne sont pas nécessairement de l'emploi public et ce dans des proportions variables suivant les pays. Dans tous les pays, la masse salariale des branches immobilier et (surtout) services financiers est plus élevée que la masse salariale dans les autres branches marchandes.
+En Italie et en Espagne, la masse salariale dans les branches non marchandes est supérieures à celle des branches non marchandes. Aux Pays-Bas et en Allemagne il n'y a pas de différence notable. En France, elle est significativement plus basse. Notons que les branches non marchandes ne sont pas nécessairement de l'emploi public et ce dans des proportions variables suivant les pays. Dans tous les pays, la masse salariale des branches services immobiliers et (surtout) services financiers est plus élevée que la masse salariale dans les autres branches marchandes.
 
 ## Comptes de branches : que changent les concepts et le champ ?
 
 ### Salariés et non salariés
 
-On utilise les données de comptabilité nationale, en trimestriel, par branche ([`nasq_10_nf_tr`](https://ec.europa.eu/eurostat/databrowser/view/nasq_10_nf_tr/default/table?lang=en)), ré-agrégées au niveau de l'ensemble de l'économie. Le passage par les comptes de branches permet de distinguer branches marchandes et non marchandes ou d'autres regroupements, comme l'exclusion des services immobiliers. Ce passage permet également de conduire la correction salariés non salariés au niveau des branches. D'après l'INSEE, (voir le blog "[Combien pèse l'industrie en France et en Allemagne](https://blog.insee.fr/combien-pese-l-industrie-en-france-et-en-allemagne/)"), tous les pays ne produisent pas une comptabilité de branche mais pour certains (notamment l'Allemagne) une comptabilité sectorielle. La différence tient aux entreprises qui produisent plusieurs produits (un constructeur automobile propose des services financiers pour l'achat des véhicules) et dont l'activité est imputé à différentes branches (industrie et services financiers) dans la comptabilité de branche alors que dans une comptabilité de secteur l’activité est versée dans le principal secteur (ou le secteur d'immatriculation de l'entreprise chapeau). Cette différence empêche normalement les comparaisons des comptes de branches entre pays, y compris à l'intérieur de l'Union Européenne. Cependant, pour comparer la part des salaries dans la valeur ajoutée sur des agrégats larges (branches marchandes par exemple), cette dérogation à la norme comptable n'est que modérément problématique : de toute façon, l'automobile et les services financiers sont agrégés et c'est la correction pour la masse salariale des non salariés qui peut être modifiée. Mais si la même délimitation est employée pour les salariés et les non salariés que pour l'activité, l'erreur est probablement minime.
+On utilise les données de comptabilité nationale, en trimestriel, par branche ([`nasq_10_nf_tr`](https://ec.europa.eu/eurostat/databrowser/view/nasq_10_nf_tr/default/table?lang=en)), ré-agrégées au niveau de l'ensemble de l'économie. Le passage par les comptes de branches permet de distinguer branches marchandes et non marchandes ou d'autres regroupements, comme l'exclusion des services immobiliers. Ce passage permet également de conduire la correction salariés non salariés au niveau des branches.
 
-La part des salaires est corrigée de la part des non salariés (données annuelles [`nama_10_a64_e`](https://ec.europa.eu/eurostat/databrowser/view/nama_10_a64_e/default/table?lang=en), extrapolées en maintenant le ratio salariés/non salariés à sa dernière valeur observée) en considérant que le salaire des non salariés est identique dans chaque branche à celui des salariés – cette hypothèse, que nous appelons *correction par les effectifs*, sous estime probablement le salaire de certains des non salariés (notamment les professions libérales ou les artisans) mais elle est difficile à lever. Le développement des platerformes et dans certains pays de statuts (sociaux, fiscaux) particuliers (les micro-entrepreneurs – ou auto-entrepreneurs en France) a introduit une nouvelle "classe" de non salariés possiblement moins rémunérés et avec des durées du travail plus basses que le reste des indépendants. L'annexe D compile quelques éléments quantitatifs.
+D'après l'INSEE, (voir le blog "[Combien pèse l'industrie en France et en Allemagne](https://blog.insee.fr/combien-pese-l-industrie-en-france-et-en-allemagne/)"), tous les pays ne produisent pas une comptabilité de branche mais pour certains (notamment l'Allemagne) une comptabilité sectorielle. La différence tient aux entreprises qui produisent plusieurs produits (un constructeur automobile propose des services financiers pour l'achat des véhicules) et dont l'activité est imputé à différentes branches (industrie et services financiers) dans la comptabilité de branche alors que dans une comptabilité de secteur l’activité est versée dans le principal secteur (ou le secteur d'immatriculation de l'entreprise chapeau). Cette différence empêche normalement les comparaisons des comptes de branches entre pays, y compris à l'intérieur de l'Union Européenne. Cependant, pour comparer la part des salaries dans la valeur ajoutée sur des agrégats larges (branches marchandes par exemple), cette dérogation à la norme comptable n'est que modérément problématique : de toute façon, l'automobile et les services financiers sont agrégés et c'est la correction pour la masse salariale des non salariés qui peut être modifiée. Mais si la même délimitation est employée pour les salariés et les non salariés que pour l'activité, l'erreur est probablement minime.
 
-En revanche, dans la correction par les effectifs, on prend bien en compte que les non salariés de la branche agricole n'ont pas le même revenu que ceux de la branche "information et communication". La décomposition employée est à 9 branches et on peut conduire la même correction à un niveau de désagrégation plus fin. Une alternative est employée en utilsant les données de revenu mixte. A défaut d'être totalement convaincante, du fait d'un manque de données diffusées, elle montre la complexité et l'importance de la correction pour le revenu des indépendants. Une solution aurait pu être de ne considérer que les entreprises (voir @sec-snff) mais là aussi les différentes pratiques de comptabilité ne garantissent pas un traitement homogène d'un pays à l'autre.
+La part des salaires est corrigée de la part des non salariés (données annuelles [`nama_10_a64_e`](https://ec.europa.eu/eurostat/databrowser/view/nama_10_a64_e/default/table?lang=en), extrapolées en maintenant le ratio salariés/non salariés à sa dernière valeur observée) en considérant que le salaire des non salariés est identique dans chaque branche à celui des salariés – cette hypothèse, que nous appelons *correction par les effectifs*, sous estime probablement le salaire de certains des non salariés (notamment les professions libérales ou les artisans) mais elle est difficile à lever. Le développement des plateformes et dans certains pays de statuts (sociaux, fiscaux) particuliers (les micro-entrepreneurs – ou auto-entrepreneurs en France) a introduit une nouvelle "classe" de non salariés possiblement moins rémunérés et avec des durées du travail plus basses que le reste des indépendants. L'annexe D compile quelques éléments quantitatifs.
 
-La masse salariale est rapportée soit à la valeur ajoutée brute ($B1G$), soit à la valeur ajoutée nette ($B1N=B1G-P51C$). Comme la consommation de capital fixe ($P51C$) n'est pas connue en trimestriel, elle est dérivée des comptes annuels en 21 branches (niveau 1 de la NACE rev2 [`nama_10_a64`](#0)), agrégée en 9 branches, puis extrapolée pour les années non connues (ici 2024 et 2025) en conservant un ratio constant dans la valeur ajouté brute. Le détail se trouve dans le code.
+En revanche, dans la correction par les effectifs, on prend bien en compte que les non salariés de la branche agricole n'ont pas le même revenu que ceux de la branche "information et communication". La décomposition employée est à 9 branches et on peut conduire la même correction à un niveau de désagrégation plus fin. Une alternative est employée en utilisant les données de revenu mixte. A défaut d'être totalement convaincante, du fait d'un manque de données diffusées, elle montre la complexité et l'importance de la correction pour le revenu des indépendants. Une solution aurait pu être de ne considérer que les entreprises (voir @sec-snff) mais là aussi les différentes pratiques de comptabilité ne garantissent pas un traitement homogène d'un pays à l'autre et surtout occultent un pan important de l'économie (en Italie aujourd'hui ou en France dans le passé par exemple).
+
+La masse salariale est rapportée soit à la valeur ajoutée brute ($B1G$), soit à la valeur ajoutée nette ($B1N=B1G-P51C$). Comme la consommation de capital fixe ($P51C$) n'est pas connue en trimestriel, elle est dérivée des comptes annuels en 21 branches (niveau 1 de la NACE rev. 2 [`nama_10_a64`](#0)), agrégée en 9 branches, puis extrapolée pour les années non connues (ici 2024 et 2025) en conservant un ratio constant dans la valeur ajouté brute. Le détail se trouve dans le code.
 
 Les trois graphiques suivants illustrent les conséquences sur la mesure de la part des salaires suivant les différents concepts. Le @fig-psalcnc compare avec et sans correction pour les non salariés. Deux rubans sont affichés, l'un pour les branches marchandes hors services immobiliers et financiers et l'autre pour toutes les branches.
 
-L'avantage des comptes de branches est une définition homogène pour chacun des pays. La branche immobilier est exclue parce qu'il est impossible de distinguer les entreprises des ménages propriétaires (les loyers imputés sont une valeur ajoutée des ménages).
+L'avantage des comptes de branches est une définition homogène pour chacun des pays. La branche immobilier est exclue parce qu'il est impossible de distinguer les entreprises des ménages propriétaires (les loyers imputés sont comptabilisés comme une valeur ajoutée des ménages).
 
-Les données trimestrielles sont annualisées pour la lisibilité et pour simplifier le mélange de données annuelles et trimestrielles. Le point 2025 (la dernière année) est donc un acquis sur les trimestres observés de l'année (ici 2 trimestres sur 4) susceptible de changer au fur et à mesure du temps. Il est possible en modifiant le code de produire un graphique trimestriel ou trimestriel lissé, à votre convenance.
+Les données trimestrielles sont annualisées pour la lisibilité et pour simplifier le mélange de données annuelles et trimestrielles. Le point 2025 (la dernière année) est donc un acquis sur les trimestres observés de l'année (ici 2 ou 3 trimestres sur 4) susceptible de changer au fur et à mesure du temps. Il est possible en modifiant le code de produire un graphique trimestriel ou trimestriel lissé.
 
 ```{r}
 #| label: fig-psalcnc
@@ -606,9 +608,9 @@ nsal |>
   
 ```
 
-En France et en Belgique, la convention employée surestime probablement la masse salariale que l'on peut imputer aux non salariés, puisqu'elle apparaît supérieure au revenu mixte. En revanche, en Allemagne ou en Espagne, c'est potentiellement l'inverse. Le cas Français est intéressant, parce que le ratio masse salariale imputée sur revenu mixte devient plus grand que 1 en 2013 et et augmente quelques années avant. Le régime d'autoentrepreneur introduit en 2008 peut expliquer cette dynamique en augmentant le nombre de non salariés ayant de faibles revenus et éventuellement étant salariés par ailleurs (voir l'annexe D pour plus de détails).
+En France et en Belgique, la convention employée surestime visiblement la masse salariale que l'on peut imputer aux non salariés, puisqu'elle apparaît supérieure au revenu mixte. En revanche, en Allemagne ou en Espagne, c'est potentiellement l'inverse. Le cas Français est intéressant, parce que le ratio masse salariale imputée sur revenu mixte devient plus grand que 1 en 2013 et et augmente quelques années avant. Le régime d'autoentrepreneur introduit en 2008 peut expliquer cette dynamique en généralisant le nombre de non salariés ayant de faibles revenus et éventuellement étant salariés par ailleurs (voir l'annexe D pour plus de détails).
 
-On peut construire à partir du revenu mixte une correction alternative de la non salarisation en utilisant le revenu mixte – en retenant 88% du revenu mixte[^4], le reste pour approcher la CCF – et non le nombre de non salariés (correction par les effectifs) comme base de la correction.
+On peut construire à partir du revenu mixte une correction alternative de la non salarisation en utilisant le revenu mixte – en retenant 88% du revenu mixte[^4], le reste pour approcher la CCF des indépendants – et non le nombre de non salariés (correction par les effectifs) comme base de la correction.
 
 [^4]: Le chiffre de 88% est établi à partir des comptes nationaux français qui permettent de calculer le ratio CCF sur revenu mixte pour les entrepreneurs individuels (secteur institutionnel S14AA). Pour la France nous utilisons le ratio calculé chaque année (qui varie entre 9,4% et 13,8% entre 1995 et 2024). Ce chiffre est plus faible que celui pour l'ensemble de l'économie marchande (de l'ordre de 20%, voir l'annexe B), ce qui peut s'expliquer par le fait que les structures fortement capitalistiques (et avec une forte CCF) sont moins suceptibles d'être des indépedants, parce qu'il est nécessaire de les financer par une structure de capital à responsabilité limitée et faisant intervenir des actionnaires qui ne sont pas le seul dirigeant. Enfin, nous supposons que dans le cas des indépendants la part des profits est nulle et que la rémunération de l'indépendant est équivalente à un revenu d'activité, ce qui est conforme au traitement fiscal en général. Lorsque l'entrepreneur souhaite bénéficier d'une fiscalité différente sur les revenus d'activité et les revenus du capital, il est contraint de passer d'un régime d'indépendant à une structure juridique moins souple.
 
@@ -694,7 +696,7 @@ psal <- ggplot(data) +
 girafy(psal, 1.5)
 ```
 
-La correction est assez importante pour la France et la Belgique, ce qui est conforme aux valeurs affichées dans le @tbl-mixte. La hausse de la part des salaires apparaît moins importante que pour la correction par les effectifs. Au lieu d'une hausse de 8,3 points de pourcentage, elle n'est que de de 4,4 points. La comparaison avec les autres pays est donc un peu moins brutale que pour la correction par les effectifs, l'Allemagne ayant en 2023 une part des salaires dans la valeur ajoutée proche de celle de la France en suivant la correction par le revenu mixte, qui réhausse la part des salaires (voir aussi le @tbl-mixte) – à la réserve près que la correction est moins précise pour l'Allemagne puisque nous n'avons pas pu accéder aux données de revenu mixte par branches, contrairement à la France.
+La correction est assez importante pour la France et la Belgique, ce qui est conforme aux valeurs affichées dans le @tbl-mixte. La hausse de la part des salaires apparaît moins importante que pour la correction par les effectifs. Au lieu d'une hausse de 8,3 points de pourcentage, elle n'est que de de 4,4 points. La comparaison avec les autres pays est donc un peu moins brutale que pour la correction par les effectifs, l'Allemagne ayant en 2023 une part des salaires dans la valeur ajoutée proche de celle de la France en suivant la correction par le revenu mixte, qui réhausse la part des salaires (voir aussi le @tbl-mixte) – à la réserve près que la correction est moins précise pour l'Allemagne puisque nous n'avons pas les données de revenu mixte par branches, contrairement à la France.
 
 ### Valeur ajoutée nette ou brute
 
@@ -784,7 +786,7 @@ psal <- ggplot() +
 girafy(psal, 1.5)
 ```
 
-La notion de part des salaires dans la valeur ajoutée nette consiste à réduire le démominateur (la valeur ajoutée) de la consommation de capital fixe. Cela augmente donc le ratio. Cependant, cette correction n'est pas constante dans le temps (comme en France, en Espagne ou en Belgique). Comme on peut le voir sur le @appfig-psalcompote, la variance entre les pays est plus basse pour la notion brute (non corrigé de la CCF) que nette. Pour les branches marchandes hors services immobiliers et services immobiliers, le classement entre pays est marginalement modifié, la Belgique ayant une part des salaires nette pus élevée que l'Allemagne, alors que sa part brute est plus faible qu'en Allemagne. Pour les autres pays, le classement est identique (La France a la part la plus haute et les Pays-Bas plus faible).
+La notion de part des salaires dans la valeur ajoutée nette consiste à réduire le dénominateur (la valeur ajoutée) de la consommation de capital fixe. Cela augmente donc le ratio. Cependant, cette correction n'est pas constante dans le temps (comme en France, en Espagne ou en Belgique). Comme on peut le voir sur le @appfig-psalcompote, la variance entre les pays est plus basse pour la notion brute (non corrigé de la CCF) que nette. Pour les branches marchandes hors services immobiliers et services immobiliers, le classement entre pays est marginalement modifié, la Belgique ayant une part des salaires nette plus élevée que l'Allemagne, alors que sa part brute est plus faible qu'en Allemagne. Pour les autres pays, le classement est identique (La France a la part la plus haute et les Pays-Bas plus faible).
 
 ### Impact du changement de structure de l'économie
 
@@ -861,7 +863,7 @@ girafy(gd,1.5)
 
 ### Profits nets dans les comptes de branche {#sec-profits}
 
-En utilisant d'une part la valeur ajoutée des branches marchandes hors services immobiliers produits par les ménages et la valeur des actifs productifs issue de la base des stocks de capital productif ([nama_10_nfa_st](https://ec.europa.eu/eurostat/databrowser/view/NAMA_10_NFA_ST__custom_2046386/default/table?lang=en)) sur le même champ (i.e. en enlevant la sous branche L68A), on peut estimer un rendement du capital productif.
+En utilisant d'une part la valeur ajoutée des branches marchandes hors services immobiliers produits par les ménages et la valeur des actifs productifs issue de la base des stocks de capital productif ([nama_10_nfa_st](https://ec.europa.eu/eurostat/databrowser/view/NAMA_10_NFA_ST__custom_2046386/default/table?lang=en)) sur le même champ (*i.e.* en enlevant la sous branche L68A), on peut estimer un rendement du capital productif.
 
 ```{r, results="asis"}
 #| label: fig-tprofitbranches
@@ -871,7 +873,9 @@ En utilisant d'une part la valeur ajoutée des branches marchandes hors services
 tabsetize(tpbranches)
 ```
 
-Le rendement calculé sur le @fig-tprofitbranches diffère de celui du @fig-tprofitsnff. La différence vient en partie de la difficulté à imputer l'impôt des sociétés aux seules entreprises des branches marchandes – des entités légales dans les branches non marchandes peuvent être soumises à l'impôt sur les sociétés et de la valorisation des actifs. Dans l'approche comptes d'agents (ou de secteurs institutionnels), on affecte la valeur nette résiduelle des entreprises au stock de capital. De plus, le stock de capital n'est pas dans l'approche du @fig-tprofitsnff limité au capital productif mais intègre également des actifs financiers qui n'ont pas de contrepartie physique parce qu'ils sont hors territoire français.
+Le rendement calculé sur le @fig-tprofitbranches diffère de celui du @fig-tprofitsnff. La différence vient en partie de la difficulté à imputer l'impôt des sociétés aux seules entreprises des branches marchandes – des entités légales dans les branches non marchandes peuvent être soumises à l'impôt sur les sociétés et de la valorisation des actifs[^5]. Dans l'approche comptes d'agents (ou de secteurs institutionnels), on affecte la valeur nette résiduelle des entreprises au stock de capital. De plus, le stock de capital n'est pas dans l'approche du @fig-tprofitsnff limité au capital productif mais intègre également des actifs financiers qui n'ont pas de contrepartie physique parce qu'ils sont hors territoire français.
+
+[^5]: Une alternative serait de disposer de l'impôt sur les sociétés (\$D51\$) par branche, mais le passage branche produits empêche de le faire simplement.
 
 La France conserve une singularité marquée par la baisse continue du taux de profit au cours du temps. Le rendement apparent du capital est ainsi très bas, plus bas que dans tous les autres pays considérés où il est plutôt stable (l'Italie fait exception avec une forte volatilité). Cette singularité subsiste lorsqu'on utilise la correction de la non salarisation par le revenu mixte au lieu des comptes de branches (@fig-rpmixte). La position de la France est un peu moins singulière, mais le diagnostic subsiste. L'écart avec l'Allemagne est significativement réduit dans cette configuration, puisqu'en 2023 le rendement du capital productif ressort à 8,2% en France contre 9,3% en Allemagne. L'écart avec les Pays-Bas subsiste presque entièrement (19,2% de rendement aux Pays-Bas).
 
@@ -963,7 +967,7 @@ girafy(tpmixte, 1.5)
 
 ### Part des salaires dans la valeur ajoutée, comptes d'agents
 
-Les comptes d'agents (ou de secteurs institutionnels) permettent une analyse plus simple, parce qu'ils permettent de distinguer les seules entreprises non financières. Cela évite d'avoir à prendre en compte les non salariés, cela exclue les services immobiliers produits par les ménages. C'est donc une analyse sur un champ économique plus strict (au sens de la forme légale des entités considérées). La notion d'impôt sur les sociétés est aussi mieux définie et le stock de capital productif est mieux connu du fait de l'obligation légale de déclaration des comptes des entreprises.
+Les comptes d'agents (ou de secteurs institutionnels) permettent une analyse plus simple, parce qu'ils permettent de distinguer les seules entreprises non financières. Cela évite d'avoir à prendre en compte les non salariés, cela exclue les services immobiliers produits par les ménages. C'est donc une analyse sur un champ économique plus strict (au sens de la forme légale des entités considérées). La notion d'impôt sur les sociétés est aussi mieux définie et le stock de capital productif est mieux connu du fait de l'obligation légale de déclaration des comptes des entreprises. Cette méthode met de côté une part importante de l'activité, puisque les entités économiques qui ne sont pas des entités légales ne sont pas prises en compte.
 
 Malheureusement, comme identifié par l'INSEE, la pratique des instituts nationaux européens n'est pas conforme à celle de l'INSEE. Par exemple, en Allemagne, le secteur S11 inclut les quasi-sociétés et les entrepreneurs individuels. La normalisation des concepts est par ailleurs peu probable dans le futur, puisqu'elle est liée aux pratiques administratives.
 
@@ -1436,7 +1440,7 @@ psaloecd <- ggplot(data |> filter(year(time)>=1995)) +
 girafy(psaloecd, 1.5)
 ```
 
-En revanche, Eurostat a un programme de coopération (avec l'OCDE) pour intégrer les données dans le cadre d'Eurostat (sans que les méthodes ne soient plus homogènes pour autant).
+En revanche, Eurostat a un programme de coopération (avec l'OCDE entre autres) pour intégrer les données dans le cadre de données d'Eurostat (sans que les méthodes ne soient parfaitement homogènes pour autant).
 
 On utilise ces données ([`naidsa_10_nf_tr`](https://ec.europa.eu/eurostat/databrowser/view/naidsa_10_nf_tr__custom_13241966/default/table?lang=en)) pour construire des indicateurs comparables en comparant des pays autres que ceux de la zone euro.
 
@@ -1452,9 +1456,9 @@ girafy(psali, 1.5)
 
 ## Le rendement de l'immobilier {#sec-immobilier}
 
-Plusieurs explications peuvent être avancées à la dégradation du rendement du capital productif[^5] :
+Plusieurs explications peuvent être avancées à la dégradation du rendement du capital productif[^6] :
 
-[^5]: On peut aussi mettre en cause la qualité des comptes nationaux et leur incapacité à apporter une information même bruitée sur la réalité des économies contemporaines. Cette explication est commode lorsqu'on a une théorie envers laquelles les "faits" comptables sont têtus. Nous partons du principe qu'on peut
+[^6]: On peut aussi mettre en cause la qualité des comptes nationaux et leur incapacité à apporter une information même bruitée sur la réalité des économies contemporaines. Cette explication est commode lorsqu'on a une théorie envers laquelles les "faits" comptables sont têtus. Nous partons du principe qu'on peut
 
 -   une part des salaires dans la valeur ajoutée trop importante, ce que suggèrent les éléments présentés plus haut,
 
@@ -1464,13 +1468,13 @@ Plusieurs explications peuvent être avancées à la dégradation du rendement d
 
 -   un mécanisme d'optimisation fiscale par des prix de transfert vers d'autres pays européens (ce qu'explorent @tørsløv2022), en particulier les Pays-Bas, qui affichent un rendement élevé et croissant du capital productif,
 
--   un autre mécanisme d'optimisation fiscale, par la séparation des activités productives et des locaux qui leur sont nécessaires. Les loyers sont alors un prix de transfert et permettraient de bénéficier de la fiscalité avantageuse de l'immobilier[^6].
+-   un autre mécanisme d'optimisation fiscale, par la séparation des activités productives et des locaux qui leur sont nécessaires. Les loyers sont alors un prix de transfert et permettraient de bénéficier de la fiscalité avantageuse de l'immobilier[^7].
 
-[^6]: Une recherche sur internet aboutit rapidement à des documents de ce type : [Les fondamentaux de l'investissement immobilier professionnel](https://www.frenchfigures.com/blog/placement-immobilier-entreprise#:~:text=Optimisation%20de%20l%27Imp%C3%B4t%20sur%20les%20Soci%C3%A9t%C3%A9s&text=Les%20loyers%20vers%C3%A9s%20par%20votre%20entreprise%20%C3%A0%20la%20structure%20d%C3%A9tenant,patrimoine%20immobilier%20du%20risque%20entrepreneurial.). Le principe est que les plus values immobilières sont moins taxées que les flux de revenus à terme.
+[^7]: Une recherche sur internet aboutit rapidement à des documents de ce type : [Les fondamentaux de l'investissement immobilier professionnel](https://www.frenchfigures.com/blog/placement-immobilier-entreprise#:~:text=Optimisation%20de%20l%27Imp%C3%B4t%20sur%20les%20Soci%C3%A9t%C3%A9s&text=Les%20loyers%20vers%C3%A9s%20par%20votre%20entreprise%20%C3%A0%20la%20structure%20d%C3%A9tenant,patrimoine%20immobilier%20du%20risque%20entrepreneurial.). Le principe est que les plus values immobilières sont moins taxées que les flux de revenus à terme.
 
-Nous explorons dans cette section cette piste. La difficulté est que l'activité résidentielle, et sa partie autoproduite, sont intégrées dans la branche "services immobiliers". A partir des données détaillées de consommation (base [`nama_10_cp18`](https://ec.europa.eu/eurostat/databrowser/view/nama_10_cp18__custom_18526061/default/table)), on peut approximativement[^7] reconstituer ces parts. Le @tbl-households fait apparaître que la valeur ajoutée de la branche "services immobiliers (L)" est particulièrement importante en France et que la partie hors service de logement des ménages est aussi particulièrement élevée.
+Nous explorons dans cette section cette piste. La difficulté est que l'activité résidentielle, et sa partie auto-produite, sont intégrées dans la branche "services immobiliers". A partir des données détaillées de consommation (base [`nama_10_cp18`](https://ec.europa.eu/eurostat/databrowser/view/nama_10_cp18__custom_18526061/default/table)), on peut approximativement[^8] reconstituer ces parts. Le @tbl-households fait apparaître que la valeur ajoutée de la branche "services immobiliers (L)" est particulièrement importante en France et que la partie hors service de logement des ménages est aussi particulièrement élevée.
 
-[^7]: En ne prenant en compte que la consommation, on manque l'investissement des ménages en services immobiliers, à savoir les frais de transaction et d'agence lors des ventes.
+[^8]: En ne prenant en compte que la consommation, on manque l'investissement des ménages en services immobiliers, à savoir les frais de transaction et d'agence lors des ventes.
 
 ```{r}
 #| label: tbl-households
@@ -1620,8 +1624,9 @@ gg <- ggplot(data_long) +
 
 girafy(gg)
 ```
-
-{{< fa square >}}{style="text-align=center;"}
+::: {style="text-align: right;"}
+{{< fa square >}}
+:::
 
 ## Références {.unnumbered}
 
@@ -1920,9 +1925,9 @@ Part des salaires dans la VA et rang, différents concepts
 
 ### Annexe D : Rémunération des non salariés {.unnumbered}
 
-::: {@appfig-mixte}
+::: {#appfig-mixte}
 ```{r, results="asis"}
-#| fig-asp: 0.85 
+#| fig-asp: 1 
 PA <- source_data("R/nace.r")$pays2 
 anD <- source_data("R/annexeD.r") |> 
   mutate(
@@ -2003,19 +2008,19 @@ gD <-imap(
     breaks = scales::pretty_breaks(3)) +
   scale_color_pays(format = "eurostat") +
   ofce_caption(
-    note = "Les échelles de chaque pays sont ajustées et donc différentes.",
+    note = "Le graphique compare trois sources différentes, d'une part les effectifs (habituellement utilisé pour corriger de l anon salarisation), d'autre part le revenu mixte et enfin l'enquête EU-SILC. Les échelles de chaque pays sont ajustées et donc différentes.",
     source = "Eurostat, comptes nationaux annuels de secteur (nasa_10_nf_tr), emploi (nama_10_a64_e), EU-SILC (ilc_di05), téléchargés le {date}, code à github.com/xtimbeau/travail/R/annexeD.r.",
  champ = "Toutes branches.") )
 
 tabsetize(gD, r = 1.5)
 ```
 
-Différentes mesures du revenu des non salariés
+Différentes mesures du revenu des non salariés, comparaisons internationales
 :::
 
 ::: {#appfig-mixtefr}
 ```{r, results="asis"}
-#| fig-asp: 0.85 
+#| fig-asp: 0.7 
 anD <- source_data("R/annexeD.r") |> 
   filter(geo == "FR", champ %in% c("tb", "md", "mdhi")) |> 
   mutate(
@@ -2088,7 +2093,7 @@ gD2 <-imap(
 tabsetize(gD2, r = 1.5)
 ```
 
-Différentes mesures du revenu des non salariés
+Différentes mesures du revenu des non salariés en France
 :::
 
 ### Annexe E : Part des salaires dans la VA, base 2020 et 2014 depuis 1949 {.unnumbered}
@@ -2146,7 +2151,9 @@ psalE <- imap(
       aesthetics = c("color", "fill")) +
     scale_y_continuous(
       labels = scales::label_percent(1), 
-      breaks = scales::pretty_breaks(5)) +
+      breaks = scales::pretty_breaks(5),
+      limits = c(0.6, 0.9),
+      oob = scales::oob_keep) +
     guides(linewidth = "none") +
     ofce_caption(
       source = "INSEE, comptes nationaux annuels base 2014 (de 2022) et base 2020 (de 2025), code à github.com/xtimbeau/travail/france CN 2014.r.",
@@ -2160,7 +2167,7 @@ tabsetize(psalE, r = 1.25, active = 2)
 Part des salaires en France 1949-2025
 :::
 
-### Annexe F : Taux de rendement du catipal productif en France, 1978-2024
+### Annexe F : Taux de rendement du capital productif en France, 1978-2024 {.unnumbered}
 
 ::: {#fig-rfr78}
 ```{r, results="asis"}
@@ -2209,7 +2216,9 @@ psalE <- imap(
                        labels = c(rb = "Correction effectifs", rbm = "Correction revenu mixte")) +
     scale_y_continuous(
       labels = scales::label_percent(1), 
-      breaks = scales::pretty_breaks(5)) +
+      breaks = scales::pretty_breaks(5),
+      limits  = c(0,0.12),
+      oob = scales::oob_keep) +
     ofce_caption(
       source = "INSEE, comptes nationaux annuels base 2020, code à github.com/xtimbeau/travail/france-melodi.r.",
       champ = "{champs[.x]}",
@@ -2219,7 +2228,7 @@ tabsetize(psalE, r = 1.25, active=2)
 
 ```
 
-Taux de rendement du catipal productif en France, 1978-2024
+Taux de rendement du capital productif en France, 1978-2024
 :::
 :::::::::::::
 
@@ -2233,5 +2242,5 @@ Taux de rendement du catipal productif en France, 1978-2024
 -   annexe C : comparaisons entre pays,
 -   annexe D : rémunération des non salariés,
 -   annexe E : CN2020 et CN2014 pour la France,
--   annexe F : Rendement du capital productif de 1978 à 2024)
+-   annexe F : Rendement du capital productif de 1978 à 2024
 :::
