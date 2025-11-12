@@ -52,7 +52,7 @@ thanks: "Je remercie chaleureusement Elliot Aurissergues, Francçois Geerolf et 
 
 ```{r, include=FALSE}
 ofce::init_qmd()
-P6 <- source_data("nace.r")$pays1 
+P6 <- source_data("R/nace.r")$pays1 
 
 options(ofce.tabsetize.pdf = "one")
 if(knitr::is_html_output()) {
@@ -87,7 +87,7 @@ champs  <- c("md" = "Marchand", "mdhifi" = "Marchand hors immobilier et services
             "mdhim"= "Marchand hors imm. des ménages (L68A)", 
             "mdhfi"= "Marchand hors services financiers", 
             "tb" = "Toutes branches (marchandes et non marchandes)")
-naq <- source_data("vaq.r")$naa |> 
+naq <- source_data("R/vaq.r")$naa |> 
   filter(geo %in% P6) |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
@@ -96,7 +96,7 @@ naq <- source_data("vaq.r")$naa |>
     Part des salaires dans la VAN : {round(psal*100,1)}%")) |>
   mutate(geo = factor(geo, P6))
 
-date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
+date <- sourcoise::sourcoise_meta("R/vaq.r")$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 labels_champ = c(tb = "Ttes branches", md="Marchand", mdhifi = "Marchand hors imm.&fin.",
@@ -133,7 +133,7 @@ psal <- imap(
   scale_color_pays(format = "eurostat") +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
     champ = "Branches marchandes {.y}.",
     note = "La CCF ou les impôts nets de subventions proviennent des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà (voir tableau A1). Le partage de la valeur ajoutée pour les tous derniers points évolue donc comme le partage dans la valeur ajoutée brute. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") ) 
 
@@ -179,7 +179,7 @@ Au début des années 2000, deux pays se distinguaient des autres (l'Espagne et 
 #| fig-asp: 0.85
 #| fig-cap: Part des salaires dans la VA nette 1995 et 2025
 
-psaleu <- source_data("ggvanettebrute.r")
+psaleu <- source_data("R/ggvanettebrute.r")
 tabsetize(psaleu$gg)
 ```
 
@@ -203,14 +203,14 @@ Une explication possible de la dégradation du rendement du capital productif es
 #| fig-asp: 0.85
 #| fig-cap: Rendement du capital productif (avant et après IS)
 
-date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
+date <- sourcoise::sourcoise_meta("R/vaq.r")$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
-data4tp <- source_data("vaq.r")$naaa |>
+data4tp <- source_data("R/vaq.r")$naaa |>
   filter(geo %in% P6) |>
   select(time, geo, champ, r, rb)
 
-vroom::vroom_write(data4tp, "data4tp.csv")
+vroom::vroom_write(data4tp, "data/data4tp.csv")
 
 tpbranches <- imap( 
   c("Marchandes-L" = "mdhi",
@@ -266,7 +266,7 @@ tpbranches <- imap(
         scale_color_pays(format = "eurostat") +
         ofce_caption(
           source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10), actifs productifs (nama_10_nfa_st), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
+ comptes nationaux trimestriels (namq_10_a10), actifs productifs (nama_10_nfa_st), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
           champ = "Branches {.y}.",
           note = "Les actifs productifs sont connus, selon les pays, jusqu'en 2024 ou 2023 ou 2022 (voir tableau A1). L'impôt sur les sociétés (D51, IS) des sociétés financières (S12) est affecté à la branche K et celui des sociétés non financières (S11) aux branches marchandes hors services financiers et immobilier des ménages (K+L68A). Le trait pointillé est le rendement après IS et le trait plein avant IS. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") +
         theme(legend.box.spacing = unit(1, "pt"))
@@ -298,9 +298,9 @@ On distingue 4 agrégations : l'ensemble des branches (ou l'ensemble de l'écono
 
 library(lubridate)
 
-salaires <- source_data('salaires.r') |> 
+salaires <- source_data('R/salaires.r') |> 
   filter(geo %in% P6) 
-meta <- sourcoise::sourcoise_meta("salaires.r")
+meta <- sourcoise::sourcoise_meta("R/salaires.r")
 date <- meta$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 data <- salaires |> 
@@ -364,7 +364,7 @@ sal <- ggplot(data |> filter(name %in% c("w", "w_md", "w_nmd", "w_hi"))) +
   guides(color = "none", fill="none") +
   ofce_caption(
     wrap = 0,
-    source = "Eurostat, comptes nationaux trimestriels de branche (namq_10_a10), téléchargé le {date}, code à github.com/xtimbeau/travail/salaires.r.",
+    source = "Eurostat, comptes nationaux trimestriels de branche (namq_10_a10), téléchargé le {date}, code à github.com/xtimbeau/travail/R/salaires.r.",
     champ = "Toute l'économie, salaires y compris cotisations sociales à la charge de l'employeur.",
     note = "Le salaire est défini comme la masse salariale (D1) divisée par l'emploi salarié, sur les 4 derniers trimestres, déflaté par le déflateur de la consommation (P31_S14) chaîné.",
     ofce = FALSE)
@@ -403,7 +403,7 @@ salb <- ggplot(data |> filter(name %in% c("wb", "wb_md", "wb_nmd", "wb_hi"))) +
   guides(color = "none", fill="none") +
   ofce_caption(
     wrap = 0,
-    source = "Eurostat, comptes nationaux trimestriels de branche (namq_10_a10), téléchargé le {date}, code à github.com/xtimbeau/travail/salaires.r.",
+    source = "Eurostat, comptes nationaux trimestriels de branche (namq_10_a10), téléchargé le {date}, code à github.com/xtimbeau/travail/R/salaires.r.",
     champ = "Toute l'économie, salaires hors cotisations sociales à la charge de l'employeur.",
     note = "Le salaire est défini comme la masse salariale (D11) divisée par l'emploi salarié, sur les 4 derniers trimestres, déflaté par le déflateur de la consommation (P31_S14) chaîné.",
     ofce = FALSE)
@@ -425,7 +425,7 @@ En Italie et en Espagne, la masse salariale dans les branches non marchandes est
 
 On utilise les données de comptabilité nationale, en trimestriel, par branche ([`nasq_10_nf_tr`](https://ec.europa.eu/eurostat/databrowser/view/nasq_10_nf_tr/default/table?lang=en)), ré-agrégées au niveau de l'ensemble de l'économie. Le passage par les comptes de branches permet de distinguer branches marchandes et non marchandes ou d'autres regroupements, comme l'exclusion des services immobiliers. Ce passage permet également de conduire la correction salariés non salariés au niveau des branches. D'après l'INSEE, (voir le blog "[Combien pèse l'industrie en France et en Allemagne](https://blog.insee.fr/combien-pese-l-industrie-en-france-et-en-allemagne/)"), tous les pays ne produisent pas une comptabilité de branche mais pour certains (notamment l'Allemagne) une comptabilité sectorielle. La différence tient aux entreprises qui produisent plusieurs produits (un constructeur automobile propose des services financiers pour l'achat des véhicules) et dont l'activité est imputé à différentes branches (industrie et services financiers) dans la comptabilité de branche alors que dans une comptabilité de secteur l’activité est versée dans le principal secteur (ou le secteur d'immatriculation de l'entreprise chapeau). Cette différence empêche normalement les comparaisons des comptes de branches entre pays, y compris à l'intérieur de l'Union Européenne. Cependant, pour comparer la part des salaries dans la valeur ajoutée sur des agrégats larges (branches marchandes par exemple), cette dérogation à la norme comptable n'est que modérément problématique : de toute façon, l'automobile et les services financiers sont agrégés et c'est la correction pour la masse salariale des non salariés qui peut être modifiée. Mais si la même délimitation est employée pour les salariés et les non salariés que pour l'activité, l'erreur est probablement minime.
 
-La part des salaires est corrigée de la part des non salariés (données annuelles [`nama_10_a64_e`](https://ec.europa.eu/eurostat/databrowser/view/nama_10_a64_e/default/table?lang=en), extrapolées en maintenant le ratio salariés/non salariés à sa dernière valeur observée) en considérant que le salaire des non salariés est identique dans chaque branche à celui des salariés – cette hypothèse, que nous appelons *correction par les effectifs*, sous estime probablement le salaire de certains des non salariés (notamment les professions libérales ou les artisans) mais elle est difficile à lever. Le développement des platerformes et dans certains pays de statuts (sociaux, fiscaux) particuliers (les microentrepreneurs – autoentrepreneurs en France) a introduit une nouvelle "classe" de non salariés possiblement moins rémunérés et avec des durées du travail plus basses que le reste des indépendants. L'annexe D compile quelques éléments quantitifs.
+La part des salaires est corrigée de la part des non salariés (données annuelles [`nama_10_a64_e`](https://ec.europa.eu/eurostat/databrowser/view/nama_10_a64_e/default/table?lang=en), extrapolées en maintenant le ratio salariés/non salariés à sa dernière valeur observée) en considérant que le salaire des non salariés est identique dans chaque branche à celui des salariés – cette hypothèse, que nous appelons *correction par les effectifs*, sous estime probablement le salaire de certains des non salariés (notamment les professions libérales ou les artisans) mais elle est difficile à lever. Le développement des platerformes et dans certains pays de statuts (sociaux, fiscaux) particuliers (les micro-entrepreneurs – ou auto-entrepreneurs en France) a introduit une nouvelle "classe" de non salariés possiblement moins rémunérés et avec des durées du travail plus basses que le reste des indépendants. L'annexe D compile quelques éléments quantitatifs.
 
 En revanche, dans la correction par les effectifs, on prend bien en compte que les non salariés de la branche agricole n'ont pas le même revenu que ceux de la branche "information et communication". La décomposition employée est à 9 branches et on peut conduire la même correction à un niveau de désagrégation plus fin. Une alternative est employée en utilsant les données de revenu mixte. A défaut d'être totalement convaincante, du fait d'un manque de données diffusées, elle montre la complexité et l'importance de la correction pour le revenu des indépendants. Une solution aurait pu être de ne considérer que les entreprises (voir @sec-snff) mais là aussi les différentes pratiques de comptabilité ne garantissent pas un traitement homogène d'un pays à l'autre.
 
@@ -448,7 +448,7 @@ champs  <- c(md = "marchand",
              mdhi= "marchand hors imm.", 
              mdhim = "Marchand hors imm. mén.",
              tb = "Toutes branches (marchandes et non marchandes)")
-naq <- source_data("vaq.r")$naa |> 
+naq <- source_data("R/vaq.r")$naa |> 
   filter(geo %in% P6) |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
@@ -458,7 +458,7 @@ naq <- source_data("vaq.r")$naa |>
     Rémunérations (sans les non salariés) dans la VAN : {round(100*psalnc,1)}%")) |>
   mutate(geo = factor(geo, P6))
 
-date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
+date <- sourcoise::sourcoise_meta("R/vaq.r")$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 annot <-  tribble(
@@ -528,7 +528,7 @@ psal <- ggplot(data) +
     legend.justification = c(0.5, 0) ) +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
  champ = "Branches marchandes et non marchandes (en léger et pointillé) et branches marchandes hors services immobiliers et financiers (L et K dans la NACE r2) (en plein).")
 
 girafy(psal, 1.5)
@@ -543,10 +543,10 @@ Cette convention d'imputation d'un salaire aux non salariés est assez habituell
 #| tbl-cap: "Revenu mixte et masse salariale imputée aux non salariés"
 ##| html-table-processing: none
 
-pays <- source_data("nace.r")$pays1
-mixte <- source_data("mixte.r")$a
+pays <- source_data("R/nace.r")$pays1
+mixte <- source_data("R/mixte.r")$a
 
-nsal <- source_data("vaq.r")$naa |> 
+nsal <- source_data("R/vaq.r")$naa |> 
   transmute(geo, time, champ, msa, msanc) |> 
   filter(champ == "tb", geo %in% pays) |> 
   left_join(mixte, by = c("geo", "time")) |> 
@@ -611,10 +611,10 @@ On peut construire à partir du revenu mixte une correction alternative de la no
 #| fig-asp: 0.85
 #| fig-cap: Correction pour la non salarisation, effectifs ou revenu mixte, comptes de branches
 
-psal_fr <- source_data("france-melodi.r")$aggr |> 
+psal_fr <- source_data("R/france-melodi.r")$aggr |> 
   transmute(time, geo = "FR", champ, psal, psalm)
 
-naq2 <- source_data("vaq.r")$naa |> 
+naq2 <- source_data("R/vaq.r")$naa |> 
   filter(geo %in% P6) |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
@@ -681,7 +681,7 @@ psal <- ggplot(data) +
     legend.text = element_marquee(margin= margin(l=1))) +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, INSEE activités des branches, CN2020, code à github.com/xtimbeau/travail/vaq.r et france-medoli.fr",
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, INSEE activités des branches, CN2020, code à github.com/xtimbeau/travail/R/vaq.r et france-medoli.fr",
     champ = "Branches marchandes hors services immobiliers (-L).",
     note = "La correction par le revenu mixte n'est pas exacte pour le champ considéré, sauf pour la France pour laquelle le revenu mixte est disponible par branches (api melodi).")
 
@@ -702,7 +702,7 @@ champs  <- c("md" = "marchand",
             "mdhi" = "marchand hors services immobiliers",
             "mdhfi"= "marchand hors services financiers", 
             "tb" = "Toutes branches (marchandes et non marchandes)")
-naq <- source_data("vaq.r")$naa |> 
+naq <- source_data("R/vaq.r")$naa |> 
   filter(geo %in% P6) |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
@@ -772,13 +772,13 @@ psal <- ggplot() +
     legend.justification = c(.5, 0) ) +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, github.com/xtimbeau/travail/vaq.r.",
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, github.com/xtimbeau/travail/R/vaq.r.",
     champ = "Branches marchandes et non marchandes (en léger et pointillé) et branches marchandes hors services immobiliers des ménages (-L68A) (en plein)")
 
 girafy(psal, 1.5)
 ```
 
-La notion de part des salaires dans la valeur ajoutée nette consiste à réduire le démominateur (la valeur ajoutée) de la consommation de capital fixe. Cela augmente donc le ratio. Cependant, cette correction n'est pas constante dans le temps (comme en France, en Espagne ou en Belgique). Comme on peut le voir sur le @appfig-psalcompote, la variance entre les pays est plus basse pour la notion brute (non corrigé de la CCF) que nette. Pour les branches marchandes hors services immobiliers et services immobiliers, le classement entre pays est marginalement modifié, la Belgique ayant une part des salaires nette pus élevée que l'Allemagne, alors que sa part brute est plus faible qu'en Allemagne. Pour les autres pays, le classement est indentique (La France a la part la plus haute et les Pays-Bas plus faible).
+La notion de part des salaires dans la valeur ajoutée nette consiste à réduire le démominateur (la valeur ajoutée) de la consommation de capital fixe. Cela augmente donc le ratio. Cependant, cette correction n'est pas constante dans le temps (comme en France, en Espagne ou en Belgique). Comme on peut le voir sur le @appfig-psalcompote, la variance entre les pays est plus basse pour la notion brute (non corrigé de la CCF) que nette. Pour les branches marchandes hors services immobiliers et services immobiliers, le classement entre pays est marginalement modifié, la Belgique ayant une part des salaires nette pus élevée que l'Allemagne, alors que sa part brute est plus faible qu'en Allemagne. Pour les autres pays, le classement est identique (La France a la part la plus haute et les Pays-Bas plus faible).
 
 ### Impact du changement de structure de l'économie
 
@@ -790,7 +790,7 @@ $$
 
 L'année 1995 est l'année de référence et le premier terme (de droite) s'interprète comme la part des salaires qui prévaudrait s'il n'y avait pas eu de changement de structure. Le @fig-structbranche représente ce terme ainsi que la part agrégée des salaires ($s_{t}$). Leffet de la structure par branche de l'économie (ici marchande hors services immobiliers produits par les ménages) est assez marginale. Les variations de la part des salaires sont bien celle des parts des salaires dans chaque secteur.
 
-Il existe quelques exceptions à cette régle générale. A structure de branche inchangée, avec comme année de référence 1995, la part des salaires serait plus basse de 3,5 points de VA pour les Pays-Bas en 2025. En Allemagne ou en Belgique, le changement de structure des branches explique un petit peu de l'évolution à la hausse.
+Il existe quelques exceptions à cette règle générale. A structure de branche inchangée, avec comme année de référence 1995, la part des salaires serait plus basse de 3,5 points de VA pour les Pays-Bas en 2025. En Allemagne ou en Belgique, le changement de structure des branches explique un petit peu de l'évolution à la hausse.
 
 En revanche, la part des salaires serait légèrement supérieure en Italie à structure inchangée. Le pic de valeur ajoutée en 2013 est lié entièrement à la structure par branche, ce qui laisse supposer une rupture de série dans les comptes de branche.
 
@@ -799,7 +799,7 @@ En revanche, la part des salaires serait légèrement supérieure en Italie à s
 #| fig-cap: Structure par branche et part des salaires dans la VA
 #| fig-asp: 0.85
 
-decomp <- source_data("decomp.r") |> 
+decomp <- source_data("R/decomp.r") |> 
   mutate(
     psal = s0+s_sec+s_psal,
     psal_si = s0+s_psal,
@@ -843,7 +843,7 @@ gd <- ggplot(decomp) +
     legend.justification = c(.5, 0) ) +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, github.com/xtimbeau/travail/vaq.r.",
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, github.com/xtimbeau/travail/R/vaq.r.",
  note = "Le trait pointillé indique la part des salaires dans la VA si la structure de branche était la même qu'en 1995.",
  champ = "Branches marchandes hors services immobiliers des ménages (L68A)")
 
@@ -872,10 +872,10 @@ La France conserve une singularité marquée par la baisse continue du taux de p
 #| fig-asp: 0.85
 #| fig-cap: Rendement du capital productif, correction de la non salarisation par les effectifs ou le revenu mixte
 
-date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
+date <- sourcoise::sourcoise_meta("R/vaq.r")$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
-psal_fr <- source_data("france-melodi.r")$aggr |> 
+psal_fr <- source_data("R/france-melodi.r")$aggr |> 
   transmute(time, geo = "FR", champ, van, msa, msam) |> 
   left_join(source_data("vaq.r")$naaa |>
               filter(geo == "FR") |>
@@ -941,7 +941,7 @@ tpmixte <- ggplot(data_long) +
         scale_color_pays(format = "eurostat") +
         ofce_caption(
           source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10), actifs productifs (nama_10_nfa_st), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
+ comptes nationaux trimestriels (namq_10_a10), actifs productifs (nama_10_nfa_st), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
           champ = "Branches marchandes.",
           note = "Le rendement du capital est calculé selon deux corrections de la non salarisation (par les effectifs, par le revenu mixte), La correction est appliquée au champ branches marchandes hors immobiliers alors que le revenu mixte est connu pour l'ensemble de l'économie.") +
         theme(legend.box.spacing = unit(1, "pt"))
@@ -966,7 +966,7 @@ Comme pour les graphiques précédents, les données trimestrielles sont annuali
 #| fig-cap: Part des salaires dans la VA, SNF, comptes d'agents
 #| fig-asp: 0.85
 
-snfq <- source_data("snf_ratio.r") |> 
+snfq <- source_data("R/snf_ratio.r") |> 
   pluck("snfq") |>
   filter(sector == "S11", geo %in% P6) |> 
   mutate(year = floor_date(time, "year")) |> 
@@ -996,7 +996,7 @@ snfq <- source_data("snf_ratio.r") |>
   mutate(geo = factor(geo, P6)) |> 
   filter(time>= "1995-01-01")
 
-date <- sourcoise::sourcoise_meta("snf_ratio.r")$data_date |> ymd_hms() 
+date <- sourcoise::sourcoise_meta("R/snf_ratio.r")$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 naq_a <-  naq |> 
   filter(champ == "mdhifi") |> 
@@ -1053,7 +1053,7 @@ psnf <- ggplot(data) +
          linewidth = guide_legend(order=1, ncol = 1),
          alpha = guide_legend(order=1, ncol = 1)) +
   ofce_caption(
-    source = "Eurostat, comptes nationaux trimestriels d'agents ou de secteurs institutionels (nasq_10_nf_tr), téléchargés le {date}, github.com/xtimbeau/travail/snf_ratio.r.",
+    source = "Eurostat, comptes nationaux trimestriels d'agents ou de secteurs institutionels (nasq_10_nf_tr), téléchargés le {date}, github.com/xtimbeau/travail/R/snf_ratio.r.",
     champ = "Sociétés non financières (les définitions varient suivant les pays)")
 
 girafy(psnf, 1.5)
@@ -1064,7 +1064,7 @@ girafy(psnf, 1.5)
 #| fig-cap: Part des salaires dans la VA, SNF+SF, comptes d'agents
 #| fig-asp: 0.85 
 
-snffq <- source_data("snf_ratio.r") |> 
+snffq <- source_data("R/snf_ratio.r") |> 
   pluck("snfq") |> 
   filter(geo %in% P6) |> 
   mutate(year = floor_date(time, "year")) |> 
@@ -1155,7 +1155,7 @@ psnff <- ggplot(data) +
          linewidth = guide_legend(order=1,ncol = 1),
          alpha = guide_legend(order=1,ncol = 1)) +
   ofce_caption(
-    source = "Eurostat, comptes nationaux trimestriels d'agents ou de secteurs institutionels (nasq_10_nf_tr), téléchargés le {date}, github.com/xtimbeau/travail/snf_ratio.r.",
+    source = "Eurostat, comptes nationaux trimestriels d'agents ou de secteurs institutionels (nasq_10_nf_tr), téléchargés le {date}, github.com/xtimbeau/travail/R/snf_ratio.r.",
     champ = "Sociétés non financières et financières (les définitions varient suivant les pays)")
 
 girafy(psnff, 1.5)
@@ -1213,7 +1213,7 @@ pprofit <- ggplot(data) +
   theme(legend.direction = "horizontal") +
   guides(color = "none", fill = "none") +
   ofce_caption(
-    source = "Eurostat, comptes nationaux trimestriels de secteur (nasq_10_nf_tr), téléchargés le {date}, github.com/xtimbeau/travail/snf_ratio.r.",
+    source = "Eurostat, comptes nationaux trimestriels de secteur (nasq_10_nf_tr), téléchargés le {date}, github.com/xtimbeau/travail/R/snf_ratio.r.",
     champ = "Sociétés non financières (les définitions varient suivant les pays)")
 
 girafy(pprofit, 1.5)
@@ -1234,7 +1234,7 @@ On obtient le graphe suivant :
 
 ```{r}
 
-assetsnfi <- source_data("snf_ratio.r") |> 
+assetsnfi <- source_data("R/snf_ratio.r") |> 
   pluck("assetsnfi") |> 
   filter(sector == "S11", geo %in% P6) |> 
   transmute(geo, time, phycap = N1N + N2N) |>
@@ -1294,11 +1294,11 @@ ptprofitsnf <- ggplot(snfq_a |> filter(name != "rendshare")) +
   theme(legend.direction = "horizontal") +
   guides(fill = "none", color = "none") +
   ofce_caption(
-    source = "Eurostat, comptes nationaux annuels de secteur (nasa_10_nf_tr), capital productif par branche (nama_10_nfa_bs) et comptes de patrimoine (naidsa_10_f_bs), téléchargés le {date}, code à github.com/xtimbeau/travail/snf_ratio.r.",
+    source = "Eurostat, comptes nationaux annuels de secteur (nasa_10_nf_tr), capital productif par branche (nama_10_nfa_bs) et comptes de patrimoine (naidsa_10_f_bs), téléchargés le {date}, code à github.com/xtimbeau/travail/R/snf_ratio.r.",
     champ = "Sociétés non financières (les définitions varient suivant les pays)")
 
 
-assetsnfi <- source_data("snf_ratio.r") |> 
+assetsnfi <- source_data("R/snf_ratio.r") |> 
   pluck("assetsnfi") |>
   filter(geo %in% P6) |> 
   group_by(geo, time) |> 
@@ -1308,7 +1308,7 @@ assetsnfi <- source_data("snf_ratio.r") |>
   filter(phycap>0) |> 
   mutate(geo = factor(geo, P6))
 
-assetsfi <- source_data("snf_ratio.r") |> 
+assetsfi <- source_data("R/snf_ratio.r") |> 
   pluck("assetsfi") |> 
   filter(geo %in% P6) |> 
   group_by(geo, time) |>  
@@ -1369,7 +1369,7 @@ ptprofitsnff <- ggplot(snfq_a |> filter(name != "rendshare")) +
   theme(legend.direction = "horizontal") +
   guides(fill = "none", color = "none") +
   ofce_caption(
-    source = "Eurostat, comptes nationaux annuels de secteur (nasa_10_nf_tr), capital productif par branche (nama_10_nfa_bs) et comptes de patrimoine (naidsa_10_f_bs), téléchargés le {date}, code à github.com/xtimbeau/travail/snf_ratio.r.",
+    source = "Eurostat, comptes nationaux annuels de secteur (nasa_10_nf_tr), capital productif par branche (nama_10_nfa_bs) et comptes de patrimoine (naidsa_10_f_bs), téléchargés le {date}, code à github.com/xtimbeau/travail/R/snf_ratio.r.",
     champ = "Sociétés non financières (les définitions varient suivant les pays)")
 ```
 
@@ -1392,7 +1392,7 @@ On obtient le @fig-psaloecd, qui rejoint ceux présentés, bien que l'agrégatio
 #| fig-cap: "Part des salaries dans le PIN, données SNA de l'OCDE"
 #| fig-asp: 0.85
 
-data <- ofce::source_data("oecd.r") |> 
+data <- ofce::source_data("R/oecd.r") |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
     {date_trim(time)}
@@ -1400,7 +1400,7 @@ data <- ofce::source_data("oecd.r") |>
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE", "US", "UK", "JP")),
          q = quarter(time))
 
-date <- sourcoise::sourcoise_meta("oecd.r")$data_date |> ymd_hms() 
+date <- sourcoise::sourcoise_meta("R/oecd.r")$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 psaloecd <- ggplot(data |> filter(year(time)>=1995)) +
@@ -1422,7 +1422,7 @@ psaloecd <- ggplot(data |> filter(year(time)>=1995)) +
   scale_color_pays(format = "eurostat") +
   ofce_caption(
     source = "OECD, comptes nationaux, téléchargés le {date},
- code à github.com/xtimbeau/travail/oecd.r.",
+ code à github.com/xtimbeau/travail/R/oecd.r.",
     champ = "Toutes branches, y compris services immobiliers")
 
 girafy(psaloecd, 1.5)
@@ -1437,7 +1437,7 @@ On utilise ces données ([`naidsa_10_nf_tr`](https://ec.europa.eu/eurostat/datab
 #| fig-cap: Part des salaires dans la valeur ajoutée, comptes de secteur, comparaisons internationales
 #| fig-asp: 0.6
 
-psali <- source_data("psali.r")
+psali <- source_data("R/psali.r")
 girafy(psali, 1.5)
 
 ```
@@ -1468,7 +1468,7 @@ Nous explorons dans cette section cette piste. La difficulté est que l'activit�
 #| label: tbl-households
 #| tbl-cap: Part des loyers et des loyers imputés dans la valeur ajoutée marchande
 
-data <- source_data("households.r")
+data <- source_data("R/households.r")
 data |>
   filter(time==max(time), geo %in% P6) |> 
   select(geo, L, Ll, Lli) |> 
@@ -1504,7 +1504,7 @@ Le @fig-ciLfr, pour la France uniquement, caractérise l'évolution de la consom
 #| fig-cap: Consommations intermédiaires en services immobiliers, France
 #| fig-asp: 0.7
 
-data <- source_data("france-melodi.r") |> 
+data <- source_data("R/france-melodi.r") |> 
   pluck("aggr") |>
   filter(champ%in%c("md", "mdhi")) |> 
   mutate(
@@ -1518,7 +1518,7 @@ data <- source_data("france-melodi.r") |>
     Part des CI branche L dans la VAB marchande : {round(md*100, 1)}%") ) |> 
   pivot_longer(c(md, mdhi), names_to = "champ")
 
-gg <- ggplot(data ) +
+gg <- ggplot(data) +
   aes(x=time, y=value) +
   geom_line(
     aes(linetype = champ, color = champ) ) +
@@ -1558,7 +1558,7 @@ Le @fig-rendfr confirme cette idée, mais illustre l'ordre de grandeur que les s
 #| fig-cap: Rendement du capital productif, sensibilité aux CI en services immobiliers, France
 #| fig-asp: 0.7
 
-data <- source_data("france-melodi.r") |> 
+data <- source_data("R/france-melodi.r") |> 
   pluck("aggr") |>
   filter(champ%in%c("mdhi")) |> 
   select(time, rb, rb2) |> 
@@ -1609,7 +1609,7 @@ gg <- ggplot(data_long) +
 girafy(gg)
 ```
 
-{{< fa square >}}
+{{< fa square >}}{style="text-align=center;"}
 
 ## Références {.unnumbered}
 
@@ -1622,11 +1622,11 @@ girafy(gg)
 ### Annexe A : derniers points connus {.unnumbered}
 
 ```{r}
-doms <- source_data("vaq.r")$dom
-pays <- source_data("nace.r")$pays3
-emp_dom <- source_data("naq10_e.r")$dom
-assets_dom <- source_data("assets.r")$dom
-meta <- sourcoise::sourcoise_meta("vaq.r")
+doms <- source_data("R/vaq.r")$dom
+pays <- source_data("R/nace.r")$pays3
+emp_dom <- source_data("R/naq10_e.r")$dom
+assets_dom <- source_data("R/assets.r")$dom
+meta <- sourcoise::sourcoise_meta("R/vaq.r")
 date <- meta$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
@@ -1680,7 +1680,7 @@ Premiers et derniers points connus par pays et par variables
 ::: {#appfig-ccf}
 ```{r, results="asis"}
 #| fig-asp: 0.85
-naa <- source_data("vaq.r")$naaa |> 
+naa <- source_data("R/vaq.r")$naaa |> 
   filter(geo %in% P6) |> 
   mutate(
     ccf = (vab-van)/vab,
@@ -1695,7 +1695,7 @@ naa <- source_data("vaq.r")$naaa |>
     actifs productifs sur VAB : {round(assetsinva*100,1)}%")) |>
   mutate(geo = factor(geo, P6))
 
-date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
+date <- sourcoise::sourcoise_meta("R/vaq.r")$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 labels_champ = c(tb = "Ttes branches", md="Marchand", mdhifi = "Marchand-LK",
@@ -1727,7 +1727,7 @@ ccfs <- imap(
   scale_color_pays(format = "eurostat") +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
     champ = "Branches marchandes {.y}.",
     note = "La CCF provient des comptes annuels, jusqu'en 2023 ou 2024 selon les pays (voir tableau A1). Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") ) 
 
@@ -1765,7 +1765,7 @@ ccfsina <- imap(
   scale_color_pays(format = "eurostat") +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
     champ = "Branches marchandes {.y}.",
     note = "La CCF provient des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà (voir tableau A1). Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") ) 
 
@@ -1803,7 +1803,7 @@ ccfsina <- imap(
   scale_color_pays(format = "eurostat") +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
     champ = "Branches marchandes {.y}.",
     note = "La CCF provient des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà (voir tableau A1). Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") ) 
 
@@ -1856,7 +1856,7 @@ gg <- ggplot(data) +
   scale_color_pays("eurostat") +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.")
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.")
 
 girafy(gg, 1.25)
 ```
@@ -1868,7 +1868,7 @@ Part des salaires dans la VA, tous concepts, comparaison entre pays
 ```{r, results="asis"}
 
 tt <- imap(strips_champ, ~{
-  source_data("vaq.r")$naa |> 
+  source_data("R/vaq.r")$naa |> 
     filter(time == "2023-01-01", champ == .y) |> 
     select(geo, time, champ, psal, psalnc, psalb, psalncb) |> 
     pivot_longer(c(psal, psalnc, psalb, psalncb)) |>
@@ -1911,8 +1911,8 @@ Part des salaires dans la VA et rang, différents concepts
 ::: {@appfig-mixte}
 ```{r, results="asis"}
 #| fig-asp: 0.85 
-PA <- source_data("nace.r")$pays2 
-anD <- source_data("annexeD.r") |> 
+PA <- source_data("R/nace.r")$pays2 
+anD <- source_data("R/annexeD.r") |> 
   mutate(
     reff = self/sal,
     reffh = selfh/salh,
@@ -1931,7 +1931,7 @@ anD <- source_data("annexeD.r") |>
            - le revenu (b3n/d1) : {round(rb3n*100, 1)}%
            - le revenu (egalisé) issu de EU-SILC : : {round(rb3n*100, 1)}"))
 
-date <- sourcoise::sourcoise_meta("annexeD.r")$data_date |> ymd_hms() 
+date <- sourcoise::sourcoise_meta("R/annexeD.r")$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 data <- anD |> 
@@ -1992,7 +1992,7 @@ gD <-imap(
   scale_color_pays(format = "eurostat") +
   ofce_caption(
     note = "Les échelles de chaque pays sont ajustées et donc différentes.",
-    source = "Eurostat, comptes nationaux annuels de secteur (nasa_10_nf_tr), emploi (nama_10_a64_e), EU-SILC (ilc_di05), téléchargés le {date}, code à github.com/xtimbeau/travail/annexeD.r.",
+    source = "Eurostat, comptes nationaux annuels de secteur (nasa_10_nf_tr), emploi (nama_10_a64_e), EU-SILC (ilc_di05), téléchargés le {date}, code à github.com/xtimbeau/travail/R/annexeD.r.",
  champ = "Toutes branches.") )
 
 tabsetize(gD, r = 1.5)
@@ -2004,7 +2004,7 @@ Différentes mesures du revenu des non salariés
 ::: {#appfig-mixtefr}
 ```{r, results="asis"}
 #| fig-asp: 0.85 
-anD <- source_data("annexeD.r") |> 
+anD <- source_data("R/annexeD.r") |> 
   filter(geo == "FR", champ %in% c("tb", "md", "mdhi")) |> 
   mutate(
     reff = self/sal,
@@ -2069,7 +2069,7 @@ gD2 <-imap(
     breaks = scales::pretty_breaks(3)) +
     theme(legend.direction = "horizontal") +
   ofce_caption(
-    source = "INSEE, téléchargés le {date}, code à   github.com/xtimbeau/travail/annexeD.r.",
+    source = "INSEE, téléchargés le {date}, code à   github.com/xtimbeau/travail/R/annexeD.r.",
  champ = "voir légende") 
   })
 
@@ -2085,7 +2085,7 @@ Différentes mesures du revenu des non salariés
 ```{r, results="asis"}
 #| fig-asp: 0.85
 
-cn14 <- source_data("france CN 2014.R") |> 
+cn14 <- source_data("R/france CN 2014.R") |> 
   select(time, champ, psal, starts_with("na"))
 cn20 <- source_data("france-melodi.r")$aggr |> 
   select(time, champ, psal = psalm)
