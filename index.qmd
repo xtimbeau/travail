@@ -2098,9 +2098,9 @@ Différentes mesures du revenu des non salariés
 #| fig-asp: 0.85
 
 cn14 <- source_data("R/france CN 2014.R") |> 
-  select(time, champ, psal, starts_with("na"))
+  select(time, champ, psal, psalc, starts_with("na"))
 cn20 <- source_data("R/france-melodi.r")$aggr |> 
-  select(time, champ, psal = psalm, psalc)
+  select(time, champ, psal = psalm)
 
 champs  <- c("md" = "Marchand", 
              "mdhifi" = "Marchand hors immobilier et services financiers",
@@ -2116,7 +2116,8 @@ data <- full_join(cn14, cn20, by=c("time", "champ"), suffix = c(".14", ".20")) |
       "<b>{year(time)}</b>
       Part des salaires dans la VAN, correction par le revenu mixte (voir note)
       CNA 2020 : {round(psal.20*100,1)}%
-      CNA 2014 : {round(psal.14*100,1)}%" ) ) |> 
+      CNA 2014 : {round(psal.14*100,1)}%,
+      CNA 2014 (ajusté sur b3g EI) : {round(psalc*100,1)}%" ) ) |> 
   pivot_longer(c(psal.20, psal.14, psalc))
 
 psalE <- imap(
@@ -2137,13 +2138,12 @@ psalE <- imap(
     scale_ofce_date(
       labels = date1d) +
     guides( fill = "none") +
-    PrettyCols::scale_color_pretty_d(
-      "Joyful",
-      name = NULL,
-      labels = c(psal.14 = "CNA 2014", psalc = "CNA 2014 (b3g)", psal.20 = "CNA 2020")) +
     theme(legend.direction = "horizontal") +
-    scale_color_manual(values = c(psal.14 = bluish, psalc = colorspace::lighten(bluish, 0.1), psal.20 = redish),
-                       aesthetics = c("color", "fill")) +
+    scale_color_manual(
+      values = c(psal.14 = bluish, psalc = colorspace::lighten(bluish, 0.1), psal.20 = redish),
+      name = NULL,
+      labels = c(psal.14 = "CNA 2014", psalc = "CNA 2014 (b3g EI)", psal.20 = "CNA 2020"),
+      aesthetics = c("color", "fill")) +
     scale_y_continuous(
       labels = scales::label_percent(1), 
       breaks = scales::pretty_breaks(5)) +
