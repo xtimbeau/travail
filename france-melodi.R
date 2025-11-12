@@ -183,7 +183,7 @@ fr_branches <- melodi::get_all_data("DD_CNA_BRANCHES") |>
   mutate(b3g = b2a3g - b2g) |>
   left_join(fr_tes_L, by = c("nace_r2", "time"))
 
-# On prolonge pour 2024 b2g sur la valeur "total" (_T) et d29x30 sur le ratio b1g
+# On prolonge pour 2024  b2g sur la valeur "total" (_T) et d29x30 sur le ratio b1g
 # Sur le passé on prolonge p51c et d29x39 sur b1g et b2g sur NSAL/SAL
 
 fr_branches_aug <- fr_branches |>
@@ -194,6 +194,8 @@ fr_branches_aug <- fr_branches |>
          rd29x39 = d29x39 / b1g) |>
   group_by(nace_r2) |>
   fill(rp51c, rd29x39, .direction = "updown") |>
+  mutate(p51c = rp51c * b1g,
+         d29x39 = rd29x39 * b1g) |>
   rename_with(tolower) |>
   ungroup()
 
@@ -231,6 +233,7 @@ dvalL <- melodi |>
   group_by(time) |>
   summarize(dva = -sum(p2l)+sum(p2lf)) |>
   mutate(nace_r2 = "L")
+
 dval <- melodi |>
   filter(nace_r2 != "L") |>
   mutate(dva = p2l - p2lf) |>
@@ -288,6 +291,8 @@ melodi_m <- melodi |>
   separate(name, sep="_", into = c("var", "champ")) |>
   pivot_wider(names_from = var, values_from = value) |>
   left_join(ccf_ei |> select(time, ccfei), by = c("time")) |>
+  group_by(champ) |>
+  fill(ccfei, .direction = "up") |>
   group_by(champ) |>
   mutate(
     msanc = d1,

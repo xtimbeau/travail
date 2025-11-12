@@ -42,6 +42,23 @@ idcn14 <- insee::get_idbank_list("CNA-2014-CPEB") |>
     PRIX_REF == "VAL",
     str_detect(CNA_ACTIVITE, "^A17"))
 
+b3g <- insee::get_idbank_list("CNA-2014-CSI") |>
+  filter(OPERATION %in% c("B3N", "B3G"),
+         SECT_INST == "S14AA",
+         COMPTE == "EA") |>
+  pull(idbank) |>
+  insee::get_insee_idbank() |>
+  transmute(time = ymd(TIME_PERIOD, truncated = 2),
+            id = case_when(
+              IDBANK == "010563062" ~ "B3G",
+              IDBANK == "010563072" ~ "B3N" ),
+            value = OBS_VALUE) |>
+  pivot_wider(names_from = id, values_from = value) |>
+  arrange(time) |>
+  mutate(rccfei = (B3G-B3N)/B3G) |>
+  fill(rccfei, .direction = "up") |>
+  mutate(ccfei = B3G*rccfei)
+
 cn14 <- idcn14 |>
   pull(idbank) |>
   insee::get_insee_idbank() |>
@@ -80,6 +97,18 @@ cn14e <- cn14 |>
   fill(rb3gpc, .direction = "up") |>
   mutate(b3g = d1/emps*empns,
          naces = str_split_i(nace,"-", 2)) |>
+  mutate(b3g = replace_na(b3g, 0))
+
+total_b3g <- cn14e |>
+  group_by(time) |>
+  summarize(b3g = sum(b3g)) |>
+  left_join(b3g |> select(time, B3G, rccfei), by = "time") |>
+  mutate(vv = b3g/B3G)
+
+
+cn14e2 <- cn14e |>
+  left_join(total_b3g |> select(time, vv, rccfei), by = 'time') |>
+  mutate(b3gc = b3g/vv) |>
   left_join(T6461 |> select(time, naces, ccf), by = c("time", "naces")) |>
   mutate(across(c(ccf, d29, d39), ~.x/b1g, .names = "r{.col}"),
          across(c(ccf, d29, d39), ~is.na(.x), .names = "na{.col}")) |>
@@ -90,37 +119,40 @@ cn14e <- cn14 |>
     d29 = rd29 * b1g,
     d39 = rd39 * b1g  ) |>
   mutate(
-    ccf = rccf * b1g,
     van = b1g - ccf,
-    msal = d1 + 0.88*b3g,
-    psal = (msal - d29 - d39) / van  ) |>
+    msal = d1 + (1-rccfei) * b3g,
+    msalc = d1 + (1-rccfei) * b3gc) |>
   left_join(md, by = "naces")
 
-cn14a <- cn14e |>
+# ca ressemble trop à la base 2020
+# assets <- "https://www.insee.fr/fr/statistiques/fichier/7455994/DD_CNA_CAPITAL_FIXE.zip" |>
+#   archive::archive_read(file="data.csv") |>
+#   vroom::vroom()
+
+cn14a <- cn14e2 |>
   filter(time<="2020-01-01") |>
   mutate(
     across(c(b3g), ~replace_na(.x, 0))) |>
   group_by(time) |>
   summarize(
     across(c(naccf, nad29, nad39, nab3g), any),
-    across(c(b1g, ccf, van, msal, d29, d39, d1, b3g),
+    across(c(b1g, ccf, van, msal, msalc, d29, d39, d1, b3g),
            ~sum(.x), .names = "{.col}_tb"),
-    across(c(b1g, ccf, van, msal, d29, d39, d1, b3g),
+    across(c(b1g, ccf, van, msal, msalc, d29, d39, d1, b3g),
            ~sum(.x[md]), .names = "{.col}_md"),
-    across(c(b1g, ccf, van, msal, d29, d39, d1, b3g),
+    across(c(b1g, ccf, van, msal, msalc, d29, d39, d1, b3g),
            ~sum(.x[mdhi]), .names = "{.col}_mdhi"),
-    across(c(b1g, ccf, van, msal, d29, d39, d1, b3g),
+    across(c(b1g, ccf, van, msal, msalc, d29, d39, d1, b3g),
            ~sum(.x[mdhifi]), .names = "{.col}_mdhifi"),
-    across(c(b1g, ccf, van, msal, d29, d39, d1, b3g),
+    across(c(b1g, ccf, van, msal, msalc, d29, d39, d1, b3g),
            ~sum(.x[mdhfi]), .names = "{.col}_mdhfi"),
     .groups = "drop") |>
   pivot_longer(-c(time, starts_with("na"))) |>
   separate(name, sep = "_", into = c("var", "champ")) |>
   pivot_wider(names_from = var, values_from = value) |>
   mutate(
-    van = b1g - ccf,
-    msal = d1 + 0.88*b3g,
-    psal = (msal - d29 - d39) / van  )
+    psal = msal / van ,
+    psalc = msalc / van  )
 
 return(cn14a)
 
