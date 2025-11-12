@@ -31,7 +31,7 @@ br <- tibble::tribble(
 
 br_alt <- c("_T", "OTQ", "K", "L")
 br_plus <- unique(c(br$nace_13, "_T"))
-codes <- vroom::vroom("ACTIVITY.codes.csv")
+codes <- vroom::vroom(pathify("/data/ACTIVITY.codes.csv"))
 colnames(codes) <- c("nace_r2", "fr", "en")
 codes <- codes |>
   bind_rows(tibble(code = "C", fr="Industrie manufacturière", en="Manufacturing"))

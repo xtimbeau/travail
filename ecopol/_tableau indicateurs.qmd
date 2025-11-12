@@ -9,7 +9,7 @@ editor: visual
 #| tbl-cap: Indicateurs du "marché du travail", 1995-2023
 #| html-table-processing: none
 
-sum <- source_data("precarite.r")$sum  |> 
+sum <- source_data("R/precarite.r")$sum  |> 
   mutate(c = case_when(
      op == "last" ~ str_c(round(v,1), "%"),
      op == "min" ~ str_c(round(v,1), "%<br>(", year(date), ")"),

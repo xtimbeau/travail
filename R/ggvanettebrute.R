@@ -68,7 +68,7 @@ psaleu <- ggplot(data_int) +
     axis.ticks = element_blank()) +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
     champ = "Branches marchandes hors services immobiliers (-L).",
     note = "Part des salaires dans la valeur ajoutée nette corrigée de la non salarisation.")
 

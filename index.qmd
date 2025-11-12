@@ -617,7 +617,7 @@ On peut construire à partir du revenu mixte une correction alternative de la no
 #| fig-asp: 0.85
 #| fig-cap: Correction pour la non salarisation, effectifs ou revenu mixte, comptes de branches
 
-psal_fr <- source_data("R/france-melodi.r")$aggr |> 
+psal_fr <- source_data("R/france-melodi.R")$aggr |> 
   transmute(time, geo = "FR", champ, psal, psalm)
 
 naq2 <- source_data("R/vaq.r")$naa |> 
@@ -796,7 +796,7 @@ s_t - \sum w_{b,1995} \times s_{b,1995} = \sum w_{b,1995} \times (s_{b,t}-s_{b,1
 \end{aligned}
 $$
 
-L'année 1995 est l'année de référence et le premier terme (de droite) s'interprète comme la part des salaires qui prévaudrait s'il n'y avait pas eu de changement de structure. Le @fig-structbranche représente ce terme ainsi que la part agrégée des salaires ($s_{t}$). Leffet de la structure par branche de l'économie (ici marchande hors services immobiliers produits par les ménages) est assez marginale. Les variations de la part des salaires sont bien celle des parts des salaires dans chaque secteur.
+L'année 1995 est l'année de référence et le premier terme (de droite) s'interprète comme la part des salaires qui prévaudrait s'il n'y avait pas eu de changement de structure. Le @fig-structbranche représente ce terme ainsi que la part agrégée des salaires ($s_{t}$). L'effet de la structure par branche de l'économie (ici marchande hors services immobiliers produits par les ménages) est assez marginale. Les variations de la part des salaires sont bien celle des parts des salaires dans chaque secteur.
 
 Il existe quelques exceptions à cette règle générale. A structure de branche inchangée, avec comme année de référence 1995, la part des salaires serait plus basse de 3,5 points de VA pour les Pays-Bas en 2025. En Allemagne ou en Belgique, le changement de structure des branches explique un petit peu de l'évolution à la hausse.
 
@@ -885,7 +885,7 @@ date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 psal_fr <- source_data("R/france-melodi.r")$aggr |> 
   transmute(time, geo = "FR", champ, van, msa, msam) |> 
-  left_join(source_data("vaq.r")$naaa |>
+  left_join(source_data("R/vaq.r")$naaa |>
               filter(geo == "FR") |>
               select(time, champ, assets, ip), 
             by = c("champ", "time")) |> 
@@ -895,7 +895,7 @@ psal_fr <- source_data("R/france-melodi.r")$aggr |>
   select(time, champ, geo, rbm) |> 
   drop_na(rbm)
 
-data4tp <- source_data("vaq.r")$naaa |>
+data4tp <- source_data("R/vaq.r")$naaa |>
   filter(geo %in% P6) |>
   select(time, geo, champ, r, rb, rbm) |> 
   left_join(psal_fr, by=c("geo", "time", "champ"), suffix = c("",".fr")) |>
@@ -1248,7 +1248,7 @@ assetsnfi <- source_data("R/snf_ratio.r") |>
   transmute(geo, time, phycap = N1N + N2N) |>
   mutate(geo = factor(geo, P6))
 
-assetsfi <- source_data("snf_ratio.r") |> 
+assetsfi <- source_data("R/snf_ratio.r") |> 
   pluck("assetsfi") |> 
   filter(sector == "S11", geo %in% P6) |> 
   select(geo, time, net_shares, net_shares_augmented) |>
@@ -2099,8 +2099,8 @@ Différentes mesures du revenu des non salariés
 
 cn14 <- source_data("R/france CN 2014.R") |> 
   select(time, champ, psal, starts_with("na"))
-cn20 <- source_data("france-melodi.r")$aggr |> 
-  select(time, champ, psal = psalm)
+cn20 <- source_data("R/france-melodi.r")$aggr |> 
+  select(time, champ, psal = psalm, psalc)
 
 champs  <- c("md" = "Marchand", 
              "mdhifi" = "Marchand hors immobilier et services financiers",
@@ -2166,7 +2166,7 @@ Part des salaires en France 1949-2025
 ```{r, results="asis"}
 #| fig-asp: 0.85
 
-cn20 <- source_data("france-melodi.r")$aggr |> 
+cn20 <- source_data("R/france-melodi.r")$aggr |> 
   select(time, champ, rb, rbm) |> 
   drop_na(rb)
 

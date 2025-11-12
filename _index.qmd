@@ -52,7 +52,7 @@ thanks: "Je remercie chaleureusement Elliot Aurissergues, Francçois Geerolf et 
 
 ```{r, include=FALSE}
 ofce::init_qmd()
-P6 <- source_data("nace.r")$pays1 
+P6 <- source_data("R/nace.r")$pays1 
 options(ofce.tabsetize.pdf = "one")
 if(knitr::is_html_output()) {
   set_theme(theme_ofce(
@@ -83,10 +83,10 @@ Cette convention d'imputation d'un salaire aux non salariés est assez habituell
 #| tbl-cap: "Revenu mixte et masse salariale imputée aux non salariés"
 ##| html-table-processing: none
 
-pays <- source_data("nace.r")$pays1
-mixte <- source_data("mixte.r")$a
+pays <- source_data("R/nace.r")$pays1
+mixte <- source_data("R/mixte.r")$a
 
-nsal <- source_data("vaq.r")$naa |> 
+nsal <- source_data("R/vaq.r")$naa |> 
   transmute(geo, time, champ, msa, msanc) |> 
   filter(champ == "tb", geo %in% pays) |> 
   left_join(mixte, by = c("geo", "time")) |> 

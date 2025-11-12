@@ -58,13 +58,13 @@ En France, les salaires réels déclinent en effet depuis plusieurs trimestres (
 #| fig-cap: Salaires réels en Europe
 #| fig-asp: 1
 
-salaires <- source_data('salaires.r') |> 
+salaires <- source_data('R/salaires.r') |> 
   mutate(tooltip = glue(
   "<b>{lbl(geo)}</b>
   {date_trim(time)}
   Salaire nominal : {round(w*pc,1)} k€ courants
   Salaire réel : {round(w,1)} k€ 2023"))
-pp <- source_data("nace.r")$pays1
+pp <- source_data("R/nace.r")$pays1
 sal <- ggplot(salaires |> filter(time >= "1995-01-01", geo %in% pp  )) +
   aes(x=time, y=w, col = geo) +
   geom_line(data = ~.x |> rename(GEO = geo) , aes(group=GEO), col = "gray80", linewidth = 0.25) +
@@ -83,7 +83,7 @@ sal <- ggplot(salaires |> filter(time >= "1995-01-01", geo %in% pp  )) +
     wrap = 0,
     source = "Eurostat, comptes nationaux trimestriels (namq_10_a10),
     calcul de l'auteur.",
-    code =  "github.com/xtimbeau/travail/salaires.r",
+    code =  "github.com/xtimbeau/travail/R/salaires.r",
     champ = "Toute l'économie, salaires y compris cotisations sociales à la charge de l'employeur.",
     note = "Le salaire est défini comme la masse salariale divisée par l'emploi salarié, sur les 4 derniers trimestres, déflaté par le déflateur de la consommation chaîné. Le ruban coloré indique les cotisations sociales à la charge de l'employeur.",
     ofce = FALSE)
@@ -131,7 +131,7 @@ Au sein de l'Union Européenne, La France se situe dans une position basse en te
 #| tbl-cap: Rémunérations des salariés dans 6 pays européens, année 2022
 #| html-table-processing: none
 
-earn <- source_data("earn.r")
+earn <- source_data("R/earn.r")
 
 earn |>
   select(label, tt, BE, DE,  IT, NL, FR,  ES) |>
@@ -180,7 +180,7 @@ Le vieillissement de la population rend difficile également le partage de la ch
 #| fig-cap: Inactifs rapportés aux effectifs en emploi, en équivalent temps plein
 #| fig-asp: 1
 
-dependants <- source_data("dependants.r") |> 
+dependants <- source_data("R/dependants.r") |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
     Dependants (plus de 15 ans)/actifs (en eqtp) : {round(depse,2)}
@@ -230,7 +230,7 @@ Enfin, la branche services immobiliers (branche L dans la NACE rev. 2) a été e
 #| fig-cap: Rémunération du travail dans la valeur ajoutée nette
 #| fig-asp: 1
 
-naa <- source_data("va.r")$naa |> 
+naa <- source_data("R/va.r")$naa |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
     {year(time)}
@@ -262,7 +262,7 @@ psal <- ggplot(naa) +
  comptes nationaux trimestriels (namq_10_a10) pour l'année 2024,
  comptes nationaux de secteur (nasa_10_nf_tr) pour l'IS (D51), téléchargés le 15 janvier 2025,
  calcul de l'auteur.",
-    code =  "github.com/xtimbeau/travail/va.r",
+    code =  "github.com/xtimbeau/travail/R/va.r",
     champ = "Branches marchandes hors services immobiliers (L dans la NACE r2)",
     note = "La part des salaires (corrigé de la non-salarisation) dans la valeur ajoutée nette atteint 90% en France en 2023 ((D1*(1+ns/s)/(B1G-P51C)). La partie colorée correspond à la correction pour la non-salarisation. L'année 2024 est estimée à partir des comptes trimestriels. La ligne pointillée indique la somme de l'impôt des sociétés et des impôts de production nets des subventions.")
 
@@ -294,7 +294,7 @@ Les taux de rendement du capital productif sont assez disparates. En 2023, le ta
 #| fig-cap: Taux de rendement nominal du capital productif après impôts
 #| fig-asp: 1
 
-naaa <- source_data("va.r")$naaa |> 
+naaa <- source_data("R/va.r")$naaa |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
     {year(time)}
@@ -319,7 +319,7 @@ return <- ggplot(naaa) +
     source = "Eurostat, comptes nationaux annuels de branche (nama_10_a64 et nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10) pour l'année 2024 (jusqu'au T3),
  comptes nationaux par secteurs institutionels (nasa_10_nf_tr) pour l'IS (D51), comptes d'actifs physique  (nama_10_nfa_st), téléchargés le 15 janvier 2025, calcul de l'auteur.",
-    code = "github.com/xtimbeau/travail/var.r",
+    code = "github.com/xtimbeau/travail/R/var.r",
     champ = "Branches marchandes hors services immobiliers (L dans la NACE r2)",
     lecture = "Le taux de rendement du capital est le ratio entre les profits (après impôts, net des suventions) et la valeur au coût de remplacement du stock de capital productif. Le capital productif considéré est hors actifs non produits (terrains, terres agricoles, ressources naturelles).",
     ofce = FALSE)
