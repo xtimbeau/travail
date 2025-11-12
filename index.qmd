@@ -69,7 +69,7 @@ if(knitr::is_html_output()) {
         legend.justification = "center")) }
 ```
 
-::: aside
+::: {.aside .content-visible when-format="html"}
 [{{wordcount}} mots]{style="font-size: 0.7rem; color: grey; font-style: italic;"}
 :::
 
