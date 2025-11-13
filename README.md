@@ -6,6 +6,6 @@ Le répertoire `data` contient quelques fichiers téléchargés (par les scripts
 
 La version de `R` employée est la 4.5.1 et la version de `quarto` doit être supérieure ou égale à 1.8.25.
 
-Pour fonctionner, en plus des packages signalés par `renv::dependencies()`, les packages suivants doivent être installés depuis `devtools::install_github()` : "`ofce/ofce`", "`rstudio/gt`", "`nsgrantham/ggbraid`", "`expersso/OECD`".
+Pour fonctionner, en plus des packages signalés par `renv::dependencies()`, les packages suivants doivent être installés depuis `devtools::install_github()` : "`ofce/ofce`", "`rstudio/gt`", "`nsgrantham/ggbraid`", "`expersso/OECD`", "`InseeFrLab/melodi`". Une alternative est d'utiliser `renv` qui est configuré sur le dépôt.
 
 *Happy reproduce* !
