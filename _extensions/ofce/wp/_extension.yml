@@ -87,9 +87,9 @@ contributes:
         - right = 2.5cm
       linestretch: 1.25
       extra_dependencies: ["float"]
-      fig-dpi: 1200
+      fig-dpi: 900
       fig-width: 5
-      fig-format: svg
+      fig-format: jpeg
       logo: ofce_m.png
       logo2: sciencespo.png
       template-partials:
