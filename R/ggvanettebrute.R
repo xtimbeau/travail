@@ -35,8 +35,8 @@ psaleu <- ggplot(data_int) +
   geom_segment(
     aes(x = x,  xend = xend, y = y, yend = yend, color = year),
     key_glyph = draw_key_point, linewidth = 0.2) +
-  ggimage::geom_flag( data = ~.x |> filter(i==1),
-                      aes(x= geo, y = 0.3, image = geo2c), size = .03)+
+  ggflags::geom_flag(data = ~.x |> filter(i==1),
+                      aes(x= geo, y = 0, country = tolower(geo2c)), size = 3)+
   scale_color_gradient(low="seagreen1", high = "seagreen4",
                        name = NULL,
                        breaks = c(1995,2025), labels = c(1995, 2025)) +
@@ -63,7 +63,7 @@ psaleu <- ggplot(data_int) +
     legend.text = element_marquee(size = rel(0.7)),
     axis.text.y = element_marquee(size = rel(1),
                                   vjust = 0.5, hjust = 1,
-                                  margin = margin(r=-10, t=0, b=2)),
+                                  margin = margin(r=-5, t=0, b=2)),
     axis.line = element_blank(),
     axis.ticks = element_blank()) +
   ofce_caption(
@@ -93,8 +93,8 @@ psalbeu <- ggplot(data_intb) +
   geom_segment(
     aes(x = x,  xend = xend, y = y, yend = yend, color = year),
     key_glyph = draw_key_point, linewidth = 0.2) +
-  ggimage::geom_flag( data = ~.x |> filter(i==1),
-                      aes(x= geo, y = 0.2, image = geo2c), size = .03)+
+  ggflags::geom_flag(data = ~.x |> filter(i==1),
+                     aes(x= geo, y = 0, country = tolower(geo2c)), size = 3)+
   scale_color_gradient(low="orange1", high = "darkorange4",
                        name = NULL,
                        breaks = c(1995,2025), labels = c(1995, 2025)) +
@@ -121,7 +121,7 @@ psalbeu <- ggplot(data_intb) +
     legend.text = element_marquee(size = rel(0.7)),
     axis.text.y = element_marquee(size = rel(1),
                                   vjust = 0.5, hjust = 1,
-                                  margin = margin(r=-10, t=0, b=2)),
+                                  margin = margin(r=-5, t=0, b=2)),
     axis.line = element_blank(),
     axis.ticks = element_blank()) +
   ofce_caption(

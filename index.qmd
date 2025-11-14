@@ -56,19 +56,9 @@ ofce::init_qmd()
 P6 <- source_data("R/nace.r")$pays1 
 
 options(ofce.tabsetize.pdf = "one")
-if(knitr::is_html_output()) {
-  set_theme(theme_ofce(
-    base_size = 10,
-    marquee=TRUE,
-    axis.line.y = element_blank(),
-    legend.position = "bottom",
-    legend.justification = "center")) } else { 
-      set_theme(theme_ofce(
-        base_size = 8,
-        marquee=TRUE,
-        axis.line.y = element_blank(),
-        legend.position = "bottom",
-        legend.justification = "center")) }
+if(knitr::is_html_output()) 
+  update_theme(text = element_text(size = 10)) else  
+    update_theme(text = element_text(size = 8)) 
 ```
 
 ::: {.aside .content-visible when-format="html"}
@@ -117,7 +107,7 @@ psal <- imap(
         tooltip = "Part des salaires dans la VAN,<br>corrigée de la non salarisation,<br>{.y}" |> glue(),
         data_id = champ),
       linewidth = 0.5) +
-    geom_point_interactive(
+     geom_point_interactive(
       aes(tooltip = tooltip, data_id = time, fill = geo),
       size = 1, stroke = 0.5, shape = 21, color = "white",
       hover_nearest = TRUE, show.legend=FALSE) +
@@ -172,7 +162,7 @@ Théoriquement[^3], l'évolution de part des salaires dans la valeur ajoutée d�
 
 [^3]: @cette2019 propose une modélisation simple des principaux déterminants du partage de la valeur ajoutée sur la base d'une fonction de production. @reis2022 étend l'analyse en équilibre néokeynéisien.
 
-L'élasticité estimée généralement, au moins à moyen terme, est sensiblement inférieure à 1, en tout cas sur données macroéconomique. Cela implique qu'une hausse du prix du travail relativement par au capital se traduit par une hausse de la part du travail dans la valeur ajoutée – la réciproque étant bien entendu vraie si c'est le capital qui est relativement plus cher. Cela peut conduire à des variations plus persistantes de la part des salaires dans la valeur ajoutée (ce qu'on appelle le *wage push)*, mais ces variations doivent reproduire celles des prix relatifs.
+L'élasticité estimée généralement, au moins à moyen terme, est sensiblement inférieure à 1, en tout cas sur données macroéconomique. Cela implique qu'une hausse du prix du travail relativement par au capital se traduit par une hausse de la part du travail dans la valeur ajoutée – la réciproque étant bien entendu vraie si c'est le capital qui est relativement plus cher. Cela peut conduire à des variations plus persistantes de la part des salaires dans la valeur ajoutée (ce qu'on appelle le *wage push*), mais ces variations doivent reproduire celles des prix relatifs.
 
 La part des salaires dans la valeur ajoutée est la plus basse aux Pays-Bas et est sur une pente décroissante depuis plus de 20 ans, alors qu'elle semble stable en Belgique et en Allemagne. L’Italie affiche une variabilité temporelle importante, avec un pic de la part des salaires dans la valeur ajoutée en 2013, puis une franche décroissance (de plus de 13 points) interrompue dans la période récente suite à la période d'inflation et la forte relance budgétaire.
 

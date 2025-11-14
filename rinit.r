@@ -2,13 +2,15 @@ library(knitr)
 opts_chunk$set(
   fig.pos="H",
   out.extra="",
-  dev="ragg_png",
+  dev="svg",
   dev.args = list(bg = "transparent"),
   out.width="100%",
-  fig.showtext=TRUE,
+  # fig.showtext=TRUE,
   message = FALSE,
   warning = FALSE,
   echo = FALSE)
+
+systemfonts::add_fonts(system.file("fonts", "OpenSans", "OpenSans-Regular.ttf", package="ofce"))
 
 library(tidyverse, quietly = TRUE)
 library(ofce, quietly = TRUE)
@@ -36,9 +38,14 @@ options(
   ofce.caption.wrap = 0,
   ofce.source_data.src_in = "file",
   sourcoise.grow_cache = Inf,
-  ofce.source_data.force_exec = FALSE)
+  ofce.source_data.force_exec = FALSE,
+  ofce.savegraph = "_sav_graph",
+  ofce.output_extension = "xlsx",
+  ofce.output_prefix = "va-xt-")
 showtext_opts(dpi = 120)
 showtext_auto()
+
+
 options(cli.ignore_unknown_rstudio_theme = TRUE)
 tooltip_css  <-
   "font-family:Open Sans;
@@ -51,33 +58,6 @@ tooltip_css  <-
   padding:4px;
   box-shadow: 2px 2px 2px gray;
   r:20px;"
-
-gdtools::register_gfont("Open Sans")
-
-girafe_opts <- function(x, ...) girafe_options(
-  x,
-  opts_hover(css = "stroke-width:1px;", nearest_distance = 60),
-  opts_tooltip(css = tooltip_css, delay_mouseover = 10, delay_mouseout = 3000)) |>
-  girafe_options(...)
-
-girafy <- function(plot, r=2.5, o = 0.5,  ...) {
-  if(knitr::is_html_output()| interactive()) {
-    return(
-      girafe(ggobj = plot) |>
-        girafe_options(
-          opts_hover_inv(css = glue("opacity:{o};")),
-          opts_hover(css = glue("r:{r}px;")),
-          opts_tooltip(css = tooltip_css)) |>
-        girafe_options(...)
-    )
-  }
-
-  if(knitr::is_latex_output()) {
-    return( plot )
-  }
-
-  plot
-  }
 
 milliards <- function(x, n_signif = 3L) {
   stringr::str_c(
@@ -93,37 +73,6 @@ if(.Platform$OS.type=="windows")
   Sys.setlocale(locale = "fr_FR.utf8") else
     Sys.setlocale(locale = "fr_FR")
 
-margin_download <- function(data, output_name = "donnees", label = "données") {
-  if(knitr::is_html_output()) {
-    if(lobstr::obj_size(data)> 1e+5)
-      cli::cli_alert("la taille de l'objet est sup\u00e9rieure à 100kB")
-    fn <- str_c("part des salaires-XT-", tolower(output_name))
-
-    dwn <- downloadthis::download_this(
-      data,
-      icon = "fa fa-download",
-      class = "dbtn",
-      button_label  = label,
-      output_name = fn)
-
-    cat(str_c("::: {.column-margin} \n" ))
-    dwn |> htmltools::tagList() |> print()
-    cat("\n")
-    cat(":::\n")
-
-  } else
-    return(invisible(NULL))
-}
-
-inline_download <- function(data, label = "données", output_name = "donnees") {
-  downloadthis::download_this(
-    data,
-    icon = "fa fa-download",
-    class = "dbtn-inline",
-    button_label  = label,
-    output_name = output_name
-  )
-}
 
 ccsummer <- function(n=4) PrettyCols::prettycols("Summer", n=n)
 ccjoy <- function(n=4) PrettyCols::prettycols("Joyful", n=n)
@@ -214,4 +163,11 @@ conflicted::conflicts_prefer(dplyr::last, .quiet = TRUE)
 conflicted::conflicts_prefer(dplyr::between, .quiet = TRUE)
 conflicted::conflicts_prefer(lubridate::quarter, .quiet = TRUE)
 
-ggplot2::set_theme(theme_ofce())
+ggplot2::set_theme(
+  theme_ofce(
+    marquee=TRUE,
+    axis.line.y = element_blank(),
+    legend.position = "bottom",
+    legend.justification = "center",
+    panel.grid = element_line(color = "grey95")
+  ))
