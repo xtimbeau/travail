@@ -5,7 +5,7 @@ opts_chunk$set(
   dev="svg",
   dev.args = list(bg = "transparent"),
   out.width="100%",
-  # fig.showtext=TRUE,
+  fig.showtext=TRUE,
   message = FALSE,
   warning = FALSE,
   echo = FALSE)
@@ -14,20 +14,16 @@ systemfonts::add_fonts(system.file("fonts", "OpenSans", "OpenSans-Regular.ttf", 
 
 library(tidyverse, quietly = TRUE)
 library(ofce, quietly = TRUE)
-library(showtext, quietly = TRUE)
 library(gt, quietly = TRUE)
 library(readxl, quietly = TRUE)
-library(ggiraph, quietly = TRUE)
 library(scales, quietly = TRUE)
 library(glue, quietly = TRUE)
 library(patchwork, quietly = TRUE)
-library(downloadthis, quietly = TRUE)
 library(lubridate, quietly = TRUE)
 library(quarto, quietly = TRUE)
 library(qs, quietly = TRUE)
 library(conflicted, quietly = TRUE)
 library(countrycode, quietly = TRUE)
-library(gfonts)
 library(marquee)
 
 options(
@@ -39,11 +35,11 @@ options(
   ofce.source_data.src_in = "file",
   sourcoise.grow_cache = Inf,
   ofce.source_data.force_exec = FALSE,
-  ofce.savegraph = "_sav_graph",
+  ofce.savegraph = TRUE,
   ofce.output_extension = "xlsx",
   ofce.output_prefix = "va-xt-")
-showtext_opts(dpi = 120)
-showtext_auto()
+showtext::showtext_opts(dpi = 120)
+showtext::showtext_auto()
 
 
 options(cli.ignore_unknown_rstudio_theme = TRUE)
