@@ -12,18 +12,18 @@ opts_chunk$set(
 
 systemfonts::add_fonts(system.file("fonts", "OpenSans", "OpenSans-Regular.ttf", package="ofce"))
 
-library(tidyverse, quietly = TRUE)
-library(ofce, quietly = TRUE)
-library(gt, quietly = TRUE)
-library(readxl, quietly = TRUE)
-library(scales, quietly = TRUE)
-library(glue, quietly = TRUE)
-library(patchwork, quietly = TRUE)
-library(lubridate, quietly = TRUE)
-library(quarto, quietly = TRUE)
-library(qs, quietly = TRUE)
-library(conflicted, quietly = TRUE)
-library(countrycode, quietly = TRUE)
+library(tidyverse)
+library(ofce)
+library(ggiraph)
+library(gt)
+library(readxl)
+library(scales)
+library(glue)
+library(patchwork)
+library(lubridate)
+library(quarto)
+library(conflicted)
+library(countrycode)
 library(marquee)
 
 options(
@@ -35,7 +35,6 @@ options(
   ofce.source_data.src_in = "file",
   sourcoise.grow_cache = Inf,
   ofce.source_data.force_exec = FALSE,
-  ofce.savegraph = TRUE,
   ofce.output_extension = "xlsx",
   ofce.output_prefix = "va-xt-")
 showtext::showtext_opts(dpi = 120)

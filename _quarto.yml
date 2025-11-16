@@ -3,40 +3,10 @@ project:
 execute:
   freeze: auto
 website:
-  # code-links:
-  #   - text: Salaires dans la VA
-  #     icon: file-code
-  #     href: R/vaq.r
-  #   - text: Décomposition
-  #     icon: file-code
-  #     href: R/decomp.R
-  #   - text: Salaires trimestriels
-  #     icon: file-code
-  #     href: R/salaires.r
-  #   - text: Comptes des SNF (s11)
-  #     icon: file-code
-  #     href: R/snf_ratio.r
-  #   - text: SNF (coop. inter. Eurostat)
-  #     icon: file-code
-  #     href: R/snf_international.r
-  #   - text: SNA (OCDE)
-  #     icon: file-code
-  #     href: R/oecd.R
-  #   - text: Emploi salarié et non salarié
-  #     icon: file-code
-  #     href: R/naq10_e.R
-  #   - text: NACE rev2
-  #     icon: file-code
-  #     href: R/nace.r
-  #   - text: CNA2020 France
-  #     icon: file-code
-  #     href: R/france-melodi.r
-  #   - text: CNA2014 France
-  #     icon: file-code
-  #     href: R/france CN 2014.r
-  #   - text: Non salariés France
-  #     icon: file-code
-  #     href: R/annexeD.r
+  other-links:
+     - text: Séminaire Lunch OFCE
+       icon: file-earmark-easel
+       href: seminaire lunch OFCE.html
   title: "Partage de la valeur ajoutée, comparaisons internationales"
   page-navigation: true
   site-url: "https://xtimbeau.github.io/travail/"

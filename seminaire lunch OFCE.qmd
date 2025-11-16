@@ -1,0 +1,356 @@
+---
+title: Le partage de la valeur ajoutée
+subtitle: Séminaire *lunch* de 11h de l'OFCE
+author-footer: "[document de travail de l'OFCE 2025-23](https://xtimbeau.github.io/travail)"
+author:
+  - name: Xavier Timbeau
+    email: xavier.timbeau@sciencespo.fr
+    affiliation: OFCE, Sciences Po Paris
+    affiliation-url: http://www.ofce.fr
+    orcid: 0000-0002-6198-5953
+date: 2025-11-17
+lang: fr
+format: 
+  pres-revealjs:
+    toc-depth: 1
+    embed-resources: true
+editor: visual
+bibliography: references.bib
+---
+
+# Une part des salaires élevée en France en 2025
+
+## Pourquoi s'intéresser au partage de la valeur ajoutée ?
+
+-   Un problème essentiellement de mesure
+
+-   Une application directe à la question salariale
+
+    -   Quelle marge de manoeuvre pour revaloriser le travail ?
+
+    -   Quel rapport salarial aujourd'hui ?
+
+    -   Quel rendement du capital ?
+
+-   Un principe : la comptabilité nationale fournit une information, comment et jusqu'où l'utiliser ?
+
+    -   Les notions et les méthodes et de la CN sont homogènes d'un pays à l'autre et dans le temps, on peut donc comparer dans l'espace et dans le temps
+
+## La part des salaires est très élevée en France en 2025
+
+```{r}
+ofce::init_qmd()
+update_theme(text = element_text(size = 16)) 
+gsal <- load_graphe("index-fig-psal-1") + ofce_caption()
+girafy(gsal)
+```
+
+## Ce résultat contraste avec des résultats antérieurs
+
+Depuis @cotis2009 le consensus est que le partage de la valeur ajoutée est plutôt stable en France -- après une période particulière où il a été élevé
+
+Récemment @cette2019, @pak2019 et @tresor2025 convergent vers le diagnostic de stabilité.
+
+::::: {.columns style="text-align: center; font-size: 0.85rem;"}
+::: {.column width="50%"}
+![](images/clipboard-3701910005.png){width="361" fig-align="center"}
+
+@tresor2025
+:::
+
+::: {.column width="50%"}
+![](images/clipboard-3667384201.png){width="300" fig-align="center"}
+
+@cette2019
+:::
+:::::
+
+## Un rendement du capital productif (très) bas en France
+
+```{r}
+gr <- load_graphe("index-fig-rp") + ofce_caption()
+girafy(gr)
+```
+
+# Définitions
+
+## Part des salaires
+
+<br>
+
+$$
+s_{net, n.s., -LOPQ}  = \frac{\sum_{b\in{TT-LOPQ}}{D1_b*(1+ns_b/sal_b)}}{\sum_{b\in{TT-LOPQ}}{B1G_b - P51C_b - (D29_b-D39_b)}}
+$$
+
+<br> $D1$ est la rémunération des salariés (incluant salaires nets, primes, cotisations employé et employeur)
+
+$B1G$ est la valeur ajoutée brute
+
+$P51C$ la consommation de capital fixe
+
+$ns$ et $sal$ sont soit les effectifs soit les revenus mixtes nets ($B3N$) des non salariés et salariés
+
+$D29$ sont les impôts de production, $D39$ les subventions à la production
+
+Toutes les grandeurs sont en **euros courants**
+
+## Rendement du capital productif
+
+<br> 
+
+\begin{aligned}
+\Pi_{\bar{is}} & = B1G - P51C - D1 - (D29-D39) = B2N \\
+
+\Pi_{{is}} & = B1G - P51C - D1 - (D29-D39) - D5 = B2N-D5
+\end{aligned} \
+\begin{aligned}
+r_{productif} & = \frac{\Pi}{N1N+[N2N]} \\
+r_{financier} & = \frac{\Pi}{F51+F52+BF90}
+\end{aligned}
+
+<br>
+
+$N1N$ sont les actifs non financiers produits,
+
+$N2N$ les actifs non financiers non produits (ressources naturelles, terre) -- non disponible pour bcp de pays
+
+$F51$ Equity (actions), $F52$ Investment fund shares/units, $BF90$ valeur nette rédiduelle
+
+# Valeur ajoutée nette ou brute
+
+## Nette plutôt que brute -- CCF sur VAN {.smaller}
+
+::::: columns
+::: {.column width="85%"}
+```{r}
+(load_graphe("index-unnamed-chunk-9-5") + 
+  ofce_caption()+
+  labs(title = "CCF dans la VAN")) |> 
+  girafy()
+```
+:::
+
+::: {.column width="15%"}
+La consommation de capital fixe est la quantité de capital "consommée" pendant le processus de production.
+
+Elle est evaluée par des tables de mortalité par classe d'actifs.
+:::
+:::::
+
+## Nette plutôt que brute -- CCF sur actifs {.smaller}
+
+::::: columns
+::: {.column width="85%"}
+```{r}
+(load_graphe("index-unnamed-chunk-10-5") + 
+  ofce_caption()+
+  labs(title = "CCF sur actifs")) |> 
+  girafy()
+```
+:::
+
+::: {.column width="15%"}
+En France, la CCF est particulièrement élevée (plus de 15% contre 10% en Allemagne).
+
+Pourquoi ?
+
+-   Structure de l'économie
+-   Nature de l'investissement
+
+La conséquence est assez importante : cela réduit assez fortement le numérateur
+:::
+:::::
+
+## Nette plutôt que brute
+
+```{r}
+("index-fig-psalnetbrut" |> 
+  load_graphe() +
+  ofce_caption() +
+  labs(title = "VAN vs VAB") ) |> 
+  girafy()
+```
+
+# Correction pour les non salariés
+
+## Les non salariés sont des travailleurs comme les autres
+
+Surout la valeur ajoutée des branches intègre l'activité des non salariés.
+
+En France, en 1970, le revenu des non salariés est égal à celui des salariés des branches marchandes
+
+On traite les non salariés en leur attribuant un salaire égal à celui des salariés de la branche. C'es la méthode "effectif" [@cette2019, @tresor2025, @pak2019, @timbeau2002, @askenazy2012 pour une décomposition par branche]
+
+Mais :
+
+-   un ouvrier agricole n'est pas un "agriculteur", le ratio n'est pas le même aujourd'hui qu'hier
+
+-   les plateformes développent de nouvelles formes de non salariés, peu payés, au heures malconnues, avec double compte possible
+
+Une autre méthode est possible : le revenu mixte
+
+-   la CN définit depuis (longtemps base 2020, base 2014, ESA 2010, 1995) le revenu mixte (B3G). La base 2020 diffuse B3G au niveau des branches.
+
+## Le revenu des non salariés
+
+```{r}
+(load_graphe("index-unnamed-chunk-14-2") + 
+  ofce_caption()+
+  labs(title = "Revenu par tête des non salariés")) |> 
+  girafy()
+```
+
+## Correction effectifs
+
+```{r}
+("index-fig-psalcnc" |> 
+  load_graphe() +
+  ofce_caption() +
+  labs(title = "Prise en compte vs non prise en compte de la non salarisation (effectif)")) |> 
+  girafy()
+```
+
+## Correction revenu mixte
+
+```{r}
+("index-fig-psalmixte" |> 
+  load_graphe() +
+  ofce_caption() +
+  labs(title = "Correction effectif vs revenu mixte ; Partage de la VA") ) |> 
+  girafy()
+```
+
+## Rendement du capital "effectif vs revenu mixte"
+
+```{r}
+("index-fig-rpmixte" |> 
+  load_graphe() +
+  ofce_caption() + 
+  labs(title = "Correction effectif vs revenu mixte ; rendement") ) |> 
+  girafy()
+```
+
+# Branches marchandes hors immobilier
+
+## Les services immobiliers : résidentiel et aux entreprises
+
+Les services immobiliers (L) sont décomposés en 2 grandes catégories :
+
+-   les services immobiliers aux entreprises
+
+    -   comptabilisé lorsqu'un loyer est payé
+
+-   les services immobiliers aux ménages
+
+    -   auto-produits : les propriétaires occupants – loyer implicite
+
+    -   produits par les ménages : les propriétaires bailleurs – loyer
+
+    -   produits par des entreprises : les bailleurs insitutionnels – loyer
+
+-   les autres services (transaction, intermédiaires)
+
+Le partage de la valeur ajoutée pour les services immobilier résidentiel n'est pas pertinent [@cette2019, @pak2019] ; celui des services aux entreprises est ennuyeux
+
+## Champ marchand vs hors immobilier
+
+```{r}
+("index-fig-psalnetbrut" |> 
+  load_graphe() + 
+  ofce_caption() +
+  labs(title = "Net vs brut; marchand vs hors immobilier") ) |> 
+  girafy()
+```
+
+# La question de l'immobilier : optimisation fiscale ?
+
+## La consommation intermétiare d'immobilier
+
+```{r}
+("index-fig-ciLfr" |> 
+  load_graphe() + 
+    ofce_caption() +
+    labs(title = "CI en service immobilier, France") ) |> 
+  girafy()
+```
+
+## Impact sur le rendement
+
+```{r}
+( "index-fig-rendfr" |> 
+    load_graphe() + 
+    ofce_caption() +
+    labs(title = "CI en service immobilier, France") ) |> 
+  girafy()
+```
+
+# Annexes
+
+## Changement de structure des branches
+
+```{r}
+( "index-fig-structbranche" |> 
+    load_graphe() +
+    ofce_caption() +
+    labs(title = "Chnagement de structure des branches") ) |> 
+  girafy()
+```
+
+## France 1949-2024
+
+```{r}
+ofce::load_graphe("index-unnamed-chunk-16-2") + 
+  ofce_caption() + 
+  scale_y_continuous(
+    limits = c(NA,NA),
+    labels = label_percent(1)  )
+```
+
+## Rendement du capital France 1978-2024
+
+```{r}
+ofce::load_graphe("index-unnamed-chunk-17-2") + 
+  ofce_caption() +
+  scale_y_continuous(
+    limits = c(NA,NA),
+    labels = label_percent(1)  )
+```
+
+## Reproductibilité {.smaller}
+
+::::: columns
+::: {.column .center width="75%"}
+-   Le document de travail OFCE 2025-23 (https://xtimbeau.github.io/travail)\[https://xtimbeau.github.io/travail\] est entièrement **exécutable** : le code n'est pas là uniquement pour le résultat mais aussi pour documenter les étapes qui conduisent au résultat, des données publiques au document publié.
+
+-   Le code est accessible à [github.com/xtimbeau/travail](https://github.com/xtimbeau/travail), un dépôt en lecture seule
+
+    -   Structuré en un `.qmd` avec le texte et les graphiques et des fichiers `R` dans le dossier `R`
+
+    -   Chaque fichier R accède à une source (téléchargement des données) et opére des transformations
+
+    -   `source_data()` permet de mettre en cache les téléchargements et assure le bon fonctionnement du dépôt sans recharger les données (dans le dossier `.sourcoise`)
+
+    -   la mise à jour peut modifier les graphiques, voire si changement du format déclencher une erreur
+
+    -   `renv` enregistre les packages et leurs versions (y compris ceux qui ne sont pas sur CRAN)
+
+    -   Un `README.md` documente l'entrée dans le code (affiché sur github.com)
+
+-   Le pdf (mis en page) est produit à partir du même qmd que le html -- mêmes données, même texte, il est sur le site de l'OFCE
+
+-   Cela permet :
+
+    -   La transparence : tous les calculs sont explicites, pas d'ambiguïté. Si il y a des erreurs, elles peuvent être identifiées et corrigées
+    -   Les données peuvent être mises à jour, les graphiques ou les tableaux actualisés
+    -   Le code peut être réutilisé pour d'autres travaux
+:::
+
+::: {.column .center width="25%"}
+![](images/clipboard-1497057781.png){width="235" fig-align="right"}
+:::
+:::::
+
+## Références
+
+::: {#refs}
+:::

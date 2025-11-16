@@ -81,7 +81,7 @@ naq_a10 <- naq_a10 |>
   fill(p51c, d29x39, d1) |>
   ungroup() |>
   mutate(
-    van = B1G*(1-p51c),
+    van = B1G*(1-p51c) - B1G * d29x39,
     vab = B1G,
     msa = d1 * B1G * tsal,
     msanc = d1 * B1G,
@@ -158,8 +158,8 @@ L68Aq <- L68A |>
     md = FALSE, hi = FALSE, hifi = FALSE, hfi = FALSE,
     him = TRUE,
     vab = B1G * rB1G,
-    van = vab - rP51C * vab,
     ip = rD29X39 * vab,
+    van = vab - rP51C * vab - ip,
     msa, msanc)
 
 naq_a10 <- naq_a10 |>
@@ -287,13 +287,13 @@ d51 <- "nasa_10_nf_tr" |>
     naa |> select(time, geo, B1G = vab, van, msa, ip, champ),
     by = c("time", "geo", "champ")) |>
   mutate(t2is = is/B1G,
-         tis = is/(van-msa-ip)) |>
+         tis = is/(van-msa)) |>
   group_by(geo, champ) |>
   fill(tis, t2is) |>
   ungroup() |>
   transmute(
     geo, time, tis, t2is, champ,
-    is = tis*(van-msa-ip),
+    is = tis*(van-msa),
     is2 = t2is*B1G)
 
 naa_ext <- naa |>
@@ -308,10 +308,10 @@ naa_ext <- naa |>
   filter(geo %in% pays, time >= "1995-01-01") |>
   mutate(geo = factor(geo, pays)) |>
   mutate(
-    tp = (van - msa - ip - is)/van,
-    tpb = (van - msa -ip)/van,
-    tpm = (van - msam - ip - is)/van,
-    tpbm = (van - msam - ip)/van  )
+    tp = (van - msa - is)/van,
+    tpb = (van - msa )/van,
+    tpm = (van - msam - is)/van,
+    tpbm = (van - msam )/van  )
 
 assets <- source_data("assets.r")$assets  |>
   filter(assets>0)

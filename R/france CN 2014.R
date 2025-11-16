@@ -105,7 +105,6 @@ total_b3g <- cn14e |>
   left_join(b3g |> select(time, B3G, rccfei), by = "time") |>
   mutate(vv = b3g/B3G)
 
-
 cn14e2 <- cn14e |>
   left_join(total_b3g |> select(time, vv, rccfei), by = 'time') |>
   mutate(b3gc = b3g/vv) |>
@@ -119,7 +118,7 @@ cn14e2 <- cn14e |>
     d29 = rd29 * b1g,
     d39 = rd39 * b1g  ) |>
   mutate(
-    van = b1g - ccf,
+    van = b1g - ccf - d29 - d39,
     msal = d1 + (1-rccfei) * b3g,
     msalc = d1 + (1-rccfei) * b3gc) |>
   left_join(md, by = "naces")

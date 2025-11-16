@@ -18,7 +18,7 @@ echo: false
 message: false
 warning: false
 keep-md: false
-abstract: "On explore différentes façons de calculer la notion de part des salaires dans la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers*. Il peut être calculé pour les pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et s'est accrue de façon importante. Bien que plus fragile empiriquement, le calcul de rendement net d'impôts du capital productif confirme ce diagnostic particulerement préoccupant pour le tissu productif français. L'ensemble des éléments présentés est reproductible à partir des codes fournis."
+abstract: "On explore différentes façons de calculer la notion de part des salaires dans la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers*. Il peut être calculé pour les pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et s'est accrue de façon importante. Bien que plus fragile empiriquement, le calcul de rendement net d'impôts du capital productif confirme ce diagnostic particulièrement préoccupant pour le tissu productif français. L'ensemble des éléments présentés est reproductible à partir des codes fournis."
 citation:
   type: article-journal
   container-title: "Document de travail de l'OFCE"
@@ -55,19 +55,22 @@ thanks: "Je remercie chaleureusement Elliot Aurissergues, François Geerolf et E
 ofce::init_qmd()
 P6 <- source_data("R/nace.r")$pays1 
 
-options(ofce.tabsetize.pdf = "one")
+options(
+  ofce.tabsetize.pdf = "one",
+  ofce.savegraph = TRUE )
+
 if(knitr::is_html_output()) 
   update_theme(text = element_text(size = 10)) else  
     update_theme(text = element_text(size = 8)) 
 ```
 
-::: {.aside .content-visible when-format="html"}
+::: {.appendix .content-visible when-format="html"}
 [{{wordcount}} mots]{style="font-size: 0.7rem; color: grey; font-style: italic;"}
 :::
 
 ## Du partage de la VA au partage des richesses
 
-L'analyse du partage de la valeur ajoutée (@fig-psal) est au cœur des débats sur la redistribution des richesses (voir notamment @hurlin1996, @timbeau2002, @cotis2009, @husson2010, @askenazy2012, @piton2019, @cette2019, @timbeau2025, @tresor2025). Un indicateur souvent retenu est celui de la part des salaires dans la valeur ajoutée. Nous discutons ici de la construction de cet indicateur et de sa comparabilité entre pays.
+L'analyse du partage de la valeur ajoutée (@fig-psal) est au cœur des débats sur la redistribution des richesses (voir notamment @hurlin1996, @timbeau2002, @cotis2009, @husson2010, @askenazy2012, @piton2019, @pak2019, @cette2019, @timbeau2025, @tresor2025). Un indicateur souvent retenu est celui de la part des salaires dans la valeur ajoutée. Nous discutons ici de la construction de cet indicateur et de sa comparabilité entre pays.
 
 ```{r, results="asis"}
 #| label: fig-psal
@@ -142,18 +145,18 @@ Trois points sont importants pour disposer du bon concept (voir @reis2022 pour u
 
 -   **Corriger des non salariés et leur imputer une masse salariale**. La correction habituelle consiste à affecter aux non salariés le même salaire que les salariés (généralement de la même branche) ; c'est ainsi que traitent la question @cette2019 et @tresor2025. Nous procédons à cette correction (appelée *correction par les effectifs*) aux 21 branches de la NACE rev. 2 niveau 1. Nous proposons une alternative en utilisant la mesure du revenu mixte (dite *correction par le revenu mixte*), parce que l'affectation d'un salarie égal aux non salariés et aux salariés par branches conduit à imputer un équivalent masse salariale supérieur au revenu mixte des non salariés[^1]. En France, le revenu mixte (des non-salariés) est passé de 30% de la masse salariale (autant pour le ratio des effectifs) au début des années 1970 à un peu moins de 10% (presque 15% pour les effectifs) en 2024. Malheureusement, le revenu mixte par branche n'est pas diffusé systématiquement par les Etats membres de l'UE. Ces corrections modifient significativement la part des salaires dans la valeur ajoutée, suivant la méthode, parce que non seulement la part des non salariés et de leur revenu mixte varie dans le temps, de façon différente par un effet de structure (moins d'agriculteurs) et de nature (les non salariés sont moins rémunérés aujourd'hui), de façon différente par pays (@fig-psalcnc et voir les annexes D et G consacrées à ce point).
 
--   **Définir le champ considéré**. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour part auto produit (les loyers imputés aux propriétaires) et pour part produits par les ménages pour d'autres ménages (les propriétaires bailleurs). Suivant les pays ou les périodes, le nombre de propriétaires occupants peut être très différent (@cette2019 fait ce point que @tresor2025 semble ignorer). Mais le vrai problème est que le partage de la valeur ajoutée n'a ici pas de sens dansle cas d'un loyer imputé ou d'un propriétaire bailleur. La consommation de services immobiliers par les ménages représentait en France en 2024 un peu moins de 300 milliards d'euros soit aprroximativement `r round(300/1666*100)`% de la valeur ajoutée brute hors services immobilier. On comprend donc que ce point n'est pas du tout négigeable. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus précise, en enlevant de la valeur ajoutée marchande la branche "services immobiliers (L)" (@appfig-psalcompote, @fig-structbranche). Omettre les services immobiliers pose cependant un problème, parce que les loyers versés par les entreprises à leurs bailleurs sont souvent un prix de transfert et non un prix de marché. C'est donc un élément qui peut être utilisé comme véhicule pour de l'otpimisation fiscale, d'autant plus que la fiscalité immobilière peut être avantageuse. Nous explorons cette dimension dans la @sec-immobilier en particulier pour la France.
+-   **Limiter l'analyse au champ pertinent**. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour part auto produit (les loyers imputés aux propriétaires) et pour part produits par les ménages pour d'autres ménages (les propriétaires bailleurs). Suivant les pays ou les périodes, le nombre de propriétaires occupants peut être très différent (@cette2019 fait ce point que @tresor2025 semble ignorer). Mais le vrai problème est que le partage de la valeur ajoutée n'a ici pas de sens dansle cas d'un loyer imputé ou d'un propriétaire bailleur. La consommation de services immobiliers par les ménages représentait en France en 2024 un peu moins de 300 milliards d'euros soit aprroximativement `r round(300/1666*100)`% de la valeur ajoutée brute hors services immobilier. On comprend donc que ce point n'est pas du tout négigeable. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus précise, en enlevant de la valeur ajoutée marchande la branche "services immobiliers (L)" (@appfig-psalcompote, @fig-structbranche). Omettre les services immobiliers pose cependant un problème, parce que les loyers versés par les entreprises à leurs bailleurs sont souvent un prix de transfert et non un prix de marché. C'est donc un élément qui peut être utilisé comme véhicule pour de l'otpimisation fiscale, d'autant plus que la fiscalité immobilière peut être avantageuse. Nous explorons cette dimension dans la @sec-immobilier en particulier pour la France.
 
--   **Utiliser la notion de valeur ajoutée nette** (de la consommation de capital fixe, la CCF) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. Cette dernière notion découle de l'application de tables de mortalité à un inventaire permanent des investissements non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire mesurée par leur amortissement physique ou fiscal, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée (@fig-psalnetbrut). Ce point est signalé par @tresor2025, mais les auteurs ont préféré le concept de valeur ajoutée brute pour des raisons de comparabilité entre études – au détriment de la comparabilité dans le temps et dans l'espace.
+-   **Utiliser la notion de valeur ajoutée nette** (de la consommation de capital fixe (CCF)) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. La CFF est évaluée par des tables de mortalité à l'inventaire permanent des investissements productifs (actifs produits) non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire mesurée par leur amortissement physique ou fiscal, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée (@fig-psalnetbrut). Ce point est signalé par @tresor2025, mais les auteurs ont préféré le concept de valeur ajoutée brute pour des raisons de comparabilité entre études – au détriment de la comparabilité dans le temps et dans l'espace.
 
 [^1]: Merci à E. Aurissergues pour m'avoir pointé cette anomalie.
 
-Le concept que nous privilégions est ainsi défini comme suit (où, pour chaque branche $D1_b$ est la masse salariale chargée, $B1G_b$ la valeur ajoutée brute, $P51C_b$ la $CCF_b$, les trois notions en euros aux prix courants et $ns_b$ et $sal_b$ les effectifs en personne ou le revenu mixte par branche)[^2] :
+Le concept que nous privilégions est ainsi défini comme suit (où, pour chaque branche $D1_b$ est la masse salariale chargée, $B1G_b$ la valeur ajoutée brute, $P51C_b$ la $CCF_b$, les trois notions en euros aux prix courants et $ns_b$ et $sal_b$ les effectifs en personne ou le revenu mixte par branche)[^2] et $D29-D39$ les impôts de production nets de subventions :
 
 [^2]: @cette2019 utilisent une définition plus large des branches non marchande en incluant les branches R, T et U.
 
 $$
-s_{net, n.s., -LOPQ}  = \frac{\sum_{b\in{TT-LOPQ}}{D1_b*(1+ns_b/sal_b)}}{\sum_{b\in{TT-LOPQ}}{B1G_b - P51C_b}}
+s_{net, n.s., -LOPQ}  = \frac{\sum_{b\in{TT-LOPQ}}{D1_b*(1+ns_b/sal_b)}}{\sum_{b\in{TT-LOPQ}}{B1G_b - P51C_b - (D29_b-D39_b)}}
 $$
 
 La part des salaires dans la valeur ajoutée nette est croissante en France (@fig-psal) (de 10 points de 1998 à 2025), comme en Espagne (de 9 points). Elle atteint en France le niveau le plus élevé des pays sélectionnés (correction des non salariés par les effectifs), pour autant que l'on puisse comparer entre pays. Ce résultat contraste avec les évaluations récentes de @cette2019 et @tresor2025 qui concluent à une stabilité de la part des salaires dans la valeur ajoutée autour de ce qu'ils supposent être une valeur d'équilibre.
@@ -232,7 +235,7 @@ tpbranches <- imap(
         geom_line(
           data=data,
           aes(y = rb, group = geo),
-          color = "grey85", layout = "fixed", linewidth = 0.2) +
+          color = "grey90", layout = "fixed", linewidth = 0.2) +
         ggbraid::geom_braid(
           data = data,
           aes(y=NULL,ymin=r, ymax=rb, group=geo), 
@@ -715,13 +718,6 @@ naq <- source_data("R/vaq.r")$naa |>
 date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
-annot <-  tribble(
-    ~time, ~psal, ~label, ~geo, ~champ,
-    "1996-01-01", .89, "Branches marchandes hors immobilier et finance", "DE", "mdhifi",
-    "1996-01-01", .61, "Branches marchandes et non marchandes", "DE", "tb") |> 
-  mutate(time = as.Date(time),
-         geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
-
 data <- naq |>
   select(geo, time, champ, psal, psalb) |> 
   filter(champ %in% c("tb", "mdhi")) |> 
@@ -901,7 +897,9 @@ data4tp <- source_data("R/vaq.r")$naaa |>
 
 data <-  data4tp |> 
   filter(champ == "mdhi") |> 
-  mutate(tooltip = glue(
+  mutate(
+    cr = rb>rbm,
+    tooltip = glue(
     "<b>{lbl(geo)}</b>
           {year(time)}
           Profits sur capital productif, avant IS, Branches marchandes,
@@ -913,42 +911,44 @@ data_long <- data |>
   mutate(concept = factor(concept, c("rb", "rbm")))
 
 tpmixte <- ggplot(data_long) +
-        aes(x=time, y=value, col = geo) +
-        geom_line(
-          data=data,
-          aes(y = rb, group = geo),
-          color = "grey85", layout = "fixed", linewidth = 0.2) +
-        scale_linetype_manual(values = c(rbm="11", rb="solid"),
-                              name=NULL, 
-                              label = c(rb="Correction effectif", rbm= "Correction revenu mixte"))+
-        scale_linewidth_manual(values = c(rbm=0.25, rb=0.5),
-                              name=NULL, 
-                              label = c(rb="Correction effectif", rbm= "Correction revenu mixte"))+
-        geom_line(aes(y=value, group=concept, linewidth=concept, linetype=concept))+
-        geom_point_interactive(
-          data=data,
-          aes(y = rb, tooltip = tooltip, data_id = time, fill = geo),
-          size = 1, stroke = 0.5, shape = 21, color = "white",
-          hover_nearest = TRUE, show.legend=FALSE) +
-        ylab("% du capital") + xlab(NULL) +
-        facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
-        scale_ofce_date(
-          labels = date1d ) +
-        guides( fill = "none", color = "none",
-                linetype = guide_legend(nrow = 1),
-                alpha = guide_legend(nrow = 1)) + 
-        scale_y_continuous(
-          labels = scales::label_percent(1), 
-          breaks = scales::pretty_breaks(5),
-          limits = c(0, .2),
-          oob = scales::oob_keep) +
-        scale_color_pays(format = "eurostat") +
-        ofce_caption(
-          source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
+  aes(x=time, y=value, col = geo) +
+  ggbraid::geom_braid(
+    data = data,  alpha = 0.1,
+    aes(y=NULL, ymin=rbm, ymax = rb, fill = cr), 
+    color="transparent", show.legend = FALSE) +
+  scale_fill_manual(values = c("green", "red")) +
+  ggnewscale::new_scale_fill() +
+  scale_linetype_manual(values = c(rbm="11", rb="solid"),
+                        name=NULL, 
+                        label = c(rb="Correction effectif", rbm= "Correction revenu mixte"))+
+  scale_linewidth_manual(values = c(rbm=0.5, rb=0.5),
+                         name=NULL, 
+                         label = c(rb="Correction effectif", rbm= "Correction revenu mixte"))+
+  geom_line(aes(y=value, group=concept, linewidth=concept, linetype=concept))+
+  geom_point_interactive(
+    data=data,
+    aes(y = rb, tooltip = tooltip, data_id = time, fill = geo),
+    size = 1, stroke = 0.5, shape = 21, color = "white",
+    hover_nearest = TRUE, show.legend=FALSE) +
+  ylab("% du capital") + xlab(NULL) +
+  facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
+  scale_ofce_date(
+    labels = date1d ) +
+  guides( fill = "none", color = "none",
+          linetype = guide_legend(nrow = 1),
+          alpha = guide_legend(nrow = 1)) + 
+  scale_y_continuous(
+    labels = scales::label_percent(1), 
+    breaks = scales::pretty_breaks(5),
+    limits = c(0, .2),
+    oob = scales::oob_keep) +
+  scale_color_pays(format = "eurostat") +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), actifs productifs (nama_10_nfa_st), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
-          champ = "Branches marchandes.",
-          note = "Le rendement du capital est calculé selon deux corrections de la non salarisation (par les effectifs, par le revenu mixte), La correction est appliquée au champ branches marchandes hors immobiliers alors que le revenu mixte est connu pour l'ensemble de l'économie.") +
-        theme(legend.box.spacing = unit(1, "pt"))
+ champ = "Branches marchandes.",
+ note = "Le rendement du capital est calculé selon deux corrections de la non salarisation (par les effectifs, par le revenu mixte), La correction est appliquée au champ branches marchandes hors immobiliers alors que le revenu mixte est connu pour l'ensemble de l'économie.") +
+  theme(legend.box.spacing = unit(1, "pt"))
 
 girafy(tpmixte, 1.5)
 ```
@@ -1172,7 +1172,7 @@ Les comptes des sociétés non financières permettent d’examiner d'autres él
 Les profits nets sont définis comme la valeur ajoutée nette de la consommation de capital fixe moins la rémunération des salariés, moins les taxes nettes des subventions moins l'impôt sur les sociétés :
 
 $$
-\Pi = B1G - P51C - D1 - (D2-D3) - D5 = B2N-D5
+\Pi = B1G - P51C - D1 - (D29-D39) - D5 = B2N-D5
 $$
 
 Les dividendes sont la ligne $D42$ nette de ce qui est payé et reçu par le secteur des sociétés non financières (SNF ou S11).
@@ -1559,7 +1559,7 @@ gg <- ggplot(data) +
 girafy(gg)
 ```
 
-Le @fig-rendfr confirme cette idée, mais illustre l'ordre de grandeur que les services immobiliers pourraient avoir sur le rendement du capital. Les deux courbes présentées sont d'une part le rendement avant IS du capital productif des branches marchandes non immobilières et d'autre part le même rendement, mais en modifiant la valeur ajoutée des branches marchandes non immobilières en appliquant le ratio consommation intermédiaire en services immobiliers de 1980 (il était alors de 3,3%). Cela représente plus d'un point de rendement.
+-   Le @fig-rendfr confirme cette idée, mais illustre l'ordre de grandeur que les services immobiliers pourraient avoir sur le rendement du capital. Les deux courbes présentées sont d'une part le rendement avant IS du capital productif des branches marchandes non immobilières et d'autre part le même rendement, mais en modifiant la valeur ajoutée des branches marchandes non immobilières en appliquant le ratio consommation intermédiaire en services immobiliers de 1980 (il était alors de 3,3%). Cela représente plus d'un point de rendement.
 
 ```{r}
 #| label: fig-rendfr
@@ -1616,6 +1616,7 @@ gg <- ggplot(data_long) +
 
 girafy(gg)
 ```
+
 ::: {style="text-align: right;"}
 {{< fa square >}}
 :::
@@ -1760,7 +1761,7 @@ ccfsina <- imap(
       aes(tooltip = tooltip, data_id = time, fill = geo),
       size = 1, stroke = 0.2, shape = 21, color = "white",
       hover_nearest = TRUE, show.legend=FALSE) +
-  ylab("% de la VA") + xlab(NULL) +
+  ylab("% des actifs") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
     labels = date1d ) +
@@ -1770,13 +1771,12 @@ ccfsina <- imap(
   scale_y_continuous(
     labels = scales::label_percent(1), 
                      breaks = scales::pretty_breaks(5),
-                     limits = c(0, 0.15)) +
+                     limits = c(0, 0.2)) +
   scale_color_pays(format = "eurostat") +
   ofce_caption(
-    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
+    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e) et actifs productifs ((nama_10_nfa_bs)), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
     champ = "Branches marchandes {.y}.",
-    note = "La CCF provient des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà (voir tableau A1). Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") ) 
+    note = "Les actifs sont les actifs productifs. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") ) 
 
 tabsetize(ccfsina, 1.25)
 ```
@@ -2144,7 +2144,7 @@ psalE <- imap(
     scale_y_continuous(
       labels = scales::label_percent(1), 
       breaks = scales::pretty_breaks(5),
-      limits = c(0.6, 0.9),
+      limits = c(0.6, 1),
       oob = scales::oob_keep) +
     guides(linewidth = "none") +
     ofce_caption(
@@ -2231,8 +2231,8 @@ Taux de rendement du capital productif en France, 1978-2024
 
 -   annexe A : Domaine des données,
 -   annexe B : CCF,
--   annexe C : comparaisons entre pays,
--   annexe D : rémunération des non salariés,
+-   annexe C : Comparaisons entre pays,
+-   annexe D : Rémunération des non salariés,
 -   annexe E : CN2020 et CN2014 pour la France,
--   annexe F : Rendement du capital productif de 1978 à 2024
+-   annexe F : Rendement du capital productif en France de 1978 à 2024
 :::

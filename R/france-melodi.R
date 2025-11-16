@@ -220,7 +220,7 @@ melodi <- fr_branches_aug |>
   rename_with(tolower) |>
   mutate(
     vab = b1g,
-    van = b1g - p51c,
+    van = b1g - p51c - d29x39,
     psal = (d1 * (1 + self/sal)) / van,
     psalm = (d1 + b3g*0.88) / van,
     p2lf = p2l[time=="1980-01-01"]/van[time=="1980-01-01"] * van,
@@ -253,7 +253,7 @@ melodi2 <- melodi |>
     .groups = "drop") |>
   mutate(
     vab = b1g,
-    van = b1g - p51c,
+    van = b1g - p51c - d29x39,
     psal = (d1 * (1 + self/sal)) / van,
     psalm = (d1 + b3g*0.8) / van,
     tp = (van - d1 * (1 + self/sal) - d29x39) / van,
