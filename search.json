@@ -1,166 +1,5 @@
 [
   {
-    "objectID": "seminaire lunch OFCE.html#pourquoi-sintéresser-au-partage-de-la-valeur-ajoutée",
-    "href": "seminaire lunch OFCE.html#pourquoi-sintéresser-au-partage-de-la-valeur-ajoutée",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Pourquoi s’intéresser au partage de la valeur ajoutée ?",
-    "text": "Pourquoi s’intéresser au partage de la valeur ajoutée ?\n\nUn problème essentiellement de mesure\nUne application directe à la question salariale\n\nQuelle marge de manoeuvre pour revaloriser le travail ?\nQuel rapport salarial aujourd’hui ?\nQuel rendement du capital ?\n\nUn principe : la comptabilité nationale fournit une information, comment et jusqu’où l’utiliser ?\n\nLes notions et les méthodes et de la CN sont homogènes d’un pays à l’autre et dans le temps, on peut donc comparer dans l’espace et dans le temps"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#la-part-des-salaires-est-très-élevée-en-france-en-2025",
-    "href": "seminaire lunch OFCE.html#la-part-des-salaires-est-très-élevée-en-france-en-2025",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "La part des salaires est très élevée en France en 2025",
-    "text": "La part des salaires est très élevée en France en 2025\n\nofce::init_qmd()\nupdate_theme(text = element_text(size = 16)) \ngsal &lt;- load_graphe(\"index-fig-psal-1\") + ofce_caption()\ngirafy(gsal)"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#ce-résultat-contraste-avec-des-résultats-antérieurs",
-    "href": "seminaire lunch OFCE.html#ce-résultat-contraste-avec-des-résultats-antérieurs",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Ce résultat contraste avec des résultats antérieurs",
-    "text": "Ce résultat contraste avec des résultats antérieurs\nDepuis Cotis (2009) le consensus est que le partage de la valeur ajoutée est plutôt stable en France – après une période particulière où il a été élevé\nRécemment Cette, Koehl, et Philippon (2019), Pak, Pionnier, et Schwellnus (2019) et Gendre et Thommen (2025) convergent vers le diagnostic de stabilité.\n\n\n\n\n\n\n\nGendre et Thommen (2025)\n\n\n\n\n\n\nCette, Koehl, et Philippon (2019)"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#un-rendement-du-capital-productif-très-bas-en-france",
-    "href": "seminaire lunch OFCE.html#un-rendement-du-capital-productif-très-bas-en-france",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Un rendement du capital productif (très) bas en France",
-    "text": "Un rendement du capital productif (très) bas en France"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#part-des-salaires",
-    "href": "seminaire lunch OFCE.html#part-des-salaires",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Part des salaires",
-    "text": "Part des salaires\n\n\\[\ns_{net, n.s., -LOPQ}  = \\frac{\\sum_{b\\in{TT-LOPQ}}{D1_b*(1+ns_b/sal_b)}}{\\sum_{b\\in{TT-LOPQ}}{B1G_b - P51C_b - (D29_b-D39_b)}}\n\\]\n \\(D1\\) est la rémunération des salariés (incluant salaires nets, primes, cotisations employé et employeur)\n\\(B1G\\) est la valeur ajoutée brute\n\\(P51C\\) la consommation de capital fixe\n\\(ns\\) et \\(sal\\) sont soit les effectifs soit les revenus mixtes nets (\\(B3N\\)) des non salariés et salariés\n\\(D29\\) sont les impôts de production, \\(D39\\) les subventions à la production\nToutes les grandeurs sont en euros courants"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#rendement-du-capital-productif",
-    "href": "seminaire lunch OFCE.html#rendement-du-capital-productif",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Rendement du capital productif",
-    "text": "Rendement du capital productif\n\n\\[\\begin{aligned}\n\\Pi_{\\bar{is}} & = B1G - P51C - D1 - (D29-D39) = B2N \\\\\n\n\\Pi_{{is}} & = B1G - P51C - D1 - (D29-D39) - D5 = B2N-D5\n\\end{aligned}\\]\n\n\n\\[\\begin{aligned}\nr_{productif} & = \\frac{\\Pi}{N1N+[N2N]} \\\\\nr_{financier} & = \\frac{\\Pi}{F51+F52+BF90}\n\\end{aligned}\\]\n\n\\(N1N\\) sont les actifs non financiers produits,\n\\(N2N\\) les actifs non financiers non produits (ressources naturelles, terre) – non disponible pour bcp de pays\n\\(F51\\) Equity (actions), \\(F52\\) Investment fund shares/units, \\(BF90\\) valeur nette rédiduelle"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#nette-plutôt-que-brute-ccf-sur-van",
-    "href": "seminaire lunch OFCE.html#nette-plutôt-que-brute-ccf-sur-van",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Nette plutôt que brute – CCF sur VAN",
-    "text": "Nette plutôt que brute – CCF sur VAN\n\n\n\n\n\n\n\n\n\nLa consommation de capital fixe est la quantité de capital « consommée » pendant le processus de production.\nElle est evaluée par des tables de mortalité par classe d’actifs."
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#nette-plutôt-que-brute-ccf-sur-actifs",
-    "href": "seminaire lunch OFCE.html#nette-plutôt-que-brute-ccf-sur-actifs",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Nette plutôt que brute – CCF sur actifs",
-    "text": "Nette plutôt que brute – CCF sur actifs\n\n\n\n\n\n\n\n\n\nEn France, la CCF est particulièrement élevée (plus de 15% contre 10% en Allemagne).\nPourquoi ?\n\nStructure de l’économie\nNature de l’investissement\n\nLa conséquence est assez importante : cela réduit assez fortement le numérateur"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#nette-plutôt-que-brute",
-    "href": "seminaire lunch OFCE.html#nette-plutôt-que-brute",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Nette plutôt que brute",
-    "text": "Nette plutôt que brute"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#les-non-salariés-sont-des-travailleurs-comme-les-autres",
-    "href": "seminaire lunch OFCE.html#les-non-salariés-sont-des-travailleurs-comme-les-autres",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Les non salariés sont des travailleurs comme les autres",
-    "text": "Les non salariés sont des travailleurs comme les autres\nSurout la valeur ajoutée des branches intègre l’activité des non salariés.\nEn France, en 1970, le revenu des non salariés est égal à celui des salariés des branches marchandes\nOn traite les non salariés en leur attribuant un salaire égal à celui des salariés de la branche. C’es la méthode « effectif » Askenazy, Cette, et Sylvain (2012)\nMais :\n\nun ouvrier agricole n’est pas un « agriculteur », le ratio n’est pas le même aujourd’hui qu’hier\nles plateformes développent de nouvelles formes de non salariés, peu payés, au heures malconnues, avec double compte possible\n\nUne autre méthode est possible : le revenu mixte\n\nla CN définit depuis (longtemps base 2020, base 2014, ESA 2010, 1995) le revenu mixte (B3G). La base 2020 diffuse B3G au niveau des branches."
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#le-revenu-des-non-salariés",
-    "href": "seminaire lunch OFCE.html#le-revenu-des-non-salariés",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Le revenu des non salariés",
-    "text": "Le revenu des non salariés"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#correction-effectifs",
-    "href": "seminaire lunch OFCE.html#correction-effectifs",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Correction effectifs",
-    "text": "Correction effectifs"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#correction-revenu-mixte",
-    "href": "seminaire lunch OFCE.html#correction-revenu-mixte",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Correction revenu mixte",
-    "text": "Correction revenu mixte"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#rendement-du-capital-effectif-vs-revenu-mixte",
-    "href": "seminaire lunch OFCE.html#rendement-du-capital-effectif-vs-revenu-mixte",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Rendement du capital « effectif vs revenu mixte »",
-    "text": "Rendement du capital « effectif vs revenu mixte »"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#les-services-immobiliers-résidentiel-et-aux-entreprises",
-    "href": "seminaire lunch OFCE.html#les-services-immobiliers-résidentiel-et-aux-entreprises",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Les services immobiliers : résidentiel et aux entreprises",
-    "text": "Les services immobiliers : résidentiel et aux entreprises\nLes services immobiliers (L) sont décomposés en 2 grandes catégories :\n\nles services immobiliers aux entreprises\n\ncomptabilisé lorsqu’un loyer est payé\n\nles services immobiliers aux ménages\n\nauto-produits : les propriétaires occupants – loyer implicite\nproduits par les ménages : les propriétaires bailleurs – loyer\nproduits par des entreprises : les bailleurs insitutionnels – loyer\n\nles autres services (transaction, intermédiaires)\n\nLe partage de la valeur ajoutée pour les services immobilier résidentiel n’est pas pertinent Pak, Pionnier, et Schwellnus (2019) ; celui des services aux entreprises est ennuyeux"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#champ-marchand-vs-hors-immobilier",
-    "href": "seminaire lunch OFCE.html#champ-marchand-vs-hors-immobilier",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Champ marchand vs hors immobilier",
-    "text": "Champ marchand vs hors immobilier"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#la-consommation-intermétiare-dimmobilier",
-    "href": "seminaire lunch OFCE.html#la-consommation-intermétiare-dimmobilier",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "La consommation intermétiare d’immobilier",
-    "text": "La consommation intermétiare d’immobilier"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#impact-sur-le-rendement",
-    "href": "seminaire lunch OFCE.html#impact-sur-le-rendement",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Impact sur le rendement",
-    "text": "Impact sur le rendement"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#changement-de-structure-des-branches",
-    "href": "seminaire lunch OFCE.html#changement-de-structure-des-branches",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Changement de structure des branches",
-    "text": "Changement de structure des branches"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#france-1949-2024",
-    "href": "seminaire lunch OFCE.html#france-1949-2024",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "France 1949-2024",
-    "text": "France 1949-2024"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#rendement-du-capital-france-1978-2024",
-    "href": "seminaire lunch OFCE.html#rendement-du-capital-france-1978-2024",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Rendement du capital France 1978-2024",
-    "text": "Rendement du capital France 1978-2024"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#reproductibilité",
-    "href": "seminaire lunch OFCE.html#reproductibilité",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Reproductibilité",
-    "text": "Reproductibilité\n\n\n\nLe document de travail OFCE 2025-23 (https://xtimbeau.github.io/travail)[https://xtimbeau.github.io/travail] est entièrement exécutable : le code n’est pas là uniquement pour le résultat mais aussi pour documenter les étapes qui conduisent au résultat, des données publiques au document publié.\nLe code est accessible à github.com/xtimbeau/travail, un dépôt en lecture seule\n\nStructuré en un .qmd avec le texte et les graphiques et des fichiers R dans le dossier R\nChaque fichier R accède à une source (téléchargement des données) et opére des transformations\nsource_data() permet de mettre en cache les téléchargements et assure le bon fonctionnement du dépôt sans recharger les données (dans le dossier .sourcoise)\nla mise à jour peut modifier les graphiques, voire si changement du format déclencher une erreur\nrenv enregistre les packages et leurs versions (y compris ceux qui ne sont pas sur CRAN)\nUn README.md documente l’entrée dans le code (affiché sur github.com)\n\nLe pdf (mis en page) est produit à partir du même qmd que le html – mêmes données, même texte, il est sur le site de l’OFCE\nCela permet :\n\nLa transparence : tous les calculs sont explicites, pas d’ambiguïté. Si il y a des erreurs, elles peuvent être identifiées et corrigées\nLa persistance : les données peuvent être mises à jour, les graphiques ou les tableaux actualisés\nLa descendance : le code peut être réutilisé – par soi même, par d’autres – pour d’autres travaux"
-  },
-  {
-    "objectID": "seminaire lunch OFCE.html#références",
-    "href": "seminaire lunch OFCE.html#références",
-    "title": "Le partage de la valeur ajoutée",
-    "section": "Références",
-    "text": "Références\n\n\nAskenazy, Philippe, Gilbert Cette, et Arnaud Sylvain. 2012. « Le partage de la valeur ajoutée ». Repères, septembre. https://doi.org/10.3917/dec.asken.2012.01.\n\n\nCette, Gilbert, Lorraine Koehl, et Thomas Philippon. 2019. « La part du travail sur le long terme : un déclin ? » Economie et Statistique / Economics and Statistics, nᵒ 510‑511‑512 (décembre): 35‑51. https://doi.org/10.24187/ecostat.2019.510t.1993.\n\n\nCotis, Jean-Philippe. 2009. « Partage de la valeur ajoutée, partage des profits et écarts de rémunérations en France ». Rapport pour la Présidence de la République Française. https://www.vie-publique.fr/rapport/30455-partage-valeur-ajoutee-partage-profits-et-ecarts-de-remuneration.\n\n\nGendre, Charles, et Yann Thommen. 2025. « Le partage de la richesse produite en France entre le travail et le capital ». Trésor-Éco, nᵒ 363 (mai). https://www.tresor.economie.gouv.fr/Articles/b72e151f-ac09-47e6-92eb-30657fce5e46/files/9a8f51d9-a060-4547-8852-b630858d7565.\n\n\nPak, Mathilde, Pierre-Alain Pionnier, et Cyrille Schwellnus. 2019. « La part du travail sur le long terme : un déclin ? » Economie et Statistique / Economics and Statistics, nᵒ 510‑511‑512 (décembre): 17‑34. https://doi.org/10.24187/ecostat.2019.510t.1993.\n\n\nTimbeau, Xavier. 2002. « Le partage de la valeur ajoutée en France ». Revue de l’OFCE 80 (1): 63. https://doi.org/10.3917/reof.080.0063."
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Une part des salaires dans la VA élévée en 2025 en France",
@@ -215,5 +54,166 @@
     "title": "Une part des salaires dans la VA élévée en 2025 en France",
     "section": "Annexes",
     "text": "Annexes\n\nAnnexe A : derniers points connus\n\n\n\nTableau A1: Premiers et derniers points connus par pays et par variables\n\n\n\n\n\n\n\n\n\n\nNote : données téléchargées sur le site d’Eurostat (package eurostat v4.0.0) le 16/11/2025, telles que publiées par Eurostat. Les instituts nationaux peuvent mettre à dispositon plus de données non (encore ?) prises en compte par Eurostat. Le niveau 1 compte 21 branches dont 19 marchandes. Le niveau 2 compte jusqu’à 99 branches, 47 sont utilisées pour les comptes de stock de capital productif.\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnnexe B : CCF et actifs dans les différents pays\n\n\n\nGraphique A1: CCF dans la valeur ajoutée\n\n\n\n\nTtes branchesMarchandMarchand-LKMarchand-L68AMarchand-L\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGraphique A2: CCF rapportée aux actifs\n\n\n\n\nTtes branchesMarchandMarchand-LKMarchand-L68AMarchand-L\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGraphique A3: Actifs productifs sur VAB\n\n\n\n\nTtes branchesMarchandMarchand-LKMarchand-L68AMarchand-L\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnnexe C : Différents concepts et champs de part des salaires\n\n\n\nGraphique A4: Part des salaires dans la VA, tous concepts, comparaison entre pays\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTableau A2: Part des salaires dans la VA et rang, différents concepts\n\n\n\n\nTtes branchesMarchandhors imm.hors loy. imp.hors fin.&loy. imp.hors fin.hors imm.&fin.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnnexe D : Rémunération des non salariés\n\n\n\nGraphique A5: Différentes mesures du revenu des non salariés, comparaisons internationales\n\n\n\n\nAgrégéPar tête\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nGraphique A6: Différentes mesures du revenu des non salariés en France\n\n\n\n\nEffectifsHeuresRevenu mixteRevenu mixte par tête\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnnexe E : Part des salaires dans la VA, base 2020 et 2014 depuis 1949\n\n\n\nGraphique 20: Part des salaires en France 1949-2025\n\n\n\n\nMarchandHors immo.Hors fi.Hors immmo.&fin.Marchand et non marchand\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnnexe F : Taux de rendement du capital productif en France, 1978-2024\n\n\n\nGraphique 21: Taux de rendement du capital productif en France, 1978-2024\n\n\n\n\nMarchandHors immo.Hors fi.Hors immmo.&fin.Marchand et non marchand"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#pourquoi-sintéresser-au-partage-de-la-valeur-ajoutée",
+    "href": "seminaire_lunch_OFCE.html#pourquoi-sintéresser-au-partage-de-la-valeur-ajoutée",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Pourquoi s’intéresser au partage de la valeur ajoutée ?",
+    "text": "Pourquoi s’intéresser au partage de la valeur ajoutée ?\n\nUn problème essentiellement de mesure\nUne application directe à la question salariale\n\nQuelle marge de manoeuvre pour revaloriser le travail ?\nQuel rapport salarial aujourd’hui ?\nQuel rendement du capital ?\n\nUn principe : la comptabilité nationale fournit une information, comment et jusqu’où l’utiliser ?\n\nLes notions et les méthodes et de la CN sont homogènes d’un pays à l’autre et dans le temps, on peut donc comparer dans l’espace et dans le temps"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#la-part-des-salaires-est-très-élevée-en-france-en-2025",
+    "href": "seminaire_lunch_OFCE.html#la-part-des-salaires-est-très-élevée-en-france-en-2025",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "La part des salaires est très élevée en France en 2025",
+    "text": "La part des salaires est très élevée en France en 2025"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#ce-résultat-contraste-avec-des-résultats-antérieurs",
+    "href": "seminaire_lunch_OFCE.html#ce-résultat-contraste-avec-des-résultats-antérieurs",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Ce résultat contraste avec des résultats antérieurs",
+    "text": "Ce résultat contraste avec des résultats antérieurs\nDepuis Cotis (2009) le consensus est que le partage de la valeur ajoutée est plutôt stable en France – après une période particulière où il a été élevé\nRécemment Cette, Koehl, et Philippon (2019), Pak, Pionnier, et Schwellnus (2019) et Gendre et Thommen (2025) convergent vers le diagnostic de stabilité.\n\n\n\n\n\n\n\nGendre et Thommen (2025)\n\n\n\n\n\n\nCette, Koehl, et Philippon (2019)"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#un-rendement-du-capital-productif-très-bas-en-france",
+    "href": "seminaire_lunch_OFCE.html#un-rendement-du-capital-productif-très-bas-en-france",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Un rendement du capital productif (très) bas en France",
+    "text": "Un rendement du capital productif (très) bas en France"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#part-des-salaires",
+    "href": "seminaire_lunch_OFCE.html#part-des-salaires",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Part des salaires",
+    "text": "Part des salaires\n\n\\[\ns_{net, n.s., -LOPQ}  = \\frac{\\sum_{b\\in{TT-LOPQ}}{D1_b*(1+ns_b/sal_b)}}{\\sum_{b\\in{TT-LOPQ}}{B1G_b - P51C_b - (D29_b-D39_b)}}\n\\]\n \\(D1\\) est la rémunération des salariés (incluant salaires nets, primes, cotisations employé et employeur)\n\\(B1G\\) est la valeur ajoutée brute\n\\(P51C\\) la consommation de capital fixe\n\\(ns\\) et \\(sal\\) sont soit les effectifs soit les revenus mixtes nets (\\(B3N\\)) des non salariés et salariés\n\\(D29\\) sont les impôts de production, \\(D39\\) les subventions à la production\nToutes les grandeurs sont en euros courants"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#rendement-du-capital-productif",
+    "href": "seminaire_lunch_OFCE.html#rendement-du-capital-productif",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Rendement du capital productif",
+    "text": "Rendement du capital productif\n\n\\[\\begin{aligned}\n\\Pi_{\\bar{is}} & = B1G - P51C - D1 - (D29-D39) = B2N \\\\\n\n\\Pi_{{is}} & = B1G - P51C - D1 - (D29-D39) - D5 = B2N-D5\n\\end{aligned}\\]\n\n\n\\[\\begin{aligned}\nr_{productif} & = \\frac{\\Pi}{N1N+[N2N]} \\\\\nr_{financier} & = \\frac{\\Pi}{F51+F52+BF90}\n\\end{aligned}\\]\n\n\\(N1N\\) sont les actifs non financiers produits,\n\\(N2N\\) les actifs non financiers non produits (ressources naturelles, terre) – non disponible pour bcp de pays\n\\(F51\\) Equity (actions), \\(F52\\) Investment fund shares/units, \\(BF90\\) valeur nette rédiduelle"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#nette-plutôt-que-brute-ccf-sur-van",
+    "href": "seminaire_lunch_OFCE.html#nette-plutôt-que-brute-ccf-sur-van",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Nette plutôt que brute – CCF sur VAN",
+    "text": "Nette plutôt que brute – CCF sur VAN\n\n\n\n\n\n\n\n\n\nLa consommation de capital fixe est la quantité de capital « consommée » pendant le processus de production.\nElle est evaluée par des tables de mortalité par classe d’actifs."
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#nette-plutôt-que-brute-ccf-sur-actifs",
+    "href": "seminaire_lunch_OFCE.html#nette-plutôt-que-brute-ccf-sur-actifs",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Nette plutôt que brute – CCF sur actifs",
+    "text": "Nette plutôt que brute – CCF sur actifs\n\n\n\n\n\n\n\n\n\nEn France, la CCF est particulièrement élevée (plus de 15% contre 10% en Allemagne).\nPourquoi ?\n\nStructure de l’économie\nNature de l’investissement\n\nLa conséquence est assez importante : cela réduit assez fortement le numérateur"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#nette-plutôt-que-brute",
+    "href": "seminaire_lunch_OFCE.html#nette-plutôt-que-brute",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Nette plutôt que brute",
+    "text": "Nette plutôt que brute"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#les-non-salariés-sont-des-travailleurs-comme-les-autres",
+    "href": "seminaire_lunch_OFCE.html#les-non-salariés-sont-des-travailleurs-comme-les-autres",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Les non salariés sont des travailleurs comme les autres",
+    "text": "Les non salariés sont des travailleurs comme les autres\nSurout la valeur ajoutée des branches intègre l’activité des non salariés.\nEn France, en 1970, le revenu des non salariés est égal à celui des salariés des branches marchandes\nOn traite les non salariés en leur attribuant un salaire égal à celui des salariés de la branche. C’es la méthode « effectif » Askenazy, Cette, et Sylvain (2012)\nMais :\n\nun ouvrier agricole n’est pas un « agriculteur », le ratio n’est pas le même aujourd’hui qu’hier\nles plateformes développent de nouvelles formes de non salariés, peu payés, au heures malconnues, avec double compte possible\n\nUne autre méthode est possible : le revenu mixte\n\nla CN définit depuis (longtemps base 2020, base 2014, ESA 2010, 1995) le revenu mixte (B3G). La base 2020 diffuse B3G au niveau des branches."
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#le-revenu-des-non-salariés",
+    "href": "seminaire_lunch_OFCE.html#le-revenu-des-non-salariés",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Le revenu des non salariés",
+    "text": "Le revenu des non salariés"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#correction-effectifs",
+    "href": "seminaire_lunch_OFCE.html#correction-effectifs",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Correction effectifs",
+    "text": "Correction effectifs"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#correction-revenu-mixte",
+    "href": "seminaire_lunch_OFCE.html#correction-revenu-mixte",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Correction revenu mixte",
+    "text": "Correction revenu mixte"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#rendement-du-capital-effectif-vs-revenu-mixte",
+    "href": "seminaire_lunch_OFCE.html#rendement-du-capital-effectif-vs-revenu-mixte",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Rendement du capital « effectif vs revenu mixte »",
+    "text": "Rendement du capital « effectif vs revenu mixte »"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#les-services-immobiliers-résidentiel-et-aux-entreprises",
+    "href": "seminaire_lunch_OFCE.html#les-services-immobiliers-résidentiel-et-aux-entreprises",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Les services immobiliers : résidentiel et aux entreprises",
+    "text": "Les services immobiliers : résidentiel et aux entreprises\nLes services immobiliers (L) sont décomposés en 2 grandes catégories :\n\nles services immobiliers aux entreprises\n\ncomptabilisé lorsqu’un loyer est payé\n\nles services immobiliers aux ménages\n\nauto-produits : les propriétaires occupants – loyer implicite\nproduits par les ménages : les propriétaires bailleurs – loyer\nproduits par des entreprises : les bailleurs insitutionnels – loyer\n\nles autres services (transaction, intermédiaires)\n\nLe partage de la valeur ajoutée pour les services immobilier résidentiel n’est pas pertinent Pak, Pionnier, et Schwellnus (2019) ; celui des services aux entreprises est ennuyeux"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#champ-marchand-vs-hors-immobilier",
+    "href": "seminaire_lunch_OFCE.html#champ-marchand-vs-hors-immobilier",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Champ marchand vs hors immobilier",
+    "text": "Champ marchand vs hors immobilier"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#la-consommation-intermétiare-dimmobilier",
+    "href": "seminaire_lunch_OFCE.html#la-consommation-intermétiare-dimmobilier",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "La consommation intermétiare d’immobilier",
+    "text": "La consommation intermétiare d’immobilier"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#impact-sur-le-rendement",
+    "href": "seminaire_lunch_OFCE.html#impact-sur-le-rendement",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Impact sur le rendement",
+    "text": "Impact sur le rendement"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#changement-de-structure-des-branches",
+    "href": "seminaire_lunch_OFCE.html#changement-de-structure-des-branches",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Changement de structure des branches",
+    "text": "Changement de structure des branches"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#france-1949-2024",
+    "href": "seminaire_lunch_OFCE.html#france-1949-2024",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "France 1949-2024",
+    "text": "France 1949-2024"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#rendement-du-capital-france-1978-2024",
+    "href": "seminaire_lunch_OFCE.html#rendement-du-capital-france-1978-2024",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Rendement du capital France 1978-2024",
+    "text": "Rendement du capital France 1978-2024"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#reproductibilité",
+    "href": "seminaire_lunch_OFCE.html#reproductibilité",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Reproductibilité",
+    "text": "Reproductibilité\n\n\n\nLe document de travail OFCE 2025-23 (https://xtimbeau.github.io/travail)[https://xtimbeau.github.io/travail] est entièrement exécutable : le code n’est pas là uniquement pour le résultat mais aussi pour documenter les étapes qui conduisent au résultat, des données publiques au document publié.\nLe code est accessible à github.com/xtimbeau/travail, un dépôt en lecture seule\n\nStructuré en un .qmd avec le texte et les graphiques et des fichiers R dans le dossier R\nChaque fichier R accède à une source (téléchargement des données) et opére des transformations\nsource_data() permet de mettre en cache les téléchargements et assure le bon fonctionnement du dépôt sans recharger les données (dans le dossier .sourcoise)\nla mise à jour peut modifier les graphiques, voire si changement du format déclencher une erreur\nrenv enregistre les packages et leurs versions (y compris ceux qui ne sont pas sur CRAN)\nUn README.md documente l’entrée dans le code (affiché sur github.com)\n\nLe pdf (mis en page) est produit à partir du même qmd que le html – mêmes données, même texte, il est sur le site de l’OFCE\nCela permet :\n\nLa transparence : tous les calculs sont explicites, pas d’ambiguïté. Si il y a des erreurs, elles peuvent être identifiées et corrigées\nLa persistance : les données peuvent être mises à jour, les graphiques ou les tableaux actualisés\nLa descendance : le code peut être réutilisé – par soi même, par d’autres – pour d’autres travaux"
+  },
+  {
+    "objectID": "seminaire_lunch_OFCE.html#références",
+    "href": "seminaire_lunch_OFCE.html#références",
+    "title": "Le partage de la valeur ajoutée",
+    "section": "Références",
+    "text": "Références\n\n\nAskenazy, Philippe, Gilbert Cette, et Arnaud Sylvain. 2012. « Le partage de la valeur ajoutée ». Repères, septembre. https://doi.org/10.3917/dec.asken.2012.01.\n\n\nCette, Gilbert, Lorraine Koehl, et Thomas Philippon. 2019. « La part du travail sur le long terme : un déclin ? » Economie et Statistique / Economics and Statistics, nᵒ 510‑511‑512 (décembre): 35‑51. https://doi.org/10.24187/ecostat.2019.510t.1993.\n\n\nCotis, Jean-Philippe. 2009. « Partage de la valeur ajoutée, partage des profits et écarts de rémunérations en France ». Rapport pour la Présidence de la République Française. https://www.vie-publique.fr/rapport/30455-partage-valeur-ajoutee-partage-profits-et-ecarts-de-remuneration.\n\n\nGendre, Charles, et Yann Thommen. 2025. « Le partage de la richesse produite en France entre le travail et le capital ». Trésor-Éco, nᵒ 363 (mai). https://www.tresor.economie.gouv.fr/Articles/b72e151f-ac09-47e6-92eb-30657fce5e46/files/9a8f51d9-a060-4547-8852-b630858d7565.\n\n\nPak, Mathilde, Pierre-Alain Pionnier, et Cyrille Schwellnus. 2019. « La part du travail sur le long terme : un déclin ? » Economie et Statistique / Economics and Statistics, nᵒ 510‑511‑512 (décembre): 17‑34. https://doi.org/10.24187/ecostat.2019.510t.1993.\n\n\nTimbeau, Xavier. 2002. « Le partage de la valeur ajoutée en France ». Revue de l’OFCE 80 (1): 63. https://doi.org/10.3917/reof.080.0063."
   }
 ]
