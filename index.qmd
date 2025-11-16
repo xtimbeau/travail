@@ -1570,6 +1570,7 @@ data <- source_data("R/france-melodi.r") |>
   pluck("aggr") |>
   filter(champ%in%c("mdhi")) |> 
   select(time, rb, rb2) |> 
+  drop_na(rb) |> 
   mutate(
     tp = glue(
       "<b>year(time)</b> France, Branches marchandes hors immobilier

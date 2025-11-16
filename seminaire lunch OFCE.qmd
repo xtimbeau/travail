@@ -280,7 +280,7 @@ Le partage de la valeur ajoutée pour les services immobilier résidentiel n'est
 ( "index-fig-rendfr" |> 
     load_graphe() + 
     ofce_caption() +
-    labs(title = "CI en service immobilier, France") ) |> 
+    labs(title = "Rendement avec et sans CI constante en immobilier") ) |> 
   girafy()
 ```
 
@@ -340,9 +340,9 @@ ofce::load_graphe("index-unnamed-chunk-17-2") +
 
 -   Cela permet :
 
-    -   La transparence : tous les calculs sont explicites, pas d'ambiguïté. Si il y a des erreurs, elles peuvent être identifiées et corrigées
-    -   Les données peuvent être mises à jour, les graphiques ou les tableaux actualisés
-    -   Le code peut être réutilisé pour d'autres travaux
+    -   *La transparence* : tous les calculs sont explicites, pas d'ambiguïté. Si il y a des erreurs, elles peuvent être identifiées et corrigées
+    -   *La persistance* : les données peuvent être mises à jour, les graphiques ou les tableaux actualisés
+    -   *La descendance* : le code peut être réutilisé -- par soi même, par d'autres -- pour d'autres travaux
 :::
 
 ::: {.column .center width="25%"}

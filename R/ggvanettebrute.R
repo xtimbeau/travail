@@ -1,6 +1,9 @@
 library(tidyverse)
 library(ofce)
-library(ggimage)
+library(ggflags)
+library(ggiraph)
+library(countrycode)
+library(glue)
 
 date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")

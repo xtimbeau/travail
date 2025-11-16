@@ -1,5 +1,6 @@
 library(tidyverse)
 library(ofce)
+library(ggiraph)
 
 snfia <- source_data("snf_international.r") |>
   pluck("snfia") |>

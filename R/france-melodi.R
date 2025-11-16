@@ -218,37 +218,38 @@ melodi <- fr_branches_aug |>
   left_join(men, by = c("time", "nace_r2")) |>
   left_join(br, by = "nace_r2") |>
   rename_with(tolower) |>
+  group_by(nace_r2) |>
   mutate(
     vab = b1g,
     van = b1g - p51c - d29x39,
     psal = (d1 * (1 + self/sal)) / van,
     psalm = (d1 + b3g*0.88) / van,
-    p2lf = p2l[time=="1980-01-01"]/van[time=="1980-01-01"] * van,
     tp = (van - d1 * (1 + self/sal) - d29x39) / van,
     tpm = (van - d1 - b3g * 0.88 - d29x39) / van,
     rb = (van - d1 * (1 + self/sal) - d29x39) / n1n,
-    rpm = (van - d1 - b3g * 0.88  - d29x39) / n1n)
+    rpm = (van - d1 - b3g * 0.88  - d29x39) / n1n) |>
+  ungroup()
 
-dvalL <- melodi |>
-  group_by(time) |>
-  summarize(dva = -sum(p2l)+sum(p2lf)) |>
-  mutate(nace_r2 = "L")
+# dvalL <- melodi |>
+#   group_by(time) |>
+#   summarize(dva = -sum(p2l)+sum(p2lf)) |>
+#   mutate(nace_r2 = "L")
+#
+# dval <- melodi |>
+#   filter(nace_r2 != "L") |>
+#   mutate(dva = p2l - p2lf) |>
+#   select(time, nace_r2, dva) |>
+#   bind_rows(dvalL)
 
-dval <- melodi |>
-  filter(nace_r2 != "L") |>
-  mutate(dva = p2l - p2lf) |>
-  select(time, nace_r2, dva) |>
-  bind_rows(dvalL)
-
-melodi <- melodi |>
-  left_join(dval, by=c("time", "nace_r2")) |>
-  mutate(
-    rb2 = (van + dva - d1 * (1 + self/sal) - d29x39) / n1n)
+# melodi <- melodi |>
+#   left_join(dval, by=c("time", "nace_r2")) |>
+#   mutate(
+#     rb2 = (van + dva - d1 * (1 + self/sal) - d29x39) / n1n)
 
 melodi2 <- melodi |>
   group_by(time, nace_13) |>
   summarize(
-    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, self, sal, n111n, n1n, lymen, dva), sum),
+    across(c(b1g, b3g, d1, d29x39, p51c, p2l, self, sal, n111n, n1n, lymen), sum),
     across(c(md, mdhi), first),
     .groups = "drop") |>
   mutate(
@@ -256,11 +257,10 @@ melodi2 <- melodi |>
     van = b1g - p51c - d29x39,
     psal = (d1 * (1 + self/sal)) / van,
     psalm = (d1 + b3g*0.8) / van,
-    tp = (van - d1 * (1 + self/sal) - d29x39) / van,
-    tpm = (van - d1 - b3g * 0.8 - d29x39) / van,
-    rb = (van - d1 * (1 + self/sal) - d29x39) / n1n,
-    rpm = (van - d1 - b3g * 0.8  - d29x39) / n1n,
-    rb2 = (van + dva - d1 * (1 + self/sal) - d29x39) / n1n)
+    tp = (van - d1 * (1 + self/sal) ) / van,
+    tpm = (van - d1 - b3g * 0.8) / van,
+    rb = (van - d1 * (1 + self/sal)) / n1n,
+    rpm = (van - d1 - b3g * 0.8  ) / n1n)
 
 ssi <- melodi2 |> filter(time == "2024-01-01",md) |> select(time, van, nace_13, md) |> mutate(van=van/sum(van))
 
@@ -277,15 +277,15 @@ ccf_ei <- melodi::get_all_data("DD_CNA_AGREGATS") |>
 melodi_m <- melodi |>
   group_by(time) |>
   summarize(
-    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, self, sal, n111n, n1n, lymen, van, vab, dva),
+    across(c(b1g, b3g, d1, d29x39, p51c, p2l, self, sal, n111n, n1n, lymen, van, vab),
            ~.x[nace_r2=="_T"]-.x[nace_r2=="OTQ"], .names = "{.col}_md" ),
-    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, self, sal, n111n, n1n, lymen, van, vab, dva),
+    across(c(b1g, b3g, d1, d29x39, p51c, p2l, self, sal, n111n, n1n, lymen, van, vab),
            ~.x[nace_r2=="_T"]-.x[nace_r2=="OTQ"]-.x[nace_r2=="L"], .names = "{.col}_mdhi" ),
-    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, self, sal, n111n, n1n, lymen, van, vab, dva),
+    across(c(b1g, b3g, d1, d29x39, p51c, p2l, self, sal, n111n, n1n, lymen, van, vab),
            ~.x[nace_r2=="_T"]-.x[nace_r2=="OTQ"]-.x[nace_r2=="L"]-.x[nace_r2=="K"], .names = "{.col}_mdhifi" ),
-    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, self, sal, n111n, n1n, lymen, van, vab, dva),
+    across(c(b1g, b3g, d1, d29x39, p51c, p2l, self, sal, n111n, n1n, lymen, van, vab),
            ~.x[nace_r2=="_T"]-.x[nace_r2=="OTQ"]-.x[nace_r2=="K"], .names = "{.col}_mdhfi" ),
-    across(c(b1g, b3g, d1, d29x39, p51c, p2l, p2lf, self, sal, n111n, n1n, lymen, van, vab, dva),
+    across(c(b1g, b3g, d1, d29x39, p51c, p2l, self, sal, n111n, n1n, lymen, van, vab),
            ~.x[nace_r2=="_T"], .names = "{.col}_tb" ) ) |>
   pivot_longer(cols = ends_with(c("md", "mdhi", "mdhifi", "mdhfi", "tb"))) |>
   separate(name, sep="_", into = c("var", "champ")) |>
@@ -299,12 +299,13 @@ melodi_m <- melodi |>
     msa = d1 * (1 + self/sal),
     msam = d1 + (1-ccfei)*b3g,
     psal = msa / van,
-    tp = (van - msa - d29x39) / van,
-    rb = (van - msa - d29x39) / n1n,
-    rb2 = (van + dva - msa - d29x39) / n1n,
+    tp = (van - msa ) / van,
+    rb = (van - msa ) / n1n,
     psalm = msam / van,
-    tp = (van - msa - d29x39) / van,
-    rbm = (van - msam - d29x39) / n1n,
-    rb2 = (van + dva - msam - d29x39) / n1n)
+    tp = (van - msa ) / van,
+    rbm = (van - msam ) / n1n,
+    dp2l = p2l - p2l[time=="1980-01-01"]/van[time=="1980-01-01"] * van,
+    rb2 = (van + dp2l - msa ) / n1n,
+    rbm2 = (van + dp2l - msam ) / n1n)
 
 return(list(full = melodi, a20 = melodi2, aggr = melodi_m))
