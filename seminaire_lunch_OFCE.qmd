@@ -18,6 +18,11 @@ editor: visual
 bibliography: references.bib
 ---
 
+```{r}
+ofce::init_qmd()
+update_theme(text = element_text(size = 14)) 
+```
+
 # Une part des salaires élevée en France en 2025
 
 ## Pourquoi s'intéresser au partage de la valeur ajoutée ?
@@ -39,8 +44,6 @@ bibliography: references.bib
 ## La part des salaires est très élevée en France en 2025
 
 ```{r}
-ofce::init_qmd()
-update_theme(text = element_text(size = 16)) 
 gsal <- load_graphe("index-fig-psal-1") + ofce_caption()
 girafy(gsal)
 ```
