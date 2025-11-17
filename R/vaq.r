@@ -199,7 +199,7 @@ naa <- naq |>
   group_by(geo, year, champ) |>
   summarize(
     nq = n(),
-    across(c(van, vab, msa, msanc, ip, b3nh), ~sum(.x, na.rm=TRUE)*4/nq),
+    across(c(van, vab, msa, msanc, ip, b3nh), ~sum(.x)*4/nq),
     .groups = "drop") |>
   ungroup() |>
   mutate(

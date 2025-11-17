@@ -702,47 +702,47 @@ psal_fr <- source_data("R/france-melodi.R")$aggr |>
   transmute(time, geo = "FR", champ, psal, psalm)
 
 naq2 <- source_data("R/vaq.r")$naa |> 
-  filter(geo %in% P6) |> 
+  filter(geo %in% P6) |>
+  filter(champ %in% c("mdhi")) |> 
+  select(time, geo, champ, psal, psalh, psalm) |> 
+  left_join(psal_fr, by = c("champ", "geo", "time"), suffix = c("",".fr") ) |> 
+  mutate(psalh = ifelse(is.na(psalm.fr), psalh, psalm.fr)) |>
+  select(-psalm.fr, -psal.fr) |> 
+  mutate(geo = factor(geo, P6)) |> 
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
     {year(time)} 
     Part des salaires dans la VA nette, Branches marchandes
     Correction par les effectifs : {round(psal*100,1)}%
-    Correction par le revenu mixte : {round(100*psalm,1)}%")) |>
-  filter(champ %in% c("mdhi")) |> 
-  select(time, geo, champ, psal, psalm, tooltip) |> 
-  left_join(psal_fr, by = c("champ", "geo", "time"), suffix = c("",".fr") ) |> 
-  mutate(psalm = ifelse(is.na(psalm.fr), psalm, psalm.fr)) |>
-  select(-psalm.fr, -psal.fr) |> 
-  mutate(geo = factor(geo, P6))
+    Correction par le revenu mixte (net, hybride) : {round(100*psalh,1)}%")) 
 
 date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
-labels = c(psal = "Correction par les effectifs", psalm = "Correction par le revenu mixte")
+labels = c(psal = "Correction par les effectifs", psalh = "Correction par le revenu mixte (net, hybride)")
 
 data <- naq2 |>  
-  pivot_longer(c(psal, psalm), names_to = "concept") |> 
+  pivot_longer(c(psal, psalh), names_to = "concept") |> 
   mutate(
     tooltip2 = ifelse(concept=="psal", 
                       "Correction par les effectifs (et salaire égal au salaire moyen)",
-                      "Correction par le revenu mixte (80%)")) |> 
+                      "Correction par le revenu mixte (net, hybride)")) |> 
   mutate(geo = factor(geo, P6))
 
 psal <- ggplot(data) +
   aes(x=time, col = geo) +
   ggbraid::geom_braid(
-    data = naq2 |> mutate(s = psal>psalm),
-    aes(ymin = psal, ymax = psalm, group = geo, fill = s), 
+    data = naq2 |> mutate(s = psal>psalh),
+    aes(ymin = psal, ymax = psalh, group = geo, fill = s), 
     color = NA, alpha=0.1, show.legend = FALSE) +
   scale_fill_manual(values = c("green", "red")) +
   ggnewscale::new_scale_fill() +
   scale_alpha_manual(
-    values = c(psal=1, psalm = .75),
+    values = c(psal=1, psalh = .75),
     labels = labels,
     name = NULL) +
   scale_linewidth_manual(
-    values = c(psal=.5, psalm = 0.25),
+    values = c(psal=.5, psalh = 0.25),
     labels = labels,
     name = NULL) +
   geom_line_interactive( 
@@ -767,10 +767,9 @@ psal <- ggplot(data) +
     legend.justification = c(0.5, 0),
     legend.text = element_marquee(margin= margin(l=1))) +
   ofce_caption(
-    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
- comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, INSEE activités des branches, CN2020, code à github.com/xtimbeau/travail/R/vaq.r et france-medoli.fr",
+    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e, nasa_10_nf_tr,namq_10_a10), INSEE activités des branches (DD_CNA_BRANCHES), CN2020, téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r et france-medoli.fr",
     champ = "Branches marchandes hors services immobiliers (-L).",
-    note = "La correction par le revenu mixte n'est pas exacte pour le champ considéré, sauf pour la France pour laquelle le revenu mixte est disponible par branches (api melodi).")
+    note = "La correction par le revenu mixte est exacte pour le champ considéré pour la France (revenu mixte par branches par l'api melodi) et hybride pour les autres pays (B3G agrégé au prorata des effectifs).")
 
 girafy(psal, 1.5)
 ```

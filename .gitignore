@@ -12,3 +12,4 @@ site_libs
 **/*.quarto_ipynb
 **/*_files/*
 nul
+_sav_graph
