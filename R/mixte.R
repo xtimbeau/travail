@@ -30,8 +30,30 @@ mixte_a <- "nasa_10_nf_tr" |>
       na_item = "B3G",
       geo = pays)) |>
   filter(sector == "S14_S15") |>
-  transmute(geo, time, b3g=values) |>
+  transmute(geo, time, b3g=values, year=year(time)) |>
   drop_na()
+
+naq10_e <- source_data("naq10_e.R")$naa_e |>
+  select(geo, time, nace_r2, sal = SAL_DC, self = SELF_DC) |>
+  mutate(year = year(time))
+
+mixte_h <- mixte_a |>
+  select(-time) |>
+  left_join(naq10_e , by = c("geo", "year")) |>
+  group_by(geo, time) |>
+  filter(!all(is.na(sal))) |>
+  ungroup() |>
+  mutate(self = replace_na(self, 0)) |>
+  group_by(geo, time) |>
+  mutate(b3gh = b3g/4 * self/sum(self),
+         b3nh = 0.88 * b3gh) |>
+  select(geo, time, nace_r2, b3gh, b3nh)
+
+mixte_ah <- mixte_h |>
+  mutate(time = floor_date(time, "year")) |>
+  group_by(geo, time, nace_r2) |>
+  summarise(across(c(b3gh, b3nh), sum),
+            .groups = "drop")
 
 nsalw <- "ilc_di05" |>
   get_eurostat(
@@ -48,4 +70,4 @@ nsalw <- "ilc_di05" |>
   drop_na() |>
   mutate(w = NSAL/SAL)
 
-return(list(q = mixte_q, a = mixte_a, ilc = nsalw))
+return(list(q = mixte_q, a = mixte_a, h = mixte_h, ah = mixte_ah, ilc = nsalw))
