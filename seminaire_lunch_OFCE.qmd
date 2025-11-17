@@ -249,7 +249,7 @@ Les services immobiliers (L) sont décomposés en 2 grandes catégories :
 
     -   produits par les ménages : les propriétaires bailleurs – loyer
 
-    -   produits par des entreprises : les bailleurs insitutionnels – loyer
+    -   produits par des entreprises : les bailleurs institutionnels – loyer
 
 -   les autres services (transaction, intermédiaires)
 

@@ -966,47 +966,51 @@ psal_fr <- source_data("R/france-melodi.r")$aggr |>
             by = c("champ", "time")) |> 
   mutate(tpbm = (van - msam - ip)/van,
          rbm = (van - msam - ip)/assets,
+         tpbh = tpbm, rbh = rbm,
          geo == "FR") |> 
-  select(time, champ, geo, rbm) |> 
+  select(time, champ, geo, rbm, rbh) |> 
   drop_na(rbm)
 
 data4tp <- source_data("R/vaq.r")$naaa |>
   filter(geo %in% P6) |>
-  select(time, geo, champ, r, rb, rbm) |> 
+  select(time, geo, champ, r, rb, rbm, rbh) |> 
   left_join(psal_fr, by=c("geo", "time", "champ"), suffix = c("",".fr")) |>
-  mutate(rbm = ifelse(is.na(rbm.fr), rbm, rbm.fr)) |> 
+  mutate(
+    rbm = ifelse(is.na(rbm.fr), rbm, rbm.fr),
+    rbh = ifelse(is.na(rbm.fr), rbh, rbm.fr)) |> 
   select(-rbm.fr) |> 
   mutate(geo = factor(geo, P6))
 
 data <-  data4tp |> 
   filter(champ == "mdhi") |> 
   mutate(
-    cr = rb>rbm,
+    cr = rb>rbh,
     tooltip = glue(
     "<b>{lbl(geo)}</b>
           {year(time)}
-          Profits sur capital productif, avant IS, Branches marchandes,
+          Profits sur capital productif, avant IS, Branches marchandes hors immobilier,
           Correction effectif : {round(rb*100,1)}%
-          Correction revenu mixte : {round(rbm*100,1)}%"  ))
+          Correction revenu mixte : {round(rbh*100,1)}%"  ))
 
 data_long <- data |> 
-  pivot_longer(c(rb, rbm), names_to = "concept", values_to = "value") |> 
-  mutate(concept = factor(concept, c("rb", "rbm")))
+  select(geo, time, rb, rbh, tooltip, cr) |> 
+  pivot_longer(c(rb, rbh), names_to = "concept", values_to = "value") |> 
+  mutate(concept = factor(concept, c("rb", "rbh")))
 
 tpmixte <- ggplot(data_long) +
   aes(x=time, y=value, col = geo) +
   ggbraid::geom_braid(
     data = data,  alpha = 0.1,
-    aes(y=NULL, ymin=rbm, ymax = rb, fill = cr), 
+    aes(y=NULL, ymin=rbh, ymax = rb, fill = cr), 
     color="transparent", show.legend = FALSE) +
   scale_fill_manual(values = c("green", "red")) +
   ggnewscale::new_scale_fill() +
-  scale_linetype_manual(values = c(rbm="11", rb="solid"),
+  scale_linetype_manual(values = c(rbh="11", rb="solid"),
                         name=NULL, 
-                        label = c(rb="Correction effectif", rbm= "Correction revenu mixte"))+
-  scale_linewidth_manual(values = c(rbm=0.5, rb=0.5),
+                        label = c(rb="Correction effectif", rbh= "Correction revenu mixte hybride"))+
+  scale_linewidth_manual(values = c(rbh=0.5, rb=0.5),
                          name=NULL, 
-                         label = c(rb="Correction effectif", rbm= "Correction revenu mixte"))+
+                         label = c(rb="Correction effectif", rbh= "Correction revenu mixte hybride"))+
   geom_line(aes(y=value, group=concept, linewidth=concept, linetype=concept))+
   geom_point_interactive(
     data=data,
@@ -1029,8 +1033,8 @@ tpmixte <- ggplot(data_long) +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), actifs productifs (nama_10_nfa_st), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
- champ = "Branches marchandes.",
- note = "Le rendement du capital est calculé selon deux corrections de la non salarisation (par les effectifs, par le revenu mixte), La correction est appliquée au champ branches marchandes hors immobiliers alors que le revenu mixte est connu pour l'ensemble de l'économie.") +
+ champ = "Branches marchandes hors immobilier (-L).",
+ note = "Le rendement du capital est calculé selon deux corrections de la non salarisation (par les effectifs, par le revenu mixte hybride).") +
   theme(legend.box.spacing = unit(1, "pt"))
 
 girafy(tpmixte, 1.5)
