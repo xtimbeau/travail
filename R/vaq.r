@@ -166,18 +166,24 @@ naq_a10 <- naq_a10 |>
   mutate(him = hi&md) |>
   bind_rows(L68Aq)
 
+mixte_h <- source_data("mixte.r")$h
+
 naq <- naq_a10 |>
+  left_join(mixte_h, by = c("time", "geo", "nace_r2")) |>
   group_by(geo, time) |>
+  mutate(
+    tb = nace_r2 != "Lbis",
+    across(c(b3gh, b3nh), ~ifelse(nace_r2 == "Lbis", .x[nace_r2 == "L"], .x) )) |>
   summarize(
-    across(c(van, vab, msa, msanc, ip), ~sum(.x[md], na.rm=TRUE), .names = "{.col}_md"),
-    across(c(van, vab, msa, msanc, ip), ~sum(.x[hi&md], na.rm=TRUE), .names = "{.col}_mdhi"),
-    across(c(van, vab, msa, msanc, ip), ~sum(.x[hifi&md], na.rm=TRUE), .names = "{.col}_mdhifi"),
-    across(c(van, vab, msa, msanc, ip), ~sum(.x[hfi&md], na.rm=TRUE), .names = "{.col}_mdhfi"),
-    across(c(van, vab, msa, msanc, ip), ~sum(.x[him], na.rm=TRUE), .names = "{.col}_mdhim"),
-    across(c(van, vab, msa, msanc, ip), ~sum(.x[him&hfi], na.rm=TRUE), .names = "{.col}_mdhimfi"),
-    across(c(van, vab, msa, msanc, ip), ~sum(.x, na.rm=TRUE), .names = "{.col}_tb"),
+    across(c(van, vab, msa, msanc, ip, b3nh), ~sum(.x[md]), .names = "{.col}_md"),
+    across(c(van, vab, msa, msanc, ip, b3nh), ~sum(.x[hi&md]), .names = "{.col}_mdhi"),
+    across(c(van, vab, msa, msanc, ip, b3nh), ~sum(.x[hifi&md]), .names = "{.col}_mdhifi"),
+    across(c(van, vab, msa, msanc, ip, b3nh), ~sum(.x[hfi&md]), .names = "{.col}_mdhfi"),
+    across(c(van, vab, msa, msanc, ip, b3nh), ~sum(.x[him]), .names = "{.col}_mdhim"),
+    across(c(van, vab, msa, msanc, ip, b3nh), ~sum(.x[him&hfi]), .names = "{.col}_mdhimfi"),
+    across(c(van, vab, msa, msanc, ip, b3nh), ~sum(.x[tb]), .names = "{.col}_tb"),
     .groups = "drop") |>
-  pivot_longer(starts_with(c("van", "vab", "msa", "ip"))) |>
+  pivot_longer(starts_with(c("van", "vab", "msa", "ip", "b3nh"))) |>
   separate(name, into = c("var", "champ"), sep = "_") |>
   pivot_wider(names_from = var, values_from = value) |>
   mutate(
@@ -193,7 +199,7 @@ naa <- naq |>
   group_by(geo, year, champ) |>
   summarize(
     nq = n(),
-    across(c(van, vab, msa, msanc, ip), ~sum(.x, na.rm=TRUE)*4/nq),
+    across(c(van, vab, msa, msanc, ip, b3nh), ~sum(.x, na.rm=TRUE)*4/nq),
     .groups = "drop") |>
   ungroup() |>
   mutate(
@@ -210,7 +216,7 @@ naa <- naq |>
 mixte <- source_data("mixte.r")$a
 
 cm <- naa |>
-  left_join(mixte, by = c("time", "geo")) |>
+  left_join(mixte |> select(-year), by = c("time", "geo")) |>
   mutate(check = (msa - msanc)/b3g) |>
   filter(champ == "tb") |>
   select(geo, year, time, cm = check) |>
@@ -221,7 +227,9 @@ naa <- naa |>
   left_join(cm, by= c("geo", "year")) |>
   mutate(
     msam = msanc + cm * (msa - msanc),
-    psalm = msam/van )
+    msah = msanc + b3nh,
+    psalm = msam/van,
+    psalh = msah/van)
 
 na_tot <-  "nama_10_gdp" |>
   get_eurostat(
@@ -231,15 +239,6 @@ na_tot <-  "nama_10_gdp" |>
   drop_na() |>
   pivot_wider(names_from = na_item, values_from = values) |>
   transmute(geo, time, d2131 = D21 - D31)
-
-# men <- "nasq_10_nf_tr" |>
-#   get_eurostat(
-#     filters = list(unit = "CP_MEUR",
-#                    sector = c("S14"),
-#                    s_adj = c("SCA", "NSA"),
-#                    na_item = c("B1G", "B1N", "D1", "D5", "D4", "D42_TO_D45", "D41", "D42", "D3", "D2"),
-#                    geo = pays2) )
-
 
 max_y <- max(year(na_tot$time))
 
@@ -297,13 +296,15 @@ d51 <- "nasa_10_nf_tr" |>
     is2 = t2is*B1G)
 
 naa_ext <- naa |>
-  select(geo, time, van, vab, msa, msam, msanc, ip, champ) |>
+  select(geo, time, van, vab, msa, msam, msanc, msah, ip, champ) |>
   arrange(time, geo, champ) |>
   left_join(d51, by  = c("time", "geo", "champ")) |>
   mutate(psal = msa/van,
+         psalh = msah/van,
          psalnc = msanc/van,
          psalm = msam/van,
          psalb = msa/vab,
+         psalhb = msah/vab,
          psalncb = msanc/vab) |>
   filter(geo %in% pays, time >= "1995-01-01") |>
   mutate(geo = factor(geo, pays)) |>
@@ -311,7 +312,9 @@ naa_ext <- naa |>
     tp = (van - msa - is)/van,
     tpb = (van - msa )/van,
     tpm = (van - msam - is)/van,
-    tpbm = (van - msam )/van  )
+    tpbm = (van - msam )/van,
+    tph = (van - msah - is)/van,
+    tpbh = (van - msah )/van  )
 
 assets <- source_data("assets.r")$assets  |>
   filter(assets>0)
@@ -323,7 +326,9 @@ naa_ext2 <- naa_ext |>
     r = tp*van/assets,
     rb = tpb*van/assets,
     rbm = tpbm*van/assets,
-    rm = tpm*van/assets) |>
+    rm = tpm*van/assets,
+    rbh = tpbh*van/assets,
+    rh = tph*van/assets) |>
   arrange( desc(time), geo ) |>
   mutate(geo = factor(geo, pays))
 
