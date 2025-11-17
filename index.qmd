@@ -179,13 +179,97 @@ Au début des années 2000, deux pays se distinguaient des autres (l'Espagne et 
 #| label: fig-psaleu
 #| fig-asp: 0.85
 #| fig-cap: Part des salaires dans la VA nette 1995 et 2025
+date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms()
+date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
+data <- source_data("r/ggvanettebrute.r")
 
-psaleu <- source_data("R/ggvanettebrute.r")
-tabsetize(psaleu$gg)
+psaleu <- ggplot(data$int) +
+  geom_segment(
+    aes(x = x,  xend = xend, y = y, yend = yend, color = year),
+    key_glyph = draw_key_point, linewidth = 0.2) +
+  ggflags::geom_flag(data = ~.x |> filter(i==1),
+                      aes(x= geo, y = 0, country = tolower(geo2c)), size = 3)+
+  scale_color_gradient(low="seagreen1", high = "seagreen4",
+                       name = NULL,
+                       breaks = c(1995,2025), labels = c(1995, 2025)) +
+  geom_point_interactive(
+    data = ~.x |> filter(!i%in%c(0,1)),
+    hover_nearest = TRUE,
+    aes(x = geo, y=psal, tooltip = tooltip, color = year),
+    size = 0.3, alpha = 0.5)+
+  geom_point_interactive(
+    data = ~.x |> filter(i%in%c(0,1)),
+    aes(x = geo, y=yend, size = van_2025, color = year,
+        tooltip = tooltip),
+    hover_nearest = TRUE)  +
+  coord_flip()+
+  guides(color = guide_legend(), size= "none") +
+  scale_x_discrete(labels = ~str_c(lbl(.x))) +
+  scale_y_continuous(labels = scales::label_percent(1),
+                     limits = c(0.325,1), oob = scales::squish) +
+  scale_size(range = c(1,3)) +
+  labs(x=NULL, y=NULL)+
+  theme(
+    legend.direction = "horizontal",
+    panel.grid.major.y = element_blank(),
+    legend.text = element_marquee(size = rel(0.7)),
+    axis.text.y = element_marquee(size = rel(1),
+                                  vjust = 0.5, hjust = 1,
+                                  margin = margin(r=-5, t=0, b=2)),
+    axis.line = element_blank(),
+    axis.ticks = element_blank()) +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
+    champ = "Branches marchandes hors services immobiliers (-L).",
+    note = "Part des salaires dans la valeur ajoutée nette corrigée de la non salarisation.")
+
+psalbeu <- ggplot(data$intb) +
+  geom_segment(
+    aes(x = x,  xend = xend, y = y, yend = yend, color = year),
+    key_glyph = draw_key_point, linewidth = 0.2) +
+  ggflags::geom_flag(data = ~.x |> filter(i==1),
+                     aes(x= geo, y = 0, country = tolower(geo2c)), size = 3)+
+  scale_color_gradient(low="orange1", high = "darkorange4",
+                       name = NULL,
+                       breaks = c(1995,2025), labels = c(1995, 2025)) +
+  geom_point_interactive(
+    data = ~.x |> filter(!i%in%c(0,1)),
+    hover_nearest = TRUE,
+    aes(x = geo, y=psalb, tooltip = tooltip, color = year),
+    size = 0.3, alpha = 0.5)+
+  geom_point_interactive(
+    data = ~.x |> filter(i%in%c(0,1)),
+    aes(x = geo, y=yend, size = vab_2025, color = year,
+        tooltip = tooltip),
+    hover_nearest = TRUE)  +
+  coord_flip()+
+  guides(color = guide_legend(), size= "none") +
+  scale_x_discrete(labels = ~str_c(lbl(.x))) +
+  scale_y_continuous(labels = scales::label_percent(1),
+                     limits = c(0.25,1), oob = scales::squish) +
+  scale_size(range = c(1,3)) +
+  labs(x=NULL, y=NULL)+
+  theme(
+    legend.direction = "horizontal",
+    panel.grid.major.y = element_blank(),
+    legend.text = element_marquee(size = rel(0.7)),
+    axis.text.y = element_marquee(size = rel(1),
+                                  vjust = 0.5, hjust = 1,
+                                  margin = margin(r=-5, t=0, b=2)),
+    axis.line = element_blank(),
+    axis.ticks = element_blank()) +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
+    champ = "Branches marchandes hors services immobiliers (-L).",
+    note = "Part des salaires dans la valeur ajoutée brute corrigée de la non salarisation.")
+
+tabsetize(list("VA nette" = psaleu, "VA brute" = psalbeu))
 ```
 
 ```{r, results="asis"}
-margin_download(psaleu$data)
+margin_download(data$data)
 
 ```
 
@@ -1436,7 +1520,7 @@ En revanche, Eurostat a un programme de coopération (avec l'OCDE entre autres) 
 
 On utilise ces données ([`naidsa_10_nf_tr`](https://ec.europa.eu/eurostat/databrowser/view/naidsa_10_nf_tr__custom_13241966/default/table?lang=en)) pour construire des indicateurs comparables en comparant des pays autres que ceux de la zone euro.
 
-```{r, eval=TRUE}
+```{r}
 #| label: fig-tprofithze
 #| fig-cap: Part des salaires dans la valeur ajoutée, comptes de secteur, comparaisons internationales
 #| fig-asp: 0.6
