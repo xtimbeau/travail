@@ -13,3 +13,4 @@ site_libs
 **/*_files/*
 nul
 _sav_graph
+.DS_Store
