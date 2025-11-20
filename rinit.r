@@ -93,36 +93,6 @@ lbl <- function(x, format=NULL) {
     mutate(across(1, ~countrycode(.x, fmt, "country.name.fr")))
 }
 
-date_trim <- function(date) {
-  str_c("T", lubridate::quarter(date), " ", lubridate::year(date))
-}
-
-date_mois <- function(date) {
-  str_c(lubridate::month(date,label = TRUE, abbr = FALSE), " ", lubridate::year(date))
-}
-
-date_jour <- function(date) {
-  str_c(lubridate::day(date), " ", lubridate::month(date,label = TRUE, abbr = FALSE), " ", lubridate::year(date))
-}
-
-date1 <- function(x) {
-  fnan <- which(!is.na(x)) |> min()
-  r0 <- stringr::str_sub(x, 1, 2)
-  cgt <- r0 != lag(r0)
-  cgt[fnan] <- TRUE
-  cgt[is.na(cgt)] <- FALSE
-  r <- stringr::str_sub(x, 3)
-  r[cgt] <- stringr::str_c(x[cgt])
-  return(r)
-}
-
-date1d <- function(x) date1(year(x))
-
-dates_breaks <- function(by=4) {
-  function(x) {
-    seq(ceiling(x[[1]]),x[[2]], by = by ) }
-}
-
 cols_hide_pdf <- function(tbl, col) {
   if(knitr::is_latex_output())
     return(gt::cols_hide(data = tbl, columns = {{ col }} ))

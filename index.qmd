@@ -18,7 +18,7 @@ echo: false
 message: false
 warning: false
 keep-md: false
-abstract: "On explore différentes façons de calculer la notion de part des salaires dans la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers*. Il peut être calculé pour les pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et s'est accrue de façon importante. Bien que plus fragile empiriquement, le calcul de rendement net d'impôts du capital productif confirme ce diagnostic particulièrement préoccupant pour le tissu productif français. L'ensemble des éléments présentés est reproductible à partir des codes fournis."
+abstract: "On explore différentes façons de calculer la notion de part des salaires dans la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation par le revenu mixte* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers*. Il peut être calculé pour les pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et s'est accrue de façon importante. Bien que plus fragile empiriquement, le calcul de rendement net d'impôts du capital productif confirme ce diagnostic particulièrement préoccupant pour le tissu productif français. L'ensemble des éléments présentés est reproductible à partir des codes fournis sur le dépôt associé."
 citation:
   type: article-journal
   container-title: "Document de travail de l'OFCE"
@@ -48,7 +48,7 @@ crossref:
       latex-list-of-description: Graphiques annexes
 apptbl-cap-location: top
 appfig-cap-location: top
-thanks: "Je remercie chaleureusement Elliot Aurissergues, François Geerolf et Eric Heyer pour leurs remarques pertinentes et stimulantes. Elles m'ont amené à aller plus loin dans les concepts et les données. La confusion qui en découle est de ma seule responsabilité. "
+thanks: "Je remercie Elliot Aurissergues, François Geerolf et Eric Heyer pour leurs remarques pertinentes et stimulantes. Elles m'ont amené à aller plus loin dans les concepts et les données. La discussion lors d'un séminaire à l'OFCE avec notoamment Eric Dubois, Mathieu Plane a été très utile. La confusion subsiste dans le document est de ma seule responsabilité. "
 ---
 
 ```{r, include=FALSE}
@@ -77,10 +77,11 @@ L'analyse du partage de la valeur ajoutée (@fig-psal) est au cœur des débats 
 #| fig-asp: 0.85
 #| fig-cap: Part des salaires dans la VA nette
 
-champs  <- c("md" = "Marchand", "mdhifi" = "Marchand hors immobilier et services financiers",
-            "mdhi"= "Marchand hors services immobiliers", 
-            "mdhim"= "Marchand hors imm. des ménages (L68A)", 
-            "mdhfi"= "Marchand hors services financiers", 
+champs  <- c("md" = "Branches marchandes", 
+             "mdhifi" = "Branches marchandes hors immobilier et services financiers (-KLOPQ)",
+            "mdhi"= "Branches marchandes hors services immobiliers (-LOPQ)", 
+            "mdhim"= "Branches marchandes hors imm. des ménages (-L68AOPQ)", 
+            "mdhfi"= "Branches marchandes hors services financiers (-KOPQ)", 
             "tb" = "Toutes branches (marchandes et non marchandes)")
 naq <- source_data("R/vaq.r")$naa |> 
   filter(geo %in% P6) |> 
@@ -88,7 +89,7 @@ naq <- source_data("R/vaq.r")$naa |>
     "<b>{lbl(geo)}</b>
     {year(time)} 
     {champs[champ]}
-    Part des salaires dans la VAN : {round(psal*100,1)}%")) |>
+    Part des salaires dans la VAN : {round(psalh*100,1)}%")) |>
   mutate(geo = factor(geo, P6))
 
 date <- sourcoise::sourcoise_meta("R/vaq.r")$data_date |> ymd_hms() 
@@ -103,7 +104,7 @@ psal <- imap(
     "Marchand" = "md",
     "hors loyers imputés (-L68A)" = "mdhim"),
   ~ggplot(naq |> filter(champ == .x)) +
-    aes(x=time, y=psal, col = geo, group = geo) +
+    aes(x=time, y=psalh, col = geo, group = geo) +
     geom_line(color = "grey80", layout = "fixed", linewidth = 0.2) +
     geom_line_interactive(
       aes(
@@ -117,7 +118,7 @@ psal <- imap(
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
-    labels = date1d) +
+    labels = date1) +
   guides( fill = "none", color = "none",
           linetype = guide_legend(nrow = 1),
           alpha = guide_legend(nrow = 1)) + 
@@ -129,8 +130,8 @@ psal <- imap(
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
-    champ = "Branches marchandes {.y}.",
-    note = "La CCF ou les impôts nets de subventions proviennent des comptes annuels, jusqu'en 2023 ou 2024 selon les pays, extrapolée au delà (voir tableau A1). Le partage de la valeur ajoutée pour les tous derniers points évolue donc comme le partage dans la valeur ajoutée brute. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") ) 
+    champ = "{champs[.x]}.",
+    note = "Part des salaires dans la Valeur Ajoutée Nette (brute corrigée de la CCF), correction des non salariés par le revenu mixte (hybride pour les pays autre que la France). Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") ) 
 
 tabsetize(psal, r = 1.25)
 ```
@@ -143,15 +144,15 @@ margin_download(naq |> select(-tooltip))
 
 Trois points sont importants pour disposer du bon concept (voir @reis2022 pour une discussion et une revue de littérature sur ce point) :
 
--   **Corriger des non salariés et leur imputer une masse salariale**. La correction habituelle consiste à affecter aux non salariés le même salaire que les salariés (généralement de la même branche) ; c'est ainsi que traitent la question @cette2019 et @tresor2025. Nous procédons à cette correction (appelée *correction par les effectifs*) aux 21 branches de la NACE rev. 2 niveau 1. Nous proposons une alternative en utilisant la mesure du revenu mixte (dite *correction par le revenu mixte*), parce que l'affectation d'un salarie égal aux non salariés et aux salariés par branches conduit à imputer un équivalent masse salariale supérieur au revenu mixte des non salariés[^1]. En France, le revenu mixte (des non-salariés) est passé de 30% de la masse salariale (autant pour le ratio des effectifs) au début des années 1970 à un peu moins de 10% (presque 15% pour les effectifs) en 2024. Malheureusement, le revenu mixte par branche n'est pas diffusé systématiquement par les Etats membres de l'UE. Ces corrections modifient significativement la part des salaires dans la valeur ajoutée, suivant la méthode, parce que non seulement la part des non salariés et de leur revenu mixte varie dans le temps, de façon différente par un effet de structure (moins d'agriculteurs) et de nature (les non salariés sont moins rémunérés aujourd'hui), de façon différente par pays (@fig-psalcnc et voir les annexes D et G consacrées à ce point).
+-   **Corriger des non salariés et leur imputer une masse salariale**. La correction habituelle consiste à affecter aux non salariés le même salaire que les salariés (généralement de la même branche) ; c'est ainsi que traitent la question @cette2019 et @tresor2025. Nous procédons à cette correction (appelée *correction par les effectifs*) aux 21 branches de la NACE rev. 2 niveau 1 mais nous proposons ici une alternative en utilisant la mesure du revenu mixte (dite *correction par le revenu mixte*), parce que l'affectation d'un salarie égal aux non salariés et aux salariés par branches conduit à imputer une masse salariale supérieure au revenu mixte des non salariés[^1], voire de dépasser la valeur ajoutée de la branche. En France, le revenu mixte (des non-salariés) est passé de 30% de la masse salariale (autant pour le ratio des effectifs) au début des années 1970 à un peu moins de 10% (presque 15% pour les effectifs) en 2024. Malheureusement, le revenu mixte par branche n'est pas diffusé systématiquement par les Etats membres de l'UE et nous utilisons une méthode hybride, qui impute suivant les effectifs le revenu mixte agrégé. Ces corrections modifient significativement la part des salaires dans la valeur ajoutée, suivant la méthode, parce que non seulement la part des non salariés et de leur revenu mixte varie dans le temps, de façon différente par un effet de structure (moins d'agriculteurs) et de nature (les non salariés sont moins rémunérés aujourd'hui), de façon différente par pays (@fig-psalcnc et voir les annexes D et G consacrées à ce point).
 
--   **Limiter l'analyse au champ pertinent**. Il est plus facile de faire le calcul au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est parfois conventionnelle. Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour part auto produit (les loyers imputés aux propriétaires) et pour part produits par les ménages pour d'autres ménages (les propriétaires bailleurs). Suivant les pays ou les périodes, le nombre de propriétaires occupants peut être très différent (@cette2019 fait ce point que @tresor2025 semble ignorer). Mais le vrai problème est que le partage de la valeur ajoutée n'a ici pas de sens dansle cas d'un loyer imputé ou d'un propriétaire bailleur. La consommation de services immobiliers par les ménages représentait en France en 2024 un peu moins de 300 milliards d'euros soit aprroximativement `r round(300/1666*100)`% de la valeur ajoutée brute hors services immobilier. On comprend donc que ce point n'est pas du tout négigeable. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus précise, en enlevant de la valeur ajoutée marchande la branche "services immobiliers (L)" (@appfig-psalcompote, @fig-structbranche). Omettre les services immobiliers pose cependant un problème, parce que les loyers versés par les entreprises à leurs bailleurs sont souvent un prix de transfert et non un prix de marché. C'est donc un élément qui peut être utilisé comme véhicule pour de l'otpimisation fiscale, d'autant plus que la fiscalité immobilière peut être avantageuse. Nous explorons cette dimension dans la @sec-immobilier en particulier pour la France.
+-   **Limiter l'analyse au champ pertinent**. Il est plus simple de calculer la part des salaires au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est conventionnelle (la valeur ajoutée est estimée au coût des facteurs). Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour part auto produit (les loyers imputés aux propriétaires) et pour part produits par les ménages pour d'autres ménages (les propriétaires bailleurs). Suivant les pays ou les périodes, le nombre de propriétaires occupants peut être très différent (@cette2019 fait ce point). Mais le vrai problème est que le partage de la valeur ajoutée entre salariés et producteur n'a ici pas de sens dans le cas d'un loyer imputé ou d'un propriétaire bailleur et que le niveau de loyer représente plutôt le conflit de répartition d'une ressource plus ou moins rare entre propriétaires et locataires. La consommation de services immobiliers par les ménages représentait en France en 2024 un peu moins de 300 milliards d'euros soit approximativement `r round(300/1666*100)`% de la valeur ajoutée brute hors services immobilier. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus précise, en enlevant de la valeur ajoutée marchande la branche "services immobiliers (L)" (@appfig-psalcompote, @fig-structbranche). Omettre les services immobiliers pose cependant un problème, parce qu'on exclu de l'analyse les loyers payés par les entreprises pour leurs locaux et constitue bine un élément de coût. La comptabilité nationale n'évalue pas un loyer implicite pour les entreprises – sans doute à raison – ce qui induit un biais spatial et temporel dans les consommations intermédiaires retenues.
 
 -   **Utiliser la notion de valeur ajoutée nette** (de la consommation de capital fixe (CCF)) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. La CFF est évaluée par des tables de mortalité à l'inventaire permanent des investissements productifs (actifs produits) non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire mesurée par leur amortissement physique ou fiscal, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée (@fig-psalnetbrut). Ce point est signalé par @tresor2025, mais les auteurs ont préféré le concept de valeur ajoutée brute pour des raisons de comparabilité entre études – au détriment de la comparabilité dans le temps et dans l'espace.
 
 [^1]: Merci à E. Aurissergues pour m'avoir pointé cette anomalie.
 
-Le concept que nous privilégions est ainsi défini comme suit (où, pour chaque branche $D1_b$ est la masse salariale chargée, $B1G_b$ la valeur ajoutée brute, $P51C_b$ la $CCF_b$, les trois notions en euros aux prix courants et $ns_b$ et $sal_b$ les effectifs en personne ou le revenu mixte par branche)[^2] et $D29-D39$ les impôts de production nets de subventions :
+Le concept que nous privilégions est ainsi défini comme suit, où, pour chaque branche $D1_b$ est la masse salariale chargée, $B1G_b$ la valeur ajoutée brute, $P51C_b$ la $CCF_b$, les trois notions en euros aux prix courants et $ns_b/sal_b$ le ratio revenu mixte à la masse salariale par branche et $D29-D39$ les impôts de production nets de subventions. Les branches exclues sont les branches L (services immobiliers) et O (administration publique, défense et sécurité), P (éducation), Q (santé humaine et travail social)[^2] :
 
 [^2]: @cette2019 utilisent une définition plus large des branches non marchande en incluant les branches R, T et U.
 
@@ -339,7 +340,7 @@ tpbranches <- imap(
         ylab("% du capital") + xlab(NULL) +
         facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
         scale_ofce_date(
-          labels = date1d ) +
+          labels = date1 ) +
         guides( fill = "none", color = "none",
                 linetype = guide_legend(nrow = 1),
                 alpha = guide_legend(nrow = 1)) + 
@@ -439,7 +440,7 @@ sal <- ggplot(data |> filter(name %in% c("w", "w_md", "w_nmd", "w_hi"))) +
   geom_line_interactive(
     aes(tooltip  = lbl_b[name])) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
-  scale_ofce_date(labels = date1d) +
+  scale_ofce_date(labels = date1) +
   ylab("Salaire annuel réel en k€") + xlab(NULL) +
   scale_y_log10(breaks = c(10, 20, 30, 40, 50, 50, 60),
                 limits = c(25, 71)) +
@@ -478,7 +479,7 @@ salb <- ggplot(data |> filter(name %in% c("wb", "wb_md", "wb_nmd", "wb_hi"))) +
   geom_line_interactive(
     aes(tooltip  = lbl_bb[name])) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
-  scale_ofce_date(labels = date1d) +
+  scale_ofce_date(labels = date1) +
   ylab("Salaire annuel réel en k€") + xlab(NULL) +
   scale_y_log10(breaks = c(10, 20, 30, 40, 50, 50, 60),
                 limits = c(25, 71)) +
@@ -601,7 +602,7 @@ psal <- ggplot(data) +
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
-    labels = date1d ) +
+    labels = date1 ) +
   guides( fill = "none", color = "none",
           linewidth = guide_legend(ncol = 1),
           alpha = guide_legend(ncol = 1), 
@@ -756,7 +757,7 @@ psal <- ggplot(data) +
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
-    labels = date1d ) +
+    labels = date1 ) +
   guides( fill = "none", color = "none" ) + 
   scale_y_continuous(labels = scales::label_percent(1), 
                      breaks = scales::pretty_breaks(3)) +
@@ -841,7 +842,7 @@ psal <- ggplot() +
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
-    labels = date1d ) +
+    labels = date1 ) +
   scale_y_continuous(labels = scales::label_percent(1),
                      breaks = scales::pretty_breaks(3)) +
   scale_color_pays(format = "eurostat") +
@@ -914,7 +915,7 @@ gd <- ggplot(decomp) +
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
-    labels = date1d ) +
+    labels = date1 ) +
   scale_y_continuous(labels = scales::label_percent(1),
                      breaks = scales::pretty_breaks(3)) +
   scale_color_pays(format = "eurostat", aesthetics = c("color", "fill")) +
@@ -1020,7 +1021,7 @@ tpmixte <- ggplot(data_long) +
   ylab("% du capital") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
-    labels = date1d ) +
+    labels = date1 ) +
   guides( fill = "none", color = "none",
           linetype = guide_legend(nrow = 1),
           alpha = guide_legend(nrow = 1)) + 
@@ -1131,7 +1132,7 @@ psnf <- ggplot(data) +
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
-   labels = date1d ) +
+   labels = date1 ) +
   scale_y_continuous(labels = scales::label_percent(1)) +
   scale_color_pays(format = "eurostat") +
   theme(
@@ -1233,7 +1234,7 @@ psnff <- ggplot(data) +
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
-   labels = date1d ) +
+   labels = date1 ) +
   scale_y_continuous(labels = scales::label_percent(1)) +
   scale_color_pays(format = "eurostat") +
   theme(
@@ -1298,7 +1299,7 @@ pprofit <- ggplot(data) +
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
-   labels = date1d ) +
+   labels = date1 ) +
   scale_y_continuous(labels = scales::label_percent(1)) +
   scale_color_pays(format = "eurostat") +
   theme(legend.direction = "horizontal") +
@@ -1379,7 +1380,7 @@ ptprofitsnf <- ggplot(snfq_a |> filter(name != "rendshare")) +
   ylab("% du stock de capital") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
-   labels = date1d ) +
+   labels = date1 ) +
   scale_y_continuous(labels = scales::label_percent(1), limits = c(0,0.3)) +
   scale_color_pays(format = "eurostat") +
   theme(legend.direction = "horizontal") +
@@ -1454,7 +1455,7 @@ ptprofitsnff <- ggplot(snfq_a |> filter(name != "rendshare")) +
   ylab("% du stock de capital") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
-   labels = date1d ) +
+   labels = date1 ) +
   scale_y_continuous(labels = scales::label_percent(1), limits = c(0,0.3)) +
   scale_color_pays(format = "eurostat") +
   theme(legend.direction = "horizontal") +
@@ -1507,8 +1508,7 @@ psaloecd <- ggplot(data |> filter(year(time)>=1995)) +
   ylab("En % du PIN") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
-    labels = date1d
-  ) +
+    labels = date1 ) +
   scale_y_continuous(labels = scales::label_percent(1)) +
   scale_color_pays(format = "eurostat") +
   ofce_caption(
@@ -1636,7 +1636,7 @@ gg <- ggplot(data) +
   scale_y_continuous(labels = scales::label_percent(.1, decimal.mark = ",")) +
   labs(y="% de la VAB", x = NULL) +
   scale_ofce_date(
-    labels = date1d) +
+    labels = date1) +
   ofce_caption(
     source="INSEE, comptes nationaux table des entrées sorties (CNA_SUT)"
   )+
@@ -1695,7 +1695,7 @@ gg <- ggplot(data_long) +
   scale_y_continuous(labels = scales::label_percent(.1, decimal.mark = ",")) +
   labs(y="% du capital productif", x = NULL) +
   scale_ofce_date(
-    labels = date1d) +
+    labels = date1) +
   ofce_caption(
     source="INSEE, comptes nationaux table des entrées sorties (CNA_SUT)"
   )+
@@ -1814,7 +1814,7 @@ ccfs <- imap(
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
-    labels = date1d ) +
+    labels = date1 ) +
   guides( fill = "none", color = "none",
           linetype = guide_legend(nrow = 1),
           alpha = guide_legend(nrow = 1)) + 
@@ -1852,7 +1852,7 @@ ccfsina <- imap(
   ylab("% des actifs") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
-    labels = date1d ) +
+    labels = date1 ) +
   guides( fill = "none", color = "none",
           linetype = guide_legend(nrow = 1),
           alpha = guide_legend(nrow = 1)) + 
@@ -1889,7 +1889,7 @@ ccfsina <- imap(
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
-    labels = date1d ) +
+    labels = date1 ) +
   guides( fill = "none", color = "none",
           linetype = guide_legend(nrow = 1),
           alpha = guide_legend(nrow = 1)) + 
@@ -1947,8 +1947,7 @@ gg <- ggplot(data) +
   scale_y_continuous(labels = scales::label_percent(1),
                      breaks = scales::breaks_pretty(n=3)) +
   scale_ofce_date(
-    labels = date1d
-    ) +
+    labels = date1 ) +
   ylab("% de la VA") +
   scale_color_pays("eurostat") +
   ofce_caption(
@@ -2066,7 +2065,7 @@ gD <-imap(
   ylab(NULL) + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl, scales = "free_y") +
   scale_ofce_date(
-    labels = date1d) +
+    labels = date1 ) +
   scale_alpha_manual(
     values = c(reff = 1, reffh = 0.5, rb3n = 1, rw = 0.5),
     labels = labels,
@@ -2151,7 +2150,7 @@ gD2 <-imap(
       hover_nearest = TRUE, show.legend=FALSE) +
   ylab(NULL) + xlab(NULL) +
   scale_ofce_date(
-    labels = date1d) +
+    labels = date1 ) +
   scale_linewidth_manual(
     values = c(tb = 0.25, md = 0.5, mdhi = 0.25),
     labels = labels,
@@ -2221,7 +2220,7 @@ psalE <- imap(
       hover_nearest = TRUE, show.legend=FALSE) +
     ylab("% de la VA") + xlab(NULL) +
     scale_ofce_date(
-      labels = date1d) +
+      labels = date1 ) +
     guides( fill = "none") +
     theme(legend.direction = "horizontal") +
     scale_color_manual(
@@ -2287,7 +2286,7 @@ psalE <- imap(
       hover_nearest = TRUE, show.legend=FALSE) +
     ylab("% des actifs productifs") + xlab(NULL) +
     scale_ofce_date(
-      labels = date1d) +
+      labels = date1 ) +
     guides( fill = "none") +
     theme(legend.direction = "horizontal") +
     scale_color_manual(values = c(rb = bluish, rbm = redish),
