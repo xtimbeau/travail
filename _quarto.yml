@@ -4,6 +4,9 @@ execute:
   freeze: auto
 website:
   other-links:
+     - text: Historique des changements
+       icon: newspaper
+       href: NEWS.html
      - text: Séminaire Lunch OFCE
        icon: file-earmark-easel
        href: seminaire_lunch_OFCE.html

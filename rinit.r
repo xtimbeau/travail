@@ -8,7 +8,8 @@ opts_chunk$set(
   fig.showtext=TRUE,
   message = FALSE,
   warning = FALSE,
-  echo = FALSE)
+  echo = FALSE,
+  error = TRUE)
 
 systemfonts::add_fonts(system.file("fonts", "OpenSans", "OpenSans-Regular.ttf", package="ofce"))
 

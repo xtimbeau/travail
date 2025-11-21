@@ -1,0 +1,35 @@
+---
+title: "Historique des modifications"
+format: 
+  ofce-html: default
+---
+
+## 17/11/2025
+ 
+* calcul de la correction revenu mixte hybride pour les autres pays que la France
+* présentation séminaire lunch
+
+## 12/11/2025
+
+* version 2 du texte, correction par le revenu mixte pour la France
+
+## 4/11/2025
+
+* version modifiée du texte, premeier éléments sur le revenu mixte
+* graphique de la semaine
+
+## 24/10/2025
+
+* version 1 du codument de travail 2025-23, mise en ligne initiale et pdf
+
+## 29/09/2025
+
+* version préliminaire du document de travail
+
+## 26/01/2025
+
+* version corrigée de l'article pour économie politique
+
+## 18/01/2025
+
+* version initiale du texte pour économie politique
