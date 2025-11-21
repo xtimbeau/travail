@@ -106,11 +106,6 @@ nav.quarto-secondary-nav,
   text-align: $aligment !important;
 }
 
-p {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem
-}
-
 .align-left {
   text-align: left;
 }
@@ -189,8 +184,6 @@ caption {
 
 .csl-entry {
   text-align: start;
-  text-indent: -2em;
-  padding-left: 2em;
 }
 
 .table {
@@ -233,10 +226,23 @@ div.callout-tip div.callout-header {
   border: none;
   color: $link-color;
   text-align: center;
-  margin-top: 0;
+  margin-top: 12px;
   margin-bottom: 6px;
   padding-bottom: 3px;
   padding-top: 3px;
+}
+
+.dbtn-inline {
+  font-size: .7rem;
+  background-color: transparent;
+  border: none;
+  color: $link-color;
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 6px;
+  padding-bottom: 3px;
+  padding-top: 3px;
+  float: right;
 }
 
 .control-label {

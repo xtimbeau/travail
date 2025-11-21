@@ -58,10 +58,6 @@ P6 <- source_data("R/nace.r")$pays1
 options(
   ofce.tabsetize.pdf = "one",
   ofce.savegraph = TRUE )
-
-if(knitr::is_html_output()) 
-  update_theme(text = element_text(size = 10)) else  
-    update_theme(text = element_text(size = 8)) 
 ```
 
 ::: {.appendix .content-visible when-format="html"}
@@ -131,7 +127,7 @@ psal <- imap(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
     champ = "{champs[.x]}.",
-    note = "Part des salaires dans la Valeur Ajoutée Nette (brute corrigée de la CCF), correction des non salariés par le revenu mixte (hybride pour les pays autre que la France). Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") ) 
+    note = "Part des salaires dans la Valeur Ajoutée Nette (brute corrigée de la CCF), correction des non salariés par le revenu mixte (hybride pour les pays autre que la France). 2025 est une extrapolation sur la base d'une information partielle jusqu'au T3. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") ) 
 
 tabsetize(psal, r = 1.25)
 ```

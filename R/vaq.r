@@ -166,6 +166,13 @@ naq_a10 <- naq_a10 |>
   mutate(him = hi&md) |>
   bind_rows(L68Aq)
 
+mixte_fr <- source_data("france-melodi.r")$aggr |>
+  select(time, champ, b3n) |>
+  mutate(geo = "FR") |>
+  cross_join(tibble(m = c(1,4,7,10))) |>
+  mutate(time = ymd(str_c(year(time),"-", m, "-01")),
+         b3n = b3n/4)
+
 mixte_h <- source_data("mixte.r")$h
 
 naq <- naq_a10 |>
@@ -186,6 +193,15 @@ naq <- naq_a10 |>
   pivot_longer(starts_with(c("van", "vab", "msa", "ip", "b3nh"))) |>
   separate(name, into = c("var", "champ"), sep = "_") |>
   pivot_wider(names_from = var, values_from = value) |>
+  left_join(mixte_fr, by = c("time", "geo", "champ")) |>
+  mutate(
+    b3nh_src = b3nh,
+    b3nh = ifelse(is.na(b3n), b3nh, b3n),
+    rb3nh = b3nh/msanc) |>
+  arrange(time) |>
+  group_by(champ, geo) |>
+  fill(rb3nh, .direction = "down") |>
+  mutate(b3nh = rb3nh * msanc) |>
   mutate(
     psal = msa/van,
     psalb = msa/vab,
@@ -207,6 +223,8 @@ naa <- naq |>
     psalb = msa/vab,
     psalnc = msanc/van,
     psalbnc = msanc/vab,
+    psalh = (msanc+b3nh)/van,
+    psalbh = (msanc+b3nh)/vab,
     time = ym(str_c(year, "-01"))) |>
   filter(geo %in% pays, time >= "1995-01-01") |>
   mutate(geo = factor(geo,  pays))

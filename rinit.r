@@ -136,3 +136,7 @@ ggplot2::set_theme(
     legend.justification = "center",
     panel.grid = element_line(color = "grey95")
   ))
+
+if(knitr::is_html_output())
+  update_theme(text = element_text(size = 10)) else
+    update_theme(text = element_text(size = 8))

@@ -295,9 +295,10 @@ melodi_m <- melodi |>
   fill(ccfei, .direction = "up") |>
   group_by(champ) |>
   mutate(
+    b3n = (1-ccfei)*b3g,
     msanc = d1,
     msa = d1 * (1 + self/sal),
-    msam = d1 + (1-ccfei)*b3g,
+    msam = d1 + b3n,
     psal = msa / van,
     tp = (van - msa ) / van,
     rb = (van - msa ) / n1n,

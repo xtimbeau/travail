@@ -1,7 +1,7 @@
-title: Format OFCE
+title: Format working paper (wp en anglais) OFCE
 author: Anissa Saumtally et Xavier Timbeau
 version: 0.2.0
-quarto-required: ">=1.4.300"
+quarto-required: ">=1.8.26"
 contributes:
   formats:
     common:
@@ -87,6 +87,7 @@ contributes:
       fig-format: png
       logo: ofce_m.png
       logo2: sciencespo.png
+      callout-icon: false
       template-partials:
         - pdf_template/title.tex
         - pdf_template/before-body.tex
