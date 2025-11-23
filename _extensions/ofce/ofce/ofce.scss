@@ -208,12 +208,12 @@ blockquote {
   margin-top: 16px;
 }
 
-div.callout-tip {
+.callout-tip {
   font-size: .8rem;
   border-radius: 0;
   background-clip: content-box;
-  background-color: $lightgrey !important;
-  border-left-color: $lightgrey !important;
+  background-color: rgba($scpored, 0.1) !important;
+  border-left-color: rgba($scpored, 0.2) !important;
 }
 
 div.callout-tip div.callout-header {

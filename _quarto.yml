@@ -40,5 +40,7 @@ website:
 comments:
   hypothesis: true
 format:
-  ofce-html: default
+  ofce-html:
+    link-external-icon: true
+    smooth-scroll: true
 

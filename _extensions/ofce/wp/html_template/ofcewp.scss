@@ -44,9 +44,8 @@ h3,.h3,h4,.h4 {
     margin-top: 0.5rem
 }
 
-
-#toc-title.h2 {
-  font-size: 0.8rem !important;
+.sidebar nav[role=doc-toc]>h2,.sidebar nav[role=doc-toc]>.h2 {
+    font-size: .8rem
 }
 
 main {
@@ -197,14 +196,6 @@ font-weight: 600 !important;
   padding-top: 0em;
 }
 
-.encadre, .callout-tip {
-  font-size: .8rem;
-  border-radius: 0;
-  background-clip: content-box;
-  background-color: #EEE !important;
-  border-left-color:$lightgrey !important;
-}
-
 .control-label {
   font-size: .8rem;
   text-align: start;
@@ -236,27 +227,32 @@ font-weight: 600 !important;
   font-size: 0.9rem;
 }
 
-
 div.callout-tip {
   font-size: .8rem;
   border-radius: 0;
   background-clip: content-box;
-  background-color: $lightgrey !important;
-  border-left-color:$lightgrey !important;
+  background-color: rgba($lightgrey, 0.5) !important;
+  border-left-color: rgba($lightgrey, 0.5) !important;
 }
 
 div.callout-tip div.callout-header {
-  background-color: $lightgrey !important;
+  background-color: rgba($lightgrey, 0.5) !important;
 }
 
 .dbtn {
   font-size: .7rem;
   background-color: transparent;
   border: none;
+  border-radius: 5px;
   color: $link-color;
   text-align: center;
   margin-top: 6px;
   margin-bottom: 6px;
+}
+
+.dbtn:hover {
+  background-color: rgba($link-color, 0.5);
+  color: white;
 }
 
 .control-label {

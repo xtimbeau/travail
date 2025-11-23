@@ -1,35 +1,46 @@
 ---
-title: "Historique des modifications"
+title: "[Document de travail de l'OFCE 2025-23 : Une part des salaires dans la VA élévée en 2025 en France](index.qmd)"
+subtitle: "Historique des modifications"
 format: 
-  ofce-html: default
+  ofce-html: 
+    number-sections: false
+    toc: false
 ---
 
-## 17/11/2025
- 
-* calcul de la correction revenu mixte hybride pour les autres pays que la France
-* présentation séminaire lunch
+### 23/11/2025
 
-## 12/11/2025
+-   ⚙️ la correction par le revenu mixte pour les non salariés est maintenant la corection de référence
+-   📝 ajouts de tableaux et modification des commentaires en conséquence
 
-* version 2 du texte, correction par le revenu mixte pour la France
+### 17/11/2025
 
-## 4/11/2025
+-   ⚙️ calcul de la correction revenu mixte hybride pour les autres pays que la France
+-   🎆 présentation séminaire lunch
 
-* version modifiée du texte, premeier éléments sur le revenu mixte
-* graphique de la semaine
+### 12/11/2025
 
-## 24/10/2025
+-   📝 version 2 du texte
+-   ⚙️ correction par le revenu mixte pour la France
 
-* version 1 du codument de travail 2025-23, mise en ligne initiale et pdf
+### 4/11/2025
 
-## 29/09/2025
+-   📝 version modifiée du texte
+-   ⚙️ premiers éléments sur le revenu mixte
+-   🎆 graphique de la semaine
 
-* version préliminaire du document de travail
+### 24/10/2025
 
-## 26/01/2025
+-   📝 version 1 du codument de travail 2025-23
+-   🚀 mise en ligne initiale et pdf
 
-* version corrigée de l'article pour économie politique
+### 29/09/2025
 
-## 18/01/2025
+-   📝 version préliminaire du document de travail
 
-* version initiale du texte pour économie politique
+### 26/01/2025
+
+-   📝 version corrigée de l'article pour économie politique
+
+### 18/01/2025
+
+-   📝 version initiale du texte pour économie politique
