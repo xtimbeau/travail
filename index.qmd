@@ -19,7 +19,7 @@ message: false
 warning: false
 keep-md: false
 freeze: false
-abstract: "On explore différentes façons de calculer la notion de part des salaires dans la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation par le revenu mixte* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers*. Il peut être calculé pour les pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et s'est accrue de façon importante. Bien que plus fragile empiriquement, le calcul de rendement net d'impôts du capital productif confirme ce diagnostic particulièrement préoccupant pour le tissu productif français. L'ensemble des éléments présentés est reproductible à partir des codes fournis sur le dépôt associé."
+abstract: "On explore différentes façons de calculer la notion de part des salaires dans la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation par le revenu mixte* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers*. Il peut être calculé pour les pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et s'est accrue de façon importante. Bien que plus fragile empiriquement, le calcul de rendement net d'impôts du capital productif confirme ce diagnostic particulièrement préoccupant pour le tissu productif français. Outre les explications habituelles de la hausse de la part des salaries dans la vakeur ajoutée, nous explorons l'évaporation de la valeur ajoutée par l'optimisation fiscale. L'ensemble des éléments présentés est reproductible à partir des codes fournis sur le dépôt associé."
 citation:
   type: article-journal
   container-title: "Document de travail de l'OFCE"
@@ -31,6 +31,7 @@ format:
   wp-html: default
   wp-pdf:
     output-file: "OFCEWP2025-23.pdf"
+    tbl-pos: "H"
 crossref:
   custom:
     - key: apptbl
@@ -65,17 +66,11 @@ options(
 
 L'analyse du partage de la valeur ajoutée (@fig-psal) est au cœur des débats sur la redistribution des richesses (voir notamment @hurlin1996, @timbeau2002, @cotis2009, @husson2010, @askenazy2012, @piton2019, @pak2019, @cette2019, @timbeau2025, @tresor2025).
 
-Le processus de productif engage d'un côté des travailleurs, qu'ils soient salariés ou non salariés, et des apporteurs de capitaux, qu'ils soient investisseurs actionnaires, détenteurs de titres de dette ou prêteurs. La nature des contrats reliant chacun de ces intervenants au partage de la richesse produite est très diverse. Certains sont à la fois travailleurs et actionnaires — un entrepreuneur cumule les deux rôles, D'autres sont dans des positions radicalement différentes, comme entre un spécialiste de l'IA dont les bonus peuvent être considérables et un agent de maintenance en contrat précaire. Mais, bien que les frontières ne soient pas aussi nettes que ce que l'on peut souhaiter, ce qu'on appelle communément la part des salaires dans la valeur ajoutée est un indicateur central dans la mesure du conflit de répartition entre le travail et le capital.
+Le processus de productif engage d'un côté des travailleurs, qu'ils soient salariés ou non salariés, et des apporteurs de capitaux (ou capitalistes), qu'ils soient investisseurs actionnaires, détenteurs de titres de dette ou prêteurs. La nature des contrats reliant chacun de ces intervenants au partage de la richesse produite est très diverse. Certains sont à la fois travailleurs et actionnaires — un entrepreuneur cumule les deux rôles, D'autres sont dans des positions radicalement différentes, comme entre un programmeur de l'IA ou un *trader* dont les bonus peuvent être considérables et un agent de maintenance au contrat précaire. Bien que les frontières ne soient pas aussi nettes que ce que l'on peut souhaiter, ce qu'on appelle communément la part des salaires dans la valeur ajoutée est un indicateur central dans la mesure du conflit de répartition entre le travail et le capital, ou plus directement les travailleurs et les capitalistes.
 
-Nous explorons ici la construction de cet indicateur afin qu'il reponde le mieux possible à la question posée, à savoir le confilt de répartatition. Cela nous anmène à privilégié la part des salaires *augmenté de la rémunération des non salariés par leur revenu mixte* dans la valeur ajouté *nette de la consommation de capital fixe* en se limitant *aux branches marchandes hors immobilier*.
+Nous explorons ici la construction de cet indicateur afin qu'il reponde le mieux possible à la question posée, à savoir le confilt de répartatition. Cela nous anmène à privilégier la part des salaires *augmenté de la rémunération des non salariés par leur revenu mixte* dans la valeur ajouté *nette de la consommation de capital fixe* en se limitant *aux branches marchandes hors immobilier*.
 
-Il apapraît que la part des salaires dans la valeur ajoutée en France est croissante depuis 30 ans (@fig-psal), est la plus haute quand à la compare à 5 grands Etats membre de la zone Euro. Ce résultat constraste avec le consensus qui s'est établit depuis le rapport Cotis [@cotis2009] et confirmé récemment par @cette2019, @pak2019 ou @tresor2025 que la part des salaires en France est constante depuis la fin des années 1980.
-
-Nous détaillons en les discutant dans la suite de ce document les effets des corrections appliquées et des choix de mesure retenus, ainsi que la différence entre les mesures dérivées des comptes de branche ou des comptes d'agents (ou de secteurs institutionnels), puisque nous nous limitons aux informations de la comptabilité nationale que nous tâchons d'exploiter le plus possible. Nous comparons systématiquement les indicateurs entre pays, au prix d'un échantillon de pays restreints et d'approximations indispensables. Ces éléments mis bout à bout sont un peu fastidieux, mais ils s'avèrent assez importants pour comprendre en quoi on peut préferer une mesure à une autre. Ils vont également à l'encontre de certaines intuitions ou a priori, particuliètement lorsqu'on les compare d'un pays à l'autre.
-
-Nous explorons également les conséquences en matière de taux de profit (part des profits nets dans la valeur ajoutée) ou rendement du capital (profits nets divisés par les actifs), avec là aussi des résultats frappants en ce qui concerne la France.
-
-Le code peremttant de reproduire les graphiques et les tableaux est disponible dans un [dépôt github] (https://github.com/xtimbeau/travail) afin d'assurer la transparence et la reproductibilité des éléments produits.
+Il apparaît que la part des salaires dans la valeur ajoutée en France est croissante depuis 30 ans (@fig-psal), est la plus haute quand à la compare à 5 grands Etats membre de la zone Euro. Ce résultat constraste avec le consensus qui s'est établit depuis le rapport Cotis [@cotis2009] et confirmé récemment par @cette2019, @pak2019 ou @tresor2025 que la part des salaires en France est constante depuis la fin des années 1980.
 
 ```{r, results="asis"}
 #| label: fig-psal
@@ -143,26 +138,32 @@ psal <- imap(
     champ = "{champs[.x]}, correction par le revenu mixte hybride (sauf pour la France).",
     note = "Part des salaires corrigés par le revenu mixte des non salariés dans la valeur ajoutée nette de la CCF pour les branches marchandes hors services immobiliers. 2025 est une extrapolation sur la base d'une information partielle jusqu'au T3. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") ) 
 
-tabsetize(psal, active = 2, r = 1.25)
+tabsetize(psal, active = 2, r = 1.5)
 ```
 
 ```{r, results="asis"}
 margin_download(naq |> select(-tooltip))
 ```
 
+Nous détaillons en les discutant dans la suite de ce document les effets des corrections appliquées et des choix de mesure retenus, ainsi que la différence entre les mesures dérivées des comptes de branche ou des comptes d'agents (ou de secteurs institutionnels), puisque nous nous limitons aux informations de la comptabilité nationale que nous tâchons d'exploiter le plus possible. Nous comparons systématiquement les indicateurs entre pays, au prix d'un échantillon de pays restreints et d'approximations indispensables. Ces éléments mis bout à bout sont un peu fastidieux, mais ils s'avèrent assez importants pour comprendre en quoi on peut préferer une mesure à une autre. Ils vont également à l'encontre de certaines intuitions ou a priori, particuliètement lorsqu'on les compare d'un pays à l'autre.
+
+Nous explorons également les conséquences en matière de taux de profit (part des profits nets dans la valeur ajoutée) ou rendement du capital (profits nets divisés par les actifs), avec là aussi des résultats frappants en ce qui concerne la France.
+
+Le code permettant de reproduire les graphiques et les tableaux est disponible dans un [dépôt github](https://github.com/xtimbeau/travail) afin d'assurer la transparence et la reproductibilité des éléments produits.
+
 ### Du bon concept de part des salaires
 
 Trois points sont importants pour disposer du bon concept (voir @reis2022 pour une revue de littérature sur ce point) :
 
--   **Corriger des non salariés et leur imputer une masse salariale**. La correction habituelle consiste à affecter aux non salariés le même salaire que les salariés (généralement de la même branche) ; c'est ainsi que traitent la question @cette2019 et @tresor2025. Nous procédons à cette correction (appelée *correction par les effectifs*) aux 21 branches de la NACE rev. 2 niveau 1 mais nous proposons ici une alternative en utilisant la mesure du revenu mixte (dite *correction par le revenu mixte*), parce que l'affectation d'un salarie égal aux non salariés et aux salariés par branches conduit à imputer une masse salariale supérieure au revenu mixte des non salariés[^1], voire de dépasser la valeur ajoutée de la branche. En France, le revenu mixte (des non-salariés) est passé de 30% de la masse salariale (autant pour le ratio des effectifs) au début des années 1970 à un peu moins de 10% (presque 15% pour les effectifs) en 2024. Malheureusement, le revenu mixte par branche n'est pas diffusé systématiquement par les Etats membres de l'UE et nous utilisons une méthode hybride, qui impute suivant les effectifs le revenu mixte agrégé. Ces corrections modifient significativement la part des salaires dans la valeur ajoutée, suivant la méthode, parce que non seulement la part des non salariés et de leur revenu mixte varie dans le temps, de façon différente par un effet de structure (moins d'agriculteurs) et de nature (les non salariés sont moins rémunérés aujourd'hui), de façon différente par pays (@fig-psalcnc et voir les annexes D et G consacrées à ce point).
+-   **Corriger des non salariés et leur imputer une masse salariale**. La correction habituelle consiste à affecter aux non salariés le même salaire que les salariés (généralement de la même branche) ; c'est ainsi que traitent la question @cette2019 et @tresor2025. Nous procédons à cette correction (appelée *correction par les effectifs*) aux 21 branches de la NACE rev. 2 niveau 1 mais nous proposons ici une alternative en utilisant la mesure du revenu mixte (dite *correction par le revenu mixte*), parce que l'affectation d'un salarie égal aux non salariés et aux salariés par branches conduit à imputer une masse salariale supérieure au revenu mixte des non salariés[^1], voire de dépasser la valeur ajoutée de la branche. En France, le revenu mixte (des non-salariés) est passé de 30% de la masse salariale (autant pour le ratio des effectifs) au début des années 1970 à un peu moins de 10% (presque 15% pour les effectifs) en 2024. Malheureusement, le revenu mixte par branche n'est pas diffusé systématiquement par les Etats membres de l'UE et nous utilisons une méthode hybride, qui impute suivant les effectifs relatifs de non salariés le revenu mixte agrégé. Ces corrections modifient significativement la part des salaires dans la valeur ajoutée, suivant la méthode, parce que non seulement la part des non salariés et de leur revenu mixte varie dans le temps, de façon différente par un effet de structure (moins d'agriculteurs) et de nature (les non salariés sont moins rémunérés aujourd'hui), de façon différente par pays (@fig-psalcnc et voir les annexes D et G consacrées à ce point).
 
--   **Limiter l'analyse au champ pertinent**. Il est plus simple de calculer la part des salaires au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est conventionnelle (la valeur ajoutée est estimée au coût des facteurs). Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour part auto produit (les loyers imputés aux propriétaires) et pour part produits par les ménages pour d'autres ménages (les propriétaires bailleurs). Suivant les pays ou les périodes, le nombre de propriétaires occupants peut être très différent (@cette2019 fait ce point). Mais le vrai problème est que le partage de la valeur ajoutée entre salariés et producteur n'a ici pas de sens dans le cas d'un loyer imputé ou d'un propriétaire bailleur et que le niveau de loyer représente plutôt le conflit de répartition d'une ressource plus ou moins rare entre propriétaires et locataires. La consommation de services immobiliers par les ménages représentait en France en 2024 un peu moins de 300 milliards d'euros soit approximativement `r round(300/1666*100)`% de la valeur ajoutée brute hors services immobilier. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus précise, en enlevant de la valeur ajoutée marchande la branche "services immobiliers (L)" (@appfig-psalcompote, @fig-structbranche). Omettre les services immobiliers pose cependant un problème, parce qu'on exclu de l'analyse les loyers payés par les entreprises pour leurs locaux et constitue bine un élément de coût. La comptabilité nationale n'évalue pas un loyer implicite pour les entreprises – sans doute à raison – ce qui induit un biais spatial et temporel dans les consommations intermédiaires retenues.
+-   **Limiter l'analyse au champ pertinent**. Il est plus simple de calculer la part des salaires au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est conventionnelle (la valeur ajoutée est estimée au coût des facteurs). Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour part auto produit (les loyers imputés aux propriétaires) et pour part produits par les ménages pour d'autres ménages (les propriétaires bailleurs). Suivant les pays ou les périodes, le nombre de propriétaires occupants peut être très différent (@cette2019 fait ce point). Mais le vrai problème est que le partage de la valeur ajoutée entre salariés et producteur n'a ici pas de sens dans le cas d'un loyer imputé ou d'un propriétaire bailleur et que le niveau de loyer représente plutôt le conflit de répartition d'une ressource plus ou moins rare entre propriétaires et locataires. La consommation de services immobiliers par les ménages représentait en France en 2024 un peu moins de 300 milliards d'euros soit approximativement `r round(300/1666*100)`% de la valeur ajoutée brute hors services immobilier. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus précise, en enlevant de la valeur ajoutée marchande la branche "services immobiliers (L)" (annexe C, @fig-structbranche). Omettre les services immobiliers pose cependant un problème, parce qu'on exclu de l'analyse les loyers payés par les entreprises pour leurs locaux et constitue bine un élément de coût. La comptabilité nationale n'évalue pas un loyer implicite pour les entreprises – sans doute à raison – ce qui induit un biais spatial et temporel dans les consommations intermédiaires retenues.
 
 -   **Utiliser la notion de valeur ajoutée nette** (de la consommation de capital fixe (CCF)) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. La CFF est évaluée par des tables de mortalité à l'inventaire permanent des investissements productifs (actifs produits) non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire mesurée par leur amortissement physique ou fiscal, on est plus proche de la réalité du processus productif. Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée (@fig-psalnetbrut). Ce point est signalé par @tresor2025, mais les auteurs ont préféré le concept de valeur ajoutée brute pour des raisons de comparabilité entre études – au détriment de la comparabilité dans le temps et dans l'espace.
 
 [^1]: Merci à E. Aurissergues pour m'avoir pointé cette anomalie.
 
-### Le principe d'un partage entre salariés et financeurs
+### Le partage entre travailleurs et capitalistes : une définition
 
 Le concept que nous privilégions, la part des salaires *corrigé de la non salarisation par le revenu mixte* dans la valeur ajoutée *nette des branches marchandes hors services immobiliers*, est défini par l'équation ci-après.
 
@@ -173,7 +174,7 @@ La valeur ajoutée est donc aux prix de base, c'est-à-dire net des impôts et s
 [^2]: @cette2019 utilisent une définition plus large des branches non marchande en incluant les branches R, T et U.
 
 $$
-s_{net, n.s., -LOPQ}  = \frac{\sum_{b\in{TT-LOPQ}}{D1_b*(1+ns_b/sal_b)}}{\sum_{b\in{TT-LOPQ}}{B1G_b - P51C_b - (D29_b-D39_b)}}
+s  = \frac{ \sum\limits_{b\in{-LOPQ}} D1_b*(1+ns_b/sal_b) } {\sum\limits_{b\in{-LOPQ}} B1G_b - P51C_b - (D29_b-D39_b)}
 $$
 
 Cette définition de la valeur ajoutée, au prix de marché, après impôt et suventions et de la consommation de capital fixe, permet d'analyser le partage entre salariés d'un côté et propriétaires ou financeurs des entreprises, puisque la somme de la part des salaires et de la part des profits nets est égal à 1. D'un côté du partage, on trouve les salariés et les non salariés, une catégorie hétérogène mais dont on retient le trait principal de tirer son revenu de son travail, par différentes formes de contrats, et de l'autre ceux qui financent l'entreprise, c'est-à-dire à la fois les banques, les marchés financiers pour le financement non bacnaire et les actionnaires. Il est possible de faire la distinction entre actionnaires et autres financeurs (à travers la dette nette des entreprises et les inétrêts nets versés), mais cette distinction n'est pas robuste pour les branches et est factice (par exemple, le *private equity* rend difficile l'imputation de la dette).
@@ -274,7 +275,7 @@ naq |>
 
 Différents éléments théoriques peuvent être avancés, comme les effets du progrès techniques, la combinaison (subistitution) du travail et du capital ou la formation des salaires ou des taux d'intérêt (voir @tip-theorie).
 
-::: {#tip-theorie .callout-tip collapse="true"}
+::: {#tip-theorie .callout-tip collapse="false"}
 ## Les déterminants théoriques de la part des salaires dans la valeur ajoutée
 
 @cette2019 proposent une modélisation simple des principaux déterminants du partage de la valeur ajoutée sur la base d'une fonction de production. @reis2022 étend l'analyse en équilibre néokeynéisien.
@@ -296,7 +297,7 @@ date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 data <- source_data("r/ggvanettebrute.r")
 
-psaleu <- ggplot(data$int) +
+psaleu <- ggplot(data$int |> drop_na(psalh_2025)) +
   geom_segment(
     aes(x = x,  xend = xend, y = y, yend = yend, color = year),
     key_glyph = draw_key_point, linewidth = 0.2) +
@@ -308,7 +309,7 @@ psaleu <- ggplot(data$int) +
   geom_point_interactive(
     data = ~.x |> filter(!i%in%c(0,1)),
     hover_nearest = TRUE,
-    aes(x = geo, y=psal, tooltip = tooltip, color = year),
+    aes(x = geo, y=psalh, tooltip = tooltip, color = year),
     size = 0.3, alpha = 0.5)+
   geom_point_interactive(
     data = ~.x |> filter(i%in%c(0,1)),
@@ -335,9 +336,9 @@ psaleu <- ggplot(data$int) +
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
     champ = "Branches marchandes hors services immobiliers (-L).",
-    note = "Part des salaires dans la valeur ajoutée nette corrigée de la non salarisation.")
+    note = "Part des salaires dans la valeur ajoutée nette corrigée de la non salarisation par le revenu mixte hybride.")
 
-psalbeu <- ggplot(data$intb) +
+psalbeu <- ggplot(data$intb |> drop_na(psalh_2025)) +
   geom_segment(
     aes(x = x,  xend = xend, y = y, yend = yend, color = year),
     key_glyph = draw_key_point, linewidth = 0.2) +
@@ -349,7 +350,7 @@ psalbeu <- ggplot(data$intb) +
   geom_point_interactive(
     data = ~.x |> filter(!i%in%c(0,1)),
     hover_nearest = TRUE,
-    aes(x = geo, y=psalb, tooltip = tooltip, color = year),
+    aes(x = geo, y=psalhb, tooltip = tooltip, color = year),
     size = 0.3, alpha = 0.5)+
   geom_point_interactive(
     data = ~.x |> filter(i%in%c(0,1)),
@@ -376,7 +377,7 @@ psalbeu <- ggplot(data$intb) +
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/vaq.r.",
     champ = "Branches marchandes hors services immobiliers (-L).",
-    note = "Part des salaires dans la valeur ajoutée brute corrigée de la non salarisation.")
+    note = "Part des salaires dans la valeur ajoutée brute corrigée de la non salarisation par le revene mixte hybride.")
 
 tabsetize(list("VA nette" = psaleu, "VA brute" = psalbeu))
 ```
@@ -386,9 +387,9 @@ margin_download(data$data)
 
 ```
 
-### Rendement financier du capital productif au plus bas en France
+### Le rendement du capital productif au plus bas en France
 
-La construction d'un taux de rendement financier du capital est sans doute assez fragile parce qu'il faut ajouter à l'évaluation du partage de la valeur ajoutée une estimation des impôts payés (notamment l'impôt sur les sociétés) et une évaluation du stock de capital (voir @sec-profits pour la méthode). En utilisant les données de stock de capital productif, le diagnostic présenté sur le @fig-psal est confirmé par le @fig-rp.
+La construction d'un taux de rendement du capital productif est sans doute assez fragile parce qu'il faut ajouter à l'évaluation du partage de la valeur ajoutée une estimation des impôts payés (notamment l'impôt sur les sociétés) et une évaluation du stock de capital (voir @sec-profits pour la méthode). En utilisant les données de stock de capital productif, le diagnostic présenté sur le @fig-psal est confirmé par le @fig-rp.
 
 Le choix du champ est assez important pour conserver une cohérence entre numérateur et le dénominateur. Pour le champ hors immobilier, le profit net et le stock de capital excluent toutes les activités immobilières parce que dans la plupart des pays (Allemagne, France, Italie) seule la branche immobilière détient des actifs de type logement ($N111N$ dans la nomenclature de la NACE rev. 2). Dans quelques pays, une part minoritaire de la valeur du stock de logements est détenue par d'autres branches (F, K, O, Q, R, S en Espagne (15%) ou en Belgique (0,5%); K au Pays-Bas (5%)) que la branche services immobiliers – ce qui suggère que la séparation branche/secteur a été interprétée assez librement d'un pays à l'autre.
 
@@ -448,7 +449,7 @@ Une explication possible de la dégradation du rendement du capital productif es
 
 Le recours à des prix de transfert et la localisation de certains actifs dans des pays européens à la fiscalité attractive pourrait donc être à l'origine d'une part des salaires élevée en France ou d'un rendement du capital productif faible[^3]. Cette évaporation n'implique pas nécessairement, mais ne l'exlue pas non plus, la dégradation de la productivité des facteurs par un retard technologique, une formation insuffisante de la main d'œuvre, un manque d'infrastructure ou une spécialisation sectorielle dégradée.
 
-[^3]: La localisation de la dette bancaire dans des filiales dans des pays qui dégrèvent la dette de la base fiscale impôt sur les sociétés peut modifier le bilan des entreprises mais ne joue pas, au contraire des prix de transfert, sur la valeur ajoutée résidente. En revanche, un phénomène similaire à l'évaporation de la valeur ajoutée peut passer par le secteur immobilier. Voir à ce sujet la section @sec-immobilier.
+[^3]: La localisation de la dette bancaire dans des filiales dans des pays qui dégrèvent la dette de la base fiscale impôt sur les sociétés peut modifier le bilan des entreprises mais ne joue pas, au contraire des prix de transfert, ni sur la valeur ajoutée résidente, ni sur le stock de capital productif (mais sur le bilan de l'entreprise filiale). Un phénomène similaire à l'évaporation de la valeur ajoutée vers un autre pays peut passer par le secteur immobilier (voir la @sec-immobilier).
 
 ```{r}
 #| label: fig-rp
@@ -696,7 +697,8 @@ naq <- source_data("R/vaq.r")$naa |>
     "<b>{lbl(geo)}</b>
     {year(time)} 
     {champs[champ]}
-    Rémunérations (y.c. les non salariés) dans la VAN : {round(psal*100,1)}%
+    Rémunérations (revenu mixte) dans la VAN : {round(psalh*100,1)}%
+    Rémunérations (effectifs) dans la VAN : {round(psal*100,1)}%
     Rémunérations (sans les non salariés) dans la VAN : {round(100*psalnc,1)}%")) |>
   mutate(geo = factor(geo, P6))
 
@@ -704,7 +706,7 @@ date <- sourcoise::sourcoise_meta("R/vaq.r")$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 annot <-  tribble(
-  ~time, ~psal, ~label, ~geo, ~champ,
+  ~time, ~psalh, ~label, ~geo, ~champ,
   "1996-01-01", .89, "Branches marchandes hors immobilier et finance", "DE", "mdhifi",
   "1996-01-01", .61, "Branches marchandes et non marchandes", "DE", "tb") |> 
   mutate(time = as.Date(time),
@@ -717,10 +719,10 @@ labels_champ = c(tb = "Ttes branches", md="Marchand",
 
 data <- naq |> 
   filter(champ %in% c("tb", "mdhi")) |> 
-  select(time, geo, champ, psal, psalnc) |> 
-  pivot_longer(c(psal, psalnc), names_to = "concept") |> 
+  select(time, geo, champ, psalh, psalnc) |> 
+  pivot_longer(c(psalh, psalnc), names_to = "concept") |> 
   mutate(
-    tooltip2 = ifelse(concept=="psal", 
+    tooltip2 = ifelse(concept=="psalh", 
                       "Part des salaires dans la VAN, non corrigée de la non salarisation",
                       "Part des salaires dans la VAN, corrigée de la non salarisation"))
 
@@ -735,19 +737,19 @@ psal <- ggplot(data) +
     labels = labels_champ,
     name = NULL) +
   scale_linewidth_manual(
-    values = c(psal=.5, psalnc=0.2),
-    labels = c(psal="Corrigé de la non salarisation", psalnc="Non corrigé"),
+    values = c(psalh=.5, psalnc=0.2),
+    labels = c(psalh="Correction revenu mixte", psalnc="Non corrigé"),
     name = NULL) +
   geom_ribbon(
     data = naq |> filter(champ %in%c("mdhi", "tb")),
-    aes(ymin = psalnc, ymax = psal, fill = geo, group = champ), 
+    aes(ymin = psalnc, ymax = psalh, fill = geo, group = champ), 
     color = NA, alpha=0.1, show.legend = FALSE) +
   geom_line_interactive( 
     aes(y=value, linetype = champ, linewidth = concept, alpha = champ,
         tooltip = tooltip2)) +
   geom_point_interactive(
     data = naq |> filter(champ == "mdhi"),
-    aes(y=psal, tooltip = tooltip, data_id = time, fill = geo),
+    aes(y=psalh, tooltip = tooltip, data_id = time, fill = geo),
     size = 1, stroke = 0.5, shape = 21, color = "white",
     hover_nearest = TRUE, show.legend=FALSE) +
   #  geom_marquee(
@@ -928,7 +930,7 @@ psal <- ggplot(data) +
 girafy(psal, 1.5)
 ```
 
-La correction est assez diférente pour la France et la Belgique, ce qui est conforme aux valeurs affichées dans le @tbl-mixte. La hausse de la part des salaires apparaît moins importante que pour la correction par les effectifs. Au lieu d'une hausse de 11,3 points de pourcentage (branches marchandes hors immobilier, de 1998 à 2024, pour la France), elle n'est que de de 5,7 points. La comparaison avec les autres pays est donc un peu moins brutale que pour la correction par les effectifs, l'Allemagne ayant en 2023 une part des salaires dans la valeur ajoutée plus proche de celle de la France en suivant la correction par le revenu mixte, qui réhausse la part des salaires en Allemagne (voir aussi le @tbl-mixte) – à la réserve près que la correction est moins précise pour l'Allemagne puisque nous n'avons pas les données de revenu mixte par branche (méthode hybride en répartissant le revenu mixte agrégé au prorata des effectifs), contrairement à la France.
+La correction est assez diférente pour la France et la Belgique, ce qui est conforme aux valeurs affichées dans le @tbl-mixte. La hausse de la part des salaires apparaît moins importante que pour la correction par les effectifs. Au lieu d'une hausse de 11,3 points de pourcentage (branches marchandes hors immobilier, de 1998 à 2024, pour la France), elle n'est que de de 5,7 points. La comparaison avec les autres pays est donc un peu moins brutale que pour la correction par les effectifs, l'Allemagne ayant en 2023 une part des salaires dans la valeur ajoutée plus proche de celle de la France en suivant la correction par le revenu mixte, qui réhausse la part des salaires en Allemagne (voir aussi le @tbl-mixte) – à la réserve près que la correction est moins précise pour l'Allemagne puisque nous n'avons pas les données de revenu mixte par branche (méthode hybride en répartissant le revenu mixte agrégé au prorata des effectifs de non salariés par branche), contrairement à la France.
 
 Cette correction respecte plus les données issues de la comptabilité nationale et est donc plus appropriée pour évaluer la part des revenus d'activité dans la valeur ajoutée. C'est la correction privilégiée dans ce document.
 
@@ -950,38 +952,38 @@ naq <- source_data("R/vaq.r")$naa |>
     "<b>{lbl(geo)}</b>
     {year(time)} 
     {champs[champ]}
-    Rémunérations (y.c. les non salariés) dans la VAN : {round(psal*100,1)}%
-    Rémunérations (sans les non salariés) dans la VAB : {round(100*psalb,1)}%")) |>
+    Rémunérations (y.c. les non salariés) dans la VAN : {round(psalh*100,1)}%
+    Rémunérations (sans les non salariés) dans la VAB : {round(100*psalhb,1)}%")) |>
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
 
 date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 data <- naq |>
-  select(geo, time, champ, psal, psalb) |> 
+  select(geo, time, champ, psalh, psalhb) |> 
   filter(champ %in% c("tb", "mdhi")) |> 
-  pivot_longer(c(psal, psalb), names_to = "concept") |> 
+  pivot_longer(c(psalh, psalhb), names_to = "concept") |> 
   mutate(
-    tooltip2 = glue("{ifelse(concept=='psal', 'VA nette', 'VA brute')}")
+    tooltip2 = glue("{ifelse(concept=='psalh', 'VA nette', 'VA brute')}")
   )
 
 psal <- ggplot() +
   aes(x=time,  col = geo) +
   scale_alpha_manual(
-    values = c(psalb=.25, psal = 1),
-    labels = c(psal="VA nette", psalb="VA brute"),
+    values = c(psalhb=.25, psalh = 1),
+    labels = c(psalh="VA nette", psalhb="VA brute"),
     name = NULL) +
   scale_linetype_manual(
     values = c(tb="11", mdhi ="solid"),
     labels = labels_champ,
     name = NULL) +
   scale_linewidth_manual(
-    values = c(psal=.5, psalb=.25),
-    labels = c(psal="VA nette", psalb="VA brute"),
+    values = c(psalh=.5, psalhb=.25),
+    labels = c(psalh="VA nette", psalhb="VA brute"),
     name = NULL) +
   geom_ribbon(
      data = naq |> filter(champ %in% c("tb", "mdhi")),
-     aes(ymin = psalb, ymax = psal, fill = geo, group = champ), 
+     aes(ymin = psalhb, ymax = psalh, fill = geo, group = champ), 
      color = NA, alpha=0.1, show.legend = FALSE) +
   geom_line_interactive( 
     data = data,
@@ -991,7 +993,7 @@ psal <- ggplot() +
         data_id = time)) +
    geom_point_interactive(
      data = naq |> filter(champ == "mdhi"),
-     aes(tooltip = tooltip, data_id = time, fill = geo, y=psal),
+     aes(tooltip = tooltip, data_id = time, fill = geo, y=psalh),
      size = 1, stroke = 0.5, shape = 21, color = "white",
      hover_nearest = TRUE) +
   ylab("% de la VA") + xlab(NULL) +
@@ -1008,12 +1010,12 @@ psal <- ggplot() +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, github.com/xtimbeau/travail/R/vaq.r.",
-    champ = "Branches marchandes et non marchandes (en léger et pointillé) et branches marchandes hors services immobiliers des ménages (-L68A) (en plein)")
+    champ = "Branches marchandes et non marchandes (en léger et pointillé) et branches marchandes hors services immobiliers des ménages (-L68A) (en plein), correction par le revenu mixte.")
 
 girafy(psal, 1.5)
 ```
 
-La notion de part des salaires dans la valeur ajoutée nette consiste à réduire le dénominateur (la valeur ajoutée) de la consommation de capital fixe. Cela augmente donc le ratio. Cependant, cette correction n'est pas constante dans le temps (comme en France, en Espagne ou en Belgique). Comme on peut le voir sur le @appfig-psalcompote, la variance entre les pays est plus basse pour la notion brute (non corrigé de la CCF) que nette. Pour les branches marchandes hors services immobiliers et services immobiliers, le classement entre pays est marginalement modifié, la Belgique ayant une part des salaires nette plus élevée que l'Allemagne, alors que sa part brute est plus faible qu'en Allemagne. Pour les autres pays, le classement est identique (La France a la part la plus haute et les Pays-Bas plus faible).
+La notion de part des salaires dans la valeur ajoutée nette consiste à réduire le dénominateur (la valeur ajoutée) de la consommation de capital fixe. Cela augmente donc le ratio. Cependant, cette correction n'est pas constante dans le temps (comme en France, en Espagne ou en Belgique). Comme on peut le voir en annexe C, la variance entre les pays est plus basse pour la notion brute (non corrigé de la CCF) que nette. Pour les branches marchandes hors services immobiliers et services immobiliers, le classement entre pays est marginalement modifié, la Belgique ayant une part des salaires nette plus élevée que l'Allemagne, alors que sa part brute est plus faible qu'en Allemagne. Pour les autres pays, le classement est identique (La France a la part la plus haute et les Pays-Bas plus faible).
 
 La mesure de la consommation de capital fixe n'est pas mise en avant par les comptables nationaux par crainte d'une mesure imprécise, bien qu'elle soit publiée. Les conventions comptables sont assez disparates d'un pays à l'autre, rendant la comparaison directe sans doute fragile.
 
@@ -1093,7 +1095,7 @@ gd <- ggplot(decomp) +
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, github.com/xtimbeau/travail/R/vaq.r.",
  note = "Le trait pointillé indique la part des salaires dans la VA si la structure de branche était la même qu'en 1995.",
- champ = "Branches marchandes hors services immobiliers des ménages (L68A)")
+ champ = "Branches marchandes hors services immobiliers des ménages (L68A), correction par les effectifs.")
 
 girafy(gd,1.5)
 
@@ -1736,7 +1738,7 @@ data |>
   relocate(geo, lbl_geo, L, LmLl, Ll, Lli) |>
   arrange(geo) |> 
   gt() |> 
-  tab_spanner(label = "Part dans la VAB marchande en 2024 des",
+  tab_spanner(label = "Part dans la VAB marchande en 2024 des branches",
               columns = c(L, LmLl, Ll, Lli)) |>
   cols_label(geo="", lbl_geo="", 
              L="services immobiliers",
@@ -1904,12 +1906,16 @@ date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 ::: {#apptbl-data_trim}
 ```{r}
 
-doms$snq |>
-  rename(debq = deb, finq = fin) |>
+doms$snq_b1g |>
+  rename(debb1gq = deb, finb1gq = fin) |>
+  left_join(doms$snq_d1, by = "geo") |> 
+  rename(debd1q = deb, find1q = fin) |> 
   left_join(emp_dom, by = "geo") |> 
   rename(debs = deb, fins = fin) |> 
   left_join(doms$sna, by="geo") |> 
   rename(deba = deb, fina = fin) |> 
+  left_join(doms$b3g, by="geo") |> 
+  rename(debb3g = deb, finb3g = fin) |> 
   left_join(doms$l68a, by = "geo") |> 
   rename(debl = deb, finl = fin) |> 
   left_join(assets_dom, by = "geo") |> 
@@ -1921,9 +1927,11 @@ doms$snq |>
   relocate(geo, geo_lbl) |> 
   gt() |> 
   fmt_flag(geo) |> 
-  tab_spanner(label = md("**B1G, D1**<br>trim., niveau 1<br>namq_10_a10"), columns = c(debq, finq)) |> 
+  tab_spanner(label = md("**B1G**<br>trim., niveau 1<br>namq_10_a10"), columns = c(debb1gq, finb1gq)) |> 
+  tab_spanner(label = md("**D1**<br>trim., niveau 1<br>namq_10_a10"), columns = c(debd1q, find1q)) |> 
   tab_spanner(label = md("**SAL, NSAL**<br>an., niveau 2<br>nama_10_a64_e"), columns = c(debs, fins)) |> 
   tab_spanner(label = md("**P51C, D29x39, D51**<br>an., niveau 1<br>nama_10_a64"), columns = c(deba, fina)) |> 
+  tab_spanner(label = md("**B3G**<br>an., niveau 0<br>nasa_10_nf_tr"), columns = c(debb3g, finb3g)) |> 
   tab_spanner(label = md("**L68A**<br>an., niveau 2<br>nama_10_a64"), columns = c(debl, finl)) |> 
   tab_spanner(label = md("**N11N**<br>an., niveau 2<br>nama_10_nfa_st"), columns = c(debk, fink)) |> 
   cols_label(geo="", geo_lbl = "") |> 

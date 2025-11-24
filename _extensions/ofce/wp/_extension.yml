@@ -84,6 +84,7 @@ contributes:
       lightbox: true
       title-block-style: default
       template-partials:
+        - html_template/styles.html
         - html_template/title-block.html
         - html_template/title-metadata.html
         - html_template/toc.html

@@ -33,6 +33,12 @@ mixte_a <- "nasa_10_nf_tr" |>
   transmute(geo, time, b3g=values, year=year(time)) |>
   drop_na()
 
+mdom <- mixte_a |>
+  group_by(geo) |>
+  drop_na() |>
+  summarize(deb=year(min(time)), fin=year(max(time)))
+
+
 naq10_e <- source_data("naq10_e.R")$naa_e |>
   select(geo, time, nace_r2, sal = SAL_DC, self = SELF_DC) |>
   mutate(year = year(time))
@@ -70,4 +76,4 @@ nsalw <- "ilc_di05" |>
   drop_na() |>
   mutate(w = NSAL/SAL)
 
-return(list(q = mixte_q, a = mixte_a, h = mixte_h, ah = mixte_ah, ilc = nsalw))
+return(list(q = mixte_q, a = mixte_a, h = mixte_h, ah = mixte_ah, ilc = nsalw, dom = mdom))

@@ -4730,7 +4730,7 @@
       "RemoteUsername": "ofce",
       "RemoteRepo": "ofce",
       "RemoteRef": "master",
-      "RemoteSha": "b1c69ad7e8a1f00b08b4baf0e688c797ebffe1f0",
+      "RemoteSha": "0f0c3c70ece4381808c4d987fff08009c767e326",
       "Remotes": "sourcoise=github::xtimbeau/sourcoise"
     },
     "officer": {

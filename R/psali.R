@@ -1,6 +1,4 @@
-library(tidyverse)
-library(ofce)
-library(ggiraph)
+ofce::init_qmd()
 
 snfia <- source_data("snf_international.r") |>
   pluck("snfia") |>
@@ -31,7 +29,7 @@ psali <- ggplot(snfia) +
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl_eurostat) +
   scale_ofce_date(
-    labels = date1d
+    labels = date1
   ) +
   scale_y_continuous(labels = scales::label_percent(1), limits = c(NA, 1)) +
   scale_color_pays(format = "eurostat") +

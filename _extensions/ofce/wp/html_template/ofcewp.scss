@@ -248,11 +248,16 @@ div.callout-tip div.callout-header {
   text-align: center;
   margin-top: 6px;
   margin-bottom: 6px;
+  padding: 4px 8px 4px 8px;
 }
 
 .dbtn:hover {
-  background-color: rgba($link-color, 0.5);
+  background-color: rgba($link-color, 0.95);
   color: white;
+  border-color: $link-color;
+  border-width: 1px;
+  border-style: solid;
+
 }
 
 .control-label {
@@ -289,9 +294,17 @@ div.callout-tip div.callout-header {
 .nav-pills .nav-link:hover {
   border: none;
   text-decoration: underline;
-  text-decoration-thickness: 10%;
+  text-decoration-thickness: 1px;
   text-decoration-color: $lightgrey;
 }
+
+.nav-pills .nav-link.active:hover {
+  border: none;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: $scpored;
+}
+
 .quarto-figure {
     position: relative;
     margin-bottom: Oem

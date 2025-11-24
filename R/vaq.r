@@ -67,9 +67,14 @@ naq_a10 <- "namq_10_a10" |>
               names_from =  na_item, values_from = c(values, s_adj)) |>
   rename_with(~str_remove(.x, "values_"))
 
-sna_q10_dom <- naq_a10 |>
+sna_b1g_dom <- naq_a10 |>
   group_by(geo) |>
-  drop_na() |>
+  drop_na(B1G) |>
+  summarize(deb=date_trim(min(time)), fin=date_trim(max(time)), .groups = "drop")
+
+sna_d1_dom <- naq_a10 |>
+  group_by(geo) |>
+  drop_na(D1) |>
   summarize(deb=date_trim(min(time)), fin=date_trim(max(time)), .groups = "drop")
 
 naq_a10 <- naq_a10 |>
@@ -174,6 +179,7 @@ mixte_fr <- source_data("france-melodi.r")$aggr |>
          b3n = b3n/4)
 
 mixte_h <- source_data("mixte.r")$h
+b3g_dom <- source_data("mixte.r")$dom
 
 naq <- naq_a10 |>
   left_join(mixte_h, by = c("time", "geo", "nace_r2")) |>
@@ -351,4 +357,5 @@ naa_ext2 <- naa_ext |>
   mutate(geo = factor(geo, pays))
 
 return(list(naa = naa_ext, naaa = naa_ext2, naq_a10 = naq_a10,
-            dom = list(emp = emp_dom, snq = sna_q10_dom, sna = sna_a64_dom, l68a = L68A_dom)))
+            dom = list(emp = emp_dom, snq_b1g = sna_b1g_dom,
+                       snq_d1 = sna_d1_dom, sna = sna_a64_dom, l68a = L68A_dom, b3g = b3g_dom)))
