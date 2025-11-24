@@ -1,0 +1,85 @@
+---
+title: "Une part des salaires dans la VA élévée en 2025 en France"
+author:
+  - name: "Xavier Timbeau" 
+    email: "xavier.timbeau@sciencespo.fr"
+    affiliation: OFCE, Sciences Po Paris
+    affiliation-url: "http://www.ofce.fr"
+    orcid: "0000-0002-6198-5953"
+editor: visual
+date: "2025-11-24"
+date-format: "D MMMM YYYY"
+date-modified: now
+bibliography: references.bib
+format:
+  blog-html: default
+---
+
+```{r, include=FALSE}
+ofce::init_qmd()
+```
+
+
+Après @cotis2009, la part des salaires dans la valeur ajoutée est réputée stable depuis 1980. Les évaluations récentes de @cette2019 et @tresor2025 semblent confirmer ce diagnostic. 
+
+```{r}
+#| label: fig-psal
+#| fig-asp: 0.85
+#| fig-cap: Part des salaires dans la VA
+
+naq <- vroom::vroom("lsh.csv") |> 
+  mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
+date <- "2025-11-24"
+
+psal <- ggplot(naq |> filter(champ == "mdhi")) +
+  aes(x=time, y=psalh, col = geo, group = geo) +
+  geom_line(color = "grey80", layout = "fixed", linewidth = 0.2) +
+  geom_line(
+    linewidth = 0.5) +
+  geom_point_interactive(
+    aes(tooltip = tooltip, data_id = time, fill = geo),
+    size = 1, stroke = 0.5, shape = 21, color = "white",
+    hover_nearest = TRUE, show.legend=FALSE) +
+  ylab("% de la VA") + xlab(NULL) +
+  facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
+  scale_ofce_date(
+    labels = date1) +
+  guides( fill = "none", color = "none",
+          linetype = guide_legend(nrow = 1),
+          alpha = guide_legend(nrow = 1)) + 
+  scale_y_continuous(
+    labels = scales::label_percent(1), 
+    breaks = scales::pretty_breaks(5)) +
+  scale_color_pays(format = "eurostat") +
+  ofce_caption(
+    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
+ comptes nationaux trimestriels (namq_10_a10), INSEE comptes de branches (DD-CNA-BRANCHES) téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
+    champ = "Branches marchandes hoirs services immobiliers (-L), correction par le revenu mixte hybride (sauf pour la France, revenu mixte exact).",
+    note = "Part des salaires corrigés par le revenu mixte des non salariés dans la valeur ajoutée nette de la CCF. 2025 est une extrapolation sur la base d'une information partielle jusqu'au T3 ou T2 de 2025. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") 
+
+girafy(psal, r = 1.5)
+```
+
+```{r, results="asis"}
+margin_download(naq |> select(-tooltip))
+```
+
+Nous contredisons ce diagnostic, comme l'indique le @fig-psal, en appliquant une méthode de calcul différente qui nous paraît plus justifiée. Nous obtenons en effet que :
+
+-   la part des salaires dans la valeur ajoutée est croissante en France, au moins depuis 1995 (depuis 1989 exactement voir le [document de travail de l'OFCE 2025-23](https://xtimbeau.github.io/travail/#annexe-e-part-des-salaires-dans-la-va-base-2020-et-2014-depuis-1949))
+
+-   la part des salaires en France est plus haute que dans les 5 autres grands pays de la zone Euro depuis la crise financière de 2008.
+
+Le partage de la valeur ajoutée synthétise en une information la situation du tissu productif. Il indique les possibilités d'accroissement des salaires et les possibilités futures d'investissement. Malgré presque 20 années de politique de l'offre --- du choc fiscal de Nicolas Sarkozy à la politique de l'offre d'Emmanuel Macron, en passant par le pacte de responsabilité de François Hollande ---, la France semble être particulièrement contrainte. Dans le [document de travail de l'OFCE 2025-23](https://xtimbeau.github.io/travail/#sec-immobilier) nous signalons qu'outre les explications habituelles d'une part des salaires dans la valeur ajoutée l'évaporation de la valeur ajoutée par l'optimisation fiscale à l'intérieur de l'Union Européenne pourrait expliquer ce haut niveau de salaires dans la valeur ajoutée nette. @tørsløv2022, par une autre approche, documentent ce canal. 
+
+La méthode que nous avons employée pour construire l'indicateur du @fig-psal différe des approches antérieures en ce que : 
+
+-    les salaires (chargés, incluant primes, bonus et intéressement) sont divisée par la **valeur ajoutée nette** et non brute comme dans la plupart des autres analyses. La valeur ajoutée nette est calculée en traitant la consommation de capital fixe (CCF, c'est-à-dire l'usure du capital productif au cours du processus de production) comme une consommation intermédiaire. Cela permet une meilleure comparabilité entre pays et dasn le temps. D'une part, les comptables nationaux peuvent traiter certaines dépenses comme des consommations intermédiaires ou de l'investissement --- c'est le cas pour les logiciels produits pour compte propre. D'autre part, des structures productives différentes ou qui évoluent dans le temps peuven tse traduire par un capital productif agrégé de nature différente dans le temps ou l'espace. La prise en compte de la CCF permet de corriger les convention spécifiques ou les différences de structure, du moins tant qu'elle est correctement évaluée. L'objectif est d'analyser le conflit (éventuel) de répartition et ne pas enlever la consommation de capital fixe de la valeur ajoutée biaiserait fortement l'analyse en réduisant la part des salaries artificiellement. Voir le [document de travail de l'OFCE 2025-03](https://xtimbeau.github.io/travail/#valeur-ajout%C3%A9e-nette-ou-brute) pour plus de détails.
+
+-    les salaires (chargés, incluant primes, bonus et intéressement) sont augmentés d'une rémunération équivalente imputée aux non salariés. Les non salariés (ou aussi appelés indépendants, ou entrepreneurs individuels) sont des travailleurs comme les autres, dont le rapport contractuels à leurs clients est de nature différente de celui des salariés. On augmente la masse salariale de leur rémunération d'activité parce que le nombre des non salariés évolue fortement dans le temps et dans l'espace. Alors que les autres analyses imputent généralement aux non salariés un salaire équivalent à celui des salariés (souvent de la même branche, à des niveaux de désagrégation plus ou moins fins) nous utilisons les données de **revenu mixte** (net de la CCF), c'est à dire le revenu des Entrepreneurs Inidviduels tel qu'il est compilé par les comptables nationaux. En effet, l'impuation au salaire équivalent conduit dans certains pays à imputer une masse salariale aux non salariés supérieure à leur revenu mixte. De plus, en France au moins, les données de revenu mixte sont disponibles par branche. Nous utilisons une méthode hybride (au prorata des effectifs non salariés de chaque branche) pour les autres pays. Cete méthode permet de prendre la mesure de l'impact des plateformes (l'*ubérisation*) sur le revenu des indépendants. Voir le [document de travail de l'OFCE 2025-03](https://xtimbeau.github.io/travail/#salari%C3%A9s-et-non-salari%C3%A9s) pour plus de détails.
+
+-    on se limte au champ des **branches marchandes hors services immobiliers**. Ce champ évite en effet de devoir intégrer dans le calcul de l'indicateur d'une part le partage de la valeur ajoutée dans les branches non marchandes où il est en grande partie conventionnel, puisque la valeur ajoutée est évaluée par les coûts en salaire et en capital. D'autre part, on exclu les acttivités de services immobiliers qui intègrent les services résidentiels aux ménages qui résultent plus de la formation des loyers (rente spatiale, pouvoir de négociation des propriétaires) et d'une convention pour l'évaluation du service de logment auto produit par les propriétaires occupants pour eux-même (la méthode est une imputation d'un loyer équivalent à celui qui prévaut sur le marché de la location, avec les difficultés que l'on imagine et des variations sensibles d'un pays à l'autre). Les loyers implictes représentent en france 18% de la valeur ajoutée marchande ; puisque l'objectif est d'analyser le conflit de répartition entre capitalistes et travailleurs, il serait problématique de le polluer avec les loyers. Voir  le [document de travail de l'OFCE 2025-03](https://xtimbeau.github.io/travail/#annexe-c-diff%C3%A9rents-concepts-et-champs-de-part-des-salaires) pour plus de détails sur l'impact du champ retenu sur l'évaluation de l'indicateur.
+
+Ces trois principales différences dans le calcul de l'indicateur expliquent la différence avec les évaluations antérieures et les autres aspects méthodologiques sont discutés en détail dans le [document de travail de l'OFCE 2025-03](https://xtimbeau.github.io/travail). {{< fa square >}}
+
+

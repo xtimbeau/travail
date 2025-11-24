@@ -4246,8 +4246,8 @@
     },
     "lobstr": {
       "Package": "lobstr",
-      "Version": "1.1.3",
-      "Source": "Repository",
+      "Version": "1.1.3.9000",
+      "Source": "GitHub",
       "Title": "Visualize R Data Structures with Trees",
       "Authors@R": "c( person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = c(\"aut\", \"cre\")), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")) )",
       "Description": "A set of tools for inspecting and understanding R data structures inspired by str(). Includes ast() for visualizing abstract syntax trees, ref() for showing shared references, cst() for showing call stack trees, and obj_size() for computing object sizes.",
@@ -4275,12 +4275,17 @@
       "Config/Needs/website": "tidyverse/tidytemplate",
       "Config/testthat/edition": "3",
       "Encoding": "UTF-8",
+      "Roxygen": "list(markdown = TRUE)",
       "RoxygenNote": "7.3.3",
       "Config/build/compilation-database": "true",
-      "NeedsCompilation": "yes",
       "Author": "Hadley Wickham [aut, cre], Posit Software, PBC [cph, fnd]",
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
-      "Repository": "CRAN"
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "r-lib",
+      "RemoteRepo": "lobstr",
+      "RemoteRef": "main",
+      "RemoteSha": "c41e5d9a78f9aac40118897cc03a1f1f1305c46c"
     },
     "logger": {
       "Package": "logger",
@@ -4660,7 +4665,7 @@
     },
     "ofce": {
       "Package": "ofce",
-      "Version": "1.3.24",
+      "Version": "1.3.25",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "Documents scientifiques aux normes OFCE",
@@ -4730,7 +4735,7 @@
       "RemoteUsername": "ofce",
       "RemoteRepo": "ofce",
       "RemoteRef": "master",
-      "RemoteSha": "0f0c3c70ece4381808c4d987fff08009c767e326",
+      "RemoteSha": "2aa963c3896c72765daa7d5c640684527d1924e9",
       "Remotes": "sourcoise=github::xtimbeau/sourcoise"
     },
     "officer": {
@@ -6550,7 +6555,7 @@
     },
     "sourcoise": {
       "Package": "sourcoise",
-      "Version": "0.6.2",
+      "Version": "0.6.2.9000",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "Source a Script and Cache",
@@ -6602,7 +6607,7 @@
       "RemoteUsername": "xtimbeau",
       "RemoteRepo": "sourcoise",
       "RemoteRef": "main",
-      "RemoteSha": "002b75efc6a6dba5d93af60c96d8ad3156217aa7"
+      "RemoteSha": "e8fbc8c894b363593d8e2c3f3c493bbfe9009d5e"
     },
     "spacesXYZ": {
       "Package": "spacesXYZ",
