@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://xtimbeau.github.io/travail/index.html</loc>
-    <lastmod>2025-11-24T11:30:42.025Z</lastmod>
+    <loc>https://xtimbeau.github.io/travail/blog.html</loc>
+    <lastmod>2025-11-24T15:49:49.211Z</lastmod>
+  </url>
+  <url>
+    <loc>https://xtimbeau.github.io/travail/NEWS.html</loc>
+    <lastmod>2025-11-22T22:30:48.609Z</lastmod>
   </url>
   <url>
     <loc>https://xtimbeau.github.io/travail/seminaire_lunch_OFCE.html</loc>
     <lastmod>2025-11-17T09:58:51.251Z</lastmod>
   </url>
   <url>
-    <loc>https://xtimbeau.github.io/travail/NEWS.html</loc>
-    <lastmod>2025-11-22T22:30:48.609Z</lastmod>
+    <loc>https://xtimbeau.github.io/travail/index.html</loc>
+    <lastmod>2025-11-25T13:24:26.447Z</lastmod>
   </url>
 </urlset>
