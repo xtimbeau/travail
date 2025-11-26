@@ -4,6 +4,9 @@ execute:
   freeze: auto
 website:
   other-links:
+     - text: Annexes
+       icon: file-bar-graph
+       href: annexes.html
      - text: Historique des changements
        icon: newspaper
        href: NEWS.html
@@ -29,6 +32,16 @@ website:
     logo: www/ofce_m.png
     logo-alt: "OFCE"
     logo-href: "https://www.ofce.fr/"
+    left:
+      - text: "wp 2025-23"
+        icon: house
+        href: index.html
+      - text: "Annexes"
+        icon: file-bar-graph
+        href: annexes.html
+      - text: Historique
+        icon: newspaper
+        href: NEWS.html
     right:
       - text: " "
         icon: person-circle
@@ -36,7 +49,6 @@ website:
       - text: " "
         icon: github
         href: https://github.com/xtimbeau/travail
-
 comments:
   hypothesis: true
 format:
@@ -44,3 +56,13 @@ format:
     link-external-icon: true
     smooth-scroll: true
 
+language:
+  fr:
+    other-links-title: "Autres contenus"
+
+author:
+  - name: "Xavier Timbeau"
+    email: "xavier.timbeau@sciencespo.fr"
+    affiliation: OFCE, Sciences Po Paris
+    affiliation-url: "http://www.ofce.fr"
+    orcid: "0000-0002-6198-5953"

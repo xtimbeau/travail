@@ -37,9 +37,18 @@ h6,
   color: $darkgrey;
 }
 
+#toc-title.h2 {
+  font-size: 0.8rem !important;
+}
+
 .navbar {
   background-color: $white;
 
+}
+
+.sidebar-logo {
+  height: 24px;
+  display:  inline;
 }
 
 main {
@@ -178,11 +187,12 @@ h5 {
 .figure-caption,
 .subfigure-caption,
 .table-caption,
-figcaption.quarto-float-caption,
-caption {
+figcaption.quarto-float-caption,caption  {
   color: $darkgrey !important;
   text-align: start !important;
   font-size: 1rem !important;
+font-weight: 600 !important;
+  margin-bottom: 6px;
 }
 
 .csl-entry {
@@ -287,4 +297,8 @@ div.callout-tip div.callout-header {
 .callout.callout-titled .callout-body>div>:last-child:not(.sourceCode) {
   padding-bottom: 0;
   margin-bottom: 0
+}
+
+.details-box {
+  margin-bottom: 3px;
 }

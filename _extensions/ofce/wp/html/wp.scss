@@ -49,6 +49,11 @@ h3,.h3,h4,.h4 {
   font-size: 0.8rem !important;
 }
 
+.sidebar-logo {
+  height: 24px;
+  display:  inline;
+}
+
 main {
   margin-top: .25em;
   margin-bottom: .25em
@@ -63,8 +68,9 @@ main {
   margin-left: -1px !important;
   padding-left: 12px !important;
   margin-right: 12px !important;
+  padding-bottom: 0px !important;
   margin-top: 6px !important;
-  margin-bottom: 3em !important;
+  margin-bottom: 1.5em !important;
   border-left-color: $scpored !important;
   border-left-width: 1px !important;
   border-left-style: solid !important;
@@ -72,6 +78,10 @@ main {
 
 main.content>p:has(+section) {
     margin-bottom: 0.5rem
+}
+
+main.content>section:first-of-type>h2:nth-child(1),main.content>section:first-of-type>.h2:nth-child(1) {
+    margin-top: 0.5em
 }
 
 .sidebar {
@@ -121,6 +131,10 @@ tfoot.gt_footnotes {
 
 .wp {
   font-size: 0.875em !important;
+}
+
+.wp:hover {
+  color: $link-color;
 }
 
 .quarto-title-meta-author, .quarto-title-meta, .keywords {
@@ -326,4 +340,8 @@ div.callout-tip div.callout-header {
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-decoration-color: $scpored;
+}
+
+.details-box {
+  margin-bottom: 3px;
 }
