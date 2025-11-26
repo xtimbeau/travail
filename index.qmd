@@ -1,5 +1,5 @@
 ---
-title: "Une part des salaires dans la VA élévée en 2025 en France"
+title: "Une part des salaires dans la VA élevée en 2025 en France"
 subtitle: "Comparaisons internationales de 30 ans de partage de la valeur ajoutée"
 author:
   - name: "Xavier Timbeau" 
@@ -19,7 +19,7 @@ message: false
 warning: false
 keep-md: false
 freeze: false
-abstract: "On explore différentes façons de calculer la notion de part des salaires dans la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation par le revenu mixte* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers*. Il peut être calculé pour les pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et s'est accrue de façon importante. Bien que plus fragile empiriquement, le calcul de rendement net d'impôts du capital productif confirme ce diagnostic particulièrement préoccupant pour le tissu productif français. Outre les explications habituelles de la hausse de la part des salaries dans la vakeur ajoutée, nous explorons l'évaporation de la valeur ajoutée par l'optimisation fiscale. L'ensemble des éléments présentés est reproductible à partir des codes fournis sur le dépôt associé."
+abstract: "On explore différentes façons de calculer la notion de part des salaires dans la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation par le revenu mixte* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers*. Il peut être calculé pour les pays européens. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et s'est accrue de façon importante. Bien que plus fragile empiriquement, le calcul de rendement net d'impôts du capital productif confirme ce diagnostic particulièrement préoccupant pour le tissu productif français. Outre les explications habituelles de la hausse de la part des salaries dans la valeur ajoutée, nous explorons l'évaporation de la valeur ajoutée par l'optimisation fiscale. L'ensemble des éléments présentés est reproductible à partir des codes fournis sur le dépôt associé."
 citation:
   type: article-journal
   container-title: "Document de travail de l'OFCE"
@@ -80,7 +80,7 @@ Il apparaît que la part des salaires dans la valeur ajoutée en France est croi
 champs  <- c("md" = "Branches marchandes", 
              "mdhifi" = "Branches marchandes hors services immobilier et financiers (-KLOPQ)",
             "mdhi"= "Branches marchandes hors services immobiliers (-LOPQ)", 
-            "mdhim"= "Branches marchandes hors imm. des ménages (-L68AOPQ)", 
+            "mdhim"= "Branches marchandes hors imm. des ménages (-LmOPQ)", 
             "mdhfi"= "Branches marchandes hors services financiers (-KOPQ)", 
             "tb" = "Toutes branches (marchandes et non marchandes)")
 
@@ -104,15 +104,15 @@ date <- sourcoise::sourcoise_meta("R/vaq.r")$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 labels_champ = c(tb = "Ttes branches", md="Marchand", mdhifi = "Marchand hors imm.&fin.",
-                 mdhim = "Marchand hors L68A (ménages)",
+                 mdhim = "Marchand hors Lm",
                  mdhi = "Marchand hors imm.")
 
 vroom::vroom_write(naq, file = "lsh.csv")
 
 psal <- imap(
   c("Marchand" = "md",
-    "Hors services immobiliers (-L)" = "mdhi", 
-    "Hors loyers imputés (-L68A)" = "mdhim"),
+    "Hors immo. (-L)" = "mdhi", 
+    "Hors immo. ménages (-Lm)" = "mdhim"),
   ~ggplot(naq |> filter(champ == .x)) +
     aes(x=time, y=psalh, col = geo, group = geo) +
     geom_line(color = "grey80", layout = "fixed", linewidth = 0.2) +
@@ -176,7 +176,7 @@ La valeur ajoutée est donc aux prix de base, c'est-à-dire net des impôts et s
 [^2]: @cette2019 utilisent une définition plus large des branches non marchande en incluant les branches R, T et U.
 
 $$
-s  = \frac{ \sum\limits_{b\in{-LOPQ}} D1_b*(1+ns_b/sal_b) } {\sum\limits_{b\in{-LOPQ}} B1G_b - P51C_b - (D29_b-D39_b)}
+s  = \frac{ \sum\limits_{b \neq LOPQ} D1_b*(1+ns_b/sal_b) } {\sum\limits_{b \neq LOPQ} B1G_b - P51C_b - (D29_b-D39_b)}
 $$
 
 Cette définition de la valeur ajoutée, au prix de marché, après impôt et suventions et de la consommation de capital fixe, permet d'analyser le partage entre salariés d'un côté et propriétaires ou financeurs des entreprises, puisque la somme de la part des salaires et de la part des profits nets est égal à 1. D'un côté du partage, on trouve les salariés et les non salariés, une catégorie hétérogène mais dont on retient le trait principal de tirer son revenu de son travail, par différentes formes de contrats, et de l'autre ceux qui financent l'entreprise, c'est-à-dire à la fois les banques, les marchés financiers pour le financement non bacnaire et les actionnaires. Il est possible de faire la distinction entre actionnaires et autres financeurs (à travers la dette nette des entreprises et les inétrêts nets versés), mais cette distinction n'est pas robuste pour les branches et est factice (par exemple, le *private equity* rend difficile l'imputation de la dette).
@@ -464,7 +464,7 @@ date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 tpbranches <- imap( 
   c("Marchand" = "md",
     "Hors services immobiliers (-L)" = "mdhi", 
-    "Hors loyers imputés (-L68A)" = "mdhim") , ~{
+    "Hors immo. ménages (-Lm)" = "mdhim") , ~{
       data <-  data4tp |> 
         filter(champ == .x) |> 
         mutate(tooltip = glue(
@@ -515,7 +515,7 @@ tpbranches <- imap(
         ofce_caption(
           source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e); actifs productifs (nama_10_nfa_st); INSEE, comptes de branches (DD_CNA_BRANCHES), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
           champ = "{champs[.x]}, correction par le revenu mixte (hybride sauf France).",
-          note = "L'impôt sur les sociétés (D51, IS) des sociétés financières (S12) est affecté à la branche K et celui des sociétés non financières (S11) aux branches marchandes hors services financiers et immobilier des ménages (K+L68A). Le trait pointillé est le rendement après IS et le trait plein avant IS. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") +
+          note = "L'impôt sur les sociétés (D51, IS) des sociétés financières (S12) est affecté à la branche K et celui des sociétés non financières (S11) aux branches marchandes hors services financiers et immobilier des ménages (K+Lm). Le trait pointillé est le rendement après IS et le trait plein avant IS. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") +
         theme(legend.box.spacing = unit(1, "pt"))
       }) 
 
@@ -1012,7 +1012,7 @@ psal <- ggplot() +
   ofce_caption(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, github.com/xtimbeau/travail/R/vaq.r.",
-    champ = "Branches marchandes et non marchandes (en léger et pointillé) et branches marchandes hors services immobiliers des ménages (-L68A) (en plein), correction par le revenu mixte.")
+    champ = "Branches marchandes et non marchandes (en léger et pointillé) et branches marchandes hors services immobiliers des ménages (-Lm) (en plein), correction par le revenu mixte.")
 
 girafy(psal, 1.5)
 ```
@@ -1044,7 +1044,7 @@ L'année 1995 est l'année de référence et le premier terme (de droite) s'inte
 
 Il existe quelques exceptions à cette règle générale. A structure de branche inchangée, avec comme année de référence 1995, la part des salaires serait plus basse de 3,5 points de VA pour les Pays-Bas en 2025. En Allemagne ou en Belgique, le changement de structure des branches explique un petit peu de l'évolution à la hausse.
 
-En revanche, la part des salaires serait légèrement supérieure en Italie à structure inchangée. Le pic de valeur ajoutée en 2013 est lié entièrement à la structure par branche, ce qui laisse supposer une rupture de série dans les comptes de branche.
+En revanche, la part des salaires serait légèrement supérieure en Italie à structure inchangée. Le pic de valeur ajoutée en 2013 est lié entièrement à la structure par branche, ce qui laisse supposer une rupture de série dans les comptes de branche en Italie.
 
 ```{r}
 #| label: fig-structbranche
@@ -1097,7 +1097,7 @@ gd <- ggplot(decomp) +
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, github.com/xtimbeau/travail/R/vaq.r.",
  note = "Le trait pointillé indique la part des salaires dans la VA si la structure de branche était la même qu'en 1995.",
- champ = "Branches marchandes hors services immobiliers des ménages (L68A), correction par les effectifs.")
+ champ = "Branches marchandes hors services immobiliers des ménages (Lm), correction par les effectifs.")
 
 girafy(gd,1.5)
 
@@ -1105,7 +1105,7 @@ girafy(gd,1.5)
 
 ### Profits nets dans les comptes de branche {#sec-profits}
 
-En utilisant d'une part la valeur ajoutée des branches marchandes hors services immobiliers produits par les ménages et la valeur des actifs productifs issue de la base des stocks de capital productif ([nama_10_nfa_st](https://ec.europa.eu/eurostat/databrowser/view/NAMA_10_NFA_ST__custom_2046386/default/table?lang=en)) sur le même champ (*i.e.* en enlevant la sous branche L68A), on peut estimer un rendement du capital productif.
+En utilisant d'une part la valeur ajoutée des branches marchandes hors services immobiliers produits par les ménages et la valeur des actifs productifs issue de la base des stocks de capital productif ([nama_10_nfa_st](https://ec.europa.eu/eurostat/databrowser/view/NAMA_10_NFA_ST__custom_2046386/default/table?lang=en)) sur le même champ (*i.e.* en enlevant la sous branche Lm), on peut estimer un rendement du capital productif.
 
 ```{r, results="asis"}
 #| label: fig-tprofitbranches
@@ -1934,7 +1934,7 @@ doms$snq_b1g |>
   tab_spanner(label = md("**SAL, NSAL**<br>an., niveau 2<br>nama_10_a64_e"), columns = c(debs, fins)) |> 
   tab_spanner(label = md("**P51C, D29x39, D51**<br>an., niveau 1<br>nama_10_a64"), columns = c(deba, fina)) |> 
   tab_spanner(label = md("**B3G**<br>an., niveau 0<br>nasa_10_nf_tr"), columns = c(debb3g, finb3g)) |> 
-  tab_spanner(label = md("**L68A**<br>an., niveau 2<br>nama_10_a64"), columns = c(debl, finl)) |> 
+  tab_spanner(label = md("**Lm**<br>an., niveau 2<br>nama_10_a64"), columns = c(debl, finl)) |> 
   tab_spanner(label = md("**N11N**<br>an., niveau 2<br>nama_10_nfa_st"), columns = c(debk, fink)) |> 
   cols_label(geo="", geo_lbl = "") |> 
   cols_label_with(
@@ -1978,7 +1978,7 @@ date <- sourcoise::sourcoise_meta("R/vaq.r")$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 labels_champ = c(tb = "Ttes branches", md="Marchand", mdhifi = "Marchand-LK",
-                 mdhim = "Marchand-L68A",
+                 mdhim = "Marchand-Lm",
                  mdhi = "Marchand-L")
 ilc <- set_names(names(labels_champ), labels_champ)
 

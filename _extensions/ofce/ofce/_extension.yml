@@ -1,6 +1,6 @@
 title: Format html OFCE
 author: Anissa Saumtally et Xavier Timbeau
-version: 0.2.0
+version: 0.2.3
 quarto-required: ">=1.8.26"
 contributes:
   formats:
@@ -51,6 +51,7 @@ contributes:
         chapters: false
       logo: ofce.png
       filters:
+        - wordcount
         - nameref
         - fr-nbsp
        # - custom-numbered-blocks
@@ -83,6 +84,8 @@ contributes:
       callout-icon: false
       lightbox: true
       title-block-style: default
+      template-partials:
+        - title-metadata.html
     pdf:
       documentclass: scrartcl
       toc-depth: 1
@@ -102,8 +105,8 @@ contributes:
       logo: ofce_m.png
       logo2: sciencespo.png
       template-partials:
-        - pdf_template/title.tex
-        - pdf_template/before-body.tex
+        - pdf/title.tex
+        - pdf/before-body.tex
     dashboard:
       theme:
         - cosmo
