@@ -15,9 +15,13 @@ format:
     number-sections: false
 ---
 
+## 26/11/2025
+
+-   🖌️Corrections mineures, réorganisation du site.
+
 ## 23/11/2025
 
--   ⚙️ la correction par le revenu mixte pour les non salariés est maintenant la corection de référence
+-   ⚙️ la correction par le revenu mixte pour les non salariés est maintenant la correction des salaires de référence
 -   📝 ajouts de tableaux et modification des commentaires en conséquence
 
 ## 17/11/2025
