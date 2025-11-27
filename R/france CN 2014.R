@@ -95,19 +95,19 @@ cn14e <- cn14 |>
   arrange(time) |>
   group_by(nace) |>
   fill(rb3gpc, .direction = "up") |>
-  mutate(b3g = d1/emps*empns,
+  mutate(b3ne = d1/emps*empns,
          naces = str_split_i(nace,"-", 2)) |>
-  mutate(b3g = replace_na(b3g, 0))
+  mutate(b3ne = replace_na(b3ne, 0))
 
 total_b3g <- cn14e |>
   group_by(time) |>
-  summarize(b3g = sum(b3g)) |>
+  summarize(b3ne = sum(b3ne)) |>
   left_join(b3g |> select(time, B3G, rccfei), by = "time") |>
-  mutate(vv = b3g/B3G)
+  mutate(vv = b3ne/((1-rccfei)*B3G) )
 
 cn14e2 <- cn14e |>
   left_join(total_b3g |> select(time, vv, rccfei), by = 'time') |>
-  mutate(b3gc = b3g/vv) |>
+  mutate(b3nec = b3ne/vv) |>
   left_join(T6461 |> select(time, naces, ccf), by = c("time", "naces")) |>
   mutate(across(c(ccf, d29, d39), ~.x/b1g, .names = "r{.col}"),
          across(c(ccf, d29, d39), ~is.na(.x), .names = "na{.col}")) |>
@@ -119,8 +119,8 @@ cn14e2 <- cn14e |>
     d39 = rd39 * b1g  ) |>
   mutate(
     van = b1g - ccf - d29 - d39,
-    msal = d1 + (1-rccfei) * b3g,
-    msalc = d1 + (1-rccfei) * b3gc) |>
+    msal = d1 + b3ne,
+    msalc = d1 + b3nec) |>
   left_join(md, by = "naces")
 
 # ca ressemble trop à la base 2020
@@ -150,8 +150,8 @@ cn14a <- cn14e2 |>
   separate(name, sep = "_", into = c("var", "champ")) |>
   pivot_wider(names_from = var, values_from = value) |>
   mutate(
-    psal = msal / van ,
-    psalc = msalc / van  )
+    psal = msal / van , # par les effectifs
+    psalc = msalc / van  ) # par les effectifs normalisé par le b3g des EI
 
 return(cn14a)
 

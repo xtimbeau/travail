@@ -606,8 +606,8 @@ data <- full_join(cn14, cn20, by=c("time", "champ"), suffix = c(".14", ".20")) |
     tooltip = glue(
       "<b>{year(time)}</b>
       Part des salaires dans la VAN, correction par le revenu mixte (voir note)
-      CNA 2020 : {round(psal.20*100,1)}%
-      CNA 2014 : {round(psal.14*100,1)}%,
+      CNA 2020 (b3g par branches): {round(psal.20*100,1)}%
+      CNA 2014 (effectifs) : {round(psal.14*100,1)}%,
       CNA 2014 (ajusté sur b3g EI) : {round(psalc*100,1)}%" ) ) |> 
   pivot_longer(c(psal.20, psal.14, psalc))
 
@@ -618,9 +618,8 @@ psalE <- imap(
     "Hors immmo.&fin." = "mdhifi",
     "Marchand et non marchand" = "tb"),
   ~ggplot(data |> filter(champ == .x)) +
-    aes(x=time, y=value, col = name, group = name, linewidth  = na) +
+    aes(x=time, y=value, col = name, group = name, linetype = name) +
     geom_line() +
-    scale_linewidth_manual(values = c(0.75, 0.25 )) +
     geom_point_interactive(
       aes(tooltip = tooltip, data_id = time, fill = name),
       size = 1, stroke = 0.5, shape = 21, color = "white",
@@ -631,10 +630,18 @@ psalE <- imap(
     guides( fill = "none") +
     theme(legend.direction = "horizontal") +
     scale_color_manual(
-      values = c(psal.14 = bluish, psalc = colorspace::lighten(bluish, 0.1), psal.20 = redish),
+      values = c(psal.14 = bluish, psalc = redish, psal.20 = redish),
       name = NULL,
-      labels = c(psal.14 = "CNA 2014", psalc = "CNA 2014 (b3g EI)", psal.20 = "CNA 2020"),
+      labels = c(psal.14 = "CNA 2014 (effectifs)", 
+                 psalc = "CNA 2014 (b3g EI)",
+                 psal.20 = "CNA 2020 (b3g br., hybride avant 1978)"),
       aesthetics = c("color", "fill")) +
+    scale_linetype_manual(
+      values = c(psal.14 = "11", psalc = "11", psal.20 = "solid"),
+      name = NULL,
+      labels = c(psal.14 = "CNA 2014 (effectifs)",
+                 psalc = "CNA 2014 (b3g EI)",
+                 psal.20 = "CNA 2020 (b3g br., hybride avant 1978)") ) +
     scale_y_continuous(
       labels = scales::label_percent(1), 
       breaks = scales::pretty_breaks(5),
@@ -643,10 +650,10 @@ psalE <- imap(
     guides(linewidth = "none") +
     ofce_caption(
       source = "INSEE, comptes nationaux annuels base 2014 (de 2022) et base 2020 (de 2025), code à github.com/xtimbeau/travail/france CN 2014.r.",
-      champ = "Branches {tolower(.y)}.",
-      note = "La construction de la part des salaires de 1949 à 1978 demande la rétropolation de la CCF (P51C), des subventions (D29) et impôts à la production (D39) à partir de la valeur ajoutée brute ainsi que du revenu mixte à partir des effectifs salariés et non salariés.") ) 
+      champ = "{champs[.x]}.",
+      note = "La construction de la part des salaires de 1949 à 1978 demande la rétropolation de la CCF (P51C), des subventions (D29) et impôts à la production (D39) à partir de la valeur ajoutée brute ainsi que du revenu mixte à partir des effectifs salariés et non salariés. Pour la CN2020, le revenu mixte par branche est disponible à partir de 1978. Avant, la distinction n'est faite que pour le total des branches. On rétropole sur cette base. Dans la CN2014 on utilise la méthode effectif ou revenu mixte hybride.") ) 
 
-tabsetize(psalE, r = 1.25, active = 2)
+tabsetize(psalE, r = 1.5, active = 2)
 
 ```
 

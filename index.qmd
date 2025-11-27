@@ -1733,7 +1733,7 @@ data |>
   my_tab_options()
 ```
 
-Le @fig-ciLfr, pour la France uniquement, caractérise l'évolution de la consommation en services immobiliers par le secteur productif hors services aux ménages. La hausse est continue depuis le début de la période d'observation (qui débute en 1978 sur le @fig-ciLfr), et s'achève en 2006. Cette hausse de la part des consommations intermédiaires ne peut donc pas expliquer à elle seule les évolutions du rendement apparent du capital productif. {{< fa square >}}
+Le @fig-ciLfr, pour la France uniquement, caractérise l'évolution de la consommation en services immobiliers par le secteur productif hors services aux ménages. La hausse est continue depuis le début de la période d'observation (qui débute en 1978 sur le @fig-ciLfr), et s'achève en 2006. Cette hausse de la part des consommations intermédiaires ne peut donc pas expliquer à elle seule les évolutions du rendement apparent du capital productif.
 
 ```{r}
 #| label: fig-ciLfr
@@ -1749,7 +1749,8 @@ data <- source_data("R/france-melodi.r") |>
   pivot_wider(names_from = champ, values_from = ciL) |> 
   mutate(
     tp = glue(
-    "<b>{year(time)}</b> France
+    "<b>{year(time)}</b>
+    France
     Part des CI branche L dans la VAB marchande hors immobilier : {round(mdhi*100, 1)}%
     Part des CI branche L dans la VAB marchande : {round(md*100, 1)}%") ) |> 
   pivot_longer(c(md, mdhi), names_to = "champ")
@@ -1779,6 +1780,7 @@ gg <- ggplot(data) +
   scale_ofce_date(
     labels = date1) +
   ofce_caption(
+    champ="Voir la légende",
     source="INSEE, comptes nationaux table des entrées sorties (CNA_SUT)"
   )+
   theme(
@@ -1801,7 +1803,8 @@ data <- source_data("R/france-melodi.r") |>
   drop_na(rb) |> 
   mutate(
     tp = glue(
-      "<b>year(time)</b> France, Branches marchandes hors immobilier
+      "<b>{year(time)}</b>
+      France
       rendement (avant IS) du capital : {round(100*rb,1)}%
       rendement (avant IS) du capital, ratio CI/VA pour les serv. immo. de 1980 : {round(100*rb2,1)}%") )
 
@@ -1838,6 +1841,7 @@ gg <- ggplot(data_long) +
   scale_ofce_date(
     labels = date1) +
   ofce_caption(
+    champ = "Branches marchandes hors services immobiliers",
     source="INSEE, comptes nationaux table des entrées sorties (CNA_SUT)"
   )+
   theme(
@@ -1846,6 +1850,9 @@ gg <- ggplot(data_long) +
 girafy(gg)
 ```
 
+::: {style="text-align: right;"}
+ {{< fa square >}}
+:::
 
 ## Nombre de mots {.appendix .unnumbered .unlisted}
 

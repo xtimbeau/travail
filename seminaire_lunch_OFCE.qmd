@@ -99,13 +99,16 @@ Toutes les grandeurs sont en **euros courants**
 
 ## Rendement du capital productif
 
-<br> 
+<br>
 
 \begin{aligned}
 \Pi_{\bar{is}} & = B1G - P51C - D1 - (D29-D39) = B2N \\
 
 \Pi_{{is}} & = B1G - P51C - D1 - (D29-D39) - D5 = B2N-D5
-\end{aligned} \
+\end{aligned}
+
+\
+
 \begin{aligned}
 r_{productif} & = \frac{\Pi}{N1N+[N2N]} \\
 r_{financier} & = \frac{\Pi}{F51+F52+BF90}
@@ -126,7 +129,7 @@ $F51$ Equity (actions), $F52$ Investment fund shares/units, $BF90$ valeur nette 
 ::::: columns
 ::: {.column width="85%"}
 ```{r}
-(load_graphe("index-unnamed-chunk-9-5") + 
+(load_graphe("annexes-unnamed-chunk-4-5") + 
   ofce_caption()+
   labs(title = "CCF dans la VAN")) |> 
   girafy()
@@ -145,7 +148,7 @@ Elle est evaluée par des tables de mortalité par classe d'actifs.
 ::::: columns
 ::: {.column width="85%"}
 ```{r}
-(load_graphe("index-unnamed-chunk-10-5") + 
+(load_graphe("annexes-unnamed-chunk-5-5") + 
   ofce_caption()+
   labs(title = "CCF sur actifs")) |> 
   girafy()
@@ -153,7 +156,9 @@ Elle est evaluée par des tables de mortalité par classe d'actifs.
 :::
 
 ::: {.column width="15%"}
-En France, la CCF est particulièrement élevée (plus de 15% contre 10% en Allemagne).
+En France, la CCF est particulièrement élevée (21.1% de la VAN en France contre 16.5% en Allemagne).
+
+{{< fa arrow-right >}} Actifs sur VAB : Allemagne : 1,65 ; France 1,33
 
 Pourquoi ?
 
@@ -197,7 +202,7 @@ Une autre méthode est possible : le revenu mixte
 ## Le revenu des non salariés
 
 ```{r}
-(load_graphe("index-unnamed-chunk-14-2") + 
+(load_graphe("annexes-unnamed-chunk-10-2") + 
   ofce_caption()+
   labs(title = "Revenu par tête des non salariés")) |> 
   girafy()
@@ -302,21 +307,23 @@ Le partage de la valeur ajoutée pour les services immobilier résidentiel n'est
 ## France 1949-2024
 
 ```{r}
-ofce::load_graphe("index-unnamed-chunk-16-2") + 
+(ofce::load_graphe("annexes-unnamed-chunk-12-2") + 
   ofce_caption() + 
   scale_y_continuous(
     limits = c(NA,NA),
-    labels = label_percent(1)  )
+    labels = label_percent(1)) ) |> 
+  girafy()
 ```
 
 ## Rendement du capital France 1978-2024
 
 ```{r}
-ofce::load_graphe("index-unnamed-chunk-17-2") + 
+(ofce::load_graphe("annexes-unnamed-chunk-13-2") + 
   ofce_caption() +
   scale_y_continuous(
     limits = c(NA,NA),
-    labels = label_percent(1)  )
+    labels = label_percent(1)) ) |> 
+  girafy()
 ```
 
 ## Reproductibilité {.smaller}
