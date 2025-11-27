@@ -11,7 +11,7 @@
     "href": "seminaire_lunch_OFCE.html#la-part-des-salaires-est-très-élevée-en-france-en-2025",
     "title": "Le partage de la valeur ajoutée",
     "section": "La part des salaires est très élevée en France en 2025",
-    "text": "La part des salaires est très élevée en France en 2025\n\n\nsystemfonts and textshaping have been compiled with different versions of Freetype. Because of this, textshaping will not use the font cache provided by systemfonts"
+    "text": "La part des salaires est très élevée en France en 2025"
   },
   {
     "objectID": "seminaire_lunch_OFCE.html#ce-résultat-contraste-avec-des-résultats-antérieurs",
@@ -53,7 +53,7 @@
     "href": "seminaire_lunch_OFCE.html#nette-plutôt-que-brute-ccf-sur-actifs",
     "title": "Le partage de la valeur ajoutée",
     "section": "Nette plutôt que brute – CCF sur actifs",
-    "text": "Nette plutôt que brute – CCF sur actifs\n\n\n\n\n\n\n\n\n\nEn France, la CCF est particulièrement élevée (plus de 15% contre 10% en Allemagne).\nPourquoi ?\n\nStructure de l’économie\nNature de l’investissement\n\nLa conséquence est assez importante : cela réduit assez fortement le numérateur"
+    "text": "Nette plutôt que brute – CCF sur actifs\n\n\n\n\n\n\n\n\n\nEn France, la CCF est particulièrement élevée (21.1% de la VAN en France contre 16.5% en Allemagne).\n Actifs sur VAB : Allemagne : 1,65 ; France 1,33\nPourquoi ?\n\nStructure de l’économie\nNature de l’investissement\n\nLa conséquence est assez importante : cela réduit assez fortement le numérateur"
   },
   {
     "objectID": "seminaire_lunch_OFCE.html#nette-plutôt-que-brute",
@@ -221,7 +221,7 @@
     "href": "index.html#nombre-de-mots",
     "title": "Une part des salaires dans la VA élevée en 2025 en France",
     "section": "Nombre de mots",
-    "text": "Nombre de mots\n\nIl y a {{wordcount}} mots (hors code, graphiques, tableaux et bibliographie) mots dans ce document."
+    "text": "Nombre de mots\n\nIl y a 7266 mots (hors code, graphiques, tableaux et bibliographie) mots dans ce document."
   },
   {
     "objectID": "annexes.html",
