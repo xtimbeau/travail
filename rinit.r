@@ -114,6 +114,7 @@ my_tab_options <- function(data, ...) {
               footnotes.padding = 5,
               source_notes.padding =  2,
               table.border.bottom.style = "none",
+              table.background.color = "transparent",
               row_group.padding = 3) |>
     opt_footnote_marks("letters") |>
     tab_options(...)

@@ -1,6 +1,6 @@
 Ce dépôt github contient tous les éléments pour reproduire intégralement le document accessible à <https://xtimbeau.github.io/travail>.
 
-L'organisation est assez standard. Le fichier `qmd` principal est `index.qmd`, les codes produisant les données sont dans `R`. Les fichiers `R` sont exécutés par `ofce::source_data()` qui exécute en cachant les résultats d'exécution. Pour rafraîchir le cache il faut exécuter `source_data_refresh()` avant le rendu de `index.qmd`.
+L'organisation est assez standard pour un projet `quarto` : le fichier `qmd` principal est `index.qmd`, la structure du site est définie par `_quarto.yml` les codes produisant les données sont dans `R`. Les fichiers `R` sont exécutés par `ofce::source_data()` qui exécute en cachant les résultats d'exécution. Pour rafraîchir le cache il faut exécuter `source_data_refresh()` avant le rendu de `index.qmd`.
 
 Le répertoire `data` contient quelques fichiers téléchargés (par les scripts), `divers` contient des éléments annexes, `ecopol` le code source de l'article d'Economie Politique.
 

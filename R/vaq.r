@@ -1,10 +1,5 @@
-library(tidyverse)
+ofce::init_qmd()
 library(eurostat)
-library(ofce)
-
-date_trim <- function(date) {
-  str_c(lubridate::year(date), "T", lubridate::quarter(date))
-}
 
 nace <- source_data("nace.r")$nace
 
@@ -15,7 +10,7 @@ adj <- c("SCA", "SA", "CA", "NSA")
 
 pays <- source_data("nace.r")$pays3
 
-label_pays <- set_names(countrycode::countrycode(pays, "eurostat", "country.name.fr"), pays)
+label_pays <- rlang::set_names(countrycode::countrycode(pays, "eurostat", "country.name.fr"), pays)
 
 naq10_e <- source_data("naq10_e")$naq_e
 
@@ -33,7 +28,7 @@ naa_a64 <- "nama_10_a64" |>
   pivot_wider(id_cols = c(nace_r2, geo, time),
               names_from =  na_item, values_from = values) |>
   left_join(nace |>
-              select(a10, a20,),
+              select(a10, a20),
             by = c("nace_r2"= "a20")) |>
   group_by(a10, geo, time) |>
   summarise(across(c(B1G, D1, D11, P51C, D29X39), sum),
@@ -212,7 +207,7 @@ naq <- naq_a10 |>
     psal = msa/van,
     psalb = msa/vab,
     psalnc = msanc/van,
-    psalbnc = msanc/vab,) |>
+    psalbnc = msanc/vab) |>
   filter(geo %in% pays, time >= "1995-01-01") |>
   mutate(geo = factor(geo,  pays))
 
