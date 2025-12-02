@@ -2,13 +2,8 @@
 title: "Une part des salaires dans la VA élevée en 2025 en France"
 subtitle: "*Historique des modifications*"
 toc-title: "*Historique des modifications*"
-date: "2025-10-24"
 date-modified: now
-
 authors-title: "Auteur"
-wp: 23
-annee: 2025
-bibliography: references.bib
 format: 
   wp-html:
     appendix-cite-as: false

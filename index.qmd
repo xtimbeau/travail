@@ -2,11 +2,6 @@
 title: "Une part des salaires dans la VA élevée en 2025 en France"
 subtitle: "Comparaisons internationales de 30 ans de partage de la valeur ajoutée"
 editor: visual
-date: "2025-10-24"
-date-modified: now
-wp: 23
-annee: 2025
-bibliography: references.bib
 abstract: "On explore différentes façons de calculer la part des salaires dans la valeur ajoutée. Le concept privilégié est celui de la part des salaires *corrigés de la non salarisation par le revenu mixte* dans la valeur ajoutée *nette de la consommation de capital fixe* des branches *marchandes hors services immobiliers*. Il fait apparaître une position singulière de la France où la part des salaires est plus élevé et s'est accrue de façon importante. Le calcul de rendement net d'impôts du capital productif confirme ce diagnostic particulièrement préoccupant pour le tissu productif français. Outre les explications habituelles de la hausse de la part des salaries dans la valeur ajoutée, nous ajoutons l'évaporation de la valeur ajoutée par l'optimisation fiscale. L'ensemble des éléments présentés est reproductible à partir des codes fournis sur le dépôt associé."
 citation:
   type: article-journal
@@ -1863,14 +1858,14 @@ girafy(gg)
 
 6 annexes sont accessibles en ligne à l'adresse <https://xtimbeau.github.io/travail/> :
 
--   annexe 1 : [Domaine des données](annexes.html#a1),
--   annexe 2 : [CCF](annexes.html#a2),
--   annexe 3 : [Comparaisons entre pays](annexes.html#a3),
--   annexe 4 : [Rémunération des non salariés](annexes.html#a4),
--   annexe 5 : [CN2020 et CN2014 pour la France](annexes.html#a5),
--   annexe 6 : [Rendement du capital productif en France de 1978 à 2024](annexes.html#a6)
+-   annexe 1 : [Domaine des données](https://xtimbeau.github.io/travail/annexes.html#a1),
+-   annexe 2 : [CCF](https://xtimbeau.github.io/travail/annexes.html#a2),
+-   annexe 3 : [Comparaisons entre pays](https://xtimbeau.github.io/travail/annexes.html#a3),
+-   annexe 4 : [Rémunération des non salariés](https://xtimbeau.github.io/travail/annexes.html#a4),
+-   annexe 5 : [CN2020 et CN2014 pour la France](https://xtimbeau.github.io/travail/annexes.html#a5),
+-   annexe 6 : [Rendement du capital productif en France de 1978 à 2024](https://xtimbeau.github.io/travail/annexes.html#a6)
 
-Un [historique des principales modifications](NEWS.html) renseigne les différentes versions du document.
+Un [historique des principales modifications](https://xtimbeau.github.io/travail/NEWS.html) renseigne les différentes versions du document.
 
 ## Nombre de mots {.appendix .unnumbered .unlisted}
 

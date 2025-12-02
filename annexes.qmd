@@ -5,11 +5,7 @@ toc-title: "*Annexes*"
 format: 
   wp-html:
     appendix-cite-as: false
-date: "2025-10-24"
-date-modified: now
 authors-title: "Auteur"
-wp: 23
-annee: 2025
 
 bibliography: references.bib
 ---
