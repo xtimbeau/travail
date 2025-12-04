@@ -8,4 +8,6 @@ La version de `R` employée est la 4.5.1 et la version de `quarto` doit être su
 
 Pour fonctionner, en plus des packages signalés par `renv::dependencies()`, les packages suivants doivent être installés depuis `devtools::install_github()` ou `renv::install()` : "`ofce/ofce`", "`rstudio/gt`", "`nsgrantham/ggbraid`", "`expersso/OECD`", "`InseeFrLab/melodi`", "`jimjam-slam/ggflags`". Une alternative est d'utiliser `renv` qui est configuré sur le dépôt.
 
+Le code est sous licence CeCILL, licence permissive comptaible avec GNU GPL. Les contenus, graphiques et tableaux sont en CC BY 4.0.
+
 *Happy reproduce* !
