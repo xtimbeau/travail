@@ -16,7 +16,9 @@ website:
      - text: Séminaire IRES-OFCE
        icon: file-earmark-easel
        href: seminaire_IRES_OFCE.html
-
+     - text: Post sur le blog de l'OFCE
+       icon: pen
+       href: https://www.ofce.sciences-po.fr/blog2024/fr/2025/20251128_XT/
   title: "Partage de la valeur ajoutée, comparaisons internationales"
   page-navigation: true
   site-url: "https://xtimbeau.github.io/travail/"
@@ -63,6 +65,12 @@ format:
 language:
   fr:
     other-links-title: "Autres contenus"
+
+wp: 23
+annee: 2025
+bibliography: references.bib
+date: "2025-10-24"
+date-modified: now
 
 author:
   - name: "Xavier Timbeau"

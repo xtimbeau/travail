@@ -2,28 +2,27 @@
 title: "Une part des salaires dans la VA élevée en 2025 en France"
 subtitle: "*Historique des modifications*"
 toc-title: "*Historique des modifications*"
-date: "2025-10-24"
 date-modified: now
-
 authors-title: "Auteur"
-wp: 23
-annee: 2025
-bibliography: references.bib
 format: 
   wp-html:
     appendix-cite-as: false
     number-sections: false
 ---
 
+## 29/11/2025
+
+-   🖌️ ajout de la référence à Sicsic 2018
+
 ## 26/11/2025
 
--   🖌️Corrections mineures, réorganisation du site.
--   📥Mise à jour des données.
+-   🖌️ Corrections mineures, réorganisation du site.
+-   📥 Mise à jour des données.
 
 ## 23/11/2025
 
 -   ⚙️ la correction par le revenu mixte pour les non salariés est maintenant la correction des salaires de référence.
--   📝 ajouts de tableaux et modification des commentaires en conséquence.
+-   🖌️ 🖌️ ajouts de tableaux et modification des commentaires en conséquence.
 
 ## 17/11/2025
 
@@ -33,31 +32,32 @@ format:
 
 ## 12/11/2025
 
--   📝 version 2 du texte.
+-   🖌️ 🖌️ version 2 du texte.
+-   🖌️ Ajout des références à Cette et al 2019, Trésor Eco 2025.
 -   ⚙️ correction par le revenu mixte pour la France.
 
 ## 4/11/2025
 
--   📝 version modifiée du texte.
--   📥Mise à jour des données.
+-   🖌️ 🖌️ version modifiée du texte.
+-   📥 Mise à jour des données.
 -   ⚙️ premiers éléments sur le revenu mixte.
 -   🎆 graphique de la semaine.
 
 ## 24/10/2025
 
--   📝 version 1 du document de travail 2025-23.
--   📥Mise à jour des données.
+-   🖌️ version 1 du document de travail 2025-23.
+-   📥 Mise à jour des données.
 -   🚀 mise en ligne initiale et pdf.
 
 ## 29/09/2025
 
--   📝 version préliminaire du document de travail.
--   📥Mise à jour des données.
+-   🖌️ 🖌️ 🖌️ version préliminaire du document de travail.
+-   📥 Mise à jour des données.
 
 ## 26/01/2025
 
--   📝 version corrigée de l'article pour économie politique.
+-   🖌️ version corrigée de l'article pour économie politique.
 
 ## 18/01/2025
 
--   📝 version initiale du texte pour économie politique.
+-   🖌️ 🖌️ 🖌️ version initiale du texte pour économie politique.
