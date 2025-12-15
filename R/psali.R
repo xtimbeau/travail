@@ -18,6 +18,8 @@ date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 lbl_eurostat <- function(x) eurostat::label_eurostat(x, "geo",
                                                      lang = "fr",
                                                      custom_dic=c("EA20"= "Zone euro"))
+source <- glue::glue("Eurostat, comptes nationaux annuels (naidsa_10_nf_tr), téléchargés le {date},
+ code à github.com/xtimbeau/travail/snf_international.r.")
 psali <- ggplot(snfia) +
   aes(x=time, y=psal, col = geo) +
   geom_line_interactive(
@@ -34,8 +36,7 @@ psali <- ggplot(snfia) +
   scale_y_continuous(labels = scales::label_percent(1), limits = c(NA, 1)) +
   scale_color_pays(format = "eurostat") +
   ofce_caption(
-    source = "Eurostat, comptes nationaux annuels (naidsa_10_nf_tr), téléchargés le {date},
- code à github.com/xtimbeau/travail/snf_international.r.",
+    source = source,
     champ = "Sociétés non financières (S11, la définition peut varier d'un pays à l'autre)")
 
 return(psali)
