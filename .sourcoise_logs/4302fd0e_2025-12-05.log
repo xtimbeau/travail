@@ -1,0 +1,29 @@
+SUCCESS [2025-12-05 23:17:34] r/annexed.r valid cache (658 kB)
+ERROR [2025-12-05 23:17:34]   but r/annexed.r failed
+SUCCESS [2025-12-05 23:17:35] r/assets.r valid cache (805 kB)
+ERROR [2025-12-05 23:17:35]   but r/assets.r failed
+SUCCESS [2025-12-05 23:17:35] r/decomp.r valid cache (12 kB)
+ERROR [2025-12-05 23:17:35]   but r/decomp.r failed
+SUCCESS [2025-12-05 23:17:37] r/france cn 2014.r (forced) in 2.06 sec. (46 kB)
+SUCCESS [2025-12-05 23:17:38] r/france-melodi.r valid cache (217 kB)
+ERROR [2025-12-05 23:17:38]   but r/france-melodi.r failed
+SUCCESS [2025-12-05 23:17:39] r/ggvanettebrute.r valid cache (500 kB)
+ERROR [2025-12-05 23:17:39]   but r/ggvanettebrute.r failed
+SUCCESS [2025-12-05 23:17:39] r/households.r valid cache (84 kB)
+ERROR [2025-12-05 23:17:39]   but r/households.r failed
+SUCCESS [2025-12-05 23:17:39] r/mixte.r valid cache (2 MB)
+ERROR [2025-12-05 23:17:39]   but r/mixte.r failed
+SUCCESS [2025-12-05 23:17:40] r/nace.r (forced) in 1.33 sec. (11 kB)
+SUCCESS [2025-12-05 23:17:40] r/naq10_e.r valid cache (3 MB)
+ERROR [2025-12-05 23:17:40]   but r/naq10_e.r failed
+SUCCESS [2025-12-05 23:17:59] r/oecd.r (forced) in 18.98 sec. (138 kB)
+SUCCESS [2025-12-05 23:18:00] r/psali.r valid cache (1 MB)
+ERROR [2025-12-05 23:18:00]   but r/psali.r failed
+SUCCESS [2025-12-05 23:18:00] r/salaires.r valid cache (161 kB)
+ERROR [2025-12-05 23:18:00]   but r/salaires.r failed
+SUCCESS [2025-12-05 23:18:00] r/snf_international.r valid cache (22 kB)
+ERROR [2025-12-05 23:18:00]   but r/snf_international.r failed
+SUCCESS [2025-12-05 23:18:00] r/snf_ratio.r valid cache (212 kB)
+ERROR [2025-12-05 23:18:00]   but r/snf_ratio.r failed
+SUCCESS [2025-12-05 23:18:01] r/vaq.r valid cache (9 MB)
+ERROR [2025-12-05 23:18:01]   but r/vaq.r failed

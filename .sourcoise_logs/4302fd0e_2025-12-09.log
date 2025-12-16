@@ -1,0 +1,1388 @@
+INFO [2025-12-09 11:40:51] Refreshing 16 source files
+INFO [2025-12-09 11:40:52] Inializing with init_fn()
+INFO [2025-12-09 11:54:15] Refreshing 16 source files
+SUCCESS [2025-12-09 11:54:15] R/mixte.r valid cache (2 MB)
+ERROR [2025-12-09 11:54:15]   but R/mixte.r failed
+SUCCESS [2025-12-09 11:54:17] R/nace.r (forced) in 1.96 sec. (11 kB)
+SUCCESS [2025-12-09 11:54:17] R/naq10_e.r valid cache (3 MB)
+ERROR [2025-12-09 11:54:18]   but R/naq10_e.r failed
+SUCCESS [2025-12-09 11:54:18] r/annexed.r valid cache (658 kB)
+ERROR [2025-12-09 11:54:18]   but r/annexed.r failed
+SUCCESS [2025-12-09 11:54:18] r/assets.r valid cache (805 kB)
+ERROR [2025-12-09 11:54:18]   but r/assets.r failed
+SUCCESS [2025-12-09 11:54:18] r/decomp.r valid cache (12 kB)
+ERROR [2025-12-09 11:54:18]   but r/decomp.r failed
+SUCCESS [2025-12-09 11:54:20] r/france cn 2014.r (forced) in 2.18 sec. (46 kB)
+ERROR [2025-12-09 11:54:20] r/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 11:54:21] r/ggvanettebrute.r valid cache (500 kB)
+ERROR [2025-12-09 11:54:21]   but r/ggvanettebrute.r failed
+SUCCESS [2025-12-09 11:54:21] r/households.r valid cache (84 kB)
+ERROR [2025-12-09 11:54:21]   but r/households.r failed
+SUCCESS [2025-12-09 11:54:39] r/oecd.r (forced) in 17.76 sec. (138 kB)
+SUCCESS [2025-12-09 11:54:39] r/psali.r valid cache (1 MB)
+ERROR [2025-12-09 11:54:39]   but r/psali.r failed
+SUCCESS [2025-12-09 11:54:39] r/salaires.r valid cache (161 kB)
+ERROR [2025-12-09 11:54:39]   but r/salaires.r failed
+SUCCESS [2025-12-09 11:54:39] r/snf_international.r valid cache (22 kB)
+ERROR [2025-12-09 11:54:39]   but r/snf_international.r failed
+SUCCESS [2025-12-09 11:54:39] r/snf_ratio.r valid cache (212 kB)
+ERROR [2025-12-09 11:54:39]   but r/snf_ratio.r failed
+SUCCESS [2025-12-09 11:54:40] r/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 11:54:40]   but r/vaq.r failed
+INFO [2025-12-09 11:56:32] Refreshing 16 source files
+INFO [2025-12-09 11:56:33] Inializing with init_fn()
+SUCCESS [2025-12-09 11:57:15] R/mixte.r valid cache (2 MB)
+ERROR [2025-12-09 11:57:15]   but R/mixte.r failed
+INFO [2025-12-09 12:03:13] Refreshing 16 source files
+SUCCESS [2025-12-09 12:03:14] R/mixte.R valid cache (2 MB)
+ERROR [2025-12-09 12:03:14]   but R/mixte.R failed
+SUCCESS [2025-12-09 12:03:15] R/nace.r (forced) in 1.26 sec. (11 kB)
+SUCCESS [2025-12-09 12:03:16] R/naq10_e.R valid cache (3 MB)
+ERROR [2025-12-09 12:03:16]   but R/naq10_e.R failed
+SUCCESS [2025-12-09 12:03:16] R/annexeD.R valid cache (658 kB)
+ERROR [2025-12-09 12:03:16]   but R/annexeD.R failed
+SUCCESS [2025-12-09 12:03:16] R/assets.r valid cache (805 kB)
+ERROR [2025-12-09 12:03:16]   but R/assets.r failed
+SUCCESS [2025-12-09 12:03:16] R/decomp.R valid cache (12 kB)
+ERROR [2025-12-09 12:03:16]   but R/decomp.R failed
+SUCCESS [2025-12-09 12:03:18] R/france CN 2014.R (forced) in 2.24 sec. (46 kB)
+ERROR [2025-12-09 12:03:18] R/france-melodi.R failed, no cache
+SUCCESS [2025-12-09 12:03:19] R/ggvanettebrute.R valid cache (500 kB)
+ERROR [2025-12-09 12:03:19]   but R/ggvanettebrute.R failed
+SUCCESS [2025-12-09 12:03:19] R/households.R valid cache (84 kB)
+ERROR [2025-12-09 12:03:19]   but R/households.R failed
+SUCCESS [2025-12-09 12:03:22] R/oecd.R (forced) in 2.62 sec. (138 kB)
+SUCCESS [2025-12-09 12:03:23] R/psali.R valid cache (1 MB)
+ERROR [2025-12-09 12:03:23]   but R/psali.R failed
+SUCCESS [2025-12-09 12:03:23] R/salaires.r valid cache (161 kB)
+ERROR [2025-12-09 12:03:23]   but R/salaires.r failed
+SUCCESS [2025-12-09 12:03:23] R/snf_international.r valid cache (22 kB)
+ERROR [2025-12-09 12:03:23]   but R/snf_international.r failed
+SUCCESS [2025-12-09 12:03:23] R/snf_ratio.r valid cache (212 kB)
+ERROR [2025-12-09 12:03:23]   but R/snf_ratio.r failed
+SUCCESS [2025-12-09 12:03:23] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:03:23]   but R/vaq.r failed
+INFO [2025-12-09 12:09:34] Refreshing 16 source files
+SUCCESS [2025-12-09 12:09:37] R/france CN 2014.r (forced) in 3.35 sec. (46 kB)
+SUCCESS [2025-12-09 12:09:40] R/nace.r (forced) in 1.63 sec. (11 kB)
+SUCCESS [2025-12-09 12:09:41] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:09:45] R/naq10_e.r (forced) in 3.67 sec. (3 MB)
+SUCCESS [2025-12-09 12:09:45] R/mixte.r (forced) in 7.72 sec. (2 MB)
+SUCCESS [2025-12-09 12:09:46] R/nace.r (forced) in 0.46 sec. (11 kB)
+SUCCESS [2025-12-09 12:09:46] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:09:48] R/naq10_e.r (forced) in 2.21 sec. (3 MB)
+SUCCESS [2025-12-09 12:09:51] R/oecd.r (forced) in 3.17 sec. (138 kB)
+SUCCESS [2025-12-09 12:09:51] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:09:51] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 12:09:51] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:09:52] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:09:52] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:09:52] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:10:01] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:01] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:02] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:02] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:02] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:10:07] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:07] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:08] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:08] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:08] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:10:13] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:13] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:13] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:13] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:13] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:10:18] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:18] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:19] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:19] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:19] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:10:24] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:24] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:25] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:25] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:25] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:10:29] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:30] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:30] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:30] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:30] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:10:35] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:35] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:36] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:36] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:36] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:10:41] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:41] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:42] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:42] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:42] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:10:46] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:46] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:47] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:47] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:47] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:10:52] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:52] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:53] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:53] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:53] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:10:58] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:58] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:58] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:58] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:10:58] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:11:03] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:03] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:04] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:04] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:04] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:11:09] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:09] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:10] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:10] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:10] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:11:14] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:14] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:15] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:15] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:15] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:11:20] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:20] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:21] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:21] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:21] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:11:25] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:25] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:26] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:26] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:26] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:11:31] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:31] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:32] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:32] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:32] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:11:37] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:37] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:37] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:37] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:38] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:11:42] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:42] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:43] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:43] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:43] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:11:48] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:48] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:49] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:49] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:49] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:11:53] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:54] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:54] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:54] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:54] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:11:59] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:11:59] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:00] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:00] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:00] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:12:05] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:05] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:06] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:06] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:06] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:12:11] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:11] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:12] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:12] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:12] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:12:17] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:17] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:18] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:18] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:18] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:12:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:23] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:23] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:23] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:12:28] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:28] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:29] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:29] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:29] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:12:35] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:35] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:36] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:36] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:36] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:12:41] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:41] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:42] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:42] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:42] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:12:47] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:47] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:48] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:48] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:48] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:12:53] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:53] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:54] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:54] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:54] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:12:59] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:12:59] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:00] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:00] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:00] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:13:05] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:05] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:05] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:05] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:05] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:13:10] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:10] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:11] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:11] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:11] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:13:16] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:16] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:18] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:18] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:18] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:13:23] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:23] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:23] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:24] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:24] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:13:29] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:29] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:30] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:30] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:30] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:13:35] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:35] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:36] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:36] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:36] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:13:41] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:41] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:42] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:42] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:42] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:13:47] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:47] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:48] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:48] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:48] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:13:54] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:54] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:55] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:55] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:13:55] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:14:00] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:00] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:01] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:01] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:01] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:14:06] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:06] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:07] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:07] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:07] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:14:12] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:12] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:13] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:13] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:13] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:14:18] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:18] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:19] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:19] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:19] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:14:24] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:24] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:25] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:25] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:25] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:14:30] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:31] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:31] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:31] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:32] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:14:37] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:37] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:38] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:38] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:38] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:14:43] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:43] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:44] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:44] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:44] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:14:49] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:49] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:50] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:50] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:50] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:14:56] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:56] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:57] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:57] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:14:57] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:15:02] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:02] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:03] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:03] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:03] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:15:08] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:08] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:09] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:09] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:09] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:15:14] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:15] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:15] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:16] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:16] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:15:21] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:21] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:22] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:15:27] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:27] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:28] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:28] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:28] R/naq10_e.r valid cache (3 MB)
+ERROR [2025-12-09 12:15:33] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:15:33] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:15:33]   but R/vaq.r failed
+SUCCESS [2025-12-09 12:15:48] R/france-melodi.r (forced) in 20.64 sec. (217 kB)
+SUCCESS [2025-12-09 12:15:48] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 12:15:48] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 12:15:49] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 12:15:51] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:51] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:15:53] R/assets.r (forced) in 1.72 sec. (805 kB)
+SUCCESS [2025-12-09 12:15:53] R/vaq.r (forced) in 31.93 sec. (9 MB)
+ERROR [2025-12-09 12:16:02] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:02] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:02]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:02] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:02] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:03]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:03] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:03] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:03]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:04] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:04] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:04]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:05] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:05] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:05]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:05] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:05] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:05]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:06] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:06] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:06]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:07] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:07] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:07]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:07] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:07] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:07]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:08] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:08] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:08]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:08] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:09] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:09]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:09] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:09] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:09]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:09] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:09] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:10]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:10] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:10] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:10]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:10] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:10] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:10]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:11] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:11] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:11]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:11] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:11] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:11]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:11] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:12] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:12]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:12] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:12] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:12]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:12] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:12] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:12]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:12] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:12] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:12]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:13] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:13] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:13]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:13] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:13] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:13]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:13] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:13] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:13]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:13] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:13] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:14]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:14] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:14] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:14]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:14] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:14] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:14]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:14] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:14] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:14]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:14] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:14] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:14]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:14] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:14] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:15]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:15] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:15] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:15]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:15] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:15] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:15]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:15] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:15] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:15]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:15] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:15] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:15]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:15] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:15] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:15]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:15] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:15] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:15]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:15] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:16] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:16]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:16] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:16] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:16]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:16] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:16] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:16]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:16] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:16] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:16]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:17] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:17] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:17]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:17] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:17] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:17]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:17] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:17] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:17]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:17] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:17] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:17]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:18] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:18] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:18]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:18] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:18] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:18]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:18] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:18] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:18]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:18] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:19] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:19]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:19] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:19] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:19]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:19] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:19] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:19]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:19] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:19] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:19]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:19] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:19] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:19]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:19] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:19] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:19]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:19] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:19] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:19]   but R/vaq.r failed
+ERROR [2025-12-09 12:16:19] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:19] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:19]   but R/vaq.r failed
+SUCCESS [2025-12-09 12:16:19] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 12:16:19] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:19] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:19] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:19] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:19] r/annexed.r valid cache (658 kB)
+ERROR [2025-12-09 12:16:19]   but r/annexed.r failed
+SUCCESS [2025-12-09 12:16:19] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:19] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:20] r/assets.r (forced) in 0.55 sec. (805 kB)
+SUCCESS [2025-12-09 12:16:20] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 12:16:20] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:20] r/decomp.r (forced) in 0.07 sec. (12 kB)
+SUCCESS [2025-12-09 12:16:20] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:20] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:20] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 12:16:20] r/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 12:16:21] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 12:16:21] r/ggvanettebrute.r (forced) in 0.93 sec. (500 kB)
+SUCCESS [2025-12-09 12:16:21] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:21] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:22] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 12:16:22] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 12:16:22] r/households.r (forced) in 0.61 sec. (84 kB)
+SUCCESS [2025-12-09 12:16:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:23] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:25] R/snf_international.r (forced) in 2.04 sec. (22 kB)
+SUCCESS [2025-12-09 12:16:25] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:25] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:31] r/salaires.r (forced) in 5.8 sec. (161 kB)
+SUCCESS [2025-12-09 12:16:31] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:31] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:31] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:31] r/snf_international.r (forced) in 0.68 sec. (22 kB)
+SUCCESS [2025-12-09 12:16:31] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:31] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:31] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:31] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:16:35] r/snf_ratio.r (forced) in 3.51 sec. (212 kB)
+SUCCESS [2025-12-09 12:16:36] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:36] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:36] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 12:16:41] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:41] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 12:16:41] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 12:16:51] R/france-melodi.r (exec. no cache found) in 10.17 sec. (217 kB)
+SUCCESS [2025-12-09 12:16:51] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 12:16:51] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 12:16:52] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 12:16:53] R/assets.r valid cache (805 kB)
+SUCCESS [2025-12-09 12:16:53] r/vaq.r (forced) in 18.23 sec. (9 MB)
+INFO [2025-12-09 13:48:34] Refreshing 1 source files
+INFO [2025-12-09 13:48:35] Inializing with init_fn()
+SUCCESS [2025-12-09 13:48:37] R/nace.r (forced) in 1.79 sec. (11 kB)
+SUCCESS [2025-12-09 13:48:37] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:48:37] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:48:40] R/naq10_e.r (forced) in 2.36 sec. (3 MB)
+SUCCESS [2025-12-09 13:48:40] R/mixte.r (forced) in 3.59 sec. (2 MB)
+SUCCESS [2025-12-09 13:48:40] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:48:41] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:48:41] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:48:41] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:48:46] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:48:46] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:48:47] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:48:47] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:48:47] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:48:52] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:48:52] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:48:53] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:48:53] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:48:53] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:48:58] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:48:59] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:48:59] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:48:59] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:48:59] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:49:05] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:05] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:06] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:06] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:06] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:49:11] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:11] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:12] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:12] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:12] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:49:17] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:17] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:18] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:18] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:18] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:49:23] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:23] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:24] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:24] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:24] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:49:29] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:29] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:30] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:30] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:30] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:49:35] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:35] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:36] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:36] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:36] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:49:41] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:41] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:42] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:42] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:42] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:49:47] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:47] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:48] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:48] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:48] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:49:53] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:53] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:54] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:54] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:54] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:49:59] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:59] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:59] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:49:59] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:00] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:50:04] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:04] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:05] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:05] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:05] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:50:10] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:10] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:11] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:11] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:11] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:50:16] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:16] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:17] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:17] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:17] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:50:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:23] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:23] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:23] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:50:29] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:29] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:29] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:29] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:29] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:50:34] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:34] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:35] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:35] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:35] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:50:40] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:40] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:41] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:41] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:41] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:50:46] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:46] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:47] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:47] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:47] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:50:52] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:52] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:53] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:53] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:53] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:50:58] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:58] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:59] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:59] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:50:59] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:51:04] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:04] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:05] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:05] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:05] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:51:10] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:10] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:10] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:10] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:10] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:51:15] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:15] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:16] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:16] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:16] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:51:21] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:21] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:22] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:51:27] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:27] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:28] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:28] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:28] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:51:33] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:33] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:34] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:34] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:34] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:51:39] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:39] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:40] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:40] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:40] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:51:45] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:45] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:46] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:46] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:46] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:51:51] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:51] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:52] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:52] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:52] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:51:57] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:57] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:58] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:58] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:51:58] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:52:03] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:03] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:04] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:04] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:04] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:52:09] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:09] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:10] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:10] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:10] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:52:15] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:15] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:16] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:16] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:16] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:52:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:23] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:23] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:52:27] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:28] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:28] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:28] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:28] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:52:34] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:34] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:35] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:35] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:35] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:52:40] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:40] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:41] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:41] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:41] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:52:46] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:46] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:47] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:47] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:47] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:52:52] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:52] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:53] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:53] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:53] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:52:59] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:52:59] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:00] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:00] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:00] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:53:05] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:05] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:06] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:06] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:06] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:53:11] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:11] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:12] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:12] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:12] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:53:17] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:18] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:18] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:19] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:19] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:53:24] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:24] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:25] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:25] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:25] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:53:30] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:30] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:31] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:31] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:31] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:53:36] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:37] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:37] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:38] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:38] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:53:43] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:43] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:44] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:44] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:44] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:53:49] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:49] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:50] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:50] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:50] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:53:55] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:55] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:56] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:56] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:53:57] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:54:02] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:02] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:03] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:03] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:03] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:54:08] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:08] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:09] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:09] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:10] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:54:15] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:15] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:16] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:16] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:16] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 13:54:21] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:23] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:23] R/naq10_e.r valid cache (3 MB)
+ERROR [2025-12-09 13:54:28] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:54:28] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:54:28]   but R/vaq.r failed
+SUCCESS [2025-12-09 13:54:39] R/france-melodi.r (forced) in 17.97 sec. (217 kB)
+SUCCESS [2025-12-09 13:54:39] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 13:54:40] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 13:54:41] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 13:54:42] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:42] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:54:43] R/assets.r (forced) in 0.74 sec. (805 kB)
+SUCCESS [2025-12-09 13:54:43] R/vaq.r (forced) in 27.58 sec. (9 MB)
+ERROR [2025-12-09 13:54:51] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:54:51] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:54:52]   but R/vaq.r failed
+ERROR [2025-12-09 13:54:52] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:54:52] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:54:52]   but R/vaq.r failed
+ERROR [2025-12-09 13:54:53] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:54:53] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:54:53]   but R/vaq.r failed
+ERROR [2025-12-09 13:54:54] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:54:54] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:54:54]   but R/vaq.r failed
+ERROR [2025-12-09 13:54:55] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:54:55] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:54:55]   but R/vaq.r failed
+ERROR [2025-12-09 13:54:55] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:54:55] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:54:56]   but R/vaq.r failed
+ERROR [2025-12-09 13:54:56] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:54:56] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:54:56]   but R/vaq.r failed
+ERROR [2025-12-09 13:54:57] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:54:57] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:54:57]   but R/vaq.r failed
+ERROR [2025-12-09 13:54:57] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:54:57] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:54:58]   but R/vaq.r failed
+ERROR [2025-12-09 13:54:58] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:54:58] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:54:58]   but R/vaq.r failed
+ERROR [2025-12-09 13:54:59] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:54:59] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:54:59]   but R/vaq.r failed
+ERROR [2025-12-09 13:54:59] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:54:59] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:54:59]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:00] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:00] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:00]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:00] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:00] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:00]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:01] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:01] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:01]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:01] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:01] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:01]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:02] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:02] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:02]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:02] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:02] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:02]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:02] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:02] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:02]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:03] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:03] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:03]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:03] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:03] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:03]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:03] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:03] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:03]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:04] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:04] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:04]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:04] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:04] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:04]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:04] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:04] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:04]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:04] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:04] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:04]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:05] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:05] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:05]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:05] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:05] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:05]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:05] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:05] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:05]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:05] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:05] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:05]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:05] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:05] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:05]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:05] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:06] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:06]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:06] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:06] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:06]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:06] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:06] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:06]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:06] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:06] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:06]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:06] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:06] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:06]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:06] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:06] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:06]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:06] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:06] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:06]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:06] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:06] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:07]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:07] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:07] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:07]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:07] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:07] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:07]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:07] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:07] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:07]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:07] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:07] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:07]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:07] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:07] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:07]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:07] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:07] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:07]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:07] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:07] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:07]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:07] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:07] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:07]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:07] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:07] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:07]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:07] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:07] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:08]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:08] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:08] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:08]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:08] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:08] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:08]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:08] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:08] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:08]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:08] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:08] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:08]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:08] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:08] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:08]   but R/vaq.r failed
+ERROR [2025-12-09 13:55:08] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:08] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:08]   but R/vaq.r failed
+SUCCESS [2025-12-09 13:55:08] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 13:55:08] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:55:08] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 13:55:08] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 13:55:08] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 13:55:08] r/annexed.r valid cache (658 kB)
+ERROR [2025-12-09 13:55:08]   but r/annexed.r failed
+INFO [2025-12-09 16:02:22] Refreshing 17 source files
+SUCCESS [2025-12-09 16:02:22] R/nace.r valid cache (11 kB)
+ERROR [2025-12-09 16:02:22]   but R/nace.r failed
+SUCCESS [2025-12-09 16:02:23] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:02:28] R/naq10_e.r (forced) in 4.99 sec. (3 MB)
+SUCCESS [2025-12-09 16:02:28] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:02:29] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 16:02:29] R/mixte.r (forced) in 1.83 sec. (2 MB)
+SUCCESS [2025-12-09 16:02:30] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:02:30] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:02:31] R/assets.r (forced) in 1.07 sec. (805 kB)
+SUCCESS [2025-12-09 16:02:34] R/france CN 2014.r (forced) in 2.89 sec. (46 kB)
+SUCCESS [2025-12-09 16:02:34] R/france CN 2014.r (forced) in 0.35 sec. (46 kB)
+SUCCESS [2025-12-09 16:02:34] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:02:34] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:02:34] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:02:49] R/france-melodi.r (forced) in 14.57 sec. (217 kB)
+SUCCESS [2025-12-09 16:03:04] R/oecd.r (forced) in 15.38 sec. (138 kB)
+SUCCESS [2025-12-09 16:03:05] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:05] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:05] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 16:03:13] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:13] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:13] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 16:03:20] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 16:03:20] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 16:03:20]   but R/vaq.r failed
+SUCCESS [2025-12-09 16:03:20] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:20] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 16:03:20] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:20] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:03:20] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 16:03:20] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:20] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:20] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 16:03:20] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 16:03:21] r/annexed.r valid cache (658 kB)
+ERROR [2025-12-09 16:03:21]   but r/annexed.r failed
+SUCCESS [2025-12-09 16:03:21] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:03:21] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:21] r/decomp.r (forced) in 0.07 sec. (12 kB)
+SUCCESS [2025-12-09 16:03:21] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:03:21] r/ggvanettebrute.r (forced) in 0.82 sec. (500 kB)
+SUCCESS [2025-12-09 16:03:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:22] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:03:22] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:03:22] r/households.r (forced) in 0.62 sec. (84 kB)
+SUCCESS [2025-12-09 16:03:23] R/snf_international.r valid cache (22 kB)
+SUCCESS [2025-12-09 16:03:23] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:23] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:29] r/salaires.r (forced) in 5.74 sec. (161 kB)
+SUCCESS [2025-12-09 16:03:29] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:29] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:29] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:30] r/snf_international.r (forced) in 1.26 sec. (22 kB)
+SUCCESS [2025-12-09 16:03:30] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:30] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:30] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:03:30] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 16:03:33] r/snf_ratio.r (forced) in 3.39 sec. (212 kB)
+INFO [2025-12-09 16:03:55] Refreshing 17 source files
+INFO [2025-12-09 16:03:55] Initializing with init_fn()
+SUCCESS [2025-12-09 16:03:58] R/nace.r (forced) in 2.59 sec. (11 kB)
+SUCCESS [2025-12-09 16:03:58] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:01] R/naq10_e.r (forced) in 3.16 sec. (3 MB)
+SUCCESS [2025-12-09 16:04:01] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:01] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:01] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:04:15] R/france-melodi.r (forced) in 13.66 sec. (217 kB)
+SUCCESS [2025-12-09 16:04:15] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:16] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 16:04:16] R/mixte.r (forced) in 1.01 sec. (2 MB)
+SUCCESS [2025-12-09 16:04:16] R/france CN 2014.r (forced) in 0.21 sec. (46 kB)
+SUCCESS [2025-12-09 16:04:16] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:16] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:17] R/assets.r (forced) in 0.59 sec. (805 kB)
+SUCCESS [2025-12-09 16:04:20] R/oecd.r (forced) in 2.6 sec. (138 kB)
+SUCCESS [2025-12-09 16:04:20] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:04:20] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:20] r/decomp.r (forced) in 0.08 sec. (12 kB)
+SUCCESS [2025-12-09 16:04:20] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:04:20] r/ggvanettebrute.r (forced) in 0.7 sec. (500 kB)
+SUCCESS [2025-12-09 16:04:21] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:21] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:21] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:04:21] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:04:21] r/households.r (forced) in 0.3 sec. (84 kB)
+SUCCESS [2025-12-09 16:04:21] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:21] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:25] r/salaires.r (forced) in 3.92 sec. (161 kB)
+SUCCESS [2025-12-09 16:04:25] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:25] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:25] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:26] r/snf_international.r (forced) in 0.8 sec. (22 kB)
+SUCCESS [2025-12-09 16:04:26] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:26] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:26] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:26] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 16:04:28] r/snf_ratio.r (forced) in 2.38 sec. (212 kB)
+SUCCESS [2025-12-09 16:04:29] R/france CN 2014.r (forced) in 0.42 sec. (46 kB)
+SUCCESS [2025-12-09 16:04:29] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:29] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:29] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 16:04:34] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:34] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:34] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 16:04:57] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 16:04:57] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 16:04:57]   but R/vaq.r failed
+SUCCESS [2025-12-09 16:04:57] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:57] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 16:04:57] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:57] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:04:57] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 16:04:57] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:57] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:04:57] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 16:04:57] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 16:04:57] r/annexed.r valid cache (658 kB)
+ERROR [2025-12-09 16:04:57]   but r/annexed.r failed
+SUCCESS [2025-12-09 16:04:58] R/snf_international.r valid cache (22 kB)
+INFO [2025-12-09 16:50:43] Refreshing 17 source files
+SUCCESS [2025-12-09 16:50:43] r/nace.r valid cache (11 kB)
+ERROR [2025-12-09 16:50:43]   but r/nace.r failed
+SUCCESS [2025-12-09 16:50:43] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:50:48] R/naq10_e.r (forced) in 5.1 sec. (3 MB)
+SUCCESS [2025-12-09 16:50:48] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:50:50] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 16:50:50] R/mixte.r (forced) in 1.8 sec. (2 MB)
+SUCCESS [2025-12-09 16:50:52] R/france CN 2014.r (forced) in 1.97 sec. (46 kB)
+SUCCESS [2025-12-09 16:50:52] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:50:52] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:50:54] R/assets.r (forced) in 1.36 sec. (805 kB)
+SUCCESS [2025-12-09 16:50:56] R/oecd.r (forced) in 2.53 sec. (138 kB)
+SUCCESS [2025-12-09 16:50:56] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:50:56] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:50:57] r/decomp.r (forced) in 0.1 sec. (12 kB)
+SUCCESS [2025-12-09 16:50:57] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:50:57] r/ggvanettebrute.r (forced) in 0.72 sec. (500 kB)
+SUCCESS [2025-12-09 16:50:57] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:50:57] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:50:58] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:50:58] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:50:58] r/households.r (forced) in 0.52 sec. (84 kB)
+SUCCESS [2025-12-09 16:50:58] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:50:58] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:51:04] r/salaires.r (forced) in 6.36 sec. (161 kB)
+SUCCESS [2025-12-09 16:51:04] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:51:04] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:51:04] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:51:06] r/snf_international.r (forced) in 1.71 sec. (22 kB)
+SUCCESS [2025-12-09 16:51:06] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:51:06] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:51:06] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:51:06] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 16:51:10] r/snf_ratio.r (forced) in 3.37 sec. (212 kB)
+SUCCESS [2025-12-09 16:51:10] R/france CN 2014.r (forced) in 0.22 sec. (46 kB)
+SUCCESS [2025-12-09 16:51:10] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:51:10] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 16:51:10] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:51:10] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:51:10] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 16:51:10] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:51:10] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:51:10] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 16:51:24] R/france-melodi.r (exec. no cache found) in 13.99 sec. (217 kB)
+SUCCESS [2025-12-09 16:51:24] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 16:51:25] r/annexed.r (forced) in 14.77 sec. (658 kB)
+SUCCESS [2025-12-09 16:51:25] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:51:25] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:51:25] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 16:51:35] r/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 16:51:35] R/snf_international.r valid cache (22 kB)
+SUCCESS [2025-12-09 16:51:36] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:51:36] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:51:36] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 16:51:45] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:51:45] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 16:51:45] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 16:51:45] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 16:51:45] r/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 16:51:45]   but r/vaq.r failed
+INFO [2025-12-09 17:22:01] Refreshing 17 source files
+INFO [2025-12-09 17:22:02] Initializing with init_fn()
+SUCCESS [2025-12-09 17:22:02] r/nace.r valid cache (11 kB)
+ERROR [2025-12-09 17:22:02]   but r/nace.r failed
+SUCCESS [2025-12-09 17:22:02] R/nace.r valid cache (11 kB)
+INFO [2025-12-09 17:22:28] Refreshing 1 source files
+INFO [2025-12-09 17:22:29] Initializing with init_fn()
+SUCCESS [2025-12-09 17:22:30] r/nace.r (forced) in 1.08 sec. (11 kB)
+INFO [2025-12-09 17:24:07] Refreshing 17 source files
+SUCCESS [2025-12-09 17:24:08] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:12] R/naq10_e.r (forced) in 4.57 sec. (3 MB)
+SUCCESS [2025-12-09 17:24:12] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:13] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 17:24:14] R/mixte.r (forced) in 1.8 sec. (2 MB)
+SUCCESS [2025-12-09 17:24:16] R/france CN 2014.r (forced) in 2.15 sec. (46 kB)
+SUCCESS [2025-12-09 17:24:16] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:16] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:18] R/assets.r (forced) in 1.32 sec. (805 kB)
+SUCCESS [2025-12-09 17:24:21] R/oecd.r (forced) in 3.28 sec. (138 kB)
+SUCCESS [2025-12-09 17:24:21] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:21] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 17:24:21] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:21] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 17:24:21] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 17:24:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:22] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:22] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 17:24:33] R/france-melodi.r (exec. no cache found) in 11.88 sec. (217 kB)
+SUCCESS [2025-12-09 17:24:33] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 17:24:34] r/annexed.r (forced) in 12.74 sec. (658 kB)
+SUCCESS [2025-12-09 17:24:34] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 17:24:34] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:34] r/decomp.r (forced) in 0.24 sec. (12 kB)
+SUCCESS [2025-12-09 17:24:35] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 17:24:35] r/ggvanettebrute.r (forced) in 0.75 sec. (500 kB)
+SUCCESS [2025-12-09 17:24:35] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:35] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:36] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 17:24:36] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 17:24:36] r/households.r (forced) in 0.8 sec. (84 kB)
+SUCCESS [2025-12-09 17:24:37] r/nace.r (forced) in 1.01 sec. (11 kB)
+SUCCESS [2025-12-09 17:24:37] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:37] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:43] r/salaires.r (forced) in 5.52 sec. (161 kB)
+SUCCESS [2025-12-09 17:24:43] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:43] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:43] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:44] r/snf_international.r (forced) in 1.57 sec. (22 kB)
+SUCCESS [2025-12-09 17:24:44] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:44] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:44] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:44] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 17:24:48] r/snf_ratio.r (forced) in 3.39 sec. (212 kB)
+SUCCESS [2025-12-09 17:24:48] R/france CN 2014.r (forced) in 0.28 sec. (46 kB)
+SUCCESS [2025-12-09 17:24:48] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:48] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:48] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 17:24:56] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 17:24:56] R/snf_international.r valid cache (22 kB)
+SUCCESS [2025-12-09 17:24:57] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:57] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:24:57] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 17:25:04] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:25:04] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:25:04] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 17:25:04] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 17:25:04] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 17:25:04]   but R/vaq.r failed
+INFO [2025-12-09 17:27:16] Refreshing 1 source files
+INFO [2025-12-09 17:27:22] Initializing with init_fn()
+SUCCESS [2025-12-09 17:27:23] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:27:23] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:27:23] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 17:27:28] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:27:28] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 17:27:28] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 17:27:42] R/france-melodi.r (exec. no cache found) in 13.99 sec. (217 kB)
+SUCCESS [2025-12-09 17:27:42] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 17:27:42] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 17:27:43] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 17:27:44] R/assets.r valid cache (805 kB)
+SUCCESS [2025-12-09 17:27:44] r/vaq.r (forced) in 21.79 sec. (9 MB)
+INFO [2025-12-09 18:01:02] Refreshing 17 source files
+INFO [2025-12-09 18:01:03] Initializing with init_fn()
+SUCCESS [2025-12-09 18:01:03] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:06] R/naq10_e.r (forced) in 2.56 sec. (3 MB)
+SUCCESS [2025-12-09 18:01:06] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:06] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 18:01:07] R/mixte.r (forced) in 1.04 sec. (2 MB)
+SUCCESS [2025-12-09 18:01:07] R/france CN 2014.r (forced) in 0.41 sec. (46 kB)
+SUCCESS [2025-12-09 18:01:07] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:08] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:08] R/assets.r (forced) in 0.49 sec. (805 kB)
+SUCCESS [2025-12-09 18:01:10] R/oecd.r (forced) in 2.17 sec. (138 kB)
+SUCCESS [2025-12-09 18:01:11] R/snf_international.r valid cache (22 kB)
+SUCCESS [2025-12-09 18:01:12] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:12] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 18:01:12] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:12] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 18:01:12] R/mixte.r valid cache (2 MB)
+SUCCESS [2025-12-09 18:01:12] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:12] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:12] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 18:01:29] R/france-melodi.r (exec. no cache found) in 16.92 sec. (217 kB)
+SUCCESS [2025-12-09 18:01:29] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 18:01:29] r/annexed.r (forced) in 17.65 sec. (658 kB)
+SUCCESS [2025-12-09 18:01:29] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 18:01:29] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:29] r/decomp.r (forced) in 0.08 sec. (12 kB)
+SUCCESS [2025-12-09 18:01:30] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 18:01:30] r/ggvanettebrute.r (forced) in 0.81 sec. (500 kB)
+SUCCESS [2025-12-09 18:01:30] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:30] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:31] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 18:01:31] R/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-09 18:01:31] r/households.r (forced) in 0.43 sec. (84 kB)
+SUCCESS [2025-12-09 18:01:31] r/nace.r (forced) in 0.5 sec. (11 kB)
+SUCCESS [2025-12-09 18:01:31] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:31] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:35] r/salaires.r (forced) in 3.7 sec. (161 kB)
+SUCCESS [2025-12-09 18:01:35] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:35] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:35] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:36] r/snf_international.r (forced) in 0.69 sec. (22 kB)
+SUCCESS [2025-12-09 18:01:36] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:36] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:36] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:36] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 18:01:38] r/snf_ratio.r (forced) in 2.2 sec. (212 kB)
+SUCCESS [2025-12-09 18:01:39] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:39] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:39] R/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-09 18:01:44] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:45] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:45] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 18:01:51] R/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 18:01:51] r/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 18:01:51]   but r/vaq.r failed
+SUCCESS [2025-12-09 18:01:51] R/france CN 2014.r (forced) in 0.25 sec. (46 kB)
+SUCCESS [2025-12-09 18:01:51] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:52] R/nace.r valid cache (11 kB)
+SUCCESS [2025-12-09 18:01:52] R/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 18:01:52] R/france-melodi.r failed, no cache

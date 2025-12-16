@@ -1,0 +1,36 @@
+INFO [2025-12-09 11:32:20] Refreshing 16 source files
+SUCCESS [2025-12-09 11:32:20] R/mixte.r valid cache (2 MB)
+ERROR [2025-12-09 11:32:20]   but R/mixte.r failed
+SUCCESS [2025-12-09 11:32:20] R/nace.r valid cache (11 kB)
+ERROR [2025-12-09 11:32:20]   but R/nace.r failed
+SUCCESS [2025-12-09 11:32:20] R/naq10_e.r valid cache (3 MB)
+ERROR [2025-12-09 11:32:20]   but R/naq10_e.r failed
+SUCCESS [2025-12-09 11:32:20] r/annexed.r valid cache (658 kB)
+ERROR [2025-12-09 11:32:20]   but r/annexed.r failed
+SUCCESS [2025-12-09 11:32:20] r/assets.r valid cache (805 kB)
+ERROR [2025-12-09 11:32:20]   but r/assets.r failed
+SUCCESS [2025-12-09 11:32:20] r/decomp.r valid cache (12 kB)
+ERROR [2025-12-09 11:32:20]   but r/decomp.r failed
+SUCCESS [2025-12-09 11:32:20] r/france cn 2014.r valid cache (46 kB)
+ERROR [2025-12-09 11:32:20]   but r/france cn 2014.r failed
+ERROR [2025-12-09 11:32:20] r/france-melodi.r failed, no cache
+SUCCESS [2025-12-09 11:32:20] r/ggvanettebrute.r valid cache (500 kB)
+ERROR [2025-12-09 11:32:20]   but r/ggvanettebrute.r failed
+SUCCESS [2025-12-09 11:32:20] r/households.r valid cache (84 kB)
+ERROR [2025-12-09 11:32:20]   but r/households.r failed
+SUCCESS [2025-12-09 11:32:20] r/oecd.r valid cache (138 kB)
+ERROR [2025-12-09 11:32:20]   but r/oecd.r failed
+SUCCESS [2025-12-09 11:32:21] r/psali.r valid cache (1 MB)
+ERROR [2025-12-09 11:32:21]   but r/psali.r failed
+SUCCESS [2025-12-09 11:32:21] r/salaires.r valid cache (161 kB)
+ERROR [2025-12-09 11:32:21]   but r/salaires.r failed
+SUCCESS [2025-12-09 11:32:21] r/snf_international.r valid cache (22 kB)
+ERROR [2025-12-09 11:32:21]   but r/snf_international.r failed
+SUCCESS [2025-12-09 11:32:21] r/snf_ratio.r valid cache (212 kB)
+ERROR [2025-12-09 11:32:21]   but r/snf_ratio.r failed
+SUCCESS [2025-12-09 11:32:21] r/vaq.r valid cache (9 MB)
+ERROR [2025-12-09 11:32:21]   but r/vaq.r failed
+INFO [2025-12-09 11:32:46] Refreshing 16 source files
+INFO [2025-12-09 11:32:51] Inializing with init_fn()
+SUCCESS [2025-12-09 11:33:28] R/mixte.r valid cache (2 MB)
+ERROR [2025-12-09 11:33:28]   but R/mixte.r failed
