@@ -13,6 +13,9 @@ website:
      - text: Séminaire Lunch OFCE
        icon: file-earmark-easel
        href: seminaire_lunch_OFCE.html
+     - text: Séminaire IRES-OFCE
+       icon: file-earmark-easel
+       href: seminaire_IRES_OFCE.html
      - text: Post sur le blog de l'OFCE
        icon: pen
        href: https://www.ofce.sciences-po.fr/blog2024/fr/2025/20251128_XT/

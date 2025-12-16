@@ -1,0 +1,363 @@
+INFO [2025-12-15 15:10:16] Refreshing 16 source files
+INFO [2025-12-15 15:10:16] sourcoising C:/Users/timbe/github/travail/r/annexed.r
+INFO [2025-12-15 15:10:16] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+INFO [2025-12-15 15:10:16] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:10:16] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:10:17] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:10:17] sourcoising C:/Users/timbe/github/travail/r/mixte.r
+INFO [2025-12-15 15:10:17] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:10:17] r/mixte.r valid cache (2 MB)
+INFO [2025-12-15 15:10:17] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:10:17] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:10:17] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:10:17] sourcoising C:/Users/timbe/github/travail/r/vaq.r
+INFO [2025-12-15 15:10:17] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:10:17] r/vaq.r valid cache (9 MB)
+INFO [2025-12-15 15:10:17] sourcoising C:/Users/timbe/github/travail/r/mixte.r
+INFO [2025-12-15 15:10:17] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:10:17] r/mixte.r valid cache (2 MB)
+INFO [2025-12-15 15:10:17] sourcoising C:/Users/timbe/github/travail/r/france-melodi.r
+INFO [2025-12-15 15:10:17] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+INFO [2025-12-15 15:10:17] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:10:17] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:10:17] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:10:17] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:10:17] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:10:17] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:10:17] sourcoising C:/Users/timbe/github/travail/r/vaq.r
+INFO [2025-12-15 15:10:17] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:10:17] r/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-15 15:11:18] r/france-melodi.r (exec. no cache) in 60.67 sec. (217 kB)
+INFO [2025-12-15 15:11:18] sourcoising C:/Users/timbe/github/travail/r/naq10_e.r
+INFO [2025-12-15 15:11:18] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:18] r/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-15 15:11:19] r/annexed.r (forced) in 62.8 sec. (658 kB)
+INFO [2025-12-15 15:11:19] sourcoising C:/Users/timbe/github/travail/r/assets.r
+INFO [2025-12-15 15:11:19] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+INFO [2025-12-15 15:11:19] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:11:19] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:19] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:11:19] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:11:19] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:19] r/nace.r valid cache (11 kB)
+SUCCESS [2025-12-15 15:11:22] r/assets.r (forced) in 3.49 sec. (806 kB)
+INFO [2025-12-15 15:11:22] sourcoising C:/Users/timbe/github/travail/r/decomp.r
+INFO [2025-12-15 15:11:22] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+INFO [2025-12-15 15:11:22] sourcoising C:/Users/timbe/github/travail/r/vaq.r
+INFO [2025-12-15 15:11:22] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:22] r/vaq.r valid cache (9 MB)
+INFO [2025-12-15 15:11:22] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:11:22] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:22] r/nace.r valid cache (11 kB)
+SUCCESS [2025-12-15 15:11:23] r/decomp.r (forced) in 0.14 sec. (12 kB)
+INFO [2025-12-15 15:11:23] sourcoising C:/Users/timbe/github/travail/r/france cn 2014.r
+INFO [2025-12-15 15:11:23] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:26] r/france cn 2014.r (forced) in 3.58 sec. (46 kB)
+INFO [2025-12-15 15:11:26] sourcoising C:/Users/timbe/github/travail/r/france-melodi.r
+INFO [2025-12-15 15:11:26] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+INFO [2025-12-15 15:11:26] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:11:26] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:26] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:11:26] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:11:26] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:26] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:11:26] sourcoising C:/Users/timbe/github/travail/r/vaq.r
+INFO [2025-12-15 15:11:26] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:26] r/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-15 15:11:45] r/france-melodi.r (forced) in 18.77 sec. (217 kB)
+INFO [2025-12-15 15:11:45] sourcoising C:/Users/timbe/github/travail/r/ggvanettebrute.r
+INFO [2025-12-15 15:11:45] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+INFO [2025-12-15 15:11:46] sourcoising C:/Users/timbe/github/travail/r/vaq.r
+INFO [2025-12-15 15:11:46] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:46] r/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-15 15:11:47] r/ggvanettebrute.r (forced) in 1.35 sec. (500 kB)
+INFO [2025-12-15 15:11:47] sourcoising C:/Users/timbe/github/travail/r/households.r
+INFO [2025-12-15 15:11:47] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+INFO [2025-12-15 15:11:47] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:11:47] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:47] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:11:47] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:11:47] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:47] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:11:48] sourcoising C:/Users/timbe/github/travail/r/vaq.r
+INFO [2025-12-15 15:11:48] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:48] r/vaq.r valid cache (9 MB)
+INFO [2025-12-15 15:11:48] sourcoising C:/Users/timbe/github/travail/r/vaq.r
+INFO [2025-12-15 15:11:48] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:48] r/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-15 15:11:48] r/households.r (forced) in 1.29 sec. (84 kB)
+INFO [2025-12-15 15:11:48] sourcoising C:/Users/timbe/github/travail/r/mixte.r
+INFO [2025-12-15 15:11:48] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+INFO [2025-12-15 15:11:48] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:11:48] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:48] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:11:51] sourcoising C:/Users/timbe/github/travail/r/naq10_e.r
+INFO [2025-12-15 15:11:51] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:51] r/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-15 15:11:52] r/mixte.r (forced) in 3.72 sec. (2 MB)
+INFO [2025-12-15 15:11:52] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:11:52] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:54] r/nace.r (forced) in 2.35 sec. (11 kB)
+INFO [2025-12-15 15:11:54] sourcoising C:/Users/timbe/github/travail/r/naq10_e.r
+INFO [2025-12-15 15:11:55] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+INFO [2025-12-15 15:11:55] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:11:55] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:11:55] r/nace.r valid cache (11 kB)
+SUCCESS [2025-12-15 15:12:03] r/naq10_e.r (forced) in 7.97 sec. (3 MB)
+INFO [2025-12-15 15:12:03] sourcoising C:/Users/timbe/github/travail/r/oecd.r
+INFO [2025-12-15 15:12:03] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:12:03] r/oecd.r valid cache (138 kB)
+ERROR [2025-12-15 15:12:03]   but r/oecd.r failed
+ERROR [2025-12-15 15:12:03] impossible d'ouvrir l'URL 'https://sdmx.oecd.org/public/rest/data/OECD.SDD.NAD,DSD_NAMAIN1@DF_QNA,1.1/Q..USA+FRA+DEU+GBR+ITA+ESP+NLD+BEL+JPN...B1G.._T...V.N.T0101?dimensionAtObservation=AllDimensions'
+INFO [2025-12-15 15:12:03] sourcoising C:/Users/timbe/github/travail/r/psali.r
+INFO [2025-12-15 15:12:03] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+INFO [2025-12-15 15:12:04] sourcoising C:/Users/timbe/github/travail/r/snf_international.r
+INFO [2025-12-15 15:12:04] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:12:04] r/snf_international.r valid cache (22 kB)
+SUCCESS [2025-12-15 15:12:05] r/psali.r valid cache (920 kB)
+ERROR [2025-12-15 15:12:05]   but r/psali.r failed
+ERROR [2025-12-15 15:12:05] glue cannot interpolate functions into strings.
+* object 'date' is a function.
+INFO [2025-12-15 15:12:05] sourcoising C:/Users/timbe/github/travail/r/salaires.r
+INFO [2025-12-15 15:12:05] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+INFO [2025-12-15 15:12:05] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:12:05] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:12:05] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:12:05] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:12:05] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:12:05] r/nace.r valid cache (11 kB)
+SUCCESS [2025-12-15 15:12:17] r/salaires.r (forced) in 11.99 sec. (161 kB)
+INFO [2025-12-15 15:12:17] sourcoising C:/Users/timbe/github/travail/r/snf_international.r
+INFO [2025-12-15 15:12:17] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+INFO [2025-12-15 15:12:17] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:12:17] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:12:17] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:12:17] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:12:17] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:12:17] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:12:17] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:12:17] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:12:17] r/nace.r valid cache (11 kB)
+SUCCESS [2025-12-15 15:12:20] r/snf_international.r (forced) in 3.11 sec. (22 kB)
+INFO [2025-12-15 15:12:20] sourcoising C:/Users/timbe/github/travail/r/snf_ratio.r
+INFO [2025-12-15 15:12:20] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+INFO [2025-12-15 15:12:20] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:12:20] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:12:20] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:12:20] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:12:20] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:12:20] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:12:20] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:12:20] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:12:20] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:12:20] sourcoising C:/Users/timbe/github/travail/r/naq10_e.r
+INFO [2025-12-15 15:12:20] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:12:20] r/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-15 15:12:28] r/snf_ratio.r (forced) in 7.37 sec. (212 kB)
+INFO [2025-12-15 15:12:28] sourcoising C:/Users/timbe/github/travail/r/vaq.r
+INFO [2025-12-15 15:12:28] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+INFO [2025-12-15 15:12:29] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:12:29] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:12:29] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:12:29] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:12:29] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:12:29] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:12:29] sourcoising C:/Users/timbe/github/travail/r/naq10_e.r
+INFO [2025-12-15 15:12:29] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:12:29] r/naq10_e.r valid cache (3 MB)
+INFO [2025-12-15 15:12:46] sourcoising C:/Users/timbe/github/travail/r/france-melodi.r
+INFO [2025-12-15 15:12:46] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+INFO [2025-12-15 15:12:46] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:12:46] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:12:46] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:12:46] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 15:12:46] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:12:46] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 15:12:46] sourcoising C:/Users/timbe/github/travail/r/vaq.r
+INFO [2025-12-15 15:12:46] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:12:46] r/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-15 15:13:05] r/france-melodi.r (exec. no cache) in 19.07 sec. (217 kB)
+INFO [2025-12-15 15:13:05] sourcoising C:/Users/timbe/github/travail/r/mixte.r
+INFO [2025-12-15 15:13:05] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:13:05] r/mixte.r valid cache (2 MB)
+INFO [2025-12-15 15:13:05] sourcoising C:/Users/timbe/github/travail/r/mixte.r
+INFO [2025-12-15 15:13:05] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:13:05] r/mixte.r valid cache (2 MB)
+INFO [2025-12-15 15:13:07] sourcoising C:/Users/timbe/github/travail/r/mixte.r
+INFO [2025-12-15 15:13:07] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:13:07] r/mixte.r valid cache (2 MB)
+INFO [2025-12-15 15:13:10] sourcoising C:/Users/timbe/github/travail/r/assets.r
+INFO [2025-12-15 15:13:10] Tracked files not found (C:/Users/timbe/github/travail/0), check your paths.
+SUCCESS [2025-12-15 15:13:10] r/assets.r valid cache (806 kB)
+SUCCESS [2025-12-15 15:13:10] r/vaq.r (forced) in 42.67 sec. (9 MB)
+INFO [2025-12-15 18:50:04] Refreshing 16 source files
+INFO [2025-12-15 18:50:04] sourcoising C:/Users/timbe/github/travail/r/annexed.r
+INFO [2025-12-15 18:50:04] Tracked files not found, check your paths.
+INFO [2025-12-15 18:50:04] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:50:04] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:04] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 18:50:05] sourcoising C:/Users/timbe/github/travail/r/mixte.r
+INFO [2025-12-15 18:50:05] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:05] r/mixte.r valid cache (2 MB)
+INFO [2025-12-15 18:50:05] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:50:05] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:05] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 18:50:05] sourcoising C:/Users/timbe/github/travail/r/vaq.r
+INFO [2025-12-15 18:50:05] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:05] r/vaq.r valid cache (9 MB)
+INFO [2025-12-15 18:50:05] sourcoising C:/Users/timbe/github/travail/r/mixte.r
+INFO [2025-12-15 18:50:05] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:05] r/mixte.r valid cache (2 MB)
+INFO [2025-12-15 18:50:05] sourcoising C:/Users/timbe/github/travail/r/france-melodi.r
+INFO [2025-12-15 18:50:05] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:05] r/france-melodi.r valid cache (217 kB)
+INFO [2025-12-15 18:50:05] sourcoising C:/Users/timbe/github/travail/r/naq10_e.r
+INFO [2025-12-15 18:50:05] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:05] r/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-15 18:50:06] r/annexed.r (forced) in 1.72 sec. (658 kB)
+INFO [2025-12-15 18:50:06] sourcoising C:/Users/timbe/github/travail/r/assets.r
+INFO [2025-12-15 18:50:06] Tracked files not found, check your paths.
+INFO [2025-12-15 18:50:06] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:50:06] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:06] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 18:50:06] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:50:06] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:06] r/nace.r valid cache (11 kB)
+SUCCESS [2025-12-15 18:50:09] r/assets.r (forced) in 2.86 sec. (806 kB)
+INFO [2025-12-15 18:50:09] sourcoising C:/Users/timbe/github/travail/r/decomp.r
+INFO [2025-12-15 18:50:09] Tracked files not found, check your paths.
+INFO [2025-12-15 18:50:09] sourcoising C:/Users/timbe/github/travail/r/vaq.r
+INFO [2025-12-15 18:50:09] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:09] r/vaq.r valid cache (9 MB)
+INFO [2025-12-15 18:50:09] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:50:09] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:09] r/nace.r valid cache (11 kB)
+SUCCESS [2025-12-15 18:50:09] r/decomp.r (forced) in 0.14 sec. (12 kB)
+INFO [2025-12-15 18:50:09] sourcoising C:/Users/timbe/github/travail/r/france cn 2014.r
+INFO [2025-12-15 18:50:09] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:12] r/france cn 2014.r (forced) in 3.3 sec. (46 kB)
+INFO [2025-12-15 18:50:12] sourcoising C:/Users/timbe/github/travail/r/france-melodi.r
+INFO [2025-12-15 18:50:12] Tracked files not found, check your paths.
+INFO [2025-12-15 18:50:13] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:50:13] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:13] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 18:50:13] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:50:13] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:13] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 18:50:13] sourcoising C:/Users/timbe/github/travail/r/vaq.r
+INFO [2025-12-15 18:50:13] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:13] r/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-15 18:50:32] r/france-melodi.r (forced) in 19.92 sec. (217 kB)
+INFO [2025-12-15 18:50:32] sourcoising C:/Users/timbe/github/travail/r/ggvanettebrute.r
+INFO [2025-12-15 18:50:32] Tracked files not found, check your paths.
+INFO [2025-12-15 18:50:34] sourcoising C:/Users/timbe/github/travail/r/vaq.r
+INFO [2025-12-15 18:50:34] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:34] r/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-15 18:50:34] r/ggvanettebrute.r (forced) in 1.33 sec. (500 kB)
+INFO [2025-12-15 18:50:34] sourcoising C:/Users/timbe/github/travail/r/households.r
+INFO [2025-12-15 18:50:34] Tracked files not found, check your paths.
+INFO [2025-12-15 18:50:34] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:50:34] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:34] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 18:50:34] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:50:34] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:34] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 18:50:35] sourcoising C:/Users/timbe/github/travail/r/vaq.r
+INFO [2025-12-15 18:50:35] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:35] r/vaq.r valid cache (9 MB)
+INFO [2025-12-15 18:50:35] sourcoising C:/Users/timbe/github/travail/r/vaq.r
+INFO [2025-12-15 18:50:35] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:35] r/vaq.r valid cache (9 MB)
+SUCCESS [2025-12-15 18:50:35] r/households.r (forced) in 1.14 sec. (84 kB)
+INFO [2025-12-15 18:50:35] sourcoising C:/Users/timbe/github/travail/r/mixte.r
+INFO [2025-12-15 18:50:35] Tracked files not found, check your paths.
+INFO [2025-12-15 18:50:35] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:50:35] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:35] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 18:50:37] sourcoising C:/Users/timbe/github/travail/r/naq10_e.r
+INFO [2025-12-15 18:50:37] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:37] r/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-15 18:50:39] r/mixte.r (forced) in 3.49 sec. (2 MB)
+INFO [2025-12-15 18:50:39] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:50:39] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:41] r/nace.r (forced) in 1.94 sec. (11 kB)
+INFO [2025-12-15 18:50:41] sourcoising C:/Users/timbe/github/travail/r/naq10_e.r
+INFO [2025-12-15 18:50:41] Tracked files not found, check your paths.
+INFO [2025-12-15 18:50:41] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:50:41] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:41] r/nace.r valid cache (11 kB)
+SUCCESS [2025-12-15 18:50:47] r/naq10_e.r (forced) in 6.08 sec. (3 MB)
+INFO [2025-12-15 18:50:47] sourcoising C:/Users/timbe/github/travail/r/oecd.r
+INFO [2025-12-15 18:50:47] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:47] r/oecd.r valid cache (138 kB)
+ERROR [2025-12-15 18:50:47]   but r/oecd.r failed
+ERROR [2025-12-15 18:50:47] impossible d'ouvrir l'URL 'https://sdmx.oecd.org/public/rest/data/OECD.SDD.NAD,DSD_NAMAIN1@DF_QNA,1.1/Q..USA+FRA+DEU+GBR+ITA+ESP+NLD+BEL+JPN...B1G.._T...V.N.T0101?dimensionAtObservation=AllDimensions'
+INFO [2025-12-15 18:50:47] sourcoising C:/Users/timbe/github/travail/r/psali.r
+INFO [2025-12-15 18:50:47] Tracked files not found, check your paths.
+INFO [2025-12-15 18:50:49] sourcoising C:/Users/timbe/github/travail/r/snf_international.r
+INFO [2025-12-15 18:50:49] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:49] r/snf_international.r valid cache (22 kB)
+SUCCESS [2025-12-15 18:50:49] r/psali.r (forced) in 1.64 sec. (920 kB)
+INFO [2025-12-15 18:50:49] sourcoising C:/Users/timbe/github/travail/r/salaires.r
+INFO [2025-12-15 18:50:49] Tracked files not found, check your paths.
+INFO [2025-12-15 18:50:49] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:50:49] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:49] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 18:50:49] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:50:49] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:50:49] r/nace.r valid cache (11 kB)
+SUCCESS [2025-12-15 18:50:59] r/salaires.r (forced) in 10.23 sec. (161 kB)
+INFO [2025-12-15 18:50:59] sourcoising C:/Users/timbe/github/travail/r/snf_international.r
+INFO [2025-12-15 18:50:59] Tracked files not found, check your paths.
+INFO [2025-12-15 18:50:59] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:51:00] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:51:00] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 18:51:00] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:51:00] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:51:00] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 18:51:00] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:51:00] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:51:00] r/nace.r valid cache (11 kB)
+SUCCESS [2025-12-15 18:51:02] r/snf_international.r (forced) in 2.75 sec. (22 kB)
+INFO [2025-12-15 18:51:02] sourcoising C:/Users/timbe/github/travail/r/snf_ratio.r
+INFO [2025-12-15 18:51:02] Tracked files not found, check your paths.
+INFO [2025-12-15 18:51:02] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:51:02] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:51:02] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 18:51:02] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:51:02] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:51:02] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 18:51:02] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:51:02] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:51:02] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 18:51:02] sourcoising C:/Users/timbe/github/travail/r/naq10_e.r
+INFO [2025-12-15 18:51:02] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:51:02] r/naq10_e.r valid cache (3 MB)
+SUCCESS [2025-12-15 18:51:09] r/snf_ratio.r (forced) in 6.61 sec. (212 kB)
+INFO [2025-12-15 18:51:09] sourcoising C:/Users/timbe/github/travail/r/vaq.r
+INFO [2025-12-15 18:51:09] Tracked files not found, check your paths.
+INFO [2025-12-15 18:51:10] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:51:10] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:51:10] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 18:51:10] sourcoising C:/Users/timbe/github/travail/r/nace.r
+INFO [2025-12-15 18:51:10] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:51:10] r/nace.r valid cache (11 kB)
+INFO [2025-12-15 18:51:10] sourcoising C:/Users/timbe/github/travail/r/naq10_e.r
+INFO [2025-12-15 18:51:10] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:51:10] r/naq10_e.r valid cache (3 MB)
+INFO [2025-12-15 18:51:23] sourcoising C:/Users/timbe/github/travail/r/france-melodi.r
+INFO [2025-12-15 18:51:23] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:51:24] r/france-melodi.r valid cache (217 kB)
+INFO [2025-12-15 18:51:24] sourcoising C:/Users/timbe/github/travail/r/mixte.r
+INFO [2025-12-15 18:51:24] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:51:24] r/mixte.r valid cache (2 MB)
+INFO [2025-12-15 18:51:24] sourcoising C:/Users/timbe/github/travail/r/mixte.r
+INFO [2025-12-15 18:51:24] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:51:24] r/mixte.r valid cache (2 MB)
+INFO [2025-12-15 18:51:26] sourcoising C:/Users/timbe/github/travail/r/mixte.r
+INFO [2025-12-15 18:51:26] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:51:26] r/mixte.r valid cache (2 MB)
+INFO [2025-12-15 18:51:29] sourcoising C:/Users/timbe/github/travail/r/assets.r
+INFO [2025-12-15 18:51:29] Tracked files not found, check your paths.
+SUCCESS [2025-12-15 18:51:29] r/assets.r valid cache (806 kB)
+SUCCESS [2025-12-15 18:51:29] r/vaq.r (forced) in 20.08 sec. (9 MB)

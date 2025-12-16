@@ -52,9 +52,7 @@ Il apparaît que la part des salaires dans la valeur ajoutée en France est croi
 ```{r, results="asis"}
 #| label: fig-psal
 #| fig-asp: 0.85
-#| fig-cap: Part des salaires dans la VA
-
-
+#| fig-cap: Part des salaires dans la VA   
 
 naq <- source_data("R/vaq.r")$naa |> 
   filter(geo %in% P6) |> 
