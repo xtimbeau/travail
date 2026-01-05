@@ -143,7 +143,7 @@ Elle est evaluée par des tables de mortalité par classe d'actifs.")) |>
 ## Nette plutôt que brute -- CCF sur actifs {.smaller}
 
 ::::: columns
-::: {.column width="85%"}
+::: {.column width="80%"}
 ```{r}
 (load_graphe("annexes-unnamed-chunk-5-5") + 
   ofce_caption()+
@@ -152,7 +152,7 @@ Elle est evaluée par des tables de mortalité par classe d'actifs.")) |>
 ```
 :::
 
-::: {.column width="15%"}
+::: {.column width="20%"}
 En France, la CCF est particulièrement élevée (21.1% de la VAN en France contre 16.5% en Allemagne).
 
 {{< fa arrow-right >}} Actifs sur VAB : Allemagne : 1,65 ; France 1,33
@@ -195,6 +195,15 @@ Mais :
 Une autre méthode est possible : le revenu mixte
 
 -   la CN définit depuis (longtemps base 2020, base 2014, ESA 2010, 1995) le revenu mixte (B3G). La base 2020 diffuse B3G au niveau des branches.
+
+## L'ampleur du problème
+
+```{r}
+("index-tbl-mixte" |> 
+   load_gt() |> 
+   tab_options(table.font.size = 18))
+```
+
 
 ## Le revenu des non salariés
 
@@ -271,11 +280,11 @@ Le partage de la valeur ajoutée pour les services immobilier résidentiel n'est
 ## Qu'est ce qui fait la différence avec le diagnostic habituel ?
 
 ```{r}
-
+#| fig-asp: 0.5
 ("annexes-unnamed-chunk-7" |> 
    load_graphe() + 
    ofce_caption() +
-   theme(strip.text = element_marquee(size=rel(0.7)))) |> 
+   theme(strip.text = element_marquee(size=rel(0.66)))) |> 
    girafy()
 
 ```
