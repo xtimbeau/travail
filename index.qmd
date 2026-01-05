@@ -150,7 +150,7 @@ En tout état de cause, la comptabilité nationale ne permet pas (encore) de dis
 
 ### La France a une part des salaires au plus haut
 
-La part des salaires dans la valeur ajoutée nette corrigé par le revenu mixte est croissante en France (@fig-psal, @tbl-psal et @tbl-evolpsal) (de 5,7 points de 1998 le point bas à 2024, le dernier point non extrapolé) alors qu'elle est stable (Italie) ou décroissante (Espagne, Allemagne, Pays-Bas et Belgique). Elle atteint en France le niveau le plus élevé des pays sélectionnés (87% pour les branches marchandes hors services immobiliers), pour autant que l'on puisse comparer entre pays et ce pour les différents concepts que l'on peut envisager (@tbl-psal).
+La part des salaires dans la valeur ajoutée nette corrigé   par le revenu mixte est croissante en France (@fig-psal, @tbl-psal et @tbl-evolpsal) (de 5,7 points de 1998 le point bas à 2024, le dernier point non extrapolé) alors qu'elle est stable (Italie) ou décroissante (Espagne, Allemagne, Pays-Bas et Belgique). Elle atteint en France le niveau le plus élevé des pays sélectionnés (87% pour les branches marchandes hors services immobiliers), pour autant que l'on puisse comparer entre pays et ce pour les différents concepts que l'on peut envisager (@tbl-psal).
 
 Ce résultat contraste avec les évaluations récentes de @cette2019 et @tresor2025 qui concluent à une stabilité de la part des salaires dans la valeur ajoutée autour de ce qu'ils concluent être une valeur d'équilibre. Cette (relative) stabilité se retrouve lorsqu'on inclue les services immobiliers et que l'on considère la valeur ajoutée brute plutôt que la valeur ajoutée nette (voir [annexe 3](annexes.html#a3)).
 
@@ -191,14 +191,16 @@ naq |>
     psalh="rev. mixte",
     psalnc="sans") |> 
   cols_label(geo = "", geo_lbl = "") |> 
-  tab_source_note(md("*Note* : Part des salaires en 2024 dans les branches marchandes hors services immobiliers pour différentes mesure (VA nette ou brute, correction ou non pour les non salariés. Le rang est indiqué entre paranthèses. Voir annexe 3 pour les autres champs.")) |> 
-  tab_source_note(md("*Source* : Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e), INSEE comptes de branches (DD_CNA_BRANCHES).")) |> 
+  ofce_caption(
+  note = "Part des salaires en 2024 dans les branches marchandes hors services immobiliers pour différentes mesure (VA nette ou brute, correction ou non pour les non salariés. Le rang est indiqué entre paranthèses. Voir annexe 3 pour les autres champs.",
+  source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e), INSEE comptes de branches (DD_CNA_BRANCHES).") |> 
   cols_width(
     geo ~ px(20),
     geo_lbl ~ px(80),
     everything() ~ px(120)) |> 
   my_tab_options() |> 
-  cols_hide_pdf(geo)
+  cols_hide_pdf(geo) |> 
+  save_gt() 
 
 ```
 
@@ -227,14 +229,16 @@ naq |>
   tab_spanner("Part des salaires entre 2024 et 1998", c(mdhi,md, tb)) |> 
   cols_label_with(c(mdhi, md, tb), fn = ~champs_c[.x]) |> 
   cols_label(geo = "", geo_lbl = "") |> 
-  tab_source_note(md("*Note* : Part des salaires corrigée de la non salarisation par le revenu mixte (hybride hors France) dans la valeur ajoutée nette pour différents champs, conforme au graphique 1.")) |> 
-  tab_source_note(md("*Source* : Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e).")) |> 
+  ofce_caption(
+    note = "Part des salaires corrigée de la non salarisation par le revenu mixte (hybride hors France) dans la valeur ajoutée nette pour différents champs, conforme au graphique 1.",
+    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e).") |> 
   cols_width(
     geo ~ px(20),
     geo_lbl ~ px(80),
     c(tb,md,mdhi) ~ px(140)) |> 
   my_tab_options() |> 
-  cols_hide_pdf(geo)
+  cols_hide_pdf(geo) |> 
+  save_gt()
            
 ```
 
@@ -394,15 +398,17 @@ data4tp |>
     rh = "après IS",
     y = "Année",
     geo = "", geo_lbl = "") |> 
-  tab_source_note(md("*Champ* : Branches marchandes hors immobilier, correction par le revenu mixte (hybride sauf France).")) |> 
-  tab_source_note(md("*Note* : profits nets de la CCF, avant ou après IS, divisés par la valeur des actifs productifs produits (N1N). L'imputation de l'IS est approximative pour ce champ.")) |> 
-  tab_source_note(md("*Source* : Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e); actifs productifs (nama_10_nfa_st); INSEE comptes de branches (DD_CNA_BRANCHES).")) |> 
+  ofce_cpation(
+  champ = "Branches marchandes hors immobilier, correction par le revenu mixte (hybride sauf France).",
+  note = " Profits nets de la CCF, avant ou après IS, divisés par la valeur des actifs productifs produits (N1N). L'imputation de l'IS est approximative pour ce champ.",
+  source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e); actifs productifs (nama_10_nfa_st); INSEE comptes de branches (DD_CNA_BRANCHES).") |> 
   cols_width(
     geo ~ px(20),
     geo_lbl ~ px(80),
     everything() ~ px(120)) |> 
   my_tab_options() |> 
-  cols_hide_pdf(geo)
+  cols_hide_pdf(geo) |> 
+  save_gt()
 
 ```
 
@@ -802,12 +808,12 @@ nsal |>
   cols_width(c(nsal, b3g, r) ~ px(100)) |> 
   cols_align_decimal(c(nsal, b3g, r), dec_mark = ",") |> 
   cols_align("center", nanoplots) |> 
-  tab_source_note(
-    md("*Champ* : Branches marchandes et non marchandes, année 2024 pour (a) et (b).") ) |> 
-  tab_source_note(
-    md("*Source* : Eurostat, comptes annuels de branche (nama_10_a64), et de transactions non financières (nasa_10_nf_tr).") ) |> 
+  ofce_caption(
+    champ = "Branches marchandes et non marchandes, année 2024 pour (a) et (b).",
+    source = "Eurostat, comptes annuels de branche (nama_10_a64), et de transactions non financières (nasa_10_nf_tr).") |> 
   cols_hide_pdf(c("nanoplots", "geo")) |> 
-  my_tab_options()
+  my_tab_options() |> 
+  ofce::save_gt()
   
 ```
 

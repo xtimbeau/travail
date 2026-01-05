@@ -4708,7 +4708,7 @@
     },
     "ofce": {
       "Package": "ofce",
-      "Version": "1.3.28",
+      "Version": "1.3.29",
       "Source": "GitHub",
       "Type": "Package",
       "Title": "Documents scientifiques aux normes OFCE",
@@ -4774,11 +4774,11 @@
       "Author": "Paul Malliet [aut], Anissa Saumtally [aut], Xavier Timbeau [aut, cre]",
       "Maintainer": "Xavier Timbeau <xavier.timbeau@sciencespo.fr>",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "ofce",
       "RemoteRepo": "ofce",
       "RemoteRef": "master",
-      "RemoteSha": "fe5c110796a985b7bd01525755f4855110102aef",
+      "RemoteSha": "7dfe8dfae77c0fa1b5c87b344d6b64c5c43ba843",
+      "RemoteHost": "api.github.com",
       "Remotes": "sourcoise=github::xtimbeau/sourcoise"
     },
     "officer": {
