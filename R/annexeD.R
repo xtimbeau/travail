@@ -1,12 +1,12 @@
 library(tidyverse)
 library(ofce)
 
-pays <- source_data("nace.r")$pays1
+pays <- sourcoise::sourcoise("nace.r")$pays1
 
-mixte <- source_data("mixte.r")$a |>
+mixte <- sourcoise::sourcoise("mixte.r")$a |>
   mutate(champ = "tb")
 
-nace <- source_data("nace.r") |>
+nace <- sourcoise::sourcoise("nace.r") |>
   pluck("nace") |>
   transmute(nace_r2=a20,
             md = marchand,
@@ -14,17 +14,17 @@ nace <- source_data("nace.r") |>
             hifi = hifi&marchand,
             hfi = hfi&marchand)
 
-d1 <- source_data("vaq.r")$naa |>
+d1 <- sourcoise::sourcoise("vaq.r")$naa |>
   select(geo, time, d1 = msanc, champ)
 
-nsalw <- source_data("mixte.r")$ilc |>
+nsalw <- sourcoise::sourcoise("mixte.r")$ilc |>
   mutate(champ = "tb")
 
-mixte_fr <- source_data("france-melodi.r")$aggr |>
+mixte_fr <- sourcoise::sourcoise("france-melodi.r")$aggr |>
   transmute(time, champ, b3g, b3n = msam-msanc, geo = "FR")
 
 mes_sumarize <- c("sal", "self", "salh", "selfh")
-effectifs <- source_data("naq10_e.r")$naa_e |>
+effectifs <- sourcoise::sourcoise("naq10_e.r")$naa_e |>
   mutate(time = floor_date(time, "year")) |>
   group_by(geo, time, nace_r2) |>
   summarize(sal = first(SAL_DC), self = first(SELF_DC),

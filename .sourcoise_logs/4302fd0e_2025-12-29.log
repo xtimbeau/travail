@@ -1,0 +1,141 @@
+INFO [2025-12-29 17:56:15] Refreshing 15 source files
+INFO [2025-12-29 17:56:15] sourcoising /Users/xt/github/travail/R/nace.r
+SUCCESS [2025-12-29 17:56:19] R/nace.r (forced) in 3.92 sec. (10.3K)
+INFO [2025-12-29 17:56:19] sourcoising /Users/xt/github/travail/R/mixte.r
+INFO [2025-12-29 17:56:19] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:56:19] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:56:20] R/nace.r cache valid (10.3K)
+INFO [2025-12-29 17:56:22] sourcoising /Users/xt/github/travail/R/naq10_e.r
+INFO [2025-12-29 17:56:22] Tracked files not found, check your paths.
+INFO [2025-12-29 17:56:22] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:56:22] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:56:22] R/nace.r cache valid (10.3K)
+SUCCESS [2025-12-29 17:56:28] R/naq10_e.r (forced) in 6.61 sec. (3.16M)
+SUCCESS [2025-12-29 17:56:29] R/mixte.r (forced) in 9.88 sec. (2.1M)
+INFO [2025-12-29 17:56:29] sourcoising /Users/xt/github/travail/R/vaq.r
+INFO [2025-12-29 17:56:30] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:56:30] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:56:30] R/nace.r cache valid (10.3K)
+INFO [2025-12-29 17:56:30] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:56:30] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:56:30] R/nace.r cache valid (10.3K)
+INFO [2025-12-29 17:56:30] sourcoising /Users/xt/github/travail/R/naq10_e.r
+INFO [2025-12-29 17:56:30] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:56:30] R/naq10_e.r cache valid (3.16M)
+INFO [2025-12-29 17:56:46] sourcoising /Users/xt/github/travail/R/france-melodi.r
+INFO [2025-12-29 17:56:46] Tracked files not found, check your paths.
+INFO [2025-12-29 17:56:46] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:56:46] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:56:46] R/nace.r cache valid (10.3K)
+INFO [2025-12-29 17:56:46] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:56:46] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:56:46] R/nace.r cache valid (10.3K)
+SUCCESS [2025-12-29 17:57:17] R/france-melodi.r (forced) in 30.98 sec. (212K)
+INFO [2025-12-29 17:57:17] sourcoising /Users/xt/github/travail/R/mixte.r
+INFO [2025-12-29 17:57:17] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:57:17] R/mixte.r cache valid (2.1M)
+INFO [2025-12-29 17:57:17] sourcoising /Users/xt/github/travail/R/mixte.r
+INFO [2025-12-29 17:57:17] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:57:17] R/mixte.r cache valid (2.1M)
+INFO [2025-12-29 17:57:18] sourcoising /Users/xt/github/travail/R/mixte.r
+INFO [2025-12-29 17:57:18] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:57:18] R/mixte.r cache valid (2.1M)
+INFO [2025-12-29 17:57:22] sourcoising /Users/xt/github/travail/R/assets.r
+INFO [2025-12-29 17:57:22] Tracked files not found, check your paths.
+INFO [2025-12-29 17:57:22] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:57:22] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:57:22] R/nace.r cache valid (10.3K)
+INFO [2025-12-29 17:57:22] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:57:22] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:57:22] R/nace.r cache valid (10.3K)
+SUCCESS [2025-12-29 17:57:25] R/assets.r (forced) in 2.56 sec. (790K)
+SUCCESS [2025-12-29 17:57:25] R/vaq.r (forced) in 55.5 sec. (8.98M)
+INFO [2025-12-29 17:57:25] sourcoising /Users/xt/github/travail/R/naq10_e.r
+INFO [2025-12-29 17:57:25] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:57:25] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:57:25] R/nace.r cache valid (10.3K)
+SUCCESS [2025-12-29 17:57:27] R/naq10_e.r (forced) in 2.26 sec. (3.16M)
+INFO [2025-12-29 17:57:27] sourcoising /Users/xt/github/travail/R/france-melodi.r
+INFO [2025-12-29 17:57:27] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:57:27] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:57:27] R/nace.r cache valid (10.3K)
+INFO [2025-12-29 17:57:27] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:57:27] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:57:27] R/nace.r cache valid (10.3K)
+SUCCESS [2025-12-29 17:57:56] R/france-melodi.r (forced) in 29.09 sec. (212K)
+INFO [2025-12-29 17:57:56] sourcoising /Users/xt/github/travail/R/assets.r
+INFO [2025-12-29 17:57:57] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:57:57] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:57:57] R/nace.r cache valid (10.3K)
+INFO [2025-12-29 17:57:57] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:57:57] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:57:57] R/nace.r cache valid (10.3K)
+SUCCESS [2025-12-29 17:57:58] R/assets.r (forced) in 0.98 sec. (790K)
+INFO [2025-12-29 17:57:58] sourcoising /Users/xt/github/travail/R/snf_international.r
+INFO [2025-12-29 17:57:58] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:57:58] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:57:58] R/nace.r cache valid (10.3K)
+INFO [2025-12-29 17:57:58] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:57:58] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:57:58] R/nace.r cache valid (10.3K)
+INFO [2025-12-29 17:57:58] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:57:58] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:57:58] R/nace.r cache valid (10.3K)
+SUCCESS [2025-12-29 17:58:00] R/snf_international.r (forced) in 2.63 sec. (21.4K)
+INFO [2025-12-29 17:58:00] sourcoising /Users/xt/github/travail/R/decomp.r
+INFO [2025-12-29 17:58:00] sourcoising /Users/xt/github/travail/R/vaq.r
+INFO [2025-12-29 17:58:00] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:58:00] R/vaq.r cache valid (8.98M)
+INFO [2025-12-29 17:58:00] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:58:00] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:58:00] R/nace.r cache valid (10.3K)
+SUCCESS [2025-12-29 17:58:00] R/decomp.r (forced) in 0.11 sec. (11.9K)
+INFO [2025-12-29 17:58:00] sourcoising /Users/xt/github/travail/R/france cn 2014.r
+SUCCESS [2025-12-29 17:58:03] R/france cn 2014.r (forced) in 2.69 sec. (45.3K)
+INFO [2025-12-29 17:58:03] sourcoising /Users/xt/github/travail/R/ggvanettebrute.r
+INFO [2025-12-29 17:58:04] sourcoising /Users/xt/github/travail/R/vaq.r
+INFO [2025-12-29 17:58:04] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:58:04] R/vaq.r cache valid (8.98M)
+SUCCESS [2025-12-29 17:58:04] R/ggvanettebrute.r (forced) in 0.88 sec. (488K)
+INFO [2025-12-29 17:58:04] sourcoising /Users/xt/github/travail/R/households.r
+INFO [2025-12-29 17:58:04] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:58:04] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:58:04] R/nace.r cache valid (10.3K)
+INFO [2025-12-29 17:58:04] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:58:04] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:58:04] R/nace.r cache valid (10.3K)
+INFO [2025-12-29 17:58:05] sourcoising /Users/xt/github/travail/R/vaq.r
+INFO [2025-12-29 17:58:05] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:58:05] R/vaq.r cache valid (8.98M)
+INFO [2025-12-29 17:58:05] sourcoising /Users/xt/github/travail/R/vaq.r
+INFO [2025-12-29 17:58:05] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:58:05] R/vaq.r cache valid (8.98M)
+SUCCESS [2025-12-29 17:58:05] R/households.r (forced) in 1.1 sec. (81.8K)
+INFO [2025-12-29 17:58:05] sourcoising /Users/xt/github/travail/R/oecd.r
+SUCCESS [2025-12-29 17:58:25] R/oecd.r (forced) in 19.46 sec. (135K)
+INFO [2025-12-29 17:58:25] sourcoising /Users/xt/github/travail/R/psali.r
+INFO [2025-12-29 17:58:26] sourcoising /Users/xt/github/travail/R/snf_international.r
+INFO [2025-12-29 17:58:26] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:58:26] R/snf_international.r cache valid (21.4K)
+INFO [2025-12-29 17:58:26] sourcoising /Users/xt/github/travail/R/salaires.r
+INFO [2025-12-29 17:58:26] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:58:26] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:58:26] R/nace.r cache valid (10.3K)
+INFO [2025-12-29 17:58:26] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:58:26] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:58:26] R/nace.r cache valid (10.3K)
+SUCCESS [2025-12-29 17:59:03] R/salaires.r (forced) in 36.95 sec. (157K)
+INFO [2025-12-29 17:59:03] sourcoising /Users/xt/github/travail/R/snf_ratio.r
+INFO [2025-12-29 17:59:03] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:59:03] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:59:03] R/nace.r cache valid (10.3K)
+INFO [2025-12-29 17:59:03] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:59:03] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:59:03] R/nace.r cache valid (10.3K)
+INFO [2025-12-29 17:59:03] sourcoising /Users/xt/github/travail/R/nace.r
+INFO [2025-12-29 17:59:03] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:59:03] R/nace.r cache valid (10.3K)
+INFO [2025-12-29 17:59:03] sourcoising /Users/xt/github/travail/R/naq10_e.r
+INFO [2025-12-29 17:59:03] Tracked files not found, check your paths.
+SUCCESS [2025-12-29 17:59:03] R/naq10_e.r cache valid (3.16M)
+SUCCESS [2025-12-29 17:59:10] R/snf_ratio.r (forced) in 7.02 sec. (207K)

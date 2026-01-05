@@ -13,7 +13,7 @@ snfia <- source_data("snf_international.r") |>
   filter(year(time)>=1995)
 
 meta <- sourcoise::sourcoise_meta("snf_ratio.r")
-date <- meta$data_date |> ymd_hms()
+date <- meta$data_date |> lubridate::ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 lbl_eurostat <- function(x) eurostat::label_eurostat(x, "geo",
                                                      lang = "fr",

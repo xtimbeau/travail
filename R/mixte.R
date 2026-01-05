@@ -2,7 +2,7 @@ library(tidyverse)
 library(eurostat)
 library(ofce)
 
-nace <- source_data("nace.r")
+nace <- sourcoise::sourcoise("nace.r")
 pays <- nace$pays3
 
 adj <- c("SCA", "SA", "CA", "NSA")
@@ -39,7 +39,7 @@ mdom <- mixte_a |>
   summarize(deb=year(min(time)), fin=year(max(time)))
 
 
-naq10_e <- source_data("naq10_e.R")$naa_e |>
+naq10_e <- sourcoise::sourcoise("naq10_e.R")$naa_e |>
   select(geo, time, nace_r2, sal = SAL_DC, self = SELF_DC) |>
   mutate(year = year(time))
 

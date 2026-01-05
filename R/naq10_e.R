@@ -2,7 +2,7 @@ library(tidyverse)
 library(eurostat)
 library(ofce)
 
-nace <- source_data("nace.r")
+nace <- sourcoise::sourcoise("nace.r")
 pays <- nace$pays3
 m_a20 <- nace$nace  |> pull(a20) |> unique()
 m_a10 <- nace$nace |> pull(a10) |> unique()

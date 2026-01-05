@@ -1,4 +1,5 @@
 library(tidyverse)
+library(eurostat)
 
 nace  <- tribble( ~a20, ~a10, ~marchand, ~hors_imm, ~hifi, ~hfi,  ~hi,
                  "A", "A",   TRUE,       TRUE,      TRUE,  TRUE,  TRUE,
@@ -40,3 +41,5 @@ pays3 <- pop |>
   filter(year(time)==2024, geo %in% eurostat::eu_countries$code) |> arrange(desc(pop)) |> pull(geo)
 
 return(list(marchand = marchand, marchand2 = marchand2, nace = nace, pays1 = pays1, pays2 = pays2, pays3 = pays3))
+
+#

@@ -1,0 +1,20 @@
+{
+  "timing": [2.2421],
+  "date": ["2025-12-26 15:49:46.43879"],
+  "size": [21936],
+  "args": [],
+  "lapse": ["never"],
+  "src": ["R/snf_international.r"],
+  "src_hash": ["3ab7240c633f9209a2c8dc7dec1a916d70510850"],
+  "arg_hash": ["4262323b"],
+  "track_hash": [0],
+  "track": [],
+  "wd": ["file"],
+  "qmd_file": [],
+  "src_in": ["project"],
+  "data_hash": ["631eda6a00e5ac86108cb338db56f1b5"],
+  "priority": [11],
+  "file_size": [8334],
+  "data_date": ["2025-12-24 17:45:45"],
+  "data_file": ["snf_international-4262323b_631eda6a00e5ac86108cb338db56f1b5.qs2"]
+}

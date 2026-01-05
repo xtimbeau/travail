@@ -1,0 +1,20 @@
+{
+  "timing": [1.3069],
+  "date": ["2025-12-24 09:18:40.169079"],
+  "size": [493768],
+  "args": [],
+  "lapse": ["never"],
+  "src": ["R/ggvanettebrute.r"],
+  "src_hash": ["c0e7e8310e3424ea6b523a5e29feb613fbcad0ca"],
+  "arg_hash": ["4262323b"],
+  "track_hash": [0],
+  "track": [],
+  "wd": ["file"],
+  "qmd_file": [],
+  "src_in": ["project"],
+  "data_hash": ["0f333583e8f858d6d4782097a2d71a5d"],
+  "priority": [10],
+  "file_size": [37589],
+  "data_date": ["2025-12-24 09:17:26.892926"],
+  "data_file": ["ggvanettebrute-4262323b_0f333583e8f858d6d4782097a2d71a5d.qs2"]
+}
