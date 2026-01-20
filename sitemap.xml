@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://xtimbeau.github.io/travail/seminaire_lunch_OFCE.html</loc>
-    <lastmod>2025-11-27T08:52:26.216Z</lastmod>
-  </url>
-  <url>
-    <loc>https://xtimbeau.github.io/travail/NEWS.html</loc>
-    <lastmod>2025-12-15T18:35:35.719Z</lastmod>
-  </url>
-  <url>
-    <loc>https://xtimbeau.github.io/travail/CLAUDE.html</loc>
-    <lastmod>2025-11-27T13:12:32.816Z</lastmod>
-  </url>
-  <url>
-    <loc>https://xtimbeau.github.io/travail/annexes.html</loc>
-    <lastmod>2025-12-15T18:35:35.733Z</lastmod>
-  </url>
-  <url>
     <loc>https://xtimbeau.github.io/travail/blog.html</loc>
-    <lastmod>2025-11-25T08:22:26.668Z</lastmod>
+    <lastmod>2025-11-24T15:49:49.211Z</lastmod>
   </url>
   <url>
     <loc>https://xtimbeau.github.io/travail/index.html</loc>
-    <lastmod>2026-01-05T10:30:52.809Z</lastmod>
+    <lastmod>2026-01-20T09:50:52.669Z</lastmod>
+  </url>
+  <url>
+    <loc>https://xtimbeau.github.io/travail/annexes.html</loc>
+    <lastmod>2025-11-29T16:19:07.889Z</lastmod>
   </url>
   <url>
     <loc>https://xtimbeau.github.io/travail/seminaire_IRES_OFCE.html</loc>
-    <lastmod>2025-12-16T10:03:16.802Z</lastmod>
+    <lastmod>2026-01-05T10:30:03.440Z</lastmod>
+  </url>
+  <url>
+    <loc>https://xtimbeau.github.io/travail/seminaire_lunch_OFCE.html</loc>
+    <lastmod>2025-11-29T12:22:11.755Z</lastmod>
+  </url>
+  <url>
+    <loc>https://xtimbeau.github.io/travail/NEWS.html</loc>
+    <lastmod>2025-11-29T16:20:25.327Z</lastmod>
+  </url>
+  <url>
+    <loc>https://xtimbeau.github.io/travail/CLAUDE.html</loc>
+    <lastmod>2025-11-29T12:22:11.732Z</lastmod>
   </url>
 </urlset>
