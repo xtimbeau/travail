@@ -1,0 +1,20 @@
+{
+  "timing": [4.2563],
+  "date": ["2026-01-08 18:23:27.646354"],
+  "size": [2201576],
+  "args": [],
+  "lapse": ["never"],
+  "src": ["R/mixte.r"],
+  "src_hash": ["b3e3eb29f7b1254e38cd1856f77550c0eabea13a"],
+  "arg_hash": ["4262323b"],
+  "track_hash": [0],
+  "track": [],
+  "wd": ["file"],
+  "qmd_file": [],
+  "src_in": ["project"],
+  "data_hash": ["ee07839770555966f748853293d4a421"],
+  "priority": [13],
+  "file_size": [348505],
+  "data_date": ["2026-01-05 11:35:47"],
+  "data_file": ["mixte-4262323b_ee07839770555966f748853293d4a421.qs2"]
+}

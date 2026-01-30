@@ -1,0 +1,20 @@
+{
+  "timing": [20.4265],
+  "date": ["2026-01-08 18:30:26.824956"],
+  "size": [9416008],
+  "args": [],
+  "lapse": ["never"],
+  "src": ["r/vaq.r"],
+  "src_hash": ["93e43e45993c414b0bb804a1357dfc3b81af517c"],
+  "arg_hash": ["4262323b"],
+  "track_hash": [0],
+  "track": [],
+  "wd": ["file"],
+  "qmd_file": [],
+  "src_in": ["project"],
+  "data_hash": ["31e25d2c54d921ca644d974438ef6022"],
+  "priority": [14],
+  "file_size": [3614124],
+  "data_date": ["2026-01-08 18:30:26.927429"],
+  "data_file": ["vaq-4262323b_31e25d2c54d921ca644d974438ef6022.qs2"]
+}
