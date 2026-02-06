@@ -150,7 +150,7 @@ En tout état de cause, la comptabilité nationale ne permet pas (encore) de dis
 
 ### La France a une part des salaires au plus haut
 
-La part des salaires dans la valeur ajoutée nette corrigé   par le revenu mixte est croissante en France (@fig-psal, @tbl-psal et @tbl-evolpsal) (de 5,7 points de 1998 le point bas à 2024, le dernier point non extrapolé) alors qu'elle est stable (Italie) ou décroissante (Espagne, Allemagne, Pays-Bas et Belgique). Elle atteint en France le niveau le plus élevé des pays sélectionnés (87% pour les branches marchandes hors services immobiliers), pour autant que l'on puisse comparer entre pays et ce pour les différents concepts que l'on peut envisager (@tbl-psal).
+La part des salaires dans la valeur ajoutée nette corrigé par le revenu mixte est croissante en France (@fig-psal, @tbl-psal et @tbl-evolpsal) (de 5,7 points de 1998 le point bas à 2024, le dernier point non extrapolé) alors qu'elle est stable (Italie) ou décroissante (Espagne, Allemagne, Pays-Bas et Belgique). Elle atteint en France le niveau le plus élevé des pays sélectionnés (87% pour les branches marchandes hors services immobiliers), pour autant que l'on puisse comparer entre pays et ce pour les différents concepts que l'on peut envisager (@tbl-psal).
 
 Ce résultat contraste avec les évaluations récentes de @cette2019 et @tresor2025 qui concluent à une stabilité de la part des salaires dans la valeur ajoutée autour de ce qu'ils concluent être une valeur d'équilibre. Cette (relative) stabilité se retrouve lorsqu'on inclue les services immobiliers et que l'on considère la valeur ajoutée brute plutôt que la valeur ajoutée nette (voir [annexe 3](annexes.html#a3)).
 

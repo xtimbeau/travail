@@ -1,0 +1,20 @@
+{
+  "timing": [14.6967],
+  "date": ["2026-01-22 09:38:29.65707"],
+  "size": [138264],
+  "args": [],
+  "lapse": ["never"],
+  "src": ["R/oecd.r"],
+  "src_hash": ["fdccaf46a1cb3feae5dc0c274796e815219293fb"],
+  "arg_hash": ["4262323b"],
+  "track_hash": [0],
+  "track": [],
+  "wd": ["file"],
+  "qmd_file": [],
+  "src_in": ["project"],
+  "data_hash": ["398c0072d0ea5973ca6a2083d2582f6a"],
+  "priority": [10],
+  "file_size": [48159],
+  "data_date": ["2026-01-22 09:38:29.697672"],
+  "data_file": ["oecd-4262323b_398c0072d0ea5973ca6a2083d2582f6a.qs2"]
+}

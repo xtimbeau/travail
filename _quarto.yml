@@ -16,6 +16,9 @@ website:
      - text: Séminaire IRES-OFCE
        icon: file-earmark-easel
        href: seminaire_IRES_OFCE.html
+     - text: Cabinet Syndex
+       icon: file-earmark-easel
+       href: syndex_26-02.html
      - text: Post sur le blog de l'OFCE
        icon: pen
        href: https://www.ofce.sciences-po.fr/blog2024/fr/2025/20251128_XT/

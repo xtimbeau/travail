@@ -1,0 +1,114 @@
+INFO [2026-01-22 09:37:29] Refreshing 15 source files
+INFO [2026-01-22 09:37:29] sourcoising C:/Users/timbe/github/travail/R/nace.r
+SUCCESS [2026-01-22 09:37:33] R/nace.r (forced) in 3.4 sec. (10.3K)
+INFO [2026-01-22 09:37:33] sourcoising C:/Users/timbe/github/travail/R/vaq.r
+INFO [2026-01-22 09:37:34] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:37:34] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:37:35] R/nace.r cache valid (10.3K)
+INFO [2026-01-22 09:37:35] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:37:35] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:37:35] R/nace.r cache valid (10.3K)
+INFO [2026-01-22 09:37:35] sourcoising C:/Users/timbe/github/travail/R/naq10_e.r
+INFO [2026-01-22 09:37:35] Tracked files not found, check your paths.
+INFO [2026-01-22 09:37:35] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:37:35] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:37:35] R/nace.r cache valid (10.3K)
+SUCCESS [2026-01-22 09:37:43] R/naq10_e.r (forced) in 8.07 sec. (3.16M)
+SUCCESS [2026-01-22 09:37:45] R/vaq.r cache valid (8.98M)
+INFO [2026-01-22 09:37:45] sourcoising C:/Users/timbe/github/travail/R/naq10_e.r
+INFO [2026-01-22 09:37:45] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:37:45] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:37:45] R/nace.r cache valid (10.3K)
+SUCCESS [2026-01-22 09:37:49] R/naq10_e.r (forced) in 3.81 sec. (3.16M)
+INFO [2026-01-22 09:37:49] sourcoising C:/Users/timbe/github/travail/R/snf_international.r
+INFO [2026-01-22 09:37:49] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:37:49] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:37:49] R/nace.r cache valid (10.3K)
+INFO [2026-01-22 09:37:49] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:37:49] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:37:49] R/nace.r cache valid (10.3K)
+INFO [2026-01-22 09:37:49] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:37:49] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:37:49] R/nace.r cache valid (10.3K)
+SUCCESS [2026-01-22 09:37:51] R/snf_international.r (forced) in 1.92 sec. (21.4K)
+INFO [2026-01-22 09:37:51] sourcoising C:/Users/timbe/github/travail/R/assets.r
+INFO [2026-01-22 09:37:51] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:37:51] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:37:51] R/nace.r cache valid (10.3K)
+INFO [2026-01-22 09:37:51] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:37:51] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:37:51] R/nace.r cache valid (10.3K)
+SUCCESS [2026-01-22 09:37:55] R/assets.r (forced) in 3.87 sec. (793K)
+INFO [2026-01-22 09:37:55] sourcoising C:/Users/timbe/github/travail/R/decomp.r
+INFO [2026-01-22 09:37:55] sourcoising C:/Users/timbe/github/travail/R/vaq.r
+INFO [2026-01-22 09:37:55] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:37:55] R/vaq.r cache valid (8.98M)
+INFO [2026-01-22 09:37:55] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:37:55] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:37:55] R/nace.r cache valid (10.3K)
+SUCCESS [2026-01-22 09:37:56] R/decomp.r (forced) in 0.14 sec. (11.9K)
+INFO [2026-01-22 09:37:56] sourcoising C:/Users/timbe/github/travail/R/france cn 2014.r
+SUCCESS [2026-01-22 09:37:59] R/france cn 2014.r (forced) in 3.13 sec. (45.3K)
+INFO [2026-01-22 09:37:59] sourcoising C:/Users/timbe/github/travail/R/france-melodi.r
+INFO [2026-01-22 09:37:59] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:37:59] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:37:59] R/nace.r cache valid (10.3K)
+INFO [2026-01-22 09:37:59] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:37:59] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:37:59] R/nace.r cache valid (10.3K)
+SUCCESS [2026-01-22 09:38:08] R/france-melodi.r (forced) in 9.4 sec. (212K)
+INFO [2026-01-22 09:38:08] sourcoising C:/Users/timbe/github/travail/R/ggvanettebrute.r
+INFO [2026-01-22 09:38:10] sourcoising C:/Users/timbe/github/travail/R/vaq.r
+INFO [2026-01-22 09:38:10] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:38:10] R/vaq.r cache valid (8.98M)
+SUCCESS [2026-01-22 09:38:10] R/ggvanettebrute.r (forced) in 1.53 sec. (488K)
+INFO [2026-01-22 09:38:10] sourcoising C:/Users/timbe/github/travail/R/households.r
+INFO [2026-01-22 09:38:10] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:38:10] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:38:10] R/nace.r cache valid (10.3K)
+INFO [2026-01-22 09:38:10] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:38:10] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:38:10] R/nace.r cache valid (10.3K)
+INFO [2026-01-22 09:38:12] sourcoising C:/Users/timbe/github/travail/R/vaq.r
+INFO [2026-01-22 09:38:12] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:38:12] R/vaq.r cache valid (8.98M)
+INFO [2026-01-22 09:38:12] sourcoising C:/Users/timbe/github/travail/R/vaq.r
+INFO [2026-01-22 09:38:12] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:38:12] R/vaq.r cache valid (8.98M)
+SUCCESS [2026-01-22 09:38:12] R/households.r (forced) in 1.71 sec. (81.8K)
+INFO [2026-01-22 09:38:12] sourcoising C:/Users/timbe/github/travail/R/mixte.r
+INFO [2026-01-22 09:38:12] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:38:12] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:38:12] R/nace.r cache valid (10.3K)
+INFO [2026-01-22 09:38:13] sourcoising C:/Users/timbe/github/travail/R/naq10_e.r
+INFO [2026-01-22 09:38:13] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:38:13] R/naq10_e.r cache valid (3.16M)
+SUCCESS [2026-01-22 09:38:14] R/mixte.r (forced) in 2.51 sec. (2.09M)
+INFO [2026-01-22 09:38:14] sourcoising C:/Users/timbe/github/travail/R/oecd.r
+SUCCESS [2026-01-22 09:38:29] R/oecd.r (forced) in 14.7 sec. (135K)
+INFO [2026-01-22 09:38:29] sourcoising C:/Users/timbe/github/travail/R/psali.r
+INFO [2026-01-22 09:38:31] sourcoising C:/Users/timbe/github/travail/R/snf_international.r
+INFO [2026-01-22 09:38:31] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:38:31] R/snf_international.r cache valid (21.4K)
+INFO [2026-01-22 09:38:31] sourcoising C:/Users/timbe/github/travail/R/salaires.r
+INFO [2026-01-22 09:38:31] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:38:31] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:38:31] R/nace.r cache valid (10.3K)
+INFO [2026-01-22 09:38:31] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:38:31] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:38:31] R/nace.r cache valid (10.3K)
+SUCCESS [2026-01-22 09:38:46] R/salaires.r (forced) in 14.96 sec. (157K)
+INFO [2026-01-22 09:38:46] sourcoising C:/Users/timbe/github/travail/R/snf_ratio.r
+INFO [2026-01-22 09:38:46] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:38:46] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:38:46] R/nace.r cache valid (10.3K)
+INFO [2026-01-22 09:38:46] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:38:46] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:38:46] R/nace.r cache valid (10.3K)
+INFO [2026-01-22 09:38:46] sourcoising C:/Users/timbe/github/travail/R/nace.r
+INFO [2026-01-22 09:38:46] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:38:46] R/nace.r cache valid (10.3K)
+INFO [2026-01-22 09:38:46] sourcoising C:/Users/timbe/github/travail/R/naq10_e.r
+INFO [2026-01-22 09:38:46] Tracked files not found, check your paths.
+SUCCESS [2026-01-22 09:38:46] R/naq10_e.r cache valid (3.16M)
+SUCCESS [2026-01-22 09:38:52] R/snf_ratio.r (forced) in 5.85 sec. (208K)

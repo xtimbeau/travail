@@ -1,0 +1,20 @@
+{
+  "timing": [11.077],
+  "date": ["2026-01-08 18:23:15.124554"],
+  "size": [3311872],
+  "args": [],
+  "lapse": ["never"],
+  "src": ["R/naq10_e.r"],
+  "src_hash": ["a47b77e83d3c6f6858e35aebc3f63e89fa5077b3"],
+  "arg_hash": ["4262323b"],
+  "track_hash": [0],
+  "track": [],
+  "wd": ["file"],
+  "qmd_file": [],
+  "src_in": ["project"],
+  "data_hash": ["cc324997b4b8476b0438109a94a96b8c"],
+  "priority": [14],
+  "file_size": [227984],
+  "data_date": ["2026-01-08 18:23:15.212896"],
+  "data_file": ["naq10_e-4262323b_cc324997b4b8476b0438109a94a96b8c.qs2"]
+}
