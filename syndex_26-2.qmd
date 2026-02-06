@@ -1,0 +1,426 @@
+---
+title: Le partage de la valeur ajoutée et la redistribution
+subtitle: Présentation, Cabinet Syndex
+author-footer: "[document de travail de l'OFCE 2025-23](https://xtimbeau.github.io/travail)"
+author:
+  - name: Xavier Timbeau
+    email: xavier.timbeau@sciencespo.fr
+    affiliation: OFCE, Sciences Po Paris
+    affiliation-url: http://www.ofce.fr
+    orcid: 0000-0002-6198-5953
+date: 2026-02-06
+lang: fr
+format: 
+  pres-revealjs:
+    toc-depth: 1
+    embed-resources: true
+editor: visual
+bibliography: references.bib
+---
+
+```{r}
+ofce::init_qmd()
+update_theme(text = element_text(size = 14)) 
+```
+
+# Une part des salaires élevée en France en 2025
+
+## Pourquoi s'intéresser au partage de la valeur ajoutée ?
+
+::: columns
+::: {.column width = "70%"} <br>
+
+-   Un problème essentiellement de mesure mais très politique
+
+-   Une application directe à la question salariale etr économique
+
+    -   Quelle marge de manoeuvre pour revaloriser le travail ?
+
+    -   Quel rapport salarial aujourd'hui ?
+
+    -   Quel rendement du capital ?
+
+    -   Quelle capacité à investir ?
+
+-   Un principe : la comptabilité nationale fournit une information, comment et jusqu'où l'utiliser ?
+
+    -   Les notions et les méthodes et de la CN sont homogènes d'un pays à l'autre et dans le temps, on peut donc comparer dans l'espace et dans le temps
+:::
+
+::: {.column width="30%"}
+<br> ![](images/clipboard-3047327630.png){width="299" fig-align="right"}
+:::
+
+::::
+
+## La part des salaires est très élevée en France en 2025
+
+```{r}
+gsal <- load_graphe("index-fig-psal-1") + ofce_caption()
+girafy(gsal)
+```
+
+## Ce résultat contraste avec des résultats antérieurs
+
+Depuis @cotis2009 le consensus est que le partage de la valeur ajoutée est plutôt stable en France -- après une période particulière où il a été élevé
+
+Récemment @cette2019, @pak2019 et @tresor2025 convergent vers le diagnostic de stabilité.
+
+::::: {.columns style="text-align: center; font-size: 0.85rem;"}
+::: {.column width="50%"}
+![](images/clipboard-3701910005.png){width="361" fig-align="center"}
+
+@tresor2025
+:::
+
+::: {.column width="50%"}
+![](images/clipboard-3667384201.png){width="300" fig-align="center"}
+
+@cette2019
+:::
+:::::
+
+## Un rendement du capital productif (très) bas en France
+
+```{r}
+gr <- load_graphe("index-fig-rp") + ofce_caption()
+girafy(gr)
+```
+
+# Définitions
+
+## Part des salaires
+
+<br>
+
+$$
+s_{net, n.s., -LOPQ}  = \frac{\sum_{b\in{TT-LOPQ}}{D1_b*(1+ns_b/sal_b)}}{\sum_{b\in{TT-LOPQ}}{B1G_b - P51C_b - (D29_b-D39_b)}}
+$$
+
+<br> $D1$ est la rémunération des salariés (incluant salaires nets, primes, cotisations employé et employeur)
+
+$B1G$ est la valeur ajoutée brute
+
+$P51C$ la consommation de capital fixe
+
+$ns$ et $sal$ sont soit les effectifs soit les revenus mixtes nets ($B3N$) des non salariés et salariés
+
+$D29$ sont les impôts de production, $D39$ les subventions à la production
+
+Toutes les grandeurs sont en **euros courants**
+
+## Rendement du capital productif
+
+<br>
+
+\begin{aligned}
+\Pi_{\bar{is}} & = B1G - P51C - D1 - (D29-D39) = B2N \\
+
+\Pi_{{is}} & = B1G - P51C - D1 - (D29-D39) - D5 = B2N-D5
+\end{aligned}
+
+\
+
+\begin{aligned}
+r_{productif} & = \frac{\Pi}{N1N+[N2N]} \\
+r_{financier} & = \frac{\Pi}{F51+F52+BF90}
+\end{aligned}
+
+<br>
+
+$N1N$ sont les actifs non financiers produits,
+
+$N2N$ les actifs non financiers non produits (ressources naturelles, terre) -- non disponible pour bcp de pays
+
+$F51$ Equity (actions), $F52$ Investment fund shares/units, $BF90$ valeur nette rédiduelle
+
+# Valeur ajoutée nette ou brute
+
+## Nette plutôt que brute -- CCF sur VAN {.smaller}
+
+::::: columns
+::: {.column width="85%"}
+```{r}
+(load_graphe("annexes-unnamed-chunk-4-5") + 
+  ofce_caption()+
+  labs(title = "CCF dans la VAN")) |> 
+  girafy()
+```
+:::
+
+::: {.column width="15%"}
+La consommation de capital fixe est la quantité de capital "consommée" pendant le processus de production.
+
+Elle est evaluée par des tables de mortalité par classe d'actifs.
+:::
+:::::
+
+## Nette plutôt que brute -- CCF sur actifs {.smaller}
+
+::::: columns
+::: {.column width="85%"}
+```{r}
+(load_graphe("annexes-unnamed-chunk-5-5") + 
+  ofce_caption()+
+  labs(title = "CCF sur actifs")) |> 
+  girafy()
+```
+:::
+
+::: {.column width="15%"}
+En France, la CCF est particulièrement élevée (21.1% de la VAN en France contre 16.5% en Allemagne).
+
+{{< fa arrow-right >}} Actifs sur VAB : Allemagne : 1,65 ; France 1,33
+
+Pourquoi ?
+
+-   Structure de l'économie
+-   Nature de l'investissement et conventions comptables
+
+La conséquence est importante : cela réduit le numérateur
+:::
+:::::
+
+## Nette plutôt que brute
+
+```{r}
+("index-fig-psalnetbrut" |> 
+  load_graphe() +
+  ofce_caption() +
+  labs(title = "VAN vs VAB") ) |> 
+  girafy()
+```
+
+# Correction pour les non salariés
+
+## Les non salariés sont des travailleurs comme les autres
+
+Surout la valeur ajoutée des branches intègre l'activité des non salariés.
+
+En France, en 1970, le revenu des non salariés est égal à celui des salariés des branches marchandes
+
+On traite les non salariés en leur attribuant un salaire égal à celui des salariés de la branche. C'es la méthode "effectif" [@cette2019, @tresor2025, @pak2019, @timbeau2002, @askenazy2012 pour une décomposition par branche]
+
+Mais :
+
+-   un ouvrier agricole n'est pas un "agriculteur", le ratio n'est pas le même aujourd'hui qu'hier
+
+-   les plateformes développent de nouvelles formes de non salariés, peu payés, au heures malconnues, avec double compte possible
+
+Une autre méthode est possible : le revenu mixte
+
+-   la CN définit depuis (longtemps base 2020, base 2014, ESA 2010, 1995) le revenu mixte (B3G). La base 2020 diffuse B3G au niveau des branches.
+
+## Le revenu des non salariés
+
+```{r}
+(load_graphe("annexes-unnamed-chunk-10-2") + 
+  ofce_caption()+
+  labs(title = "Revenu par tête des non salariés")) |> 
+  girafy()
+```
+
+## Correction effectifs
+
+```{r}
+("index-fig-psalcnc" |> 
+  load_graphe() +
+  ofce_caption() +
+  labs(title = "Prise en compte vs non prise en compte de la non salarisation (effectif)")) |> 
+  girafy()
+```
+
+## Correction revenu mixte
+
+```{r}
+("index-fig-psalmixte" |> 
+  load_graphe() +
+  ofce_caption() +
+  labs(title = "Correction effectif vs revenu mixte ; Partage de la VA") ) |> 
+  girafy()
+```
+
+## Rendement du capital "effectif vs revenu mixte"
+
+```{r}
+("index-fig-rpmixte" |> 
+  load_graphe() +
+  ofce_caption() + 
+  labs(title = "Correction effectif vs revenu mixte ; rendement") ) |> 
+  girafy()
+```
+
+# Branches marchandes hors immobilier
+
+## Les services immobiliers : résidentiel et aux entreprises
+
+Les services immobiliers (L) sont décomposés en 2 grandes catégories :
+
+-   les services immobiliers aux entreprises
+
+    -   comptabilisé lorsqu'un loyer est payé
+
+-   les services immobiliers aux ménages
+
+    -   auto-produits : les propriétaires occupants – loyer implicite
+
+    -   produits par les ménages : les propriétaires bailleurs – loyer
+
+    -   produits par des entreprises : les bailleurs institutionnels – loyer
+
+-   les autres services (transaction, intermédiaires)
+
+Le partage de la valeur ajoutée pour les services immobilier résidentiel n'est pas pertinent [@cette2019, @pak2019] ; celui des services aux entreprises est ennuyeux
+
+## Champ marchand vs hors immobilier
+
+```{r}
+("index-fig-psalnetbrut" |> 
+  load_graphe() + 
+  ofce_caption() +
+  labs(title = "Net vs brut; marchand vs hors immobilier") ) |> 
+  girafy()
+```
+
+# La question de l'immobilier : optimisation fiscale ?
+
+## La consommation intermétiare d'immobilier
+
+```{r}
+("index-fig-ciLfr" |> 
+  load_graphe() + 
+    ofce_caption() +
+    labs(title = "CI en service immobilier, France") ) |> 
+  girafy()
+```
+
+## Impact sur le rendement
+
+```{r}
+( "index-fig-rendfr" |> 
+    load_graphe() + 
+    ofce_caption() +
+    labs(title = "Rendement avec et sans CI constante en immobilier") ) |> 
+  girafy()
+```
+
+# Quelques éléments sur la redistribution et la mesure du bien être
+
+## Un débat ou un consensus ?
+
+-   L'Europe décroche(rait)
+
+-   La vague d'innovation autour de l'IA (fait suite à la numérisation de l'économie et les TIC) semble dépasser l'Europe
+
+-   
+
+    ```         
+    Concurrence féroce entre la Chine et les Etats Unis
+    ```
+
+-   
+
+    ```         
+    Perspectives de renversement (IAG), ou de singularité
+    ```
+
+-   
+
+    ```         
+    Dimension politique (technodictature/république technologique)
+    ```
+
+-   Remises en cause de l'Etat Social, de la démocratie sociale, de l'économie sociale de marché
+
+## Le décrochage en moyenne
+
+```{r}
+library(ggrepel)
+( "index-fig-pibcap-3" |> 
+    load_graphe() + 
+    ofce_caption() +
+    labs(title = "PIB par tête relatif aux USA") ) |> 
+  girafy()
+```
+
+## De la moyenne à la médianne (I)
+
+```{r}
+( "index-fig-percentile-1" |> 
+    load_graphe() + 
+    ofce_caption() +
+    labs(title = "Revenu ajusté") ) |> 
+  girafy()
+```
+
+## De la moyenne à la médiane (II)
+
+```{r}
+( "index-fig-percentile-2" |> 
+    load_graphe() + 
+    ofce_caption() +
+    labs(title = "Revenu ajusté, détail EUZ") ) |> 
+  girafy()
+```
+
+## De la moyenne à la médiane (III)
+
+```{r}
+( "index-fig-percentile-3" |> 
+    load_graphe() + 
+    ofce_caption() +
+    labs(title = "Revenu ajusté, relatif USA") ) |> 
+  girafy()
+```
+
+## Un petit mot sur les données
+
+Un travail impressionant, à la suite des travaux de T. Piketty sur les inégalités (les hauts revenus en France), de Zucman, Saez et quelques autres.
+
+Un travail d'imputation des données de dépenses publiques systématiques (temps ⨉ pays)
+
+Des méthodes d'intrapolation, d'extrapolation, de réimputation (taxes indirectes, dépenses) pas toujours explicites
+
+Des choix (très) discutables : par exemple, individualisation, pas de prise en compte des enfants, donc pas de niveau de vie, des precentiles sur des notions de revenus variables, sans correspondance
+
+Des choix pertinents mais qui peuvent être trompeurs : la retraite comme revenu primaire, mais pas d'appréciation des transferts entre générations
+
+{{< fa arrow-right >}} Un aiguillon pour les systèmes statitiques plutôt qu'une donnée robuste !
+
+## Tous les nicolas du monde
+
+![](images/clipboard-3400625716.png){fig-align="center" width="850"}
+
+# Annexes
+
+## Changement de structure des branches
+
+```{r}
+( "index-fig-structbranche" |> 
+    load_graphe() +
+    ofce_caption() +
+    labs(title = "Chnagement de structure des branches") ) |> 
+  girafy()
+```
+
+## France 1949-2024
+
+```{r}
+(ofce::load_graphe("annexes-unnamed-chunk-12-2") + 
+  ofce_caption() + 
+  scale_y_continuous(
+    limits = c(NA,NA),
+    labels = label_percent(1)) ) |> 
+  girafy()
+```
+
+## Rendement du capital France 1978-2024
+
+```{r}
+(ofce::load_graphe("annexes-unnamed-chunk-13-2") + 
+  ofce_caption() +
+  scale_y_continuous(
+    limits = c(NA,NA),
+    labels = label_percent(1)) ) |> 
+  girafy()
+```
