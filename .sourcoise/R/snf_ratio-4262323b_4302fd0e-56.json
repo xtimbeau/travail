@@ -1,0 +1,20 @@
+{
+  "timing": [4.4194],
+  "date": ["2026-01-20 10:20:06.250768"],
+  "size": [212592],
+  "args": [],
+  "lapse": ["never"],
+  "src": ["R/snf_ratio.r"],
+  "src_hash": ["770ba13b8cd361219e9c4cfcb0a8793146fb195a"],
+  "arg_hash": ["4262323b"],
+  "track_hash": [0],
+  "track": [],
+  "wd": ["file"],
+  "qmd_file": [],
+  "src_in": ["project"],
+  "data_hash": ["c2ee3d22c3c12c785b69ee6a743de844"],
+  "priority": [10],
+  "file_size": [59598],
+  "data_date": ["2026-01-20 10:07:38.764124"],
+  "data_file": ["snf_ratio-4262323b_c2ee3d22c3c12c785b69ee6a743de844.qs2"]
+}

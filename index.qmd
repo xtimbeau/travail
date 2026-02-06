@@ -185,7 +185,7 @@ naq |>
   arrange(desc(va), geo) |> 
   gt() |> 
   fmt_flag(geo) |> 
-  tab_spanner(label = "Correction des non salariés", columns = c(psalh, psal, psalnc)) |> 
+  tab_spanner(label = "Correction des non salari\u00e9s", columns = c(psalh, psal, psalnc)) |> 
   cols_label(
     psal="effectifs",
     psalh="rev. mixte",
@@ -396,9 +396,9 @@ data4tp |>
   cols_label(
     rbh = "avant IS",
     rh = "après IS",
-    y = "Année",
+    y = "Ann\u00e9e",
     geo = "", geo_lbl = "") |> 
-  ofce_cpation(
+  ofce_caption(
   champ = "Branches marchandes hors immobilier, correction par le revenu mixte (hybride sauf France).",
   note = " Profits nets de la CCF, avant ou après IS, divisés par la valeur des actifs productifs produits (N1N). L'imputation de l'IS est approximative pour ce champ.",
   source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e); actifs productifs (nama_10_nfa_st); INSEE comptes de branches (DD_CNA_BRANCHES).") |> 
@@ -1713,9 +1713,9 @@ data |>
               columns = c(L, LmLl, Ll, Lli)) |>
   cols_label(geo="", lbl_geo="", 
              L="services immobiliers",
-             LmLl="services immobiliers hors ménages",
-             Ll= "loyers des ménages", 
-             Lli = "loyers imputés aux ménages" ) |> 
+             LmLl="services immobiliers hors m\u00e9nages",
+             Ll= "loyers des m\u00e9nages", 
+             Lli = "loyers imput\u00e9s aux m\u00e9nages" ) |> 
   fmt_percent(-geo, decimals=1, dec_mark = ",", sep_mark = " ") |> 
   cols_align_decimal(-geo, dec_mark = ",") |> 
   fmt_flag(geo) |> 
