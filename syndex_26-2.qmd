@@ -27,8 +27,10 @@ update_theme(text = element_text(size = 14))
 
 ## Pourquoi s'intéresser au partage de la valeur ajoutée ?
 
-::: columns
-::: {.column width = "70%"} <br>
+:::: columns
+::: {.column width="70%"} 
+
+<br>
 
 -   Un problème essentiellement de mesure mais très politique
 
@@ -56,7 +58,10 @@ update_theme(text = element_text(size = 14))
 ## La part des salaires est très élevée en France en 2025
 
 ```{r}
-gsal <- load_graphe("index-fig-psal-1") + ofce_caption()
+gsal <- load_graphe("index-fig-psal-2") + 
+  ofce_caption(
+    note = "Part des salaires dans la VA nette, correction des non salariés par le revenu mixte, branches marchandes hors immobilier"
+  )
 girafy(gsal)
 ```
 
@@ -308,27 +313,17 @@ Le partage de la valeur ajoutée pour les services immobilier résidentiel n'est
 
 ## Un débat ou un consensus ?
 
+<br>
+
 -   L'Europe décroche(rait)
 
 -   La vague d'innovation autour de l'IA (fait suite à la numérisation de l'économie et les TIC) semble dépasser l'Europe
 
--   
+    -   Concurrence féroce entre la Chine et les Etats Unis
 
-    ```         
-    Concurrence féroce entre la Chine et les Etats Unis
-    ```
-
--   
-
-    ```         
-    Perspectives de renversement (IAG), ou de singularité
-    ```
-
--   
-
-    ```         
-    Dimension politique (technodictature/république technologique)
-    ```
+    -   Perspectives de renversement (IAG), ou de singularité
+    
+    -   Dimension politique (technodictature/république technologique)
 
 -   Remises en cause de l'Etat Social, de la démocratie sociale, de l'économie sociale de marché
 
