@@ -15,7 +15,7 @@ earn.raw <- get_eurostat("earn_ses_annual", filters = list(isco08 = c("OC1", "OC
   select(-freq) |>
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE"))) |>
   group_by(geo) |>
-  filter(time==max(time)) |>
+  filter(time=="2018-01-01") |>
   group_by(geo) |>
   mutate(vr = values/values[age=="TOTAL"&sex=="T"&indic_se=="MED_E_PPS" &isco08 == "TOTAL" & worktime == "TOTAL"]) |>
   group_by(isco08, age, sex, indic_se, time, geo, nace_r2) |>

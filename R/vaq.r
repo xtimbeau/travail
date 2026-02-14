@@ -262,9 +262,8 @@ na_tot <-  "nama_10_gdp" |>
 max_y <- max(year(na_tot$time))
 
 nq_tot <- get_eurostat("namq_10_gdp",
-                       filters = list(geo = pays,
-                                      na_item = c("D21X31"),
-                                      unit = "CP_MEUR")) |>
+                       filters = list(geo = pays, unit = "CP_MEUR")) |>
+  filter(na_item == "D21X31" ) |>
   drop_na() |>
   mutate(s_adj = factor(s_adj, c("SCA", "SA", "CA", "NSA"))) |>
   arrange(s_adj) |>
@@ -276,9 +275,16 @@ nq_tot <- get_eurostat("namq_10_gdp",
   group_by(geo, na_item) |>
   summarize(values = mean(values, na.rm=TRUE) * 4,
             .groups = "drop") |>
-  pivot_wider(names_from = na_item, values_from = values) |>
+  pivot_wider(names_from = na_item, values_from = values)
+
+if(nrow(nq_tot)>0)
+  nq_tot <- nq_tot |>
   transmute(geo, time = ym(str_c(max_y+1, "-01")), d2131 = D21X31) |>
   bind_rows(na_tot) |>
+  arrange(geo, time)
+
+if(nrow(nq_tot)==0)
+  nq_tot <- na_tot |>
   arrange(geo, time)
 
 d51 <- "nasa_10_nf_tr" |>
