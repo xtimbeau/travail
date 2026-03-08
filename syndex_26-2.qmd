@@ -27,9 +27,8 @@ update_theme(text = element_text(size = 14))
 
 ## Pourquoi s'intéresser au partage de la valeur ajoutée ?
 
-:::: columns
-::: {.column width="70%"} 
-
+::::: columns
+::: {.column width="70%"}
 <br>
 
 -   Un problème essentiellement de mesure mais très politique
@@ -52,8 +51,7 @@ update_theme(text = element_text(size = 14))
 ::: {.column width="30%"}
 <br> ![](images/clipboard-3047327630.png){width="299" fig-align="right"}
 :::
-
-::::
+:::::
 
 ## La part des salaires est très élevée en France en 2025
 
@@ -322,7 +320,7 @@ Le partage de la valeur ajoutée pour les services immobilier résidentiel n'est
     -   Concurrence féroce entre la Chine et les Etats Unis
 
     -   Perspectives de renversement (IAG), ou de singularité
-    
+
     -   Dimension politique (technodictature/république technologique)
 
 -   Remises en cause de l'Etat Social, de la démocratie sociale, de l'économie sociale de marché
