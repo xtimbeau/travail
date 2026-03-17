@@ -1,0 +1,20 @@
+{
+  "timing": [1.5352],
+  "date": ["2026-03-17 16:56:22.633779"],
+  "size": [83896],
+  "args": [],
+  "lapse": ["never"],
+  "src": ["R/households.r"],
+  "src_hash": ["2240a1184ba9fd8722f2826ae9246fae429a0b8f"],
+  "arg_hash": ["4262323b"],
+  "track_hash": [0],
+  "track": [],
+  "wd": ["file"],
+  "qmd_file": [],
+  "src_in": ["project"],
+  "data_hash": ["0a827a741dbcbce5c7c40494f215fb7b"],
+  "priority": [10],
+  "file_size": [45837],
+  "data_date": ["2026-03-17 16:56:22.676195"],
+  "data_file": ["households-4262323b_0a827a741dbcbce5c7c40494f215fb7b.qs2"]
+}
