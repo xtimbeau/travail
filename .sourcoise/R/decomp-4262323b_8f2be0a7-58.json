@@ -1,0 +1,20 @@
+{
+  "timing": [0.1271],
+  "date": ["2026-04-21 11:41:10.792071"],
+  "size": [12152],
+  "args": [],
+  "lapse": ["never"],
+  "src": ["R/decomp.r"],
+  "src_hash": ["53b8e124183403d861fca225232070638c02e57b"],
+  "arg_hash": ["4262323b"],
+  "track_hash": [0],
+  "track": [],
+  "wd": ["file"],
+  "qmd_file": [],
+  "src_in": ["project"],
+  "data_hash": ["c483d64201b1853798650319da12a332"],
+  "priority": [10],
+  "file_size": [6094],
+  "data_date": ["2026-04-13 10:44:21.502363"],
+  "data_file": ["decomp-4262323b_c483d64201b1853798650319da12a332.qs2"]
+}

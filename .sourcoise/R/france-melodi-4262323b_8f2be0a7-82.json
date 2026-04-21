@@ -1,0 +1,20 @@
+{
+  "timing": [9.6578],
+  "date": ["2026-04-21 11:45:42.075449"],
+  "size": [216720],
+  "args": [],
+  "lapse": ["never"],
+  "src": ["R/france-melodi.r"],
+  "src_hash": ["3131159374acc08d5a2f50aa9069d50035bf51c4"],
+  "arg_hash": ["4262323b"],
+  "track_hash": [0],
+  "track": [],
+  "wd": ["file"],
+  "qmd_file": [],
+  "src_in": ["project"],
+  "data_hash": ["e841930af3dadde1d21f28de4dd2b246"],
+  "priority": [11],
+  "file_size": [92414],
+  "data_date": ["2026-04-13 10:44:15.383522"],
+  "data_file": ["france-melodi-4262323b_e841930af3dadde1d21f28de4dd2b246.qs2"]
+}

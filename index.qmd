@@ -19,20 +19,20 @@ thanks: "Je remercie Elliot Aurissergues, François Geerolf et Eric Heyer pour l
 
 ```{r, include=FALSE}
 ofce::init_qmd()
-P6 <- source_data("R/nace.r")$pays1 
+P6 <- source_data("R/nace.r")$pays1
 
-champs  <- c("md" = "Branches marchandes", 
+champs  <- c("md" = "Branches marchandes",
              "mdhifi" = "Branches marchandes hors services immobilier et financiers (-KLOPQ)",
-            "mdhi"= "Branches marchandes hors services immobiliers (-LOPQ)", 
-            "mdhim"= "Branches marchandes hors imm. des ménages (-LmOPQ)", 
-            "mdhfi"= "Branches marchandes hors services financiers (-KOPQ)", 
+            "mdhi"= "Branches marchandes hors services immobiliers (-LOPQ)",
+            "mdhim"= "Branches marchandes hors imm. des ménages (-LmOPQ)",
+            "mdhfi"= "Branches marchandes hors services financiers (-KOPQ)",
             "tb" = "Toutes branches (marchandes et non marchandes)")
 
-champs_c  <- c("md" = "Marchandes", 
+champs_c  <- c("md" = "Marchandes",
              "mdhifi" = "Marchandes hors imm. et fin.",
-            "mdhi"= "Marchandes hors im.", 
-            "mdhim"= "Marchandes hors imm. ménages", 
-            "mdhfi"= "Marchandes hors fin.", 
+            "mdhi"= "Marchandes hors im.",
+            "mdhim"= "Marchandes hors imm. ménages",
+            "mdhfi"= "Marchandes hors fin.",
             "tb" = "Toutes branches")
 options(
   ofce.tabsetize.pdf = "one",
@@ -43,27 +43,27 @@ options(
 
 L'analyse du partage de la valeur ajoutée (@fig-psal) est au cœur des débats sur la redistribution des richesses (voir notamment @hurlin1996, @timbeau2002, @cotis2009, @husson2010, @askenazy2012, @piton2019, @pak2019, @cette2019, @timbeau2025, @tresor2025).
 
-Le processus de productif engage d'un côté des travailleurs, qu'ils soient salariés ou non, et des apporteurs de capitaux (ou capitalistes), qu'ils soient investisseurs actionnaires, détenteurs de titres de dette ou prêteurs. La nature des contrats reliant chacun de ces intervenants au partage de la richesse produite est très diverse. Certains sont à la fois travailleurs et actionnaires — un entrepreuneur cumule les deux rôles, D'autres sont dans des positions radicalement différentes, comme entre un programmeur de l'IA ou un *trader* dont les bonus peuvent être considérables et un agent de maintenance au contrat précaire. Bien que les frontières ne soient pas aussi nettes que ce que l'on peut souhaiter, ce qu'on appelle communément la part des salaires dans la valeur ajoutée est un indicateur central dans la mesure du conflit de répartition entre le travail et le capital, ou plus directement les travailleurs et les capitalistes.
+Le processus de productif engage d'un côté des travailleurs, qu'ils soient salariés ou non, et des apporteurs de capitaux (ou capitalistes), qu'ils soient investisseurs actionnaires, détenteurs de titres de dette ou prêteurs. La nature des contrats reliant chacun de ces intervenants au partage de la richesse produite est très diverse. Certains sont à la fois travailleurs et actionnaires — un entrepreneur cumule les deux rôles, D'autres sont dans des positions radicalement différentes, comme entre un programmeur de l'IA ou un *trader* dont les bonus peuvent être considérables et un agent de maintenance au contrat précaire. Bien que les frontières ne soient pas aussi nettes que ce que l'on peut souhaiter, ce qu'on appelle communément la part des salaires dans la valeur ajoutée est un indicateur central dans la mesure du conflit de répartition entre le travail et le capital, ou plus directement les travailleurs et les capitalistes.
 
-Nous explorons ici la construction de cet indicateur afin qu'il reponde le mieux possible à la question posée, à savoir le confilt de répartition. Cela nous amène à privilégier la part des salaires *augmentés de la rémunération des non salariés par leur revenu mixte* dans la valeur ajoutée *nette de la consommation de capital fixe* en se limitant *aux branches marchandes hors immobilier*.
+Nous explorons ici la construction de cet indicateur afin qu'il réponde le mieux possible à la question posée, à savoir le confilt de répartition. Cela nous amène à privilégier la part des salaires *augmentés de la rémunération des non salariés par leur revenu mixte* dans la valeur ajoutée *nette de la consommation de capital fixe* en se limitant *aux branches marchandes hors immobilier*.
 
 Il apparaît que la part des salaires dans la valeur ajoutée en France est croissante depuis 30 ans (@fig-psal), est la plus haute quand à la compare à 5 grands Etats membre de la zone Euro. Ce résultat contraste avec le consensus qui s'est établit depuis le rapport Cotis [@cotis2009] et confirmé récemment par @cette2019, @pak2019 ou @tresor2025 que la part des salaires en France est constante depuis la fin des années 1980.
 
 ```{r, results="asis"}
 #| label: fig-psal
 #| fig-asp: 0.85
-#| fig-cap: Part des salaires dans la VA   
+#| fig-cap: Part des salaires dans la VA
 
-naq <- source_data("R/vaq.r")$naa |> 
-  filter(geo %in% P6) |> 
+naq <- source_data("R/vaq.r")$naa |>
+  filter(geo %in% P6) |>
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
-    {year(time)} 
+    {year(time)}
     {champs[champ]}
     Part des salaires dans la VAN : {round(psalh*100,1)}%")) |>
   mutate(geo = factor(geo, P6))
 
-date <- sourcoise::sourcoise_meta("R/vaq.r")$data_date |> ymd_hms() 
+date <- sourcoise::sourcoise_meta("R/vaq.r")$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 labels_champ = c(tb = "Ttes branches", md="Marchand", mdhifi = "Marchand hors imm.&fin.",
@@ -74,7 +74,7 @@ vroom::vroom_write(naq, file = "lsh.csv")
 
 psal <- imap(
   c("Marchand" = "md",
-    "Hors immo. (-L)" = "mdhi", 
+    "Hors immo. (-L)" = "mdhi",
     "Hors immo. ménages (-Lm)" = "mdhim"),
   ~ggplot(naq |> filter(champ == .x)) +
     aes(x=time, y=psalh, col = geo, group = geo) +
@@ -91,9 +91,9 @@ psal <- imap(
     labels = date1) +
   guides( fill = "none", color = "none",
           linetype = guide_legend(nrow = 1),
-          alpha = guide_legend(nrow = 1)) + 
+          alpha = guide_legend(nrow = 1)) +
   scale_y_continuous(
-    labels = scales::label_percent(1), 
+    labels = scales::label_percent(1),
                      breaks = scales::pretty_breaks(5),
                      limits = c(.65, .95)) +
   scale_color_pays(format = "eurostat") +
@@ -101,7 +101,7 @@ psal <- imap(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
     champ = "{champs[.x]}, correction par le revenu mixte hybride (sauf pour la France).",
-    note = "Part des salaires corrigés par le revenu mixte des non salariés dans la valeur ajoutée nette de la CCF pour les branches marchandes hors services immobiliers. 2025 est une extrapolation sur la base d'une information partielle jusqu'au T3. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") ) 
+    note = "Part des salaires corrigés par le revenu mixte des non salariés dans la valeur ajoutée nette de la CCF pour les branches marchandes hors services immobiliers. 2025 est une extrapolation sur la base d'une information partielle jusqu'au T3. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") )
 
 tabsetize(psal, active = 2, r = 1.5)
 ```
@@ -110,7 +110,7 @@ tabsetize(psal, active = 2, r = 1.5)
 margin_download(naq |> select(-tooltip))
 ```
 
-Nous détaillons en les discutant dans la suite de ce document les effets des corrections appliquées et des choix de mesure retenus, ainsi que la différence entre les mesures dérivées des comptes de branche ou des comptes d'agents (ou de secteurs institutionnels), puisque nous nous limitons aux informations de la comptabilité nationale que nous tâchons d'exploiter le plus possible. Nous comparons systématiquement les indicateurs entre pays, au prix d'un échantillon de pays restreints et d'approximations indispensables. Ces éléments mis bout à bout sont un peu fastidieux, mais ils s'avèrent assez importants pour comprendre en quoi on peut préferer une mesure à une autre. Ils vont également à l'encontre de certaines intuitions ou a priori, particulièrement lorsqu'on les compare d'un pays à l'autre.
+Nous détaillons en les discutant dans la suite de ce document les effets des corrections appliquées et des choix de mesure retenus, ainsi que la différence entre les mesures dérivées des comptes de branche ou des comptes d'agents (ou de secteurs institutionnels), puisque nous nous limitons aux informations de la comptabilité nationale que nous tâchons d'exploiter le plus possible. Nous comparons systématiquement les indicateurs entre pays, au prix d'un échantillon de pays restreints et d'approximations indispensables. Ces éléments mis bout à bout sont un peu fastidieux, mais ils s'avèrent assez importants pour comprendre en quoi on peut préférer une mesure à une autre. Ils vont également à l'encontre de certaines intuitions ou a priori, particulièrement lorsqu'on les compare d'un pays à l'autre.
 
 Nous explorons également les conséquences en matière de taux de profit (part des profits nets dans la valeur ajoutée) ou rendement du capital (profits nets divisés par les actifs), avec là aussi des résultats frappants en ce qui concerne la France.
 
@@ -120,11 +120,11 @@ Le code permettant de reproduire les graphiques et les tableaux est disponible d
 
 Trois points sont importants pour disposer du bon concept (voir @reis2022 pour une revue de littérature sur ce point) :
 
--   **Corriger des non salariés et leur imputer une masse salariale**. La correction habituelle consiste à affecter aux non salariés le même salaire que les salariés (généralement de la même branche) ; c'est ainsi que traitent la question @cette2019 et @tresor2025. Nous procédons à cette correction (appelée *correction par les effectifs*) aux 21 branches de la NACE rev. 2 niveau 1 mais nous proposons ici une alternative en utilisant la mesure du revenu mixte (dite *correction par le revenu mixte*), parce que l'affectation d'un salarie égal aux non salariés et aux salariés par branches conduit à imputer une masse salariale supérieure au revenu mixte des non salariés[^1], voire de dépasser la valeur ajoutée de la branche. En France, le revenu mixte (des non-salariés) est passé de 30% de la masse salariale (autant pour le ratio des effectifs) au début des années 1970 à un peu moins de 10% (presque 15% pour les effectifs) en 2024. Malheureusement, le revenu mixte par branche n'est pas diffusé systématiquement par les Etats membres de l'UE et nous utilisons une méthode hybride, qui impute suivant les effectifs relatifs de non salariés le revenu mixte agrégé. Ces corrections modifient significativement la part des salaires dans la valeur ajoutée, suivant la méthode, parce que non seulement la part des non salariés et de leur revenu mixte varie dans le temps, de façon différente par un effet de structure (moins d'agriculteurs) et de nature (les non salariés sont moins rémunérés aujourd'hui), de façon différente par pays (@fig-psalcnc et voir l'[annexe 4](annexes.html#a4) consacrée à ce point).
+- **Corriger des non salariés et leur imputer une masse salariale**. La correction habituelle consiste à affecter aux non salariés le même salaire que les salariés (généralement de la même branche) ; c'est ainsi que traitent la question @cette2019 et @tresor2025. Nous procédons à cette correction (appelée *correction par les effectifs*) aux 21 branches de la NACE rev. 2 niveau 1 mais nous proposons ici une alternative en utilisant la mesure du revenu mixte (dite *correction par le revenu mixte*), parce que l'affectation d'un salarie égal aux non salariés et aux salariés par branches conduit à imputer une masse salariale supérieure au revenu mixte des non salariés[^1], voire de dépasser la valeur ajoutée de la branche. En France, le revenu mixte (des non-salariés) est passé de 30% de la masse salariale (autant pour le ratio des effectifs) au début des années 1970 à un peu moins de 10% (presque 15% pour les effectifs) en 2024. Malheureusement, le revenu mixte par branche n'est pas diffusé systématiquement par les Etats membres de l'UE et nous utilisons une méthode hybride, qui impute suivant les effectifs relatifs de non salariés le revenu mixte agrégé. Ces corrections modifient significativement la part des salaires dans la valeur ajoutée, suivant la méthode, parce que non seulement la part des non salariés et de leur revenu mixte varie dans le temps, de façon différente par un effet de structure (moins d'agriculteurs) et de nature (les non salariés sont moins rémunérés aujourd'hui), de façon différente par pays (@fig-psalcnc et voir l'[annexe 4](annexes.html#a4) consacrée à ce point).
 
--   **Limiter l'analyse au champ pertinent**. Il est plus simple de calculer la part des salaires au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est conventionnelle (la valeur ajoutée est estimée au coût des facteurs). Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour part auto produit (les loyers imputés aux propriétaires) et pour part produits par les ménages pour d'autres ménages (les propriétaires bailleurs). Suivant les pays ou les périodes, le nombre de propriétaires occupants peut être très différent (@cette2019 fait ce point). Mais le vrai problème est que le partage de la valeur ajoutée entre salariés et producteur n'a ici pas de sens dans le cas d'un loyer imputé ou d'un propriétaire bailleur et que le niveau de loyer représente plutôt le conflit de répartition d'une ressource plus ou moins rare entre propriétaires et locataires. La consommation de services immobiliers par les ménages représentait en France en 2024 un peu moins de 300 milliards d'euros soit approximativement `r round(300/1666*100)`% de la valeur ajoutée brute hors services immobilier. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus précise, en enlevant de la valeur ajoutée marchande la branche "services immobiliers (L)" ([annexe 3](annexes.html#a3), @fig-structbranche). Omettre les services immobiliers pose cependant un problème, parce qu'on exclu de l'analyse les loyers payés par les entreprises pour leurs locaux et constitue bien un élément de coût. La comptabilité nationale n'évalue pas un loyer implicite pour les entreprises – sans doute à raison – ce qui induit un biais spatial et temporel dans les consommations intermédiaires retenues.
+- **Limiter l'analyse au champ pertinent**. Il est plus simple de calculer la part des salaires au niveau le plus agrégé, mais ce champ inclut les branches non marchandes dans lesquelles la notion de prix et donc de valeur ajoutée est conventionnelle (la valeur ajoutée est estimée au coût des facteurs). Parmi les branches marchandes, la branches des services immobiliers est problématique parce qu'elle prend en compte la valeur ajoutée des ménages au travers des services immobiliers qui sont pour part auto produit (les loyers imputés aux propriétaires) et pour part produits par les ménages pour d'autres ménages (les propriétaires bailleurs). Suivant les pays ou les périodes, le nombre de propriétaires occupants peut être très différent (@cette2019 fait ce point). Mais le vrai problème est que le partage de la valeur ajoutée entre salariés et producteur n'a ici pas de sens dans le cas d'un loyer imputé ou d'un propriétaire bailleur et que le niveau de loyer représente plutôt le conflit de répartition d'une ressource plus ou moins rare entre propriétaires et locataires. La consommation de services immobiliers par les ménages représentait en France en 2024 un peu moins de 300 milliards d'euros soit approximativement `r round(300/1666*100)`% de la valeur ajoutée brute hors services immobilier. La notion privilégiée est donc celle de partage de la valeur ajoutée dans les branches marchandes hors services immobiliers ou, de façon plus précise, en enlevant de la valeur ajoutée marchande la branche "services immobiliers (L)" ([annexe 3](annexes.html#a3), @fig-structbranche). Omettre les services immobiliers pose cependant un problème, parce qu'on exclu de l'analyse les loyers payés par les entreprises pour leurs locaux et constitue bien un élément de coût. La comptabilité nationale n'évalue pas un loyer implicite pour les entreprises – sans doute à raison – ce qui induit un biais spatial et temporel dans les consommations intermédiaires retenues.
 
--   **Utiliser la notion de valeur ajoutée nette** (de la consommation de capital fixe (CCF)) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. La CFF est évaluée par des tables de mortalité à l'inventaire permanent des investissements productifs (actifs produits) non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire mesurée par leur amortissement physique ou fiscal, on est plus proche de la réalité du processus productif (voir @sicsic2018). Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée (@fig-psalnetbrut). Ce point est signalé par @tresor2025, mais les auteurs ont préféré le concept de valeur ajoutée brute pour des raisons de comparabilité entre études – au détriment de la comparabilité dans le temps et dans l'espace.
+- **Utiliser la notion de valeur ajoutée nette** (de la consommation de capital fixe (CCF)) plutôt que brute. Rappelons que la valeur ajoutée nette est construite en ôtant de la valeur ajoutée brute la consommation de capital fixe. La CFF est évaluée par des tables de mortalité à l'inventaire permanent des investissements productifs (actifs produits) non financiers (i.e. les investissements physiques mais aussi ceux en logiciels ou en base de données ainsi que les investissements intangibles comme les marques). En traitant les investissements comme une consommation intermédiaire mesurée par leur amortissement physique ou fiscal, on est plus proche de la réalité du processus productif (voir @sicsic2018). Lorsque le taux de dépréciation du capital varie, par des changement dans les tables de mortalité, des changements dans la composition du capital ou des changements dans la structure par branche de l'économie, la CCF rapportée à la valeur ajoutée varie et modifie donc la perception des évolutions du partage de la valeur ajoutée. La notion de valeur ajoutée nette est meilleure pour des comparaisons dans l'espace ou dans le temps. Comme pour la correction pour les non salariés, la prise en compte de la valeur ajoutée nette modifie dans le temps et dans l'espace la part des salaires dans la valeur ajoutée (@fig-psalnetbrut). Ce point est signalé par @tresor2025, mais les auteurs ont préféré le concept de valeur ajoutée brute pour des raisons de comparabilité entre études – au détriment de la comparabilité dans le temps et dans l'espace.
 
 [^1]: Merci à E. Aurissergues pour m'avoir pointé cette anomalie.
 
@@ -138,13 +138,11 @@ La valeur ajoutée est donc aux prix de base, c'est-à-dire net des impôts et s
 
 [^2]: @cette2019 utilisent une définition plus large des branches non marchande en incluant les branches R, T et U.
 
-$$
-s  = \frac{ \sum\limits_{b \neq LOPQ} D1_b*(1+ns_b/sal_b) } {\sum\limits_{b \neq LOPQ} B1G_b - P51C_b - (D29_b-D39_b)}
-$$
+$$s  = \frac{ \sum\limits_{b \neq LOPQ} D1_b*(1+ns_b/sal_b) } {\sum\limits_{b \neq LOPQ} B1G_b - P51C_b - (D29_b-D39_b)}$$
 
 Cette définition de la valeur ajoutée, au prix de marché, après impôt et suventions et de la consommation de capital fixe, permet d'analyser le partage entre salariés d'un côté et propriétaires ou financeurs des entreprises, puisque la somme de la part des salaires et de la part des profits nets est égal à 1. D'un côté du partage, on trouve les salariés et les non salariés, une catégorie hétérogène mais dont on retient le trait principal de tirer son revenu de son travail, par différentes formes de contrats, et de l'autre ceux qui financent l'entreprise, c'est-à-dire à la fois les banques, les marchés financiers pour le financement non bancaire et les actionnaires. Il est possible de faire la distinction entre actionnaires et autres financeurs (à travers la dette nette des entreprises et les inétrêts nets versés), mais cette distinction n'est pas robuste pour les branches et est factice (par exemple, le *private equity* rend difficile l'imputation de la dette).
 
-Pour exclure de ce partage complètement les impôts, il conviendrait de retirer de la valeur ajoutée l'impôt sur les sociétés. C'est en effet, par exemple, une partie de la valeur ajoutée qu'un investisseur étranger ne peut percevoir. En revanche pour un investisseur résident, la taxation des dividendes (via le prélèvement forfaitaire unique, PFU) et la taxation par l'impôt sur les sociétés conduit à un taux marginal (à peu près) comparable à l'impôt sur le revenu et dans ce cas le traitement serait plutôt identique pour les revenus d'activité (soumis à l'IR) et les revenus de la propriétés (IS+PFU). Pour autant, les taux marginals ne sont pas comparables et n'intègrent que partiellement la taxe inflationiste sur la capital détenu ou les gains en plus value, latents jusqu'à leur réalisation, mais qui échappent assez facilement à la taxation [@allègre2012].
+Pour exclure de ce partage complètement les impôts, il conviendrait de retirer de la valeur ajoutée l'impôt sur les sociétés. C'est en effet, par exemple, une partie de la valeur ajoutée qu'un investisseur étranger ne peut percevoir. En revanche pour un investisseur résident, la taxation des dividendes (via le prélèvement forfaitaire unique, PFU) et la taxation par l'impôt sur les sociétés conduit à un taux marginal (à peu près) comparable à l'impôt sur le revenu et dans ce cas le traitement serait plutôt identique pour les revenus d'activité (soumis à l'IR) et les revenus de la propriétés (IS+PFU). Pour autant, les taux marginaux ne sont pas comparables et n'intègrent que partiellement la taxe inflationniste sur la capital détenu ou les gains en capital (ou plus-values), latents jusqu'à leur réalisation, mais qui échappent assez facilement à la taxation [@allègre2012].
 
 En tout état de cause, la comptabilité nationale ne permet pas (encore) de distinguer finement l'impôt sur les sociétés ($D5$) par branche et l'imputation à un sous ensemble des branches est périlleux : il y a dans les branches non marchandes ou dans la branche L "services immobiliers" des entités soumises à l'IS et il est difficile de produire un numérateur pertinent incluant $D51$. Nous avons fait une telle imputation grossièrement [@fig-rp, @fig-tprofitbranches], qui est à considérer avec prudence.
 
@@ -165,42 +163,42 @@ La part des salaires dans la valeur ajoutée est la plus basse aux Pays-Bas, la 
 psal_lbl = c(b = "part des salaires dans la VA brute",
              n = "part des salaires dans la VA nette")
 naq |>
-  filter(time == "2024-01-01") |> 
-  arrange(geo) |> 
-  filter(champ == "mdhi" ) |> 
+  filter(time == "2024-01-01") |>
+  arrange(geo) |>
+  filter(champ == "mdhi" ) |>
   select(geo, psalh, psal, psalnc, psalb, psalhb, psalncb) |>
   mutate(
     geo_lbl = countrycode::countrycode(geo, "eurostat", "country.name.fr")) |>
   select(geo, geo_lbl, starts_with("psal")) |>
-  pivot_longer(-c(geo, geo_lbl)) |> 
+  pivot_longer(-c(geo, geo_lbl)) |>
   mutate(
     va = ifelse(str_detect(name, "b"), "b","n"),
-    name = str_remove(name, "b") ) |> 
-  pivot_wider(names_from = name, values_from = value) |> 
+    name = str_remove(name, "b") ) |>
+  pivot_wider(names_from = name, values_from = value) |>
   mutate(
-    va = factor(va, c("b","n"), psal_lbl)) |> 
-  group_by(va) |> 
+    va = factor(va, c("b","n"), psal_lbl)) |>
+  group_by(va) |>
   mutate(
-    across(starts_with("psal"), ~str_c(str_replace(round(.x*100,1), "\\.", ","), "% (", rank(-.x), ")"))) |> 
-  arrange(desc(va), geo) |> 
-  gt() |> 
-  fmt_flag(geo) |> 
-  tab_spanner(label = "Correction des non salari\u00e9s", columns = c(psalh, psal, psalnc)) |> 
+    across(starts_with("psal"), ~str_c(str_replace(round(.x*100,1), "\\.", ","), "% (", rank(-.x), ")"))) |>
+  arrange(desc(va), geo) |>
+  gt() |>
+  fmt_flag(geo) |>
+  tab_spanner(label = "Correction des non salari\u00e9s", columns = c(psalh, psal, psalnc)) |>
   cols_label(
     psal="effectifs",
     psalh="rev. mixte",
-    psalnc="sans") |> 
-  cols_label(geo = "", geo_lbl = "") |> 
+    psalnc="sans") |>
+  cols_label(geo = "", geo_lbl = "") |>
   ofce_caption(
   note = "Part des salaires en 2024 dans les branches marchandes hors services immobiliers pour différentes mesure (VA nette ou brute, correction ou non pour les non salariés. Le rang est indiqué entre paranthèses. Voir annexe 3 pour les autres champs.",
-  source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e), INSEE comptes de branches (DD_CNA_BRANCHES).") |> 
+  source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e), INSEE comptes de branches (DD_CNA_BRANCHES).") |>
   cols_width(
     geo ~ px(20),
     geo_lbl ~ px(80),
-    everything() ~ px(120)) |> 
-  my_tab_options() |> 
-  cols_hide_pdf(geo) |> 
-  save_gt() 
+    everything() ~ px(120)) |>
+  my_tab_options() |>
+  cols_hide_pdf(geo) |>
+  save_gt()
 
 ```
 
@@ -211,35 +209,35 @@ La séquence allant de la crise sanitaire (2020) à la forte inflation énergét
 #| tbl-cap: Evolution de la part des salaires
 
 naq |>
-  arrange(geo) |> 
+  arrange(geo) |>
   select(time, geo, champ, psalh) |>
   filter(time %in% c("1998-01-01", "2024-01-01"),
-         champ %in% c("tb", "md", "mdhi") ) |> 
-  mutate(time = year(time)) |> 
-  pivot_wider(names_from = time, values_from = psalh, names_glue = "y{time}") |> 
+         champ %in% c("tb", "md", "mdhi") ) |>
+  mutate(time = year(time)) |>
+  pivot_wider(names_from = time, values_from = psalh, names_glue = "y{time}") |>
   mutate(
     geo_lbl = countrycode::countrycode(geo, "eurostat", "country.name.fr"),
     d = y2024-y1998 ) |>
   select(geo, geo_lbl, champ, d) |>
-  pivot_wider(names_from = champ, values_from = c(d)) |> 
-  relocate(geo, geo_lbl, tb, md, mdhi) |> 
-  gt() |> 
-  fmt_flag(geo) |> 
-  fmt_percent(c(tb, md, mdhi), decimals = 1, dec_mark = ",", sep_mark = " ", force_sign = TRUE) |> 
-  tab_spanner("Part des salaires entre 2024 et 1998", c(mdhi,md, tb)) |> 
-  cols_label_with(c(mdhi, md, tb), fn = ~champs_c[.x]) |> 
-  cols_label(geo = "", geo_lbl = "") |> 
+  pivot_wider(names_from = champ, values_from = c(d)) |>
+  relocate(geo, geo_lbl, tb, md, mdhi) |>
+  gt() |>
+  fmt_flag(geo) |>
+  fmt_percent(c(tb, md, mdhi), decimals = 1, dec_mark = ",", sep_mark = " ", force_sign = TRUE) |>
+  tab_spanner("Part des salaires entre 2024 et 1998", c(mdhi,md, tb)) |>
+  cols_label_with(c(mdhi, md, tb), fn = ~champs_c[.x]) |>
+  cols_label(geo = "", geo_lbl = "") |>
   ofce_caption(
     note = "Part des salaires corrigée de la non salarisation par le revenu mixte (hybride hors France) dans la valeur ajoutée nette pour différents champs, conforme au graphique 1.",
-    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e).") |> 
+    source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e).") |>
   cols_width(
     geo ~ px(20),
     geo_lbl ~ px(80),
-    c(tb,md,mdhi) ~ px(140)) |> 
-  my_tab_options() |> 
-  cols_hide_pdf(geo) |> 
+    c(tb,md,mdhi) ~ px(140)) |>
+  my_tab_options() |>
+  cols_hide_pdf(geo) |>
   save_gt()
-           
+
 ```
 
 Différents éléments théoriques peuvent être avancés, comme les effets du progrès techniques, la combinaison (substitution) du travail et du capital ou la formation des salaires ou des taux d'intérêt (voir @tip-theorie).
@@ -377,37 +375,37 @@ vroom::vroom_write(data4tp, "data/data4tp.csv")
 rend_lbl = c(rbh = "rendement avant IS",
              rh = "rendement après IS")
 data4tp |>
-  filter(champ == "mdhi" ) |> 
+  filter(champ == "mdhi" ) |>
   group_by(geo) |>
-  mutate(y = year(time)) |> 
-  drop_na(rbh) |> 
-  filter(y == max(y)) |> 
-  ungroup() |> 
-  arrange(geo) |> 
+  mutate(y = year(time)) |>
+  drop_na(rbh) |>
+  filter(y == max(y)) |>
+  ungroup() |>
+  arrange(geo) |>
   select(geo, y, rh, rbh) |>
   mutate(
     geo_lbl = countrycode::countrycode(geo, "eurostat", "country.name.fr")) |>
   relocate(geo, geo_lbl) |>
-  arrange(desc(rbh)) |> 
-  gt() |> 
-  fmt_flag(geo) |> 
-  fmt_percent(c(rh, rbh), decimals = 1, sep_mark = "", dec_mark = ",") |> 
-  tab_spanner("Rendement", c(rbh, rh)) |> 
+  arrange(desc(rbh)) |>
+  gt() |>
+  fmt_flag(geo) |>
+  fmt_percent(c(rh, rbh), decimals = 1, sep_mark = "", dec_mark = ",") |>
+  tab_spanner("Rendement", c(rbh, rh)) |>
   cols_label(
     rbh = "avant IS",
     rh = "après IS",
     y = "Ann\u00e9e",
-    geo = "", geo_lbl = "") |> 
+    geo = "", geo_lbl = "") |>
   ofce_caption(
   champ = "Branches marchandes hors immobilier, correction par le revenu mixte (hybride sauf France).",
   note = " Profits nets de la CCF, avant ou après IS, divisés par la valeur des actifs productifs produits (N1N). L'imputation de l'IS est approximative pour ce champ.",
-  source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e); actifs productifs (nama_10_nfa_st); INSEE comptes de branches (DD_CNA_BRANCHES).") |> 
+  source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e); actifs productifs (nama_10_nfa_st); INSEE comptes de branches (DD_CNA_BRANCHES).") |>
   cols_width(
     geo ~ px(20),
     geo_lbl ~ px(80),
-    everything() ~ px(120)) |> 
-  my_tab_options() |> 
-  cols_hide_pdf(geo) |> 
+    everything() ~ px(120)) |>
+  my_tab_options() |>
+  cols_hide_pdf(geo) |>
   save_gt()
 
 ```
@@ -427,25 +425,25 @@ Le recours à des prix de transfert et la localisation de certains actifs dans d
 #| fig-asp: 0.85
 #| fig-cap: Rendement du capital productif (avant et après IS)
 
-date <- sourcoise::sourcoise_meta("R/vaq.r")$data_date |> ymd_hms() 
+date <- sourcoise::sourcoise_meta("R/vaq.r")$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
-tpbranches <- imap( 
+tpbranches <- imap(
   c("Marchand" = "md",
-    "Hors services immobiliers (-L)" = "mdhi", 
+    "Hors services immobiliers (-L)" = "mdhi",
     "Hors immo. ménages (-Lm)" = "mdhim") , ~{
-      data <-  data4tp |> 
-        filter(champ == .x) |> 
+      data <-  data4tp |>
+        filter(champ == .x) |>
         mutate(tooltip = glue(
           "<b>{lbl(geo)}</b>
           {year(time)}
           {champs[.x]}
           profits avant IS sur capital productif : {round(rbh*100,1)}%
           profits après IS (estimation) sur capital productif : {round(rh*100,1)}%"  ))
-      data_long <- data |> 
-        pivot_longer(c(rh, rbh), names_to = "concept", values_to = "value") |> 
+      data_long <- data |>
+        pivot_longer(c(rh, rbh), names_to = "concept", values_to = "value") |>
         mutate(concept = factor(concept, c("rbh", "rh")))
-      
+
       ggplot(data_long) +
         aes(x=time, y=value, col = geo) +
         geom_line(
@@ -454,13 +452,13 @@ tpbranches <- imap(
           color = "grey90", layout = "fixed", linewidth = 0.2) +
         ggbraid::geom_braid(
           data = data,
-          aes(y=NULL,ymin=rh, ymax=rbh, group=geo), 
+          aes(y=NULL,ymin=rh, ymax=rbh, group=geo),
           fill="darkorchid", alpha=0.1, color = NA)+
         scale_linetype_manual(values = c(rh="11", rbh="solid"),
-                              name=NULL, 
+                              name=NULL,
                               label = c(rh="Après IS", rbh= "Avant IS"))+
         scale_linewidth_manual(values = c(rh=0.25, rbh=0.5),
-                              name=NULL, 
+                              name=NULL,
                               label = c(rh="Après IS", rbh= "Avant IS"))+
         geom_line(aes(y=value, group=concept, linewidth=concept, linetype=concept))+
         geom_point_interactive(
@@ -474,9 +472,9 @@ tpbranches <- imap(
           labels = date1 ) +
         guides( fill = "none", color = "none",
                 linetype = guide_legend(nrow = 1),
-                alpha = guide_legend(nrow = 1)) + 
+                alpha = guide_legend(nrow = 1)) +
         scale_y_continuous(
-          labels = scales::label_percent(1), 
+          labels = scales::label_percent(1),
           breaks = scales::pretty_breaks(5),
           limits = c(0, .22),
           oob = scales::oob_keep) +
@@ -486,7 +484,7 @@ tpbranches <- imap(
           champ = "{champs[.x]}, correction par le revenu mixte (hybride sauf France).",
           note = "L'impôt sur les sociétés (D51, IS) des sociétés financières (S12) est affecté à la branche K et celui des sociétés non financières (S11) aux branches marchandes hors services financiers et immobilier des ménages (K+Lm). Le trait pointillé est le rendement après IS et le trait plein avant IS. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") +
         theme(legend.box.spacing = unit(1, "pt"))
-      }) 
+      })
 
 girafy(tpbranches[[2]], 1.5)
 ```
@@ -510,15 +508,15 @@ On distingue 4 agrégations : l'ensemble des branches (ou l'ensemble de l'écono
 
 library(lubridate)
 
-salaires <- source_data('R/salaires.r') |> 
-  filter(geo %in% P6) 
+salaires <- source_data('R/salaires.r') |>
+  filter(geo %in% P6)
 meta <- sourcoise::sourcoise_meta("R/salaires.r")
-date <- meta$data_date |> ymd_hms() 
+date <- meta$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
-data <- salaires |> 
-  filter(geo %in% P6) |> 
-  filter(time >= "1995-01-01") |> 
-  select(geo, time, w, w_md, w_nmd, w_hi, wb, wb_md, wb_nmd, wb_hi) |> 
+data <- salaires |>
+  filter(geo %in% P6) |>
+  filter(time >= "1995-01-01") |>
+  select(geo, time, w, w_md, w_nmd, w_hi, wb, wb_md, wb_nmd, wb_hi) |>
   mutate(
     tooltip = glue(
     "<b>{lbl(geo)}</b>
@@ -533,16 +531,16 @@ data <- salaires |>
     Salaire hors cot. soc. employeur réel, toute l'économie {round(wb,1)} k€/an
     Salaire hors cot. soc. employeur réel, branches marchandes {round(wb_md,1)} k€/an
     Salaire hors cot. soc. employeur réel, branches marchandes hors imm. {round(wb_hi,1)} k€/an
-    Salaire hors cot. soc. employeur réel, branches non marchandes {round(wb_nmd,1)} k€/an")) |> 
-  pivot_longer(starts_with("w")) |> 
+    Salaire hors cot. soc. employeur réel, branches non marchandes {round(wb_nmd,1)} k€/an")) |>
+  pivot_longer(starts_with("w")) |>
   mutate(geo = factor(geo, P6))
 
-lbl_b <- c(w = "Ttes branches", w_md = "Marchand", 
+lbl_b <- c(w = "Ttes branches", w_md = "Marchand",
                      w_nmd = "Non marchand", w_hi = "Marchand hors imm.")
-lbl_bb <- c(wb = "Ttes branches", wb_md = "Marchand", 
+lbl_bb <- c(wb = "Ttes branches", wb_md = "Marchand",
                      wb_nmd = "Non marchand", wb_hi = "Marchand hors imm.")
 sal <- ggplot(data |> filter(name %in% c("w", "w_md", "w_nmd", "w_hi"))) +
-  aes(x=time, y=value, 
+  aes(x=time, y=value,
       alpha = name, linewidth = name, linetype = name,
       color = geo) +
   scale_alpha_manual(
@@ -556,8 +554,8 @@ sal <- ggplot(data |> filter(name %in% c("w", "w_md", "w_nmd", "w_hi"))) +
     values = c(w=.5, w_md = 0.1, w_nmd = 0.25, w_hi= 0.5),
     labels = lbl_b, name = NULL) +
   geom_point_interactive(
-    data = ~.x |> 
-      filter( name == "w") |>  
+    data = ~.x |>
+      filter( name == "w") |>
       group_by(geo) |>
       filter(quarter(time) == last(quarter(time))) |>
       ungroup(),
@@ -581,7 +579,7 @@ sal <- ggplot(data |> filter(name %in% c("w", "w_md", "w_nmd", "w_hi"))) +
     note = "Le salaire est défini comme la masse salariale (D1) divisée par l'emploi salarié, sur les 4 derniers trimestres, déflaté par le déflateur de la consommation (P31_S14) chaîné.",
     ofce = FALSE)
 salb <- ggplot(data |> filter(name %in% c("wb", "wb_md", "wb_nmd", "wb_hi"))) +
-  aes(x=time, y=value, 
+  aes(x=time, y=value,
       alpha = name, linewidth = name, linetype = name,
       color = geo) +
   scale_alpha_manual(
@@ -595,8 +593,8 @@ salb <- ggplot(data |> filter(name %in% c("wb", "wb_md", "wb_nmd", "wb_hi"))) +
     values = c(wb=.5, wb_md = 0.1, wb_nmd = 0.25, wb_hi= 0.5),
     labels = lbl_bb, name = NULL) +
   geom_point_interactive(
-    data = ~.x |> 
-      filter( name == "wb") |>  
+    data = ~.x |>
+      filter( name == "wb") |>
       group_by(geo) |>
       filter(quarter(time) == last(quarter(time))) |>
       ungroup(),
@@ -639,7 +637,7 @@ On utilise les données de comptabilité nationale, en trimestriel, par branche 
 
 D'après l'INSEE, (voir le blog "[Combien pèse l'industrie en France et en Allemagne](https://blog.insee.fr/combien-pese-l-industrie-en-france-et-en-allemagne/)", @larieu2024), tous les pays ne produisent pas une comptabilité de branche mais pour certains (notamment l'Allemagne) une comptabilité sectorielle. La différence tient aux entreprises qui produisent plusieurs produits (un constructeur automobile propose des services financiers pour l'achat des véhicules) et dont l'activité est imputé à différentes branches (industrie et services financiers) dans la comptabilité de branche alors que dans une comptabilité de secteur l’activité est versée dans le principal secteur (ou le secteur d'immatriculation de l'entreprise chapeau). Cette différence empêche normalement les comparaisons des comptes de branches entre pays, y compris à l'intérieur de l'Union Européenne. Cependant, pour comparer la part des salaries dans la valeur ajoutée sur des agrégats larges (branches marchandes par exemple), cette dérogation à la norme comptable n'est que modérément problématique : de toute façon, l'automobile et les services financiers sont agrégés et c'est la correction pour la masse salariale des non salariés qui peut être modifiée. Mais si la même délimitation est employée pour les salariés et les non salariés que pour l'activité, l'erreur est probablement minime.
 
-La part des salaires est corrigée de la part des non salariés (données annuelles [`nama_10_a64_e`](https://ec.europa.eu/eurostat/databrowser/view/nama_10_a64_e/default/table?lang=en), extrapolées en maintenant le ratio salariés/non salariés à sa dernière valeur observée) en considérant que le salaire des non salariés est identique dans chaque branche à celui des salariés – cette hypothèse, que nous appelons *correction par les effectifs*, sous estime probablement le salaire de certains des non salariés (notamment les professions libérales ou les artisans) et surestime celui d'autres indépendants (chauffeurs et livreurs des plateforme, auto-entrepreuneurs du bâtiment) mais elle est difficile à lever. Le développement des plateformes et dans certains pays de statuts (sociaux, fiscaux) particuliers (les micro-entrepreneurs – ou auto-entrepreneurs en France) a introduit une nouvelle "classe" de non salariés possiblement moins rémunérés et avec des durées du travail plus basses que le reste des indépendants. L'[annexe 4](annexes.html#4) compile quelques éléments quantitatifs.
+La part des salaires est corrigée de la part des non salariés (données annuelles [`nama_10_a64_e`](https://ec.europa.eu/eurostat/databrowser/view/nama_10_a64_e/default/table?lang=en), extrapolées en maintenant le ratio salariés/non salariés à sa dernière valeur observée) en considérant que le salaire des non salariés est identique dans chaque branche à celui des salariés – cette hypothèse, que nous appelons *correction par les effectifs*, sous estime probablement le salaire de certains des non salariés (notamment les professions libérales ou les artisans) et surestime celui d'autres indépendants (chauffeurs et livreurs des plateforme, auto-entrepreneurs du bâtiment) mais elle est difficile à lever. Le développement des plateformes et dans certains pays de statuts (sociaux, fiscaux) particuliers (les micro-entrepreneurs – ou auto-entrepreneurs en France) a introduit une nouvelle "classe" de non salariés possiblement moins rémunérés et avec des durées du travail plus basses que le reste des indépendants. L'[annexe 4](annexes.html#4) compile quelques éléments quantitatifs.
 
 En revanche, dans la correction par les effectifs, on prend bien en compte que les non salariés de la branche agricole n'ont pas le même revenu que ceux de la branche "information et communication". La décomposition employée est à 9 branches et on peut conduire la même correction à un niveau de désagrégation plus fin. Une alternative est employée en utilisant les données de revenu mixte. A défaut d'être totalement convaincante, du fait d'un manque de données diffusées, elle montre la complexité et l'importance de la correction pour le revenu des indépendants. Une solution aurait pu être de ne considérer que les entreprises (voir @sec-snff) mais là aussi les différentes pratiques de comptabilité ne garantissent pas un traitement homogène d'un pays à l'autre et surtout occultent un pan important de l'économie (en Italie aujourd'hui ou en France dans le passé par exemple).
 
@@ -656,44 +654,44 @@ Les données trimestrielles sont annualisées pour la lisibilité et pour simpli
 #| fig-asp: 0.85
 #| fig-cap: Correction pour la non salarisation, comptes de branches
 
-champs  <- c(md = "marchand", 
+champs  <- c(md = "marchand",
              mdhifi = "marchand hors immobilier et services financiers",
-             mdhfi= "marchand hors services financiers", 
-             mdhi= "marchand hors imm.", 
+             mdhfi= "marchand hors services financiers",
+             mdhi= "marchand hors imm.",
              mdhim = "Marchand hors imm. mén.",
              tb = "Toutes branches (marchandes et non marchandes)")
-naq <- source_data("R/vaq.r")$naa |> 
-  filter(geo %in% P6) |> 
+naq <- source_data("R/vaq.r")$naa |>
+  filter(geo %in% P6) |>
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
-    {year(time)} 
+    {year(time)}
     {champs[champ]}
     Rémunérations (revenu mixte) dans la VAN : {round(psalh*100,1)}%
     Rémunérations (effectifs) dans la VAN : {round(psal*100,1)}%
     Rémunérations (sans les non salariés) dans la VAN : {round(100*psalnc,1)}%")) |>
   mutate(geo = factor(geo, P6))
 
-date <- sourcoise::sourcoise_meta("R/vaq.r")$data_date |> ymd_hms() 
+date <- sourcoise::sourcoise_meta("R/vaq.r")$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 annot <-  tribble(
   ~time, ~psalh, ~label, ~geo, ~champ,
   "1996-01-01", .89, "Branches marchandes hors immobilier et finance", "DE", "mdhifi",
-  "1996-01-01", .61, "Branches marchandes et non marchandes", "DE", "tb") |> 
+  "1996-01-01", .61, "Branches marchandes et non marchandes", "DE", "tb") |>
   mutate(time = as.Date(time),
          geo = factor(geo, P6))
 
-labels_champ = c(tb = "Ttes branches", md="Marchand", 
+labels_champ = c(tb = "Ttes branches", md="Marchand",
                  mdhifi = "Marchand hors imm.&fin.",
                  mdhi = "Marchand hors imm.",
                  mdhim = "Marchand hors imm. mén.")
 
-data <- naq |> 
-  filter(champ %in% c("tb", "mdhi")) |> 
-  select(time, geo, champ, psalh, psalnc) |> 
-  pivot_longer(c(psalh, psalnc), names_to = "concept") |> 
+data <- naq |>
+  filter(champ %in% c("tb", "mdhi")) |>
+  select(time, geo, champ, psalh, psalnc) |>
+  pivot_longer(c(psalh, psalnc), names_to = "concept") |>
   mutate(
-    tooltip2 = ifelse(concept=="psalh", 
+    tooltip2 = ifelse(concept=="psalh",
                       "Part des salaires dans la VAN, non corrigée de la non salarisation",
                       "Part des salaires dans la VAN, corrigée de la non salarisation"))
 
@@ -713,9 +711,9 @@ psal <- ggplot(data) +
     name = NULL) +
   geom_ribbon(
     data = naq |> filter(champ %in%c("mdhi", "tb")),
-    aes(ymin = psalnc, ymax = psalh, fill = geo, group = champ), 
+    aes(ymin = psalnc, ymax = psalh, fill = geo, group = champ),
     color = NA, alpha=0.1, show.legend = FALSE) +
-  geom_line_interactive( 
+  geom_line_interactive(
     aes(y=value, linetype = champ, linewidth = concept, alpha = champ,
         tooltip = tooltip2)) +
   geom_point_interactive(
@@ -724,7 +722,7 @@ psal <- ggplot(data) +
     size = 1, stroke = 0.5, shape = 21, color = "white",
     hover_nearest = TRUE, show.legend=FALSE) +
   #  geom_marquee(
-  #    data = annot, hjust = 0, 
+  #    data = annot, hjust = 0,
   #    aes(label = label),  size = 6, size.unit = "pt", show.legend=FALSE) +
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
@@ -732,9 +730,9 @@ psal <- ggplot(data) +
     labels = date1 ) +
   guides( fill = "none", color = "none",
           linewidth = guide_legend(ncol = 1),
-          alpha = guide_legend(ncol = 1), 
-          linetype = guide_legend(ncol = 1)) + 
-  scale_y_continuous(labels = scales::label_percent(1), 
+          alpha = guide_legend(ncol = 1),
+          linetype = guide_legend(ncol = 1)) +
+  scale_y_continuous(labels = scales::label_percent(1),
                      breaks = scales::pretty_breaks(3)) +
   scale_color_pays(format = "eurostat") +
   theme(
@@ -763,30 +761,30 @@ Le revenu mixte est le revenu des entrepreneurs individuels, autoentrepreneurs e
 pays <- source_data("R/nace.r")$pays1
 mixte <- source_data("R/mixte.r")$a
 
-nsal <- source_data("R/vaq.r")$naa |> 
-  transmute(geo, time, champ, msa, msanc) |> 
-  filter(champ == "tb", geo %in% pays) |> 
-  left_join(mixte, by = c("geo", "time")) |> 
+nsal <- source_data("R/vaq.r")$naa |>
+  transmute(geo, time, champ, msa, msanc) |>
+  filter(champ == "tb", geo %in% pays) |>
+  left_join(mixte, by = c("geo", "time")) |>
   mutate(
-    geo = factor(geo, pays) ) |> 
-  arrange(geo) |> 
+    geo = factor(geo, pays) ) |>
+  arrange(geo) |>
   transmute(
     nsal = msa-msanc,
     b3g,
-    rb3g = nsal/b3g-1, 
+    rb3g = nsal/b3g-1,
     geo_label = countrycode(geo, "eurostat", "country.name.fr"),
     geo = countrycode(geo, "eurostat", "iso3c"),
-    year = year(time)) |> 
-  pivot_wider(names_from = year, values_from = c(nsal, b3g, rb3g)) |> 
-  select(geo, geo_label, nsal_2024, b3g_2024, starts_with("rb3g")) |> 
-  rename_with(.cols  = starts_with("rb3g_"), .fn = ~str_remove(.x, "rb3g_")) |> 
+    year = year(time)) |>
+  pivot_wider(names_from = year, values_from = c(nsal, b3g, rb3g)) |>
+  select(geo, geo_label, nsal_2024, b3g_2024, starts_with("rb3g")) |>
+  rename_with(.cols  = starts_with("rb3g_"), .fn = ~str_remove(.x, "rb3g_")) |>
   rename(nsal = nsal_2024,
-         b3g = b3g_2024) |> 
+         b3g = b3g_2024) |>
   mutate(r = nsal/b3g)
 
-nsal |> 
-  gt() |> 
-  fmt_flag(geo) |> 
+nsal |>
+  gt() |>
+  fmt_flag(geo) |>
   cols_nanoplot(
     columns = matches("[0-9]{4}"),
     plot_type = "bar",
@@ -797,24 +795,24 @@ nsal |>
       data_bar_fill_color = alpha("red", 0.5),
       data_bar_negative_stroke_color = alpha("green",0.5),
       data_bar_negative_fill_color = alpha("green", 0.5),
-      data_bar_stroke_width = 0)) |> 
+      data_bar_stroke_width = 0)) |>
   cols_label(geo = "", geo_label ="",
              nsal = "(a) Salaires des non sal.",
-             b3g = "(b) Revenu mixte", 
+             b3g = "(b) Revenu mixte",
              r = "(a)/(b)",
-             nanoplots = "de 1995 à 2025") |> 
-  fmt_number(c(nsal, b3g), decimals = 0, scale_by = 1/1000, dec_mark = ",", sep_mark = " ", pattern = "{x} Mds€") |> 
-  fmt_percent(c(r), decimals = 0, dec_mark = ",", sep_mark = " ") |> 
-  cols_width(c(nsal, b3g, r) ~ px(100)) |> 
-  cols_align_decimal(c(nsal, b3g, r), dec_mark = ",") |> 
-  cols_align("center", nanoplots) |> 
+             nanoplots = "de 1995 à 2025") |>
+  fmt_number(c(nsal, b3g), decimals = 0, scale_by = 1/1000, dec_mark = ",", sep_mark = " ", pattern = "{x} Mds€") |>
+  fmt_percent(c(r), decimals = 0, dec_mark = ",", sep_mark = " ") |>
+  cols_width(c(nsal, b3g, r) ~ px(100)) |>
+  cols_align_decimal(c(nsal, b3g, r), dec_mark = ",") |>
+  cols_align("center", nanoplots) |>
   ofce_caption(
     champ = "Branches marchandes et non marchandes, année 2024 pour (a) et (b).",
-    source = "Eurostat, comptes annuels de branche (nama_10_a64), et de transactions non financières (nasa_10_nf_tr).") |> 
-  cols_hide_pdf(c("nanoplots", "geo")) |> 
-  my_tab_options() |> 
+    source = "Eurostat, comptes annuels de branche (nama_10_a64), et de transactions non financières (nasa_10_nf_tr).") |>
+  cols_hide_pdf(c("nanoplots", "geo")) |>
+  my_tab_options() |>
   ofce::save_gt()
-  
+
 ```
 
 En France et en Belgique, la convention employée surestime visiblement la masse salariale que l'on peut imputer aux non salariés, puisqu'elle est supérieure au revenu mixte. En revanche, en Allemagne ou en Espagne, c'est l'inverse. Le cas Français est intéressant, parce que le ratio masse salariale imputée sur revenu mixte devient plus grand que 1 en 2013 et et augmente quelques années avant. Le régime d'autoentrepreneur introduit en 2008 peut expliquer cette dynamique en généralisant le nombre de non salariés ayant de faibles revenus et éventuellement étant salariés par ailleurs (voir l'[annexe 4](annexes.html#a4) pour plus de détails).
@@ -828,39 +826,39 @@ On peut construire à partir du revenu mixte une correction alternative de la no
 #| fig-asp: 0.85
 #| fig-cap: Correction pour la non salarisation, effectifs ou revenu mixte, comptes de branches
 
-psal_fr <- source_data("R/france-melodi.R")$aggr |> 
+psal_fr <- source_data("R/france-melodi.R")$aggr |>
   transmute(time, geo = "FR", champ, psal, psalm)
 
-naq2 <- source_data("R/vaq.r")$naa |> 
+naq2 <- source_data("R/vaq.r")$naa |>
   filter(geo %in% P6) |>
-  filter(champ %in% c("mdhi")) |> 
-  select(time, geo, champ, psal, psalh, psalm) |> 
-  mutate(geo = factor(geo, P6)) |> 
+  filter(champ %in% c("mdhi")) |>
+  select(time, geo, champ, psal, psalh, psalm) |>
+  mutate(geo = factor(geo, P6)) |>
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
-    {year(time)} 
+    {year(time)}
     Part des salaires dans la VA nette, Branches marchandes
     Correction par les effectifs : {round(psal*100,1)}%
-    Correction par le revenu mixte (net, hybride) : {round(100*psalh,1)}%")) 
+    Correction par le revenu mixte (net, hybride) : {round(100*psalh,1)}%"))
 
-date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
+date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 labels = c(psal = "Correction par les effectifs", psalh = "Correction par le revenu mixte (net, hybride)")
 
-data <- naq2 |>  
-  pivot_longer(c(psal, psalh), names_to = "concept") |> 
+data <- naq2 |>
+  pivot_longer(c(psal, psalh), names_to = "concept") |>
   mutate(
-    tooltip2 = ifelse(concept=="psal", 
+    tooltip2 = ifelse(concept=="psal",
                       "Correction par les effectifs (et salaire égal au salaire moyen)",
-                      "Correction par le revenu mixte (net, hybride)")) |> 
+                      "Correction par le revenu mixte (net, hybride)")) |>
   mutate(geo = factor(geo, P6))
 
 psal <- ggplot(data) +
   aes(x=time, col = geo) +
   ggbraid::geom_braid(
     data = naq2 |> mutate(s = psalh>psal),
-    aes(ymin = psal, ymax = psalh, group = geo, fill = s), 
+    aes(ymin = psal, ymax = psalh, group = geo, fill = s),
     color = NA, alpha=0.1, show.legend = FALSE) +
   scale_fill_manual(values = c("green", "red")) +
   ggnewscale::new_scale_fill() +
@@ -872,20 +870,20 @@ psal <- ggplot(data) +
     values = c(psalh=.5, psal = 0.25),
     labels = labels,
     name = NULL) +
-  geom_line_interactive( 
+  geom_line_interactive(
     aes(y=value, linewidth = concept, alpha = champ,
         tooltip = tooltip2)) +
   geom_point_interactive(
     data = naq2,
-    shape = 21, color="white", stroke = 0.5, size =1, 
+    shape = 21, color="white", stroke = 0.5, size =1,
     aes(y=psalh, tooltip = tooltip, data_id = time, fill = geo),
     hover_nearest = TRUE, show.legend=FALSE) +
   ylab("% de la VA") + xlab(NULL) +
   facet_wrap(vars(geo), ncol = 3, labeller = lbl) +
   scale_ofce_date(
     labels = date1 ) +
-  guides( fill = "none", color = "none" ) + 
-  scale_y_continuous(labels = scales::label_percent(1), 
+  guides( fill = "none", color = "none" ) +
+  scale_y_continuous(labels = scales::label_percent(1),
                      breaks = scales::pretty_breaks(3)) +
   scale_color_pays(format = "eurostat") +
   theme(
@@ -901,7 +899,7 @@ psal <- ggplot(data) +
 girafy(psal, 1.5)
 ```
 
-La correction est assez différente pour la France et la Belgique, ce qui est conforme aux valeurs affichées dans le @tbl-mixte. La hausse de la part des salaires apparaît moins importante que pour la correction par les effectifs. Au lieu d'une hausse de 11,3 points de pourcentage (branches marchandes hors immobilier, de 1998 à 2024, pour la France), elle n'est que de de 5,7 points. La comparaison avec les autres pays est donc un peu moins brutale que pour la correction par les effectifs, l'Allemagne ayant en 2023 une part des salaires dans la valeur ajoutée plus proche de celle de la France en suivant la correction par le revenu mixte, qui réhausse la part des salaires en Allemagne (voir aussi le @tbl-mixte) – à la réserve près que la correction est moins précise pour l'Allemagne puisque nous n'avons pas les données de revenu mixte par branche (méthode hybride en répartissant le revenu mixte agrégé au prorata des effectifs de non salariés par branche), contrairement à la France.
+La correction est assez différente pour la France et la Belgique, ce qui est conforme aux valeurs affichées dans le @tbl-mixte. La hausse de la part des salaires apparaît moins importante que pour la correction par les effectifs. Au lieu d'une hausse de 11,3 points de pourcentage (branches marchandes hors immobilier, de 1998 à 2024, pour la France), elle n'est que de de 5,7 points. La comparaison avec les autres pays est donc un peu moins brutale que pour la correction par les effectifs, l'Allemagne ayant en 2023 une part des salaires dans la valeur ajoutée plus proche de celle de la France en suivant la correction par le revenu mixte, qui ré-hausse la part des salaires en Allemagne (voir aussi le @tbl-mixte) – à la réserve près que la correction est moins précise pour l'Allemagne puisque nous n'avons pas les données de revenu mixte par branche (méthode hybride en répartissant le revenu mixte agrégé au prorata des effectifs de non salariés par branche), contrairement à la France.
 
 Cette correction respecte plus les données issues de la comptabilité nationale et est donc plus appropriée pour évaluer la part des revenus d'activité dans la valeur ajoutée. C'est la correction privilégiée dans ce document.
 
@@ -915,25 +913,25 @@ Cette correction respecte plus les données issues de la comptabilité nationale
 champs  <- c("md" = "marchand",
             "mdhifi" = "marchand hors services immobiliers et financiers",
             "mdhi" = "marchand hors services immobiliers",
-            "mdhfi"= "marchand hors services financiers", 
+            "mdhfi"= "marchand hors services financiers",
             "tb" = "Toutes branches (marchandes et non marchandes)")
-naq <- source_data("R/vaq.r")$naa |> 
-  filter(geo %in% P6) |> 
+naq <- source_data("R/vaq.r")$naa |>
+  filter(geo %in% P6) |>
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
-    {year(time)} 
+    {year(time)}
     {champs[champ]}
     Rémunérations (y.c. les non salariés) dans la VAN : {round(psalh*100,1)}%
     Rémunérations (sans les non salariés) dans la VAB : {round(100*psalhb,1)}%")) |>
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE")))
 
-date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms() 
+date <- sourcoise::sourcoise_meta("vaq.r")$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 data <- naq |>
-  select(geo, time, champ, psalh, psalhb) |> 
-  filter(champ %in% c("tb", "mdhi")) |> 
-  pivot_longer(c(psalh, psalhb), names_to = "concept") |> 
+  select(geo, time, champ, psalh, psalhb) |>
+  filter(champ %in% c("tb", "mdhi")) |>
+  pivot_longer(c(psalh, psalhb), names_to = "concept") |>
   mutate(
     tooltip2 = glue("{ifelse(concept=='psalh', 'VA nette', 'VA brute')}")
   )
@@ -954,9 +952,9 @@ psal <- ggplot() +
     name = NULL) +
   geom_ribbon(
      data = naq |> filter(champ %in% c("tb", "mdhi")),
-     aes(ymin = psalhb, ymax = psalh, fill = geo, group = champ), 
+     aes(ymin = psalhb, ymax = psalh, fill = geo, group = champ),
      color = NA, alpha=0.1, show.legend = FALSE) +
-  geom_line_interactive( 
+  geom_line_interactive(
     data = data,
     aes(y=value, linetype = champ, linewidth = concept, alpha = concept,
         group = interaction(geo, champ, concept),
@@ -1002,12 +1000,10 @@ Le biais des conventions joue sur le stock de capital mesuré et peut biaisé le
 
 On peut décomposer le changement de la part des salaires dans la valeur ajoutée en un effet de structure en branche et un effet de changement de la part des salaires dans la valeur ajoutée dans chaque branche. Formellement la décomposition retenue s'écrit (où $w_{b,t}$ est la part de VAN de la branche $b$ dans la valeur ajoutée nette de l'ensemble des branches considérées et $s_{b,t}$ la part des salaires dans la branche $b$) :
 
-$$
-\begin{aligned}
-s_t - \sum w_{b,1995} \times s_{b,1995} = \sum w_{b,1995} \times (s_{b,t}-s_{b,1995}) \\ 
-+ \sum (w_{b,t} - w_{b,1995}) \times s_{b,t}  
-\end{aligned}
-$$
+$$\begin{aligned}
+s_t - \sum w_{b,1995} \times s_{b,1995} = \sum w_{b,1995} \times (s_{b,t}-s_{b,1995}) \\
++ \sum (w_{b,t} - w_{b,1995}) \times s_{b,t}
+\end{aligned}$$
 
 L'année 1995 est l'année de référence et le premier terme (de droite) s'interprète comme la part des salaires qui prévaudrait s'il n'y avait pas eu de changement de structure. Le @fig-structbranche représente ce terme ainsi que la part agrégée des salaires ($s_{t}$). L'effet de la structure par branche de l'économie (ici marchande hors services immobiliers produits par les ménages) est assez marginale. Les variations de la part des salaires sont bien celle des parts des salaires dans chaque secteur.
 
@@ -1020,7 +1016,7 @@ En revanche, la part des salaires serait légèrement supérieure en Italie à s
 #| fig-cap: Structure par branche et part des salaires dans la VA
 #| fig-asp: 0.85
 
-decomp <- source_data("R/decomp.r") |> 
+decomp <- source_data("R/decomp.r") |>
   mutate(
     psal = s0+s_sec+s_psal,
     psal_si = s0+s_psal,
@@ -1035,7 +1031,7 @@ gd <- ggplot(decomp) +
   aes(x = time, color = geo) +
   ggbraid::geom_braid(
     data = decomp,
-    aes(ymin = psal_si, ymax = psal, fill = s_sec>0, group=geo), 
+    aes(ymin = psal_si, ymax = psal, fill = s_sec>0, group=geo),
     alpha = 0.2,
     color = NA,  show.legend=FALSE) +
   scale_fill_manual(values = c("palegreen1", "pink")) +
@@ -1095,34 +1091,34 @@ La France conserve une singularité marquée par la baisse continue du taux de p
 #| fig-asp: 0.85
 #| fig-cap: Rendement du capital productif, correction de la non salarisation par les effectifs ou le revenu mixte
 
-date <- sourcoise::sourcoise_meta("R/vaq.r")$data_date |> ymd_hms() 
+date <- sourcoise::sourcoise_meta("R/vaq.r")$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
-psal_fr <- source_data("R/france-melodi.r")$aggr |> 
-  transmute(time, geo = "FR", champ, van, msa, msam) |> 
+psal_fr <- source_data("R/france-melodi.r")$aggr |>
+  transmute(time, geo = "FR", champ, van, msa, msam) |>
   left_join(source_data("R/vaq.r")$naaa |>
               filter(geo == "FR") |>
-              select(time, champ, assets, ip), 
-            by = c("champ", "time")) |> 
+              select(time, champ, assets, ip),
+            by = c("champ", "time")) |>
   mutate(tpbm = (van - msam - ip)/van,
          rbm = (van - msam - ip)/assets,
          tpbh = tpbm, rbh = rbm,
-         geo == "FR") |> 
-  select(time, champ, geo, rbm, rbh) |> 
+         geo == "FR") |>
+  select(time, champ, geo, rbm, rbh) |>
   drop_na(rbm)
 
 data4tp <- source_data("R/vaq.r")$naaa |>
   filter(geo %in% P6) |>
-  select(time, geo, champ, r, rb, rbm, rbh) |> 
+  select(time, geo, champ, r, rb, rbm, rbh) |>
   left_join(psal_fr, by=c("geo", "time", "champ"), suffix = c("",".fr")) |>
   mutate(
     rbm = ifelse(is.na(rbm.fr), rbm, rbm.fr),
-    rbh = ifelse(is.na(rbm.fr), rbh, rbm.fr)) |> 
-  select(-rbm.fr) |> 
+    rbh = ifelse(is.na(rbm.fr), rbh, rbm.fr)) |>
+  select(-rbm.fr) |>
   mutate(geo = factor(geo, P6))
 
-data <-  data4tp |> 
-  filter(champ == "mdhi") |> 
+data <-  data4tp |>
+  filter(champ == "mdhi") |>
   mutate(
     cr = rbh>rb,
     tooltip = glue(
@@ -1132,24 +1128,24 @@ data <-  data4tp |>
           Correction effectif : {round(rb*100,1)}%
           Correction revenu mixte : {round(rbh*100,1)}%"  ))
 
-data_long <- data |> 
-  select(geo, time, rb, rbh, tooltip, cr) |> 
-  pivot_longer(c(rb, rbh), names_to = "concept", values_to = "value") |> 
+data_long <- data |>
+  select(geo, time, rb, rbh, tooltip, cr) |>
+  pivot_longer(c(rb, rbh), names_to = "concept", values_to = "value") |>
   mutate(concept = factor(concept, c("rb", "rbh")))
 
 tpmixte <- ggplot(data_long) +
   aes(x=time, y=value, col = geo) +
   ggbraid::geom_braid(
     data = data,  alpha = 0.1,
-    aes(y=NULL, ymin=rbh, ymax = rb, fill = cr), 
+    aes(y=NULL, ymin=rbh, ymax = rb, fill = cr),
     color="transparent", show.legend = FALSE) +
   scale_fill_manual(values = c("green", "red")) +
   ggnewscale::new_scale_fill() +
   scale_linetype_manual(values = c(rb="11", rbh="solid"),
-                        name=NULL, 
+                        name=NULL,
                         label = c(rb="Correction effectif", rbh= "Correction revenu mixte hybride"))+
   scale_linewidth_manual(values = c(rbh=0.5, rb=0.5),
-                         name=NULL, 
+                         name=NULL,
                          label = c(rb="Correction effectif", rbh= "Correction revenu mixte hybride"))+
   geom_line(aes(y=value, group=concept, linewidth=concept, linetype=concept))+
   geom_point_interactive(
@@ -1163,9 +1159,9 @@ tpmixte <- ggplot(data_long) +
     labels = date1 ) +
   guides( fill = "none", color = "none",
           linetype = guide_legend(nrow = 1),
-          alpha = guide_legend(nrow = 1)) + 
+          alpha = guide_legend(nrow = 1)) +
   scale_y_continuous(
-    labels = scales::label_percent(1), 
+    labels = scales::label_percent(1),
     breaks = scales::pretty_breaks(5),
     limits = c(0, .2),
     oob = scales::oob_keep) +
@@ -1197,15 +1193,15 @@ Comme pour les graphiques précédents, les données trimestrielles sont annuali
 #| fig-cap: Part des salaires dans la VA, SNF, comptes d'agents
 #| fig-asp: 0.85
 
-snfq <- source_data("R/snf_ratio.r") |> 
+snfq <- source_data("R/snf_ratio.r") |>
   pluck("snfq") |>
-  filter(sector == "S11", geo %in% P6) |> 
-  mutate(year = floor_date(time, "year")) |> 
-  select(-starts_with("s_adj_"), -time) |> 
-  group_by(geo, year, sector) |> 
+  filter(sector == "S11", geo %in% P6) |>
+  mutate(year = floor_date(time, "year")) |>
+  select(-starts_with("s_adj_"), -time) |>
+  group_by(geo, year, sector) |>
   summarize(across(everything(), ~sum(.x)/n()*4),
-            .groups = "drop") |> 
-  rename(time = year) |> 
+            .groups = "drop") |>
+  rename(time = year) |>
   mutate(
     van = B1N,
     vab = B1G,
@@ -1215,7 +1211,7 @@ snfq <- source_data("R/snf_ratio.r") |>
     div = (D42)/B1N,
     divb = (D42)/B1G,
     isp = (D5+D2+D3)/B1N,
-    tp = (B1N-D1-D5-D2-D3)/B1N ) |> 
+    tp = (B1N-D1-D5-D2-D3)/B1N ) |>
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
     {year(time)}
@@ -1223,21 +1219,21 @@ snfq <- source_data("R/snf_ratio.r") |>
     Rémunérations dans la VAN : {round(psal*100,1)}%
     Rémunérations dans la VAB : {round(psalb*100,1)}%
     Profits nets (d'IS, taxes et subvention) dans la VAN : {round(tp*100,1)}%
-    Dividendes nets dans la VAN : {round(div*100,1)}%")) |> 
-  mutate(geo = factor(geo, P6)) |> 
+    Dividendes nets dans la VAN : {round(div*100,1)}%")) |>
+  mutate(geo = factor(geo, P6)) |>
   filter(time>= "1995-01-01")
 
-date <- sourcoise::sourcoise_meta("R/snf_ratio.r")$data_date |> ymd_hms() 
+date <- sourcoise::sourcoise_meta("R/snf_ratio.r")$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
-naq_a <-  naq |> 
-  filter(champ == "mdhifi") |> 
+naq_a <-  naq |>
+  filter(champ == "mdhifi") |>
   select(geo, time, psal_branche  = psal, psalb_branche = psalb)
-data <- snfq |> 
-  select(geo, time, psal_snf = psal, psalb_snf = psalb) |> 
-  left_join(naq_a, by = c("geo", "time")) |> 
-  pivot_longer(starts_with("psal")) |> 
-  separate(name, into = c("concept", "champ")) |> 
-  filter(time>="1995-01-01", !(concept=="psalb"&champ=="branche")) |> 
+data <- snfq |>
+  select(geo, time, psal_snf = psal, psalb_snf = psalb) |>
+  left_join(naq_a, by = c("geo", "time")) |>
+  pivot_longer(starts_with("psal")) |>
+  separate(name, into = c("concept", "champ")) |>
+  filter(time>="1995-01-01", !(concept=="psalb"&champ=="branche")) |>
   mutate(
     tooltip2 = glue("Valeur ajoutée {ifelse(concept=='psal', 'nette', 'brute')}; {ifelse(champ=='snf', 'SNF', 'branches marchandes hors imm.&fin.')}") )
 
@@ -1293,21 +1289,21 @@ girafy(psnf, 1.5)
 ```{r}
 #| label: fig-s1112psal
 #| fig-cap: Part des salaires dans la VA, SNF+SF, comptes d'agents
-#| fig-asp: 0.85 
+#| fig-asp: 0.85
 
-snffq <- source_data("R/snf_ratio.r") |> 
-  pluck("snfq") |> 
-  filter(geo %in% P6) |> 
-  mutate(year = floor_date(time, "year")) |> 
-  select(-starts_with("s_adj_")) |> 
-  group_by(geo, time, year) |> 
+snffq <- source_data("R/snf_ratio.r") |>
+  pluck("snfq") |>
+  filter(geo %in% P6) |>
+  mutate(year = floor_date(time, "year")) |>
+  select(-starts_with("s_adj_")) |>
+  group_by(geo, time, year) |>
   summarize(across(-sector, ~sum(.x)),
-            .groups = "drop") |> 
-  group_by(geo, year) |> 
-  select(-time) |> 
+            .groups = "drop") |>
+  group_by(geo, year) |>
+  select(-time) |>
   summarize(across(everything(), ~sum(.x)/n()*4),
-            .groups = "drop") |> 
-  rename(time = year) |> 
+            .groups = "drop") |>
+  rename(time = year) |>
   mutate(
     van = B1N,
     vab = B1G,
@@ -1317,7 +1313,7 @@ snffq <- source_data("R/snf_ratio.r") |>
     div = (D42)/B1N,
     divb = (D42)/B1G,
     isp = (D5+D2+D3)/B1N,
-    tp = (B1N-D1-D5-D2-D3)/B1N ) |> 
+    tp = (B1N-D1-D5-D2-D3)/B1N ) |>
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
     {year(time)}
@@ -1325,21 +1321,21 @@ snffq <- source_data("R/snf_ratio.r") |>
     Rémunérations dans la VAN : {round(psal*100,1)}%
     Rémunérations dans la VAB : {round(psalb*100,1)}%
     Profits nets (d'IS, taxes et subvention) dans la VAN : {round(tp*100,1)}%
-    Dividendes nets dans la VAN : {round(div*100,1)}%")) |> 
-  mutate(geo = factor(geo, P6)) |> 
+    Dividendes nets dans la VAN : {round(div*100,1)}%")) |>
+  mutate(geo = factor(geo, P6)) |>
   filter(time>= "1995-01-01")
 
-date <- sourcoise::sourcoise_meta("snf_ratio.r")$data_date |> ymd_hms() 
+date <- sourcoise::sourcoise_meta("snf_ratio.r")$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
-naq_a <-  naq |> 
-  filter(champ == "mdhi") |> 
+naq_a <-  naq |>
+  filter(champ == "mdhi") |>
   select(geo, time, psal_branche  = psal, psalb_branche = psalb)
-data <- snfq |> 
-  select(geo, time, psal_snf = psal, psalb_snf = psalb) |> 
-  left_join(naq_a, by = c("geo", "time")) |> 
-  pivot_longer(starts_with("psal")) |> 
-  separate(name, into = c("concept", "champ")) |> 
-  filter(time>="1995-01-01", !(concept=="psalb"&champ=="branche")) |> 
+data <- snfq |>
+  select(geo, time, psal_snf = psal, psalb_snf = psalb) |>
+  left_join(naq_a, by = c("geo", "time")) |>
+  pivot_longer(starts_with("psal")) |>
+  separate(name, into = c("concept", "champ")) |>
+  filter(time>="1995-01-01", !(concept=="psalb"&champ=="branche")) |>
   mutate(
     tooltip2 = glue("Valeur ajoutée {ifelse(concept=='psal', 'nette', 'brute')}; {ifelse(champ=='snf', 'SNF', 'branches marchandes hors imm.')}") )
 
@@ -1398,9 +1394,7 @@ Les comptes des sociétés non financières permettent d’examiner d'autres él
 
 Les profits nets sont définis comme la valeur ajoutée nette de la consommation de capital fixe moins la rémunération des salariés, moins les taxes nettes des subventions moins l'impôt sur les sociétés :
 
-$$
-\Pi = B1G - P51C - D1 - (D29-D39) - D5 = B2N-D5
-$$
+$$\Pi = B1G - P51C - D1 - (D29-D39) - D5 = B2N-D5$$
 
 Les dividendes sont la ligne $D42$ nette de ce qui est payé et reçu par le secteur des sociétés non financières (SNF ou S11).
 
@@ -1409,22 +1403,22 @@ Les dividendes sont la ligne $D42$ nette de ce qui est payé et reçu par le sec
 #| fig-cap: Profits nets dans la VA, SNF, comptes d'agents
 #| fig-asp: 0.85
 
-data <- snfq |> 
-  filter(time >= "1995-01-01") |> 
-  select(time, geo, tp, div) |> 
-  pivot_longer(c(tp, div)) |> 
-  mutate(tooltip2 = glue("{ifelse(name=='tp', 'Profits nets sur VAN, SNF', 'Dividendes nets sur VAN, SNF' )}")) |> 
+data <- snfq |>
+  filter(time >= "1995-01-01") |>
+  select(time, geo, tp, div) |>
+  pivot_longer(c(tp, div)) |>
+  mutate(tooltip2 = glue("{ifelse(name=='tp', 'Profits nets sur VAN, SNF', 'Dividendes nets sur VAN, SNF' )}")) |>
   mutate(name = factor(name, c("tp","div")))
 
 pprofit <- ggplot(data) +
   aes(x=time, col = geo) +
   scale_linewidth_manual(
-    values = c(tp = 0.5, div = 0.25), 
-    labels = c(tp = "Profits nets", div = "Dividendes"), 
+    values = c(tp = 0.5, div = 0.25),
+    labels = c(tp = "Profits nets", div = "Dividendes"),
     name = NULL) +
   scale_alpha_manual(
     values = c(tp = 1, div = 0.75),
-    labels = c(tp = "Profits nets", div = "Dividendes"), 
+    labels = c(tp = "Profits nets", div = "Dividendes"),
     name = NULL) +
   geom_line_interactive(
      aes( y=value, linewidth = name, alpha = name, tooltip = tooltip2),
@@ -1454,44 +1448,42 @@ On peut rapporter ces notions aux éléments qui viennent du compte de capital. 
 
 On rapporte également à une notion financière, à savoir la valeur nette des actions au passif des comptes d'entreprises. Les conventions de valorisation des actions non cotées sont délicates et difficiles à suivre d'un pays à l'autre. On choisit ici d'augmenter ces actions de la valeur nette résiduelle des entreprises non financières ($BF90$). On a donc :
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 r_{productif} & = \frac{\Pi}{N1N+N2N} \\
 r_{financier} & = \frac{\Pi}{F51+F52+BF90}
-\end{aligned}
-$$
+\end{aligned}$$
 
 On obtient le graphe suivant :
 
 ```{r}
 
-assetsnfi <- source_data("R/snf_ratio.r") |> 
-  pluck("assetsnfi") |> 
-  filter(sector == "S11", geo %in% P6) |> 
+assetsnfi <- source_data("R/snf_ratio.r") |>
+  pluck("assetsnfi") |>
+  filter(sector == "S11", geo %in% P6) |>
   transmute(geo, time, phycap = N1N + N2N) |>
   mutate(geo = factor(geo, P6))
 
-assetsfi <- source_data("R/snf_ratio.r") |> 
-  pluck("assetsfi") |> 
-  filter(sector == "S11", geo %in% P6) |> 
+assetsfi <- source_data("R/snf_ratio.r") |>
+  pluck("assetsfi") |>
+  filter(sector == "S11", geo %in% P6) |>
   select(geo, time, net_shares, net_shares_augmented) |>
   mutate(geo = factor(geo, P6))
 
-snfq_a <- snfq |> 
-  filter(time >= "1995-01-01") |> 
-  left_join(assetsfi, by = c("geo", "time")) |> 
-  left_join(assetsnfi, by = c("geo", "time")) |> 
+snfq_a <- snfq |>
+  filter(time >= "1995-01-01") |>
+  left_join(assetsfi, by = c("geo", "time")) |>
+  left_join(assetsnfi, by = c("geo", "time")) |>
   transmute(
     geo, time,
     rendphy = tp*B1N/phycap,
     rendshare = tp*B1N/net_shares,
-    rendshareaug = tp*B1N/net_shares_augmented) |> 
+    rendshareaug = tp*B1N/net_shares_augmented) |>
   mutate(tooltip2 = glue(
   "<b>{lbl(geo)}</b>
   {year(time)}
   Rendement productif SNF : {round(100*rendphy,1)}% par an
-  Rendement financier SNF : {round(100*rendshareaug,1)}% par an")) |> 
-  pivot_longer(-c(geo, time, tooltip2)) |> 
+  Rendement financier SNF : {round(100*rendshareaug,1)}% par an")) |>
+  pivot_longer(-c(geo, time, tooltip2)) |>
   mutate(
     tooltip = glue("Profits sur {ifelse(name=='rendphy', 'actifs productifs', 'fonds propres augmentés de la valeur résiduelle')}") )
 
@@ -1508,7 +1500,7 @@ ptprofitsnf <- ggplot(snfq_a |> filter(name != "rendshare")) +
     name = NULL
   ) +
   geom_line_interactive(
-     aes(y = value, 
+     aes(y = value,
          tooltip = tooltip) ) +
   geom_point_interactive(
     data = ~.x |> filter(name == "rendshareaug"),
@@ -1529,44 +1521,44 @@ ptprofitsnf <- ggplot(snfq_a |> filter(name != "rendshare")) +
     champ = "Sociétés non financières (les définitions varient suivant les pays)")
 
 
-assetsnfi <- source_data("R/snf_ratio.r") |> 
+assetsnfi <- source_data("R/snf_ratio.r") |>
   pluck("assetsnfi") |>
-  filter(geo %in% P6) |> 
-  group_by(geo, time) |> 
+  filter(geo %in% P6) |>
+  group_by(geo, time) |>
   summarize(across(c(N1N,N2N,N11N), ~sum(.x)),
-            .groups = "drop") |> 
+            .groups = "drop") |>
   transmute(geo, time, phycap = N1N + N2N) |>
-  filter(phycap>0) |> 
+  filter(phycap>0) |>
   mutate(geo = factor(geo, P6))
 
-assetsfi <- source_data("R/snf_ratio.r") |> 
-  pluck("assetsfi") |> 
-  filter(geo %in% P6) |> 
-  group_by(geo, time) |>  
+assetsfi <- source_data("R/snf_ratio.r") |>
+  pluck("assetsfi") |>
+  filter(geo %in% P6) |>
+  group_by(geo, time) |>
   summarize(across(c(net_shares, net_shares_augmented), sum),
-            .groups = "drop") |> 
+            .groups = "drop") |>
   select(geo, time, net_shares, net_shares_augmented) |>
   mutate(geo = factor(geo, P6))
 
-snfq_a <- snfq |> 
-  filter(time >= "1995-01-01") |> 
-  group_by(geo, time) |> 
+snfq_a <- snfq |>
+  filter(time >= "1995-01-01") |>
+  group_by(geo, time) |>
   summarize(
     tp = sum(B1N*tp)/sum(B1N),
-    B1N = sum(B1N)  ) |> 
-  left_join(assetsfi, by = c("geo", "time")) |> 
-  left_join(assetsnfi, by = c("geo", "time")) |> 
+    B1N = sum(B1N)  ) |>
+  left_join(assetsfi, by = c("geo", "time")) |>
+  left_join(assetsnfi, by = c("geo", "time")) |>
   transmute(
     geo, time,
     rendphy = tp*B1N/phycap,
     rendshare = tp*B1N/net_shares,
-    rendshareaug = tp*B1N/net_shares_augmented) |> 
+    rendshareaug = tp*B1N/net_shares_augmented) |>
   mutate(tooltip2 = glue(
   "<b>{lbl(geo)}</b>
   {year(time)}
   Rendement productif SNF+SF : {round(100*rendphy,1)}% par an
-  Rendement financier SNF+SF : {round(100*rendshareaug,1)}% par an")) |> 
-  pivot_longer(-c(geo, time, tooltip2)) |> 
+  Rendement financier SNF+SF : {round(100*rendshareaug,1)}% par an")) |>
+  pivot_longer(-c(geo, time, tooltip2)) |>
   mutate(
     tooltip = glue("Profits sur {ifelse(name=='rendphy', 'actifs productifs', 'fonds propres augmentés de la valeur résiduelle')}") )
 
@@ -1583,7 +1575,7 @@ ptprofitsnff <- ggplot(snfq_a |> filter(name != "rendshare")) +
     name = NULL
   ) +
   geom_line_interactive(
-     aes(y = value, 
+     aes(y = value,
          tooltip = tooltip) ) +
   geom_point_interactive(
     data = ~.x |> filter(name == "rendshareaug"),
@@ -1614,7 +1606,7 @@ tabsetize(list("SNF" = ptprofitsnf, "SNF+SF" = ptprofitsnff))
 
 ## Au delà de l'Europe et pour l'ensemble de l'économie
 
-Il est possible d'utiliser des données de comptabilité nationale, au niveau de l'ensemble de l'économie (y compris donc les branches non marchandes et l'immobilier). La correction pour la non-salarisation est assurée par les données de l'*Economic Outlook* (avec une trimestrialisation ad hoc). Au lieu de la valeur ajoutée, on utilise le PIB, auquel on enlève la consommation de capital fixe (dans les données OCDE, il n'y a pas de données de CCF pour le Japon publiées). Le concept de part des salaires n'est donc pas tout à fait le même que dans les autres analyses.
+Il est possible d'utiliser des données de comptabilité nationale, au niveau de l'ensemble de l'économie (y compris donc les branches non marchandes et l'immobilier). La correction pour la non-salarisation est assurée par les données de l'*Economic Outlook* (avec une trimestrialisation *ad hoc*). Au lieu de la valeur ajoutée, on utilise le PIB, auquel on enlève la consommation de capital fixe (dans les données OCDE, il n'y a pas de données de CCF pour le Japon publiées). Le concept de part des salaires n'est donc pas tout à fait le même que dans les autres analyses.
 
 On obtient le @fig-psaloecd, qui rejoint ceux présentés, bien que l'agrégation à l'ensemble de l'économie écrase les évolutions.
 
@@ -1623,15 +1615,15 @@ On obtient le @fig-psaloecd, qui rejoint ceux présentés, bien que l'agrégatio
 #| fig-cap: "Part des salaries dans le PIN, données SNA de l'OCDE"
 #| fig-asp: 0.85
 
-data <- ofce::source_data("R/oecd.r") |> 
+data <- ofce::source_data("R/oecd.r") |>
   mutate(tooltip = glue(
     "<b>{lbl(geo)}</b>
     {date_trim(time)}
-    Salaires dans le Produit Intérieur Net de la CCF : {round(100*psalaire,1)}%")) |> 
+    Salaires dans le Produit Intérieur Net de la CCF : {round(100*psalaire,1)}%")) |>
   mutate(geo = factor(geo, c("DE", "FR", "IT", "ES", "NL", "BE", "US", "UK", "JP")),
          q = quarter(time))
 
-date <- sourcoise::sourcoise_meta("R/oecd.r")$data_date |> ymd_hms() 
+date <- sourcoise::sourcoise_meta("R/oecd.r")$data_date |> ymd_hms()
 date <- stringr::str_glue("{day(date)}/{month(date)}/{year(date)}")
 
 psaloecd <- ggplot(data |> filter(year(time)>=1995)) +
@@ -1678,15 +1670,15 @@ Plusieurs explications peuvent être avancées à la dégradation du rendement d
 
 [^6]: On peut aussi mettre en cause la qualité des comptes nationaux et leur incapacité à apporter une information même bruitée sur la réalité des économies contemporaines. Cette explication est commode lorsqu'on a une théorie envers laquelles les "faits" comptables sont têtus. Nous partons du principe qu'on peut utiliser l'information des comptes nationaux bien qu'ils ne soient pas parfaits.
 
--   une part des salaires dans la valeur ajoutée trop importante, ce que suggèrent les éléments présentés plus haut,
+- une part des salaires dans la valeur ajoutée trop importante, ce que suggèrent les éléments présentés plus haut,
 
--   une fonction de production agrégée spécifique qui implique une part de l'immobilier plus importante compte tenu de la structure et de la technologie de l'économie française. Alternativement, si les services immobiliers sont imparfaitement substituables (ce qui est probable) aux autres facteurs de production, un prix relatif plus élevé de ces services immobiliers peut conduire à une part plus importante des consommations intermédiaires (en valeur).
+- une fonction de production agrégée spécifique qui implique une part de l'immobilier plus importante compte tenu de la structure et de la technologie de l'économie française. Alternativement, si les services immobiliers sont imparfaitement substituables (ce qui est probable) aux autres facteurs de production, un prix relatif plus élevé de ces services immobiliers peut conduire à une part plus importante des consommations intermédiaires (en valeur).
 
--   une mauvaise évaluation de la valeur des actifs productifs conduisant à surestimer le stock de capital productif, par exemple en sous estimant la consommation de capital fixe. L'[annexe 2](annexes.html#a2) tend à contredire cette idée, la CCF étant plutôt plus élevée en France qu'ailleurs et le taux de dépréciation (CCF sur actif) étant assez stable dans le temps.
+- une mauvaise évaluation de la valeur des actifs productifs conduisant à surestimer le stock de capital productif, par exemple en sous estimant la consommation de capital fixe. L'[annexe 2](annexes.html#a2) tend à contredire cette idée, la CCF étant plutôt plus élevée en France qu'ailleurs et le taux de dépréciation (CCF sur actif) étant assez stable dans le temps.
 
--   un mécanisme d'optimisation fiscale par des prix de transfert vers d'autres pays européens (ce qu'explorent @tørsløv2022), en particulier les Pays-Bas, qui affichent un rendement élevé et croissant du capital productif, qui provoquerait une évaporation de la valeur ajoutée dans certains pays au profit d'autres,
+- un mécanisme d'optimisation fiscale par des prix de transfert vers d'autres pays européens (ce qu'explorent @tørsløv2022), en particulier les Pays-Bas, qui affichent un rendement élevé et croissant du capital productif, qui provoquerait une évaporation de la valeur ajoutée dans certains pays au profit d'autres,
 
--   un autre mécanisme d'optimisation fiscale, par la séparation des activités productives et des locaux qui leur sont nécessaires. Les loyers sont alors un prix de transfert et permettraient de bénéficier de la fiscalité avantageuse de l'immobilier[^7] et pourrait constituer un autre canal d'évaporation de la valeur ajoutée.
+- un autre mécanisme d'optimisation fiscale, par la séparation des activités productives et des locaux qui leur sont nécessaires. Les loyers sont alors un prix de transfert et permettraient de bénéficier de la fiscalité avantageuse de l'immobilier[^7] et pourrait constituer un autre canal d'évaporation de la valeur ajoutée.
 
 [^7]: Une recherche sur internet aboutit rapidement à des documents de ce type : [Les fondamentaux de l'investissement immobilier professionnel](https://www.frenchfigures.com/blog/placement-immobilier-entreprise#:~:text=Optimisation%20de%20l%27Imp%C3%B4t%20sur%20les%20Soci%C3%A9t%C3%A9s&text=Les%20loyers%20vers%C3%A9s%20par%20votre%20entreprise%20%C3%A0%20la%20structure%20d%C3%A9tenant,patrimoine%20immobilier%20du%20risque%20entrepreneurial.). Le principe est que les plus values immobilières sont moins taxées que les flux de revenus à terme.
 
@@ -1700,35 +1692,35 @@ Nous explorons dans cette section cette dernière piste. La difficulté est que 
 
 data <- source_data("R/households.r")
 data |>
-  filter(time==max(time), geo %in% P6) |> 
-  select(geo, L, Ll, Lli) |> 
+  filter(time==max(time), geo %in% P6) |>
+  select(geo, L, Ll, Lli) |>
   mutate(
-    LmLl = L -Ll, 
+    LmLl = L -Ll,
     lbl_geo = countrycode(geo, "eurostat", "country.name.fr"),
-    geo = factor(geo, P6)) |> 
+    geo = factor(geo, P6)) |>
   relocate(geo, lbl_geo, L, LmLl, Ll, Lli) |>
-  arrange(geo) |> 
-  gt() |> 
+  arrange(geo) |>
+  gt() |>
   tab_spanner(label = "Part dans la VAB marchande en 2024 des branches",
               columns = c(L, LmLl, Ll, Lli)) |>
-  cols_label(geo="", lbl_geo="", 
+  cols_label(geo="", lbl_geo="",
              L="services immobiliers",
              LmLl="services immobiliers hors m\u00e9nages",
-             Ll= "loyers des m\u00e9nages", 
-             Lli = "loyers imput\u00e9s aux m\u00e9nages" ) |> 
-  fmt_percent(-geo, decimals=1, dec_mark = ",", sep_mark = " ") |> 
-  cols_align_decimal(-geo, dec_mark = ",") |> 
-  fmt_flag(geo) |> 
+             Ll= "loyers des m\u00e9nages",
+             Lli = "loyers imput\u00e9s aux m\u00e9nages" ) |>
+  fmt_percent(-geo, decimals=1, dec_mark = ",", sep_mark = " ") |>
+  cols_align_decimal(-geo, dec_mark = ",") |>
+  fmt_flag(geo) |>
   cols_width(
     geo ~ px(30),
-    lbl_geo ~ px(120) , 
-    everything() ~ px(100)) |> 
-  tab_options(table.font.size = 12) |> 
+    lbl_geo ~ px(120) ,
+    everything() ~ px(100)) |>
+  tab_options(table.font.size = 12) |>
   # gt::tab_header(
-  #   title = NULL, 
-  #   subtitle = "Part dans la VAB marchande en 2024 des") |> 
-  tab_source_note(md("*Source* : Eurostat Household final consumption expenditure by purpose (nama_10_cp18)")) |> 
-  cols_hide_pdf("geo") |> 
+  #   title = NULL,
+  #   subtitle = "Part dans la VAB marchande en 2024 des") |>
+  tab_source_note(md("*Source* : Eurostat Household final consumption expenditure by purpose (nama_10_cp18)")) |>
+  cols_hide_pdf("geo") |>
   my_tab_options()
 ```
 
@@ -1739,19 +1731,19 @@ Le @fig-ciLfr, pour la France uniquement, caractérise l'évolution de la consom
 #| fig-cap: Consommations intermédiaires en services immobiliers, France
 #| fig-asp: 0.7
 
-data <- source_data("R/france-melodi.r") |> 
+data <- source_data("R/france-melodi.r") |>
   pluck("aggr") |>
-  filter(champ%in%c("md", "mdhi")) |> 
+  filter(champ%in%c("md", "mdhi")) |>
   mutate(
-    ciL = p2l/vab) |> 
-  select(time, ciL, champ) |> 
-  pivot_wider(names_from = champ, values_from = ciL) |> 
+    ciL = p2l/vab) |>
+  select(time, ciL, champ) |>
+  pivot_wider(names_from = champ, values_from = ciL) |>
   mutate(
     tp = glue(
     "<b>{year(time)}</b>
     France
     Part des CI branche L dans la VAB marchande hors immobilier : {round(mdhi*100, 1)}%
-    Part des CI branche L dans la VAB marchande : {round(md*100, 1)}%") ) |> 
+    Part des CI branche L dans la VAB marchande : {round(md*100, 1)}%") ) |>
   pivot_longer(c(md, mdhi), names_to = "champ")
 
 gg <- ggplot(data) +
@@ -1761,13 +1753,13 @@ gg <- ggplot(data) +
   scale_color_manual(
     values = c(md="pink2", mdhi = "steelblue2"),
     aesthetics = c("fill", "color"),
-    name = NULL, 
-    labels = c(md = "branches marchandes", 
+    name = NULL,
+    labels = c(md = "branches marchandes",
     mdhi = "Branches marchandes hors immobilier")) +
   scale_linetype_manual(
     values = c(md="11", mdhi = "solid"),
-    name = NULL, 
-    labels = c(md = "branches marchandes", 
+    name = NULL,
+    labels = c(md = "branches marchandes",
     mdhi = "Branches marchandes hors immobilier")) +
   geom_point_interactive(
     data = ~.x |> filter(champ=="mdhi"),
@@ -1788,18 +1780,18 @@ gg <- ggplot(data) +
 girafy(gg)
 ```
 
--   Le @fig-rendfr confirme cette idée, mais illustre l'ordre de grandeur que les services immobiliers pourraient avoir sur le rendement du capital. Les deux courbes présentées sont d'une part le rendement avant IS du capital productif des branches marchandes non immobilières et d'autre part le même rendement, mais en modifiant la valeur ajoutée des branches marchandes non immobilières en appliquant le ratio consommation intermédiaire en services immobiliers de 1980 (il était alors de 3,3%). Cela représente plus d'un point de rendement.
+- Le @fig-rendfr confirme cette idée, mais illustre l'ordre de grandeur que les services immobiliers pourraient avoir sur le rendement du capital. Les deux courbes présentées sont d'une part le rendement avant IS du capital productif des branches marchandes non immobilières et d'autre part le même rendement, mais en modifiant la valeur ajoutée des branches marchandes non immobilières en appliquant le ratio consommation intermédiaire en services immobiliers de 1980 (il était alors de 3,3%). Cela représente plus d'un point de rendement.
 
 ```{r}
 #| label: fig-rendfr
 #| fig-cap: Rendement du capital productif, sensibilité aux CI en services immobiliers, France
 #| fig-asp: 0.7
 
-data <- source_data("R/france-melodi.r") |> 
+data <- source_data("R/france-melodi.r") |>
   pluck("aggr") |>
-  filter(champ%in%c("mdhi")) |> 
-  select(time, rb, rb2) |> 
-  drop_na(rb) |> 
+  filter(champ%in%c("mdhi")) |>
+  select(time, rb, rb2) |>
+  drop_na(rb) |>
   mutate(
     tp = glue(
       "<b>{year(time)}</b>
@@ -1807,7 +1799,7 @@ data <- source_data("R/france-melodi.r") |>
       rendement (avant IS) du capital : {round(100*rb,1)}%
       rendement (avant IS) du capital, ratio CI/VA pour les serv. immo. de 1980 : {round(100*rb2,1)}%") )
 
-data_long <- data |> 
+data_long <- data |>
   pivot_longer(c(rb, rb2))
 
 gg <- ggplot(data_long) +
@@ -1820,15 +1812,15 @@ gg <- ggplot(data_long) +
   scale_color_manual(
     values = c(rb="pink2", rb2 = "steelblue2"),
     aesthetics = c("fill", "color"),
-    name = NULL, 
+    name = NULL,
     labels = c(
-      rb = "Rendement du capital productif, avant IS", 
+      rb = "Rendement du capital productif, avant IS",
       rb2 = "Rendement du capital productif, CI serv. immo. de 1980 (ratio), avant IS")) +
   scale_linetype_manual(
     values = c(rb2="11", rb = "solid"),
-    name = NULL, 
+    name = NULL,
     labels = c(
-      rb = "Rendement du capital productif, avant IS", 
+      rb = "Rendement du capital productif, avant IS",
       rb2 = "Rendement du capital productif, CI serv. immo. de 1980 (ratio), avant IS")) +
   geom_point_interactive(
     data = ~.x |> filter(name=="rb"),
@@ -1862,12 +1854,12 @@ girafy(gg)
 
 6 annexes sont accessibles en ligne à l'adresse <https://xtimbeau.github.io/travail/> :
 
--   annexe 1 : [Domaine des données](https://xtimbeau.github.io/travail/annexes.html#a1),
--   annexe 2 : [CCF](https://xtimbeau.github.io/travail/annexes.html#a2),
--   annexe 3 : [Comparaisons entre pays](https://xtimbeau.github.io/travail/annexes.html#a3),
--   annexe 4 : [Rémunération des non salariés](https://xtimbeau.github.io/travail/annexes.html#a4),
--   annexe 5 : [CN2020 et CN2014 pour la France](https://xtimbeau.github.io/travail/annexes.html#a5),
--   annexe 6 : [Rendement du capital productif en France de 1978 à 2024](https://xtimbeau.github.io/travail/annexes.html#a6)
+- annexe 1 : [Domaine des données](https://xtimbeau.github.io/travail/annexes.html#a1),
+- annexe 2 : [CCF](https://xtimbeau.github.io/travail/annexes.html#a2),
+- annexe 3 : [Comparaisons entre pays](https://xtimbeau.github.io/travail/annexes.html#a3),
+- annexe 4 : [Rémunération des non salariés](https://xtimbeau.github.io/travail/annexes.html#a4),
+- annexe 5 : [CN2020 et CN2014 pour la France](https://xtimbeau.github.io/travail/annexes.html#a5),
+- annexe 6 : [Rendement du capital productif en France de 1978 à 2024](https://xtimbeau.github.io/travail/annexes.html#a6)
 
 Un [historique des principales modifications](https://xtimbeau.github.io/travail/NEWS.html) renseigne les différentes versions du document.
 
