@@ -19,7 +19,8 @@ mixte_q <- "nasq_10_nf_tr" |>
   drop_na() |>
   group_by(geo, time) |>
   arrange(s_adj, geo, time) |>
-  summarise(b3g = first(values)) |>
+  summarise(b3g = first(values),
+            .groups = "drop") |>
   transmute(geo, time, b3g)
 
 mixte_a <- "nasa_10_nf_tr" |>
@@ -65,7 +66,7 @@ nsalw <- "ilc_di05" |>
   get_eurostat(
     filters = list(
       wstatus = c("SAL", "NSAL"),
-      indic_il = "MEI_E",
+      statinfo = "MEAN_EI",
       age = "Y16-64",
       sex = "T",
       unit = "EUR",
