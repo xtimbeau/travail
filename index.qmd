@@ -101,7 +101,7 @@ psal <- imap(
     source = "Eurostat, comptes nationaux annuels (nama_10_a64, nama_10_a64_e),
  comptes nationaux trimestriels (namq_10_a10), téléchargés le {date}, code à github.com/xtimbeau/travail/R/vaq.r.",
     champ = "{champs[.x]}, correction par le revenu mixte hybride (sauf pour la France).",
-    note = "Part des salaires corrigés par le revenu mixte des non salariés dans la valeur ajoutée nette de la CCF pour les branches marchandes hors services immobiliers. 2025 est une extrapolation sur la base d'une information partielle jusqu'au T3. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") )
+    note = "Part des salaires corrigés par le revenu mixte des non salariés dans la valeur ajoutée nette de la CCF pour les branches marchandes hors services immobiliers. 2026 est une extrapolation sur la base d'une information partielle jusqu'au T1. Les traits colorés correspondent à chaque pays, les traits fins gris rappellent les autres pays.") )
 
 tabsetize(psal, active = 2, r = 1.5)
 ```

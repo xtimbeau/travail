@@ -10,6 +10,10 @@ format:
     number-sections: false
 ---
 
+## 29/05/2026
+
+-   📥 Mise à jour des données, T1 2026 détaillés (et équivalent en Europe) intégrés. Les autres pays seront progressivement mis à jour en fonction des disponibilités des données.
+
 ## 29/11/2025
 
 -   🖌️ ajout de la référence à Sicsic 2018
