@@ -93,7 +93,8 @@ fr_tes_L <- "DD_CNA_SUT" |>
     p2l  = OBS_VALUE ) |>
   arrange(time)
 
-fr_emp <- melodi::get_all_data("DD_CNA_BRANCHES") |>
+fr_emp <- "DD_CNA_BRANCHES" |>
+  melodi::get_all_data() |>
   filter(REF_SECTOR == "S1",
          STO%in%c("SAL", "SELF", "EMP"),
          UNIT_MEASURE == "PS",
@@ -108,7 +109,7 @@ fr_emp <- melodi::get_all_data("DD_CNA_BRANCHES") |>
   pivot_wider(names_from = STO, values_from = value) |>
   mutate(
     across(c(EMP, SELF, SAL), ~replace_na(.x, 0)) ) |>
-  arrange(time, nace_r2)
+  arrange(desc(time), nace_r2)
 
 fr_b23g <- melodi::get_all_data("DD_CNA_BRANCHES") |>
   filter(REF_SECTOR == "S1",
@@ -125,9 +126,10 @@ fr_b23g <- melodi::get_all_data("DD_CNA_BRANCHES") |>
             nace_r2 = ACTIVITY) |>
   pivot_wider(names_from = STO, values_from = value) |>
   mutate(b3g = B2A3G - B2G) |>
-  arrange(time, nace_r2)
+  arrange(desc(time), nace_r2)
 
-fr_d1 <- melodi::get_all_data("DD_CNA_BRANCHES") |>
+fr_d1 <- "DD_CNA_BRANCHES" |>
+  melodi::get_all_data() |>
   filter(REF_SECTOR == "S1",
          STO%in%c("D1"),
          PRICES == "V",
@@ -141,7 +143,7 @@ fr_d1 <- melodi::get_all_data("DD_CNA_BRANCHES") |>
             STO,
             nace_r2 = ACTIVITY) |>
   pivot_wider(names_from = STO, values_from = value) |>
-  arrange(time, nace_r2)
+  arrange(desc(time), nace_r2)
 
 fr_ind <- fr_emp |>
   full_join(fr_b23g, by = c("time", "nace_r2")) |>
@@ -173,7 +175,7 @@ fr_branches <- melodi::get_all_data("DD_CNA_BRANCHES") |>
             na_item = STO,
             ca = COUNTERPART_AREA,
             ae = ACCOUNTING_ENTRY) |>
-  arrange(time, na_item, nace_r2) |>
+  arrange(desc(time), na_item, nace_r2) |>
   pivot_wider(names_from = c(ae, ca) , values_from = value) |>
   rowwise() |>
   mutate(value = coalesce(B_W0, B_W2, D_W0, D_W2)) |>
