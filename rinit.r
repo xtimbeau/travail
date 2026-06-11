@@ -26,6 +26,7 @@ library(quarto)
 library(conflicted)
 library(countrycode)
 library(marquee)
+library(ofceweb)
 
 options(
   ofce.base_size = 12,

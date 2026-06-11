@@ -24,8 +24,7 @@ website:
       href: https://www.ofce.sciences-po.fr/blog2024/fr/2025/20251128_XT/
   title: Partage de la valeur ajoutée, comparaisons internationales
   page-navigation: true
-  site-url: https://www.ofce.fr/wp/
-  site-path: 2025/023
+  site-url: https://www.ofce.fr/
   repo-url: https://github.com/xtimbeau/travail/
   reader-mode: false
   bread-crumbs: true
@@ -59,8 +58,9 @@ website:
       - text: ' '
         icon: github
         href: https://github.com/xtimbeau/travail
+  site-path: 2026/023/v1
 comments:
-  hypothesis: true
+  hypothesis: false
 format:
   ofce-html:
     link-external-icon: true
@@ -68,8 +68,7 @@ format:
 language:
   fr:
     other-links-title: Autres contenus
-wp: 23
-annee: 2025
+annee: 2026
 bibliography: references.bib
 date: '2025-10-24'
 date-modified: now
@@ -84,4 +83,7 @@ citation:
   type: article-journal
   container-title: Document de travail de l'OFCE
   issue: 2025-23
-  url: https://www.ofce.fr/wp/2025/023/
+  url: https://www.ofce.fr/2026/023/
+version: v1
+wp: 23
+lang: fr
